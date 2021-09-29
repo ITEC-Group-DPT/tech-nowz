@@ -1,11 +1,18 @@
 import React from 'react'
-//import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-const App = () =>  {
+import Authentication from './pages/Authentication/Authentication';
+import HomeNavigation from './navigation/HomeNavigation';
+
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>Hello Technowz</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/authentication' component={Authentication}/>
+        <Route path='/' component={HomeNavigation}/>
+      </Switch>
+    </Router>
   );
 }
 
