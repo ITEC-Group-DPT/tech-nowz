@@ -7,8 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavItem from './NavItem';
 
-
-import { colors } from '../../constant';
+import { colors, icons } from '../../constant';
 
 const Navbar = () => {
     const styles = useStyles();
@@ -28,10 +27,10 @@ const Navbar = () => {
                         <MenuIcon />
                     </IconButton>
 
-                    <NavItem href='/' title='Home' icon={<HomeOutlinedIcon className={styles.icon}/>}/>
-                    <NavItem href='/' title='Hot Discount' icon={<LocalOfferOutlinedIcon className={styles.icon}/>}/>
-                    <NavItem href='/' title='Shipping Policy' icon={<LocalShippingOutlinedIcon className={styles.icon}/>}/>
-                    <NavItem href='/contactus' title='Contact Us' icon={<PhoneCallbackOutlinedIcon className={styles.icon}/>}/>
+                    <NavItem href='/' title='Home' icon={<icons.Home className={styles.icon}/>}/>
+                    <NavItem href='/' title='Hot Discount' icon={<icons.Offer className={styles.icon}/>}/>
+                    <NavItem href='/' title='Shipping Policy' icon={<icons.Truck className={styles.icon}/>}/>
+                    <NavItem href='/contactus' title='Contact Us' icon={<icons.Phone className={styles.icon}/>}/>
 
                 </Toolbar>
             </AppBar>
