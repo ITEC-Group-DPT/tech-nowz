@@ -13,7 +13,7 @@ const Home = () => {
         dispatch(login("hehe@gmail.com","1"));
     }, [])
     useEffect(() => {
-        console.log('authen: ', authentication);
+        //console.log('authen: ', authentication);
     }, [authentication])
 
     return (

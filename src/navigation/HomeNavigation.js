@@ -8,11 +8,14 @@ import CartNavigation from './CartNavigation';
 import ProfileNavigation from './ProfileNavigation';
 import Home from '../pages/Home/Home';
 import NotFound from '../components/NotFound/NotFound';
+import UpperNav from '../components/UpperNav/UpperNav';
+import Footer from '../components/Footer/Footer';
 
 
 const HomeNavigation = () => {
     return (
         <div>
+            <Route exact path='/' component={UpperNav}/>
             <Navbar/>
             <Switch>
                 <Route exact path='/contactus' component={ContactUs}/>
@@ -24,6 +27,7 @@ const HomeNavigation = () => {
 
                 <Route path='/' component={NotFound}/>
             </Switch>
+            <Footer/>
         </div>
     )
 }
