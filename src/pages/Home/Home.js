@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import React,{useEffect} from 'react'
 import { useSelector ,useDispatch} from 'react-redux'
 import {login} from '../../store/actions/authAction'
@@ -18,7 +19,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1 style={{minHeight: '50vh'}}>Home</h1>
+            <Typography style={{minHeight: '50vh', fontSize: '3rem'}}>Home</Typography>
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useStyles from './NavItem.style';
@@ -5,12 +6,14 @@ import useStyles from './NavItem.style';
 const NavItem = (props) => {
     const styles = useStyles();
     return (
-        <div className={styles.navItem}>
-            <Link to={props.href} className={styles.navLink}>
+        <Link to={props.href} className={styles.navLink}>
+            <div className={styles.navItem}>
+
                 {props.icon}
-                {props.title}
-            </Link>
-        </div>
+                <Typography className={styles.navTitle}>{props.title}</Typography>
+
+            </div>
+        </Link>
     )
 }
 

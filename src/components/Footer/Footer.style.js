@@ -3,29 +3,29 @@ import { colors } from '../../constant';
 
 const useStyles = makeStyles({
     footer: {
-        textAlign: 'center !important',
         marginTop: '3rem !important',
-        width: '100% !important',
         backgroundColor: colors.primary,
         color: 'white',
         padding: '2rem',
     },
-    wrapper: {
+
+    addressWrapper: {
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: '2.5rem',
-
+        marginTop: '1.5rem',
     },
+
     socialMedia: {
         display: 'flex',
     },
+
     newsletter: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'end',
     },
 
     textField: {
-        marginRight: '1.5rem',
+        width: '100%',
         color: 'white',
         "& .Mui-focused": {
             color: "white",
@@ -44,22 +44,43 @@ const useStyles = makeStyles({
         },
     },
 
+    btnWrapper : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
     icon: {
-        fontSize: '2rem',
-        marginRight: '1.5rem',
+        fontSize: '2rem !important',
     },
+
     signUp: {
-        marginRight: '1.5rem',
+        fontSize: '1rem !important',
+        textAlign: 'center',
     },
+
     subscribeBtn : {
-        color: 'white',
-        border: 'solid 1px #FFFFFF',
+        color: 'white !important',
+        border: 'solid 1px #FFFFFF !important',
+        textTransform: 'none !important',
         "&:hover": {
             border: 'solid 1px #FFFFFF',
         },
     },
+
     address : {
 
+    },
+
+    bottomFooter: {
+        backgroundColor: 'rgb(41 41 41)',
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '1rem',
+    },
+
+    copyright: {
+        color: 'white',
     },
 });
 

@@ -4,25 +4,31 @@ const useStyles = makeStyles({
     navItem: {
         marginRight: '.5rem',
         marginLeft: '.5rem',
+        display: 'flex',
+
     },
 
     navLink: {
         color: 'white',
         textDecoration: 'none',
-        paddingRight: '.5rem',
         display: 'flex',
+        justifyContent: 'center',
         padding: '.5rem 1rem',
         transition: '400ms',
-        borderRadius: '15px',
+        borderRadius: '10px',
         '&:hover': {
             backgroundColor: '#737373',
         }
     },
 
     icon: {
-        fontSize: 'medium !important',
+        fontSize: 'large !important',
         marginRight: '.5rem',
     },
+
+    navTitle: {
+        fontSize: '.8rem !important',
+    }
 
 });
 
