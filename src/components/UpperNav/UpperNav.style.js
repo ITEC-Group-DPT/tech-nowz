@@ -25,14 +25,12 @@ const useStyles = makeStyles({
         alignItems: 'center',
     },
 
-    menuWrapper: {
-        display: 'flex',
-
-    },
-
     menuItem: {
         display: 'flex',
-        marginLeft: '3rem',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textDecoration: 'none',
+        color: 'black',
     },
 
     menuTitle: {

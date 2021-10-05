@@ -19,7 +19,7 @@ const Home = () => {
 
     return (
         <div>
-            <Typography style={{minHeight: '50vh', fontSize: '3rem'}}>Home</Typography>
+            <Typography style={{minHeight: '100vh', fontSize: '3rem'}}>Home</Typography>
         </div>
     )
 }

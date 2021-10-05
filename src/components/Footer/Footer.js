@@ -37,15 +37,15 @@ const Footer = () => {
 
                 <Container maxWidth="md">
                     <Grid container spacing={2} mt={1}>
-                        <Grid item xs={3}>
+                        <Grid item lg={3} xs={12}>
                             <Typography className={styles.signUp}>Sign up for our newsletter</Typography>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item lg={6} xs={12}>
                             <TextField InputProps={{
                                 className: styles.textField
                             }} size='small' id="standard-basic" label="Email" variant="standard" className={styles.textField} />
                         </Grid>
-                        <Grid item xs={3} className={styles.btnWrapper}>
+                        <Grid item lg={3} xs={12} className={styles.btnWrapper}>
                             <Button className={styles.subscribeBtn} variant="outlined">Subscribe</Button>
                         </Grid>
                     </Grid>

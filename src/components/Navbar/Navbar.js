@@ -13,13 +13,10 @@ import { colors, icons } from '../../constant';
 
 const Navbar = () => {
     const styles = useStyles();
-
     return (
-        <Box sx={{ flexGrow: 1 }}>
-
-            <AppBar position="sticky" sx={{ backgroundColor: colors.primary }}>
-                <Toolbar>
-                    {/* <IconButton
+        <AppBar position="sticky" sx={{ backgroundColor: colors.primary }}>
+            <Toolbar>
+                {/* <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
@@ -29,26 +26,25 @@ const Navbar = () => {
                         <MenuIcon />
                     </IconButton> */}
 
-                    <Container maxWidth='xl'>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <NavItem href='/' title='Home' icon={<icons.Home className={styles.icon} />} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <NavItem href='/' title='Hot Discount' icon={<icons.Offer className={styles.icon} />} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <NavItem href='/' title='Shipping Policy' icon={<icons.Truck className={styles.icon} />} />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <NavItem href='/contactus' title='Contact Us' icon={<icons.Phone className={styles.icon} />} />
-                            </Grid>
+                <Container maxWidth='xl'>
+                    <Grid container spacing={2}>
+                        <Grid item xs={2}>
+                            <NavItem href='/' title='Home' icon={<icons.Home className={styles.icon} />} />
                         </Grid>
-                    </Container>
+                        <Grid item xs={2}>
+                            <NavItem href='/' title='Hot Discount' icon={<icons.Offer className={styles.icon} />} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <NavItem href='/' title='Shipping Policy' icon={<icons.Truck className={styles.icon} />} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <NavItem href='/contactus' title='Contact Us' icon={<icons.Phone className={styles.icon} />} />
+                        </Grid>
+                    </Grid>
+                </Container>
 
-                </Toolbar>
-            </AppBar>
-        </Box>
+            </Toolbar>
+        </AppBar>
     );
 
 }

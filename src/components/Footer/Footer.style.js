@@ -28,7 +28,7 @@ const useStyles = makeStyles({
         width: '100%',
         color: 'white',
         "& .Mui-focused": {
-            color: "white",
+            color: "white !important",
         },
         "& .MuiFormLabel-root": {
             color: "white",
