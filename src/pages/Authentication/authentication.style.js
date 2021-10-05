@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
     main: {
         display: 'flex',
-        flexDirection:'column',
+        flexDirection: 'column',
         height: '100vh',
         backgroundImage: 'url("https://wallpaperaccess.com/full/1836506.png")',
         backgroundRepeat: 'no-repeat',
@@ -13,16 +13,16 @@ const useStyles = makeStyles({
     },
     container: {
         display: 'flex',
-        flexDirection: 'row',
+        position:'relative'
     },
     formContainer: {
         flex: 1,
-        background: 'white',
         padding: '50px',
+        background: 'white',
         display: 'flex',
-        flexDirection:'column',
-        alignItems:'center',
-        justifyItems:'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyItems: 'center',
     },
     input: {
         'backgroundColor': '#eee',
@@ -57,19 +57,34 @@ const useStyles = makeStyles({
     signInButton: {
         background: '#272727 !important',
     },
-    overlayContainer: {
+    overlayRight: {
         background: 'linear-gradient(133deg ,#7d7a7a,#000304)',
-        display:'flex',
-        flex: 1,
-        textAlign:'center',
+        display: 'flex',
+        height: '100%',
+        width:'50%',
+        position: 'absolute',
+        textAlign: 'center',
         flexDirection: 'column',
-        justifyContent:'center',
-        alignItems:'center',
-        color:'white',
-        padding: '0 50px'
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        right:0,
     },
+    overlayLeft: {
+        background: 'linear-gradient(133deg ,#7d7a7a,#000304)',
+        display: 'flex',
+        height: '100%',
+        width:'50%',
+        position: 'absolute',
+        textAlign: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+    },
+
     overlayButton: {
-        borderColor:'white !important',
+        borderColor: 'white !important',
         color: 'white !important'
     },
 });
