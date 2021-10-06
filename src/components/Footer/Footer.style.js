@@ -1,7 +1,6 @@
-import { makeStyles } from '@mui/styles';
 import { colors } from '../../constant';
 
-const useStyles = makeStyles({
+const styles = {
     footer: {
         marginTop: '3rem !important',
         backgroundColor: colors.primary,
@@ -82,6 +81,6 @@ const useStyles = makeStyles({
     copyright: {
         color: 'white',
     },
-});
+}
 
-export default useStyles;
+export default styles;

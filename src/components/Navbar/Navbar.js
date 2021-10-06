@@ -16,16 +16,6 @@ const Navbar = () => {
     return (
         <AppBar position="sticky" sx={{ backgroundColor: colors.primary }}>
             <Toolbar>
-                {/* <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton> */}
-
                 <Container maxWidth='xl'>
                     <Grid container spacing={2}>
                         <Grid item xs={2}>

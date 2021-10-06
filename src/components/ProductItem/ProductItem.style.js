@@ -1,32 +1,37 @@
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
+const styles = {
     card: {
-        borderRadius: '25px !important',
-        boxShadow: 'none !important',
+        borderRadius: '25px',
+        boxShadow: 'none',
     },
 
     cardActionArea: {
-        padding: '.9rem !important',
+        padding: '.9rem',
     },
 
     pImage: {
-        objectFit: 'contain !important',
+        objectFit: 'contain',
     },
 
     pName: {
-        fontSize: '.85rem !important',
-        fontWeight: '500 !important',
+        fontSize: '.85rem',
+        fontWeight: '500',
         minHeight: '80px',
     },
 
-    cardActions :{
-        padding: '16px 0px 0px 16px !important',
+    pRating: {
+        marginLeft: '12px',
+        fontSize: '1rem'
+    },
+
+    cardBottom :{
+        marginLeft: '16px',
+        padding: 0,
     },
 
     pPrice: {
-        fontSize: '.9rem !important',
-        fontWeight: '600 !important',
+        fontSize: '.9rem',
+        fontWeight: '600',
+        // color: 'red',
     },
 
     btnWrapper: {
@@ -35,8 +40,9 @@ const useStyles = makeStyles({
     },
 
     pAddCart: {
-        color: 'black !important',
+        color: 'black',
+        marginLeft: 'auto',
     },
-})
+}
 
-export default useStyles;
+export default styles;

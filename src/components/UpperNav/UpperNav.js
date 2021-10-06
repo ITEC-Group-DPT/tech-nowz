@@ -1,5 +1,5 @@
 import React from 'react'
-import useStyles from './UpperNav.style'
+import styles from './UpperNav.style'
 import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -11,14 +11,12 @@ import { icons } from '../../constant';
 import { Typography } from '@mui/material';
 
 const UpperNav = () => {
-    const styles = useStyles();
-
     return (
-        <Container maxWidth='xl' className={styles.container}>
+        <Container maxWidth='xl' sx={styles.container}>
             <Grid container spacing={2}>
-                <Grid item lg={3} xs={12} className={styles.logoWrapper}>
+                <Grid item lg={3} xs={12} sx={styles.logoWrapper}>
                     <Link to='/' >
-                        <img className={styles.logo} src={logo} alt="" />
+                        <img style={styles.logo} src={logo} alt="" />
                     </Link>
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -34,20 +32,20 @@ const UpperNav = () => {
                             ),
                           }} />
                 </Grid>
-                <Grid item lg={3} xs={12} className={styles.menuContainer}>
+                <Grid item lg={3} xs={12} sx={styles.menuContainer}>
                     <Grid container spacing={1}>
                         <Grid item xs={6}>
-                            <Link to='/checkout/cart' className={styles.menuItem}>
+                            <Link to='/checkout/cart' style={styles.menuItem}>
                                 <Badge badgeContent={1} color="error">
                                     <icons.Cart />
                                 </Badge>
-                                <Typography className={styles.menuTitle}>Cart</Typography>
+                                <Typography sx={styles.menuTitle}>Cart</Typography>
                             </Link>
                         </Grid>
                         <Grid item xs={6}>
-                            <Link to='/authentication' className={styles.menuItem}>
+                            <Link to='/authentication' style={styles.menuItem}>
                                 <icons.User />
-                                <Typography className={styles.menuTitle}>Login</Typography>
+                                <Typography sx={styles.menuTitle}>Login</Typography>
                             </Link>
                         </Grid>
                     </Grid>

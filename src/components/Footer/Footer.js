@@ -1,5 +1,5 @@
 import React from 'react'
-import useStyles from './Footer.style';
+import styles from './Footer.style';
 import { Container, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -7,30 +7,28 @@ import Grid from '@mui/material/Grid';
 import { colors, icons } from '../../constant';
 
 const Footer = () => {
-    const styles = useStyles();
-
     return (
         <>
-            <div className={styles.footer}>
+            <div style={styles.footer}>
                 <Container maxWidth="xs" >
                     <Grid container spacing={2}>
                         <Grid item xs={2}>
-                            <icons.Facebook className={styles.icon} />
+                            <icons.Facebook sx={styles.icon} />
                         </Grid>
                         <Grid item xs={2}>
-                            <icons.Twitter className={styles.icon} />
+                            <icons.Twitter sx={styles.icon} />
                         </Grid>
                         <Grid item xs={2}>
-                            <icons.Google className={styles.icon} />
+                            <icons.Google sx={styles.icon} />
                         </Grid>
                         <Grid item xs={2}>
-                            <icons.Instagram className={styles.icon} />
+                            <icons.Instagram sx={styles.icon} />
                         </Grid>
                         <Grid item xs={2}>
-                            <icons.LinkedIn className={styles.icon} />
+                            <icons.LinkedIn sx={styles.icon} />
                         </Grid>
                         <Grid item xs={2}>
-                            <icons.GitHub className={styles.icon} />
+                            <icons.GitHub sx={styles.icon} />
                         </Grid>
                     </Grid>
                 </Container>
@@ -38,28 +36,26 @@ const Footer = () => {
                 <Container maxWidth="md">
                     <Grid container spacing={2} mt={1}>
                         <Grid item lg={3} xs={12}>
-                            <Typography className={styles.signUp}>Sign up for our newsletter</Typography>
+                            <Typography sx={styles.signUp}>Sign up for our newsletter</Typography>
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <TextField InputProps={{
-                                className: styles.textField
-                            }} size='small' id="standard-basic" label="Email" variant="standard" className={styles.textField} />
+                            <TextField size='small' id="standard-basic" label="Email" variant="standard" sx={styles.textField} />
                         </Grid>
-                        <Grid item lg={3} xs={12} className={styles.btnWrapper}>
-                            <Button className={styles.subscribeBtn} variant="outlined">Subscribe</Button>
+                        <Grid item lg={3} xs={12} sx={styles.btnWrapper}>
+                            <Button sx={styles.subscribeBtn} variant="outlined">Subscribe</Button>
                         </Grid>
                     </Grid>
                 </Container>
 
-                <div className={styles.addressWrapper}>
-                    <div className={styles.address}>
+                <div style={styles.addressWrapper}>
+                    <div style={styles.address}>
                         <Typography>227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam</Typography>
                     </div>
                 </div>
 
             </div>
-            <div className={styles.bottomFooter}>
-                <div className={styles.copyright}>
+            <div style={styles.bottomFooter}>
+                <div style={styles.copyright}>
                     <Typography>© 2021 Copyright: TechNow</Typography>
                 </div>
             </div>

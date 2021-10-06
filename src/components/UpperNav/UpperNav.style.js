@@ -1,6 +1,4 @@
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
+const styles = {
     container : {
         paddingTop: '1rem',
         paddingBottom: '1rem',
@@ -36,6 +34,6 @@ const useStyles = makeStyles({
     menuTitle: {
         marginLeft: '.7rem !important',
     },
-});
+}
 
-export default useStyles;
+export default styles

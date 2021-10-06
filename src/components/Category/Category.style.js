@@ -1,6 +1,4 @@
-import { makeStyles } from '@mui/styles'
-
-const useStyles = makeStyles({
+const styles = {
     category: {
         marginBottom: '10px',
         display: 'flex',
@@ -15,6 +13,6 @@ const useStyles = makeStyles({
         color: 'black !important',
         margin: 'auto 0 auto auto !important',
     }
-})
+}
 
-export default useStyles;
+export default styles;

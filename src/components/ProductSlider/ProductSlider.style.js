@@ -1,12 +1,10 @@
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
+const styles = {
     sliderTitle: {
-        fontSize: '2rem !important',
+        fontSize: '1.8rem !important',
         fontWeight: 'bold !important',
         textAlign: 'center',
-        marginBottom: '30px !important',
+        marginBottom: '25px !important',
     },
-})
+}
 
-export default useStyles;
+export default styles;
