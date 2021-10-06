@@ -2,12 +2,12 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     card: {
-        borderRadius: '20px !important',
-        boxShadow: 'none !important'
+        borderRadius: '25px !important',
+        boxShadow: 'none !important',
     },
 
-    imgWrapper: {
-        padding: '.8rem'
+    cardActionArea: {
+        padding: '.9rem !important',
     },
 
     pImage: {
@@ -15,18 +15,18 @@ const useStyles = makeStyles({
     },
 
     pName: {
-        fontSize: '.9rem !important',
-        fontWeight: 'normal !important',
-        minHeight: '60px',
+        fontSize: '.85rem !important',
+        fontWeight: '500 !important',
+        minHeight: '80px',
     },
 
     cardActions :{
-        padding: '16px !important',
+        padding: '16px 0px 0px 16px !important',
     },
 
     pPrice: {
         fontSize: '.9rem !important',
-        fontWeight: 'bold !important',
+        fontWeight: '600 !important',
     },
 
     btnWrapper: {

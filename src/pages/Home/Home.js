@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container, Typography } from '@mui/material';
-import ProductItem from '../../components/ProductItem/ProductItem';
 import Grid from '@mui/material/Grid';
+import Category from '../../components/Category/Category';
+import ProductSlider from '../../components/ProductSlider/ProductSlider';
 
 const productList = [
     {
@@ -70,63 +71,21 @@ const productList = [
     },
 ]
 
+
 const Home = () => {
+
     return (
-        <div style={{ minHeight: '100vh', backgroundColor: 'rgb(247, 247, 247)', paddingTop: 80}}>
-            <Container>
-                
-
-                <Typography gutterBottom variant="h5" component="div" style={{fontWeight: 'bold'}}>Laptop</Typography>
-                <Grid container spacing={3}>
-                    {productList.map(product => (
-                        <Grid item lg={3} xs={6}>
-                            <ProductItem
-                                productID={product.productID}
-                                name={product.name}
-                                img1={product.img1}
-                                rating={product.rating}
-                                sold={product.sold}
-                                price={product.price}
-                            />
-                        </Grid>
-
-                    ))}
-                </Grid>
-
-                <Typography gutterBottom variant="h5" component="div" style={{fontWeight: 'bold', marginTop: '60px'}}>Monitor</Typography>
-                <Grid container spacing={3}>
-                    {productList.map(product => (
-                        <Grid item lg={3} xs={6}>
-                            <ProductItem
-                                productID={product.productID}
-                                name={product.name}
-                                img1={product.img1}
-                                rating={product.rating}
-                                sold={product.sold}
-                                price={product.price}
-                            />
-                        </Grid>
-
-                    ))}
-                </Grid>
-
-                <Typography gutterBottom variant="h5" component="div" style={{fontWeight: 'bold', marginTop: '60px'}}>Graphic cards</Typography>
-                <Grid container spacing={3}>
-                    {productList.map(product => (
-                        <Grid item lg={3} xs={6}>
-                            <ProductItem
-                                productID={product.productID}
-                                name={product.name}
-                                img1={product.img1}
-                                rating={product.rating}
-                                sold={product.sold}
-                                price={product.price}
-                            />
-                        </Grid>
-
-                    ))}
-                </Grid>
-
+        <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', paddingTop: 80 }}>
+            <Container maxWidth="xl" style={{ marginTop: '60px' }}>
+                <ProductSlider sliderTitle="Top Seller" productList={productList} />
+            </Container>
+            <Container maxWidth="xl" style={{ marginTop: '60px' }}>
+                <ProductSlider sliderTitle="Top Rating" productList={productList} />
+            </Container>
+            <Container maxWidth="lg">
+                <Category categoryName="Laptop" productList={productList} />
+                <Category categoryName="Monitor" productList={productList} />
+                <Category categoryName="Graphic Card" productList={productList} />
             </Container>
         </div>
     )

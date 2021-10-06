@@ -11,10 +11,10 @@ import { icons } from '../../constant';
 const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
     const styles = useStyles()
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
+
     return (
-        <Card sx={{ maxWidth: 345, minHeight: 350 }} className={styles.card}>
-            <CardActionArea>
-                <div className={styles.imgWrapper}>
+            <Card sx={{ maxWidth: 345, minHeight: 350 }} className={styles.card}>
+                <CardActionArea className={styles.cardActionArea}>
                     <CardMedia
                         component="img"
                         height="200"
@@ -22,29 +22,28 @@ const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
                         alt="product image"
                         className={styles.pImage}
                     />
-                </div>
-                <CardContent>
-                    <Typography gutterBottom variant="h6" component="div" className={styles.pName}>
-                        {name}
-                    </Typography>
-                </CardContent>
+                    <CardContent>
+                        <Typography gutterBottom variant="h6" component="div" className={styles.pName}>
+                            {name}
+                        </Typography>
+                    </CardContent>
 
-                <CardActions className={styles.cardActions}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Typography gutterBottom variant="h6" component="div" className={styles.pPrice}>
-                                {formatedPrice}
-                            </Typography>
+                    <CardActions className={styles.cardActions}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6}>
+                                <Typography gutterBottom variant="h6" component="div" className={styles.pPrice}>
+                                    {formatedPrice}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6} className={styles.btnWrapper}>
+                                <Button size="small" className={styles.pAddCart}>
+                                    <icons.AddCart />
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={6} className={styles.btnWrapper}>
-                            <Button size="small" className={styles.pAddCart}>
-                                <icons.AddCart />
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </CardActions>
-            </CardActionArea>
-        </Card>
+                    </CardActions>
+                </CardActionArea>
+            </Card>
     )
 }
 
