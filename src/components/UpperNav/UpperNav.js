@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import Badge from '@mui/material/Badge';
-
 import logo from '../../img/logo_sub.webp'
 import { icons } from '../../constant';
 import { Typography } from '@mui/material';
-
-
 
 const UpperNav = () => {
     const styles = useStyles();
@@ -24,7 +22,17 @@ const UpperNav = () => {
                     </Link>
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                    <TextField fullWidth size='small' label="What are you looking for today?" id="fullWidth" />
+                    <TextField fullWidth size='small'
+                        label="Search"
+                        placeholder="Product names..."
+                        multiline id="fullWidth"
+                        InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <icons.Search />
+                              </InputAdornment>
+                            ),
+                          }} />
                 </Grid>
                 <Grid item lg={3} xs={12} className={styles.menuContainer}>
                     <Grid container spacing={1}>
