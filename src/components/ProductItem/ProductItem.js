@@ -28,7 +28,10 @@ const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
                     </Typography>
                 </CardContent>
 
-                <Rating name="read-only" size="small" readOnly value={rating} precision={0.5} sx={styles.pRating} />
+                <div style={styles.pRatingWrapper}>
+                    <Rating name="read-only" size="small" readOnly value={rating} precision={0.5} sx={styles.pRating} />
+                    <Typography variant="h5" sx={styles.pSold}>({sold})</Typography>
+                </div>
 
                 <CardActions sx={styles.cardBottom}>
                     <Typography gutterBottom variant="h6" component="div" sx={styles.pPrice}>

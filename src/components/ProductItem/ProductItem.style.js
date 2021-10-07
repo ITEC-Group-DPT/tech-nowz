@@ -18,9 +18,19 @@ const styles = {
         minHeight: '80px',
     },
 
+    pRatingWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+
     pRating: {
         marginLeft: '12px',
-        fontSize: '1rem'
+        fontSize: '1rem',
+    },
+
+    pSold: {
+        fontSize: '.6rem',
+        marginLeft: '5px',
     },
 
     cardBottom :{

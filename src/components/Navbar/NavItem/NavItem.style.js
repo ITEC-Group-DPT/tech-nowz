@@ -15,19 +15,21 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         padding: '.5rem 1rem',
         transition: '400ms',
-        borderRadius: '10px',
+        borderRadius: '25px',
         '&:hover': {
             backgroundColor: '#737373',
         }
     },
 
     icon: {
-        fontSize: 'large !important',
-        marginRight: '.5rem',
+        '& *': {
+            fontSize: 'large',
+            marginRight: '.5rem',
+        }
     },
 
     navTitle: {
-        fontSize: '.8rem !important',
+        fontSize: '.8rem',
     }
 
 });

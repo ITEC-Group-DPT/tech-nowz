@@ -3,14 +3,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import useStyles from './NavItem.style';
 
-const NavItem = (props) => {
+const NavItem = ({ href, title, icon }) => {
     const styles = useStyles();
-    return (
-        <Link to={props.href} className={styles.navLink}>
-            <div className={styles.navItem}>
 
-                {props.icon}
-                <Typography className={styles.navTitle}>{props.title}</Typography>
+    return (
+        <Link to={href} className={styles.navLink}>
+            <div className={styles.navItem}>
+                <div className={styles.icon}>
+                    {icon}
+                </div>
+                <Typography className={styles.navTitle}>{title}</Typography>
 
             </div>
         </Link>
