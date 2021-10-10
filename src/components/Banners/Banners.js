@@ -1,7 +1,15 @@
 import React from 'react'
+import styles from './Banners.style';
 import Slider from "react-slick";
 import IconButton from '@mui/material/IconButton';
+import slideShow1 from '../../img/slideshow_1.jpeg';
+import slideShow2 from '../../img/slideshow_2.jpeg';
+import slideShow3 from '../../img/slideshow_3.jpeg';
+import leftBanner from '../../img/left-banner.png';
+import smallBanner1 from '../../img/sm-banner2.webp';
+import smallBanner2 from '../../img/sm-banner3.webp';
 import { icons } from '../../constant';
+import { Grid } from '@mui/material';
 
 const CustomNextArrow = ({ onClick }) => (
     <IconButton aria-label="next" component="span" size="large" onClick={onClick} style={{
@@ -10,9 +18,8 @@ const CustomNextArrow = ({ onClick }) => (
         right: "30px",
         zIndex: "1000",
         top: "50%",
-        backgroundColor: "white",
     }}>
-        <icons.Next fontSize="inherit" />
+        <icons.Next fontSize="inherit" style={{ color: 'white' }} />
     </IconButton>
 )
 
@@ -23,9 +30,8 @@ const CustomPrevArrow = ({ onClick }) => (
         left: "30px",
         zIndex: "1000",
         top: "50%",
-        backgroundColor: "white",
     }}>
-        <icons.Prev fontSize="inherit" />
+        <icons.Prev fontSize="inherit" style={{ color: 'white' }} />
     </IconButton>
 )
 
@@ -44,28 +50,38 @@ const settings = {
     prevArrow: <CustomPrevArrow />,
 }
 
-
 const Banners = () => {
     return (
 
-        <Slider {...settings}>
-            <div>
-                <h3 style={{ backgroundColor: "blue", height: "700px" }}></h3>
-            </div>
-            <div>
-                <h3 style={{ backgroundColor: "red", height: "700px" }}></h3>
-            </div>
-            <div>
-                <h3 style={{ backgroundColor: "yellow", height: "700px" }}></h3>
-            </div>
-            <div>
-                <h3 style={{ backgroundColor: "green", height: "700px" }}></h3>
-            </div>
-            <div>
-                <h3 style={{ backgroundColor: "black", height: "700px" }}></h3>
-            </div>
-        </Slider>
+        <Grid container spacing={2}>
+            <Grid item xs={12} lg={3} sx={styles.leftBannerWrapper}>
+                <img src={leftBanner} alt="left-banner" style={styles.leftBanner} />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+                <Slider {...settings}>
+                    <div>
+                        <div style={styles.slideShowWrapper}>
+                            <img style={styles.slideShow} src={slideShow1} alt="slide1" />
+                        </div>
+                    </div>
+                    <div>
+                        <div style={styles.slideShowWrapper}>
+                            <img style={styles.slideShow} src={slideShow2} alt="slide2" />
+                        </div>
+                    </div>
+                    <div>
+                        <div style={styles.slideShowWrapper}>
+                            <img style={styles.slideShow} src={slideShow3} alt="slide3" />
+                        </div>
+                    </div>
 
+                </Slider>
+            </Grid>
+            <Grid item xs={12} lg={3} sx={styles.rightBannerWrapper}>
+                <img src={smallBanner1} alt="sm-banner1" style={styles.rightBanner} />
+                <img src={smallBanner2} alt="sm-banner2" style={styles.rightBanner} />
+            </Grid>
+        </Grid>
     )
 }
 

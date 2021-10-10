@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Rating from '@mui/material/Rating';
-import Grid from '@mui/material/Grid';
 import { icons } from '../../constant';
 
 const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
