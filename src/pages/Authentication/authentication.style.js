@@ -1,4 +1,4 @@
-
+import { makeStyles } from '@mui/styles';
 
 const styles = {
     main: {
@@ -43,9 +43,10 @@ const styles = {
     input: {
         backgroundColor: '#eee',
         padding: '12px 15px',
-        margin: '8px 0',
+        margin: '8px 0 14px',
         fontSize: '0.7rem',
         borderRadius: '10px',
+        fontFamily: "'Montserrat', sans-serif",
     },
     title: {
         fontFamily: "Roboto Slab",
@@ -78,7 +79,7 @@ const styles = {
     },
     back: {
         fontFamily: "IBM Plex Serif, serif",
-        fontSize: 13,
+        fontSize: 14,
         color: '#333',
         textDecoration: 'none',
         display: 'block',
@@ -88,7 +89,7 @@ const styles = {
         background: '#272727 !important',
         borderRadius: '20px',
 
-
+        fontFamily: 'Montserrat, sans-serif',
         fontSize: 13,
         fontWeight: 'bold',
         padding: '10px 45px',
@@ -96,12 +97,12 @@ const styles = {
         textTransform: 'uppercase',
     },
     overlayRight: {
-        background: 'linear-gradient(133deg ,#7d7a7a,#000304)',
+        background: 'linear-gradient(307deg, rgb(0, 0, 0), rgb(100 100 100))',
         display: 'flex',
         width: '50%',
         position: 'absolute',
         textAlign: 'center',
-        height: '-webkit-fill-available',
+        height: '100%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
@@ -110,12 +111,12 @@ const styles = {
 
         borderTopRightRadius: '10px',
         borderBottomRightRadius: '10px',
-        
+
     },
     overlayLeft: {
-        background: 'linear-gradient(133deg ,#7d7a7a,#000304)',
+        background: 'linear-gradient(65deg, rgb(0, 0, 0), rgb(82 82 82))',
         display: 'flex',
-        height: '-webkit-fill-available',
+        height: '100%',
         width: '50%',
         position: 'absolute',
         textAlign: 'center',
@@ -128,9 +129,29 @@ const styles = {
         borderBottomLeftRadius: '10px',
     },
 
+    overlayTitle: {
+        fontFamily: "Roboto Slab",
+        fontWeight: 'bold',
+        fontSize: '1.8rem'
+    },
+    overlaySubTitle: {
+        fontSize: '14px',
+        fontWeight: '100',
+        lineHeight: '20px',
+        letterSpacing: '0.5px',
+        margin: '20px 40px 30px',
+        fontFamily: "'IBM Plex Serif', serif"
+    },
     overlayButton: {
         borderColor: 'white !important',
-        color: 'white !important'
+        color:'white',
+        borderRadius: '20px',
+
+        fontFamily: 'Montserrat, sans-serif',
+        fontSize: 13,
+        fontWeight: 'bold',
+        padding: '10px 45px',
+        textTransform: 'uppercase',
     },
 };
 

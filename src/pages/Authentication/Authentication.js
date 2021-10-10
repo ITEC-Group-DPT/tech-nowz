@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { Input, Button, Slide, Fade } from '@mui/material';
+import { Input, Button, Slide, Fade, Typography } from '@mui/material';
 
 import SignInForm from '../../components/SignInForm/SignInForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import styles from './authentication.style';
+import { Box } from '@mui/system';
 
 
 const Authentication = () => {
@@ -13,12 +14,11 @@ const Authentication = () => {
     const leftRef = useRef(null);
     const rightRef = useRef(null);
 
-    console.log('right Ref: ', rightRef);
-    const [state, setState] = useState(false);
+    const [isSignIn, setIsSignIn] = useState(true);
 
     return (
-        <div style={styles.main}>
-            <div style={styles.container}
+        <Box sx={styles.main}>
+            <Box sx={styles.container}
 
             >
                 <SignInForm
@@ -32,34 +32,37 @@ const Authentication = () => {
                 <Slide
                     appear={false}
                     direction="right"
-                    in={!state}
+                    in={isSignIn}
                     container={rightRef.current}
                     timeout={500}
                 >
-                    <div style={styles.overlayRight}>
-                        <h1>Welcome To TechNow</h1>
-                        <p>Fill in some personal details and start shopping with us</p>
+                    <Box sx={styles.overlayRight}>
+                        <Typography variant="h1" sx={styles.overlayTitle}>Welcome To TechNow!</Typography>
+                        <Typography sx={styles.overlaySubTitle} variant="p">Fill in some personal details and start shopping with us </Typography>
                         <Button
-                            onClick={() => setState(!state)}
+                            onClick={() => setIsSignIn(false)}
                             sx={styles.overlayButton} variant="outlined">Sign Up</Button>
-                    </div>
+                    </Box>
                 </Slide>
 
                 <Fade
-                    in={state}
-                    timeout={550}
+                    in={!isSignIn}
+                    timeout={500}
                 >
-                    <div style={styles.overlayLeft}>
-                        <h1>Abcxyz</h1>
-                        <p>Kcjasdads</p>
-                        <Button
-                            onClick={() => setState(!state)}
-                            sx={styles.overlayButton} variant="outlined">Sign In</Button>
-                    </div>
-                </Fade>
-            </div>
+                    <Box style={styles.overlayLeft}>
+                        <Typography variant="h1" sx={styles.overlayTitle}>Welcome Back!
+                        </Typography>
+                        <Typography sx={styles.overlaySubTitle} variant="p">Time to get back to shopping, please login with your personal info
 
-        </div>
+                        </Typography>
+                        <Button
+                            onClick={() => setIsSignIn(true)}
+                            sx={styles.overlayButton} variant="outlined">Sign In</Button>
+                    </Box>
+                </Fade>
+            </Box>
+
+        </Box>
     )
 }
 

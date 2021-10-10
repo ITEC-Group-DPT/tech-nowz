@@ -6,14 +6,16 @@ import { Box } from '@mui/system';
 const SignUpForm = (props) => {
 
     return (
-        <Box sx={styles.formContainerRight} ref = {props.references}>
-            <Typography sx={styles.title}>Sign in</Typography>
-            <Box component="div" sx={styles.socialContainer}>
+        <Box sx={styles.formContainerRight} ref={props.references}>
+            <Typography sx={styles.title}>Create Account
+            </Typography>
+            <Box component="div" style={styles.socialContainer}>
                 <Link to="#" style={styles.socialLink}><i class="fab fa-facebook-f"></i></Link>
                 <Link to="#" style={styles.socialLink}><i class="fab fa-google-plus-g"></i></Link>
                 <Link to="#" style={styles.socialLink}><i class="fab fa-linkedin-in"></i></Link>
             </Box>
-            <Typography variant="span" sx={styles.subTitle}>or use your TechNow account</Typography>
+            <Typography variant="span" sx={styles.subTitle}>or use your email for registration
+            </Typography>
 
             <Input
                 sx={styles.input}
@@ -24,7 +26,7 @@ const SignUpForm = (props) => {
 
             <Input
                 sx={styles.input}
-                placeholder="Password"
+                placeholder="Username"
                 disableUnderline
                 fullWidth
             />
@@ -38,7 +40,7 @@ const SignUpForm = (props) => {
 
             <Input
                 sx={styles.input}
-                placeholder="Password"
+                placeholder="Confirm Password"
                 disableUnderline
                 fullWidth
             />
@@ -47,7 +49,7 @@ const SignUpForm = (props) => {
 
             <Button
                 sx={styles.mainButton} variant="contained"
-            >Sign In
+            >Sign Up
             </Button>
 
         </Box>

@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "../../pages/Authentication/authentication.style"
 import { Link } from 'react-router-dom';
-import { Input, Button, FormControl, Typography } from '@mui/material';
+import { Input, Button, FormControl, Typography, Slide } from '@mui/material';
 import { Box } from '@mui/system';
 const SignInForm = (props) => {
+
+    // const styles = useStyles();
     return (
         <Box sx={styles.formContainerLeft} ref={props.references}>
             <Typography sx={styles.title}>Sign in</Typography>
