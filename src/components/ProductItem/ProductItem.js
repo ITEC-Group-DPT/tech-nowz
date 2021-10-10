@@ -13,7 +13,7 @@ const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
 
     return (
-        <Card sx={{ maxWidth: 345, minHeight: 350 }} sx={styles.card}>
+        <Card sx={styles.card}>
             <CardActionArea sx={styles.cardActionArea}>
                 <CardMedia
                     component="img"
@@ -22,7 +22,7 @@ const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
                     alt="product image"
                     sx={styles.pImage}
                 />
-                <CardContent>
+                <CardContent sx={styles.pNameWrapper}>
                     <Typography gutterBottom variant="h6" component="div" sx={styles.pName}>
                         {name}
                     </Typography>

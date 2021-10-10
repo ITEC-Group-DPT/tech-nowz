@@ -8,24 +8,27 @@ import './styles.css'
 import IconButton from '@mui/material/IconButton';
 import { icons } from '../../constant';
 
-// const CustomNextArrow = ({ className, style, onClick }) => (
-//     <div className={className} onClick={onClick}>
-//         <IconButton aria-label="next" component="span">
-//             <icons.Next />
-//         </IconButton>
-//     </div >
-// )
+const CustomNextArrow = ({ onClick }) => (
+  <IconButton aria-label="next" component="span" size="large" onClick={onClick} style={{
+    position: "absolute",
+    padding: 0,
+    right: "-35px",
+    top: "50%",
+  }}>
+    <icons.Next fontSize="inherit" />
+  </IconButton>
+)
 
-// const CustomPrevArrow = props => {
-//     const { className, style, onClick } = props;
-//     return (
-//         <div
-//             className={className}
-//             style={{ ...style, display: "block", background: "green" }}
-//             onClick={onClick}
-//         />
-//     );
-// }
+const CustomPrevArrow = ({ onClick }) => (
+  <IconButton aria-label="prev" component="span" size="large" onClick={onClick} style={{
+    position: "absolute",
+    padding: 0,
+    left: "-35px",
+    top: "50%",
+  }}>
+    <icons.Prev fontSize="inherit" />
+  </IconButton>
+)
 
 const settings = {
   dots: true,
@@ -34,12 +37,12 @@ const settings = {
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 3500,
   pauseOnHover: true,
   swipeToSlide: true,
 
-  // nextArrow: <CustomNextArrow />,
-  // prevArrow: <CustomPrevArrow />
+  nextArrow: <CustomNextArrow />,
+  prevArrow: <CustomPrevArrow />,
 
   responsive: [
     {

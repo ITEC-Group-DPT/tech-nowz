@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
@@ -9,14 +9,14 @@ const fadeIn = (el) => {
     el.style.display = "flex"
     setTimeout(function () {
         el.style.opacity = "1"
-    }, 300)
+    }, 250)
 }
 
 const fadeOut = (el) => {
     el.style.opacity = "0"
     setTimeout(function () {
         el.style.display = "none"
-    }, 300)
+    }, 250)
 }
 
 const NavUserItems = ({ isPopUp }) => {

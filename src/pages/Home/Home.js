@@ -3,6 +3,7 @@ import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Category from '../../components/Category/Category';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
+import Banners from '../../components/Banners/Banners';
 
 const productList = [
     {
@@ -72,9 +73,11 @@ const productList = [
 ]
 
 const Home = () => {
-
     return (
-        <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', padding: '100px 0px'}}>
+        <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', paddingBottom: '100px'}}>
+            <Container maxWidth="xxl" style={{ marginBottom: '100px' }}>
+               <Banners/>
+            </Container>
             <Container maxWidth="xl" style={{ marginBottom: '100px' }}>
                 <ProductSlider sliderTitle="Top Seller" productList={productList} />
             </Container>

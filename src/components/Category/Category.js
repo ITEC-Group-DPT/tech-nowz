@@ -17,7 +17,7 @@ const Category = ({ categoryName, productList }) => {
                 <Typography gutterBottom variant="h5" component="div" sx={styles.categoryTitle}>{categoryName}</Typography>
                 <Button size="small" sx={styles.viewMoreBtn}>View more</Button>
             </div>
-            <Grid container spacing={{xs: 0.5, md: 3, lg: 3.5}}>
+            <Grid container spacing={{xs: 1, md: 3, lg: 3.5}}>
                 {productList.map(product => (
                     <Grid item xs={6} md={4} lg={3} key={product.productID}>
                         <ProductItem
