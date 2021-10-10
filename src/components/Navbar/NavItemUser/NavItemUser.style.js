@@ -41,6 +41,7 @@ const useStyles = makeStyles({
     userItemWrapper: {
         display: 'flex',
         justifyContent: 'end',
+        transition: '400ms',
     },
 
     navItem: {

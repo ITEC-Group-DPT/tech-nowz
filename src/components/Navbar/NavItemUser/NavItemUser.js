@@ -1,15 +1,35 @@
-import React from 'react'
-//import styles from './NavItemUser.style'
+import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import { icons } from '../../../constant';
 import useStyles from './NavItemUser.style'
 
-const NavUserItems = () => {
+const fadeIn = (el) => {
+    el.style.display = "flex"
+    setTimeout(function () {
+        el.style.opacity = "1"
+    }, 300)
+}
+
+const fadeOut = (el) => {
+    el.style.opacity = "0"
+    setTimeout(function () {
+        el.style.display = "none"
+    }, 300)
+}
+
+const NavUserItems = ({ isPopUp }) => {
     const styles = useStyles();
+
+    useEffect(() => {
+        const popUpNav = document.querySelector('#popUpNav')
+        if (isPopUp) fadeIn(popUpNav)
+        else fadeOut(popUpNav)
+    })
+
     return (
-        <div className={styles.userItemWrapper}>
+        <div className={styles.userItemWrapper} id='popUpNav'>
             <div className={styles.navItem}>
                 <Link to='/checkout/cart' className={styles.navLink}>
                     <Badge badgeContent={1} color="error">
