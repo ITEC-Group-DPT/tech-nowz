@@ -3,11 +3,15 @@ import styles from "../../pages/Authentication/authentication.style"
 import { Link } from 'react-router-dom';
 import { Input, Button, FormControl, Typography, Slide } from '@mui/material';
 import { Box } from '@mui/system';
-const SignInForm = (props) => {
+import useMediaQuery from '@mui/material/useMediaQuery';
+const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
-    // const styles = useStyles();
+    const minWidth = useMediaQuery('(min-width:900px)');
+
+    const isHide = !minWidth && !isSignIn;
+    if (isHide) return <></>;
     return (
-        <Box sx={styles.formContainerLeft} ref={props.references}>
+        <Box sx={styles.formContainerLeft} ref={references}>
             <Typography sx={styles.title}>Sign in</Typography>
             <Box component="div" sx={styles.socialContainer}>
                 <Link to="#" style={styles.socialLink}><i class="fab fa-facebook-f"></i></Link>
@@ -30,6 +34,12 @@ const SignInForm = (props) => {
                 fullWidth
             />
 
+            {
+               (isSignIn && !minWidth) &&
+                <Button onClick={() => setIsSignIn(false)} 
+                    sx={styles.switch}>Don't have an account? Sign up
+                </Button>
+            }
             <Link style={styles.back} to="/"><i class="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
 
             <Button

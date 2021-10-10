@@ -22,12 +22,17 @@ const Authentication = () => {
 
             >
                 <SignInForm
+                    isSignIn={isSignIn}
+                    setIsSignIn={setIsSignIn}
                     references={leftRef}
                 />
 
                 <SignUpForm
+                    isSignIn={isSignIn}
+                    setIsSignIn={setIsSignIn}
                     references={rightRef}
                 />
+
 
                 <Slide
                     appear={false}
@@ -45,11 +50,12 @@ const Authentication = () => {
                     </Box>
                 </Slide>
 
+
                 <Fade
                     in={!isSignIn}
-                    timeout={500}
+                    timeout={570}
                 >
-                    <Box style={styles.overlayLeft}>
+                    <Box sx={styles.overlayLeft}>
                         <Typography variant="h1" sx={styles.overlayTitle}>Welcome Back!
                         </Typography>
                         <Typography sx={styles.overlaySubTitle} variant="p">Time to get back to shopping, please login with your personal info

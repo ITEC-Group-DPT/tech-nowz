@@ -12,7 +12,8 @@ const styles = {
         alignItems: 'center',
     },
     container: {
-        width: 900,
+        width: { xs: '90%', md: 900 },
+        height:{ xs: '90%', md: 'auto' },
         display: 'flex',
         position: 'relative',
     },
@@ -25,8 +26,9 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
 
-        borderTopLeftRadius: '10px',
-        borderBottomLeftRadius: '10px',
+        borderRadius: { xs: '10px', md: '10px 0 0 10px' },
+        // borderTopLeftRadius: '10px',
+        // borderBottomLeftRadius: '10px',
     },
     formContainerRight: {
         flex: 1,
@@ -37,8 +39,9 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
 
-        borderTopRightRadius: '10px',
-        borderBottomRightRadius: '10px',
+        borderRadius: { xs: '10px', md: '0px 10px 10px 0px' },
+        // borderTopRightRadius: '10px',
+        // borderBottomRightRadius: '10px',
     },
     input: {
         backgroundColor: '#eee',
@@ -59,6 +62,14 @@ const styles = {
         fontFamily: "IBM Plex Serif, serif",
         fontSize: 12,
         marginBottom: 1,
+    },
+    switch: {
+        marginTop: 2,
+        fontFamily: "IBM Plex Serif, serif",
+        fontSize: 14,
+        cursor:'pointer',
+        textTransform:'initial',
+        color:'black'
     },
     socialContainer: {
         margin: "20px 0 15px"
@@ -98,7 +109,7 @@ const styles = {
     },
     overlayRight: {
         background: 'linear-gradient(307deg, rgb(0, 0, 0), rgb(100 100 100))',
-        display: 'flex',
+        display: { xs: 'none', md: 'flex' },
         width: '50%',
         position: 'absolute',
         textAlign: 'center',
@@ -115,7 +126,8 @@ const styles = {
     },
     overlayLeft: {
         background: 'linear-gradient(65deg, rgb(0, 0, 0), rgb(82 82 82))',
-        display: 'flex',
+        left: 0,
+        display: { xs: 'none', md: 'flex' },
         height: '100%',
         width: '50%',
         position: 'absolute',
@@ -144,7 +156,7 @@ const styles = {
     },
     overlayButton: {
         borderColor: 'white !important',
-        color:'white',
+        color: 'white',
         borderRadius: '20px',
 
         fontFamily: 'Montserrat, sans-serif',

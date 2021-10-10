@@ -3,10 +3,15 @@ import styles from "../../pages/Authentication/authentication.style"
 import { Link } from 'react-router-dom';
 import { Input, Button, FormControl, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-const SignUpForm = (props) => {
+import useMediaQuery from '@mui/material/useMediaQuery';
+const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
 
+    const minWidth = useMediaQuery('(min-width:900px)');
+
+    const isHide = (!minWidth && isSignIn);
+    if (isHide) return <></>;
     return (
-        <Box sx={styles.formContainerRight} ref={props.references}>
+        <Box sx={styles.formContainerRight} ref={references}>
             <Typography sx={styles.title}>Create Account
             </Typography>
             <Box component="div" style={styles.socialContainer}>
@@ -45,6 +50,13 @@ const SignUpForm = (props) => {
                 fullWidth
             />
 
+            {
+                (!isSignIn && !minWidth) &&
+                <Button onClick={() => setIsSignIn(true)}
+                    sx={styles.switch}>
+                    Already have an account? Sign in
+                </Button>
+            }
             <Link style={styles.back} to="/"><i class="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
 
             <Button
