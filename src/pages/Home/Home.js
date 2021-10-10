@@ -1,11 +1,8 @@
 import React from 'react'
-import { Container, Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import Category from '../../components/Category/Category';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Banners from '../../components/Banners/Banners';
 import Sponsors from '../../components/Sponsors/Sponsors';
-import { colors } from '../../constant';
 
 const productList = [
     {
@@ -77,24 +74,14 @@ const productList = [
 const Home = () => {
     return (
         <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', paddingBottom: '100px' }}>
-            <Container maxWidth="xxl" style={{ marginBottom: '100px' }}>
-                <Banners />
-            </Container>
-            <Container maxWidth="xl" style={{ marginBottom: '100px' }}>
-                <ProductSlider sliderTitle="Top Seller" productList={productList} />
-            </Container>
-            <Container maxWidth="xl" style={{ marginBottom: '100px', backgroundColor: colors.primary, padding: '3rem 8rem', borderRadius: '25px' }}>
-                <Sponsors />
-            </Container>
-            <Container maxWidth="xl" style={{ marginBottom: '100px' }}>
-                <ProductSlider sliderTitle="Top Rating" productList={productList} />
-            </Container>
-            <Container maxWidth="lg">
-                <Category categoryName="Laptop" productList={productList} />
-                <Category categoryName="Monitor" productList={productList} />
-                <Category categoryName="Graphic Card" productList={productList} />
-            </Container>
-        </div>
+            <Banners />
+            <ProductSlider sliderTitle="Top Seller" productList={productList} />
+            <Sponsors />
+            <ProductSlider sliderTitle="Top Rating" productList={productList} />
+            <Category categoryName="Laptop" productList={productList} />
+            <Category categoryName="Monitor" productList={productList} />
+            <Category categoryName="Graphic Card" productList={productList} />
+        </div >
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from "react-slick";
-import { Button, Typography } from '@mui/material';
+import { Container, Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import ProductItem from '../ProductItem/ProductItem';
 import styles from './ProductSlider.style'
@@ -69,7 +69,7 @@ const settings = {
 const ProductSlider = ({ sliderTitle, productList }) => {
 
   return (
-    <div>
+    <Container maxWidth="xl" style={{ marginBottom: '100px' }}>
       <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>{sliderTitle}</Typography>
       <Slider {...settings}>
         {productList.map(product => (
@@ -84,7 +84,7 @@ const ProductSlider = ({ sliderTitle, productList }) => {
           />
         ))}
       </Slider>
-    </div>
+      </Container>
   )
 }
 

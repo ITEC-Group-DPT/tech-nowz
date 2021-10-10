@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Banners.style';
 import Slider from "react-slick";
+import { Container } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import slideShow1 from '../../img/slideshow_1.jpeg';
 import slideShow2 from '../../img/slideshow_2.jpeg';
@@ -52,36 +53,37 @@ const settings = {
 
 const Banners = () => {
     return (
+        <Container maxWidth="xxl" style={{ marginBottom: '100px' }}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} lg={3} sx={styles.leftBannerWrapper}>
+                    <img src={leftBanner} alt="left-banner" style={styles.leftBanner} />
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                    <Slider {...settings}>
+                        <div>
+                            <div style={styles.slideShowWrapper}>
+                                <img style={styles.slideShow} src={slideShow1} alt="slide1" />
+                            </div>
+                        </div>
+                        <div>
+                            <div style={styles.slideShowWrapper}>
+                                <img style={styles.slideShow} src={slideShow2} alt="slide2" />
+                            </div>
+                        </div>
+                        <div>
+                            <div style={styles.slideShowWrapper}>
+                                <img style={styles.slideShow} src={slideShow3} alt="slide3" />
+                            </div>
+                        </div>
 
-        <Grid container spacing={2}>
-            <Grid item xs={12} lg={3} sx={styles.leftBannerWrapper}>
-                <img src={leftBanner} alt="left-banner" style={styles.leftBanner} />
+                    </Slider>
+                </Grid>
+                <Grid item xs={12} lg={3} sx={styles.rightBannerWrapper}>
+                    <img src={smallBanner1} alt="sm-banner1" style={styles.rightBanner} />
+                    <img src={smallBanner2} alt="sm-banner2" style={styles.rightBanner} />
+                </Grid>
             </Grid>
-            <Grid item xs={12} lg={6}>
-                <Slider {...settings}>
-                    <div>
-                        <div style={styles.slideShowWrapper}>
-                            <img style={styles.slideShow} src={slideShow1} alt="slide1" />
-                        </div>
-                    </div>
-                    <div>
-                        <div style={styles.slideShowWrapper}>
-                            <img style={styles.slideShow} src={slideShow2} alt="slide2" />
-                        </div>
-                    </div>
-                    <div>
-                        <div style={styles.slideShowWrapper}>
-                            <img style={styles.slideShow} src={slideShow3} alt="slide3" />
-                        </div>
-                    </div>
-
-                </Slider>
-            </Grid>
-            <Grid item xs={12} lg={3} sx={styles.rightBannerWrapper}>
-                <img src={smallBanner1} alt="sm-banner1" style={styles.rightBanner} />
-                <img src={smallBanner2} alt="sm-banner2" style={styles.rightBanner} />
-            </Grid>
-        </Grid>
+        </Container>
     )
 }
 
