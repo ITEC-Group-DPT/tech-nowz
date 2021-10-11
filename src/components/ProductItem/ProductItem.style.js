@@ -4,6 +4,18 @@ const styles = {
         minHeight: 350,
         borderRadius: '25px',
         boxShadow: 'none',
+        // marginRight: '30px',
+    },
+    cardSlider: {
+        maxWidth: 345,
+        minHeight: 350,
+        borderRadius: '25px',
+        boxShadow: 'none',
+
+        marginRight: {
+            xs: 0,
+            md: '30px',
+        },
     },
 
     cardActionArea: {

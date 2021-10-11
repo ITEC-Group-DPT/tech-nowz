@@ -8,11 +8,10 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import Rating from '@mui/material/Rating';
 import { icons } from '../../constant';
 
-const ProductItem = ({ productID, name, img1, rating, sold, price }) => {
+const ProductItem = ({ productID, name, img1, rating, sold, price, isSlider }) => {
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
-
     return (
-        <Card sx={styles.card}>
+        <Card sx={isSlider ? styles.cardSlider : styles.card}>
             <CardActionArea sx={styles.cardActionArea}>
                 <CardMedia
                     component="img"

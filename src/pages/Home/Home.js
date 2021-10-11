@@ -1,8 +1,9 @@
-import React from 'react'
+import { React, useEffect, useState } from 'react'
 import Category from '../../components/Category/Category';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Banner from '../../components/Banner/Banner';
 import Sponsors from '../../components/Sponsors/Sponsors';
+import axios from 'axios';
 
 const productList = [
     {
@@ -72,16 +73,44 @@ const productList = [
 ]
 
 const Home = () => {
+    const [laptopList, setLaptopList] = useState([])
+    const [cpuList, setCPUList] = useState([])
+    const [monitorList, setMonitorList] = useState([])
+    const [topRatingList, settopRatingList] = useState([])
+
+    useEffect(() => {
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=laptop')
+        .then(response => {
+            setLaptopList(response.data)
+        })
+
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=monitor')
+        .then(response => {
+            setMonitorList(response.data)
+        })
+
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=cpu')
+        .then(response => {
+            setCPUList(response.data)
+        })
+
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getTopRating')
+        .then(response => {
+            settopRatingList(response.data)
+        })
+
+    }, [])
+
     return (
         <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', paddingBottom: '100px' }}>
             <Banner />
             <ProductSlider sliderTitle="New Arrival" productList={productList} />
             <ProductSlider sliderTitle="Top Seller" productList={productList} />
             <Sponsors />
-            <ProductSlider sliderTitle="Top Rating" productList={productList} />
-            <Category categoryName="Laptop" productList={productList} />
-            <Category categoryName="Monitor" productList={productList} />
-            <Category categoryName="Graphic Card" productList={productList} />
+            <ProductSlider sliderTitle="Top Rating" productList={topRatingList} />
+            <Category categoryName="Laptop" productList={laptopList} />
+            <Category categoryName="Monitor" productList={monitorList} />
+            <Category categoryName="CPU" productList={cpuList} />
         </div >
     )
 }
