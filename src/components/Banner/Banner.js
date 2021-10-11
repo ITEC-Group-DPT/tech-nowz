@@ -50,23 +50,23 @@ const settings = {
 const Banners = () => {
     return (
         <Container maxWidth='xxl' style={styles.container}>
-                    <Slider {...settings}>
-                        <div>
-                            <div style={styles.slideShowWrapper}>
-                                <img style={styles.slideShow} src={slideShow1} alt="slide1" />
-                            </div>
-                        </div>
-                        <div>
-                            <div style={styles.slideShowWrapper}>
-                                <img style={styles.slideShow} src={slideShow2} alt="slide2" />
-                            </div>
-                        </div>
-                        <div>
-                            <div style={styles.slideShowWrapper}>
-                                <img style={styles.slideShow} src={slideShow3} alt="slide3" />
-                            </div>
-                        </div>
-                    </Slider>
+            <Slider {...settings}>
+                <div>
+                    <div style={styles.slideShowWrapper}>
+                        <img style={styles.slideShow} src={slideShow1} alt="slide1" />
+                    </div>
+                </div>
+                <div>
+                    <div style={styles.slideShowWrapper}>
+                        <img style={styles.slideShow} src={slideShow2} alt="slide2" />
+                    </div>
+                </div>
+                <div>
+                    <div style={styles.slideShowWrapper}>
+                        <img style={styles.slideShow} src={slideShow3} alt="slide3" />
+                    </div>
+                </div>
+            </Slider>
         </Container>
     )
 }

@@ -21,18 +21,18 @@ const ProductItem = ({ productID, name, img1, rating, sold, price, isSlider }) =
                     sx={styles.pImage}
                 />
                 <CardContent sx={styles.pNameWrapper}>
-                    <Typography gutterBottom variant="h6" component="div" sx={isSlider ? styles.pNameSlider: styles.pName}>
+                    <Typography variant="h6" component="div" sx={isSlider ? styles.pNameSlider: styles.pName}>
                         {name}
                     </Typography>
                 </CardContent>
 
                 <div style={styles.pRatingWrapper}>
-                    <Rating name="read-only" size="small" readOnly value={rating} precision={0.5} sx={isSlider ? styles.pRatingSlider: styles.pRating} />
+                    <Rating size="small" readOnly value={rating} precision={0.5} sx={isSlider ? styles.pRatingSlider: styles.pRating} />
                     <Typography variant="h5" sx={isSlider ? styles.pSoldSlider : styles.pSold}>({sold})</Typography>
                 </div>
 
                 <CardActions sx={styles.cardBottom}>
-                    <Typography gutterBottom variant="h6" component="div" sx={isSlider ? styles.pPriceSlider:styles.pPrice}>
+                    <Typography variant="h6" component="div" sx={isSlider ? styles.pPriceSlider:styles.pPrice}>
                         {formatedPrice}
                     </Typography>
                     <Button size="small" sx={styles.pAddCart}>
