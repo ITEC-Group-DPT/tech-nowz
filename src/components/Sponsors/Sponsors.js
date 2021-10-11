@@ -18,8 +18,8 @@ const Sponsors = () => {
     return (
         <Container maxWidth="xl" sx={styles.container}>
             <Typography gutterBottom variant="h5" component="div" sx={styles.sponsorTitle}>Our Sponsors</Typography>
-            <Grid container spacing={{ xs: 3, lg: 5 }}>
-                <Grid item xs={12} lg={4}>
+            <Grid container spacing={{ xs: 3, md: 5}}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Card sx={styles.card}>
                         <CardActionArea sx={styles.cardActionArea}>
                             <CardMedia
@@ -32,7 +32,7 @@ const Sponsors = () => {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Card sx={styles.card}>
                         <CardActionArea sx={styles.cardActionArea}>
                             <CardMedia
@@ -45,7 +45,7 @@ const Sponsors = () => {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Card sx={styles.card}>
                         <CardActionArea sx={styles.cardActionArea}>
                             <CardMedia
@@ -58,7 +58,7 @@ const Sponsors = () => {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Card sx={styles.card}>
                         <CardActionArea sx={styles.cardActionArea}>
                             <CardMedia
@@ -71,7 +71,7 @@ const Sponsors = () => {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Card sx={styles.card}>
                         <CardActionArea sx={styles.cardActionArea}>
                             <CardMedia
@@ -84,7 +84,7 @@ const Sponsors = () => {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Card sx={styles.card}>
                         <CardActionArea sx={styles.cardActionArea}>
                             <CardMedia

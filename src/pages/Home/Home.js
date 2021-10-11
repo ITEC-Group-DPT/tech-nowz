@@ -1,7 +1,7 @@
 import React from 'react'
 import Category from '../../components/Category/Category';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
-import Banners from '../../components/Banners/Banners';
+import Banner from '../../components/Banner/Banner';
 import Sponsors from '../../components/Sponsors/Sponsors';
 
 const productList = [
@@ -74,7 +74,8 @@ const productList = [
 const Home = () => {
     return (
         <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', paddingBottom: '100px' }}>
-            <Banners />
+            <Banner />
+            <ProductSlider sliderTitle="New Arrival" productList={productList} />
             <ProductSlider sliderTitle="Top Seller" productList={productList} />
             <Sponsors />
             <ProductSlider sliderTitle="Top Rating" productList={productList} />

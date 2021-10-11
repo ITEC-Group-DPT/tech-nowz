@@ -1,16 +1,13 @@
 import React from 'react'
-import styles from './Banners.style';
+import styles from './Banner.style';
+import './styles.css';
 import Slider from "react-slick";
 import { Container } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import slideShow1 from '../../img/slideshow_1.jpeg';
-import slideShow2 from '../../img/slideshow_2.jpeg';
-import slideShow3 from '../../img/slideshow_3.jpeg';
-import leftBanner from '../../img/left-banner.png';
-import smallBanner1 from '../../img/sm-banner2.webp';
-import smallBanner2 from '../../img/sm-banner3.webp';
+import slideShow1 from '../../img/slide-show1.jpg';
+import slideShow2 from '../../img/slide-show2.jpg';
+import slideShow3 from '../../img/slide-show3.jpg';
 import { icons } from '../../constant';
-import { Grid } from '@mui/material';
 
 const CustomNextArrow = ({ onClick }) => (
     <IconButton aria-label="next" component="span" size="large" onClick={onClick} style={{
@@ -43,7 +40,7 @@ const settings = {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 6000,
     pauseOnHover: true,
     swipeToSlide: true,
 
@@ -53,12 +50,7 @@ const settings = {
 
 const Banners = () => {
     return (
-        <Container maxWidth="xxl" style={{ marginBottom: '100px' }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} lg={3} sx={styles.leftBannerWrapper}>
-                    <img src={leftBanner} alt="left-banner" style={styles.leftBanner} />
-                </Grid>
-                <Grid item xs={12} lg={6}>
+        <Container maxWidth='xxl' style={styles.container}>
                     <Slider {...settings}>
                         <div>
                             <div style={styles.slideShowWrapper}>
@@ -75,14 +67,7 @@ const Banners = () => {
                                 <img style={styles.slideShow} src={slideShow3} alt="slide3" />
                             </div>
                         </div>
-
                     </Slider>
-                </Grid>
-                <Grid item xs={12} lg={3} sx={styles.rightBannerWrapper}>
-                    <img src={smallBanner1} alt="sm-banner1" style={styles.rightBanner} />
-                    <img src={smallBanner2} alt="sm-banner2" style={styles.rightBanner} />
-                </Grid>
-            </Grid>
         </Container>
     )
 }

@@ -6,6 +6,7 @@ const styles = {
         backgroundColor: colors.primary,
         padding: {
             xs: '2rem 1rem',
+            md: '2rem 4rem',
             lg: '3rem 7rem',
         },
         borderRadius: '25px'
