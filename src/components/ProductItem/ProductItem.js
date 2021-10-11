@@ -8,27 +8,27 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import Rating from '@mui/material/Rating';
 import { icons } from '../../constant';
 
-const ProductItem = ({ productID, name, img1, rating, sold, price, isSlider }) => {
-    const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
+const ProductItem = ({ product, isSlider }) => {
+    const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)
     return (
         <Card sx={isSlider ? styles.cardSlider : styles.card}>
             <CardActionArea sx={isSlider ? styles.cardActionAreaSlider: styles.cardActionArea}>
                 <CardMedia
                     component="img"
                     height="200"
-                    image={img1}
+                    image={product.img1}
                     alt="product image"
                     sx={styles.pImage}
                 />
                 <CardContent sx={styles.pNameWrapper}>
                     <Typography variant="h6" component="div" sx={isSlider ? styles.pNameSlider: styles.pName}>
-                        {name}
+                        {product.name}
                     </Typography>
                 </CardContent>
 
                 <div style={styles.pRatingWrapper}>
-                    <Rating size="small" readOnly value={rating} precision={0.5} sx={isSlider ? styles.pRatingSlider: styles.pRating} />
-                    <Typography variant="h5" sx={isSlider ? styles.pSoldSlider : styles.pSold}>({sold})</Typography>
+                    <Rating size="small" readOnly value={product.rating} precision={0.5} sx={isSlider ? styles.pRatingSlider: styles.pRating} />
+                    <Typography variant="h5" sx={isSlider ? styles.pSoldSlider : styles.pSold}>({product.sold})</Typography>
                 </div>
 
                 <CardActions sx={styles.cardBottom}>

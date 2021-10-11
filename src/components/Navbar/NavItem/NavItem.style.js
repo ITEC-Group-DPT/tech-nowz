@@ -5,7 +5,6 @@ const useStyles = makeStyles({
         marginRight: '.5rem',
         marginLeft: '.5rem',
         display: 'flex',
-
     },
 
     navLink: {

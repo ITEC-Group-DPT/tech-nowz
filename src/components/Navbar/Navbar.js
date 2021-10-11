@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import NavItemUser from './NavItemUser/NavItemUser';
-import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -22,7 +21,7 @@ const Navbar = () => {
     const [isPopUp, setIsPopUp] = useState(false)
     useEffect(() => {
         const appBar = document.querySelector(".appBar");
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 setIsPopUp(!entry.isIntersecting)
             })
@@ -31,8 +30,7 @@ const Navbar = () => {
     }, [])
 
     // responsiveNav(drawer)
-    const theme = useTheme()
-    const isMatch = useMediaQuery(theme.breakpoints.down('md'))
+    const isMatch = useMediaQuery("(max-width: 950px)")
 
     const openSide = 'left' // can be 'right', 'top' or 'bottom'
 
@@ -60,15 +58,15 @@ const Navbar = () => {
         >
             <List>
                 <ListItem button key='home'>
-                <NavItem href='/' title='Home' icon={<icons.Home />} />
+                    <NavItem href='/' title='Home' icon={<icons.Home />} />
                 </ListItem>
 
                 <ListItem button key='Hot Discount'>
-                <NavItem href='/' title='Hot Discount' icon={<icons.Offer />} />
+                    <NavItem href='/' title='Hot Discount' icon={<icons.Offer />} />
                 </ListItem>
 
                 <ListItem button key='Shipping Policy'>
-                <NavItem href='/' title='Shipping Policy' icon={<icons.Truck />} />
+                    <NavItem href='/' title='Shipping Policy' icon={<icons.Truck />} />
                 </ListItem>
 
                 <ListItem button key='Contact Us'>
@@ -91,7 +89,7 @@ const Navbar = () => {
                                     <icons.Menu style={{ color: 'white' }} />
                                 </IconButton>
                                 <Drawer
-                                    classes={{paper: styles.paper}}
+                                    classes={{ paper: styles.paper }}
                                     anchor={openSide}
                                     open={state[openSide]}
                                     onClose={toggleDrawer(openSide, false)}

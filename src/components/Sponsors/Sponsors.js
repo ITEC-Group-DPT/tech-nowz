@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from './Sponsors.style'
-import { Container, Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea, Typography } from '@mui/material';
+import { Container, Grid, CardActionArea, Typography } from '@mui/material';
 import sponsor1 from '../../img/sponsor-1.png';
 import sponsor2 from '../../img/sponsor-2.jpeg';
 import sponsor3 from '../../img/sponsor-3.jpeg';

@@ -15,7 +15,6 @@ const styles = {
         backgroundColor: 'white',
         width: '165px',
         height: '34px',
-        //animation: 'float 3s ease-in-out infinite',
     },
 
     menuContainer: {
@@ -32,7 +31,7 @@ const styles = {
     },
 
     menuTitle: {
-        marginLeft: '.7rem !important',
+        marginLeft: '.7rem',
     },
 }
 

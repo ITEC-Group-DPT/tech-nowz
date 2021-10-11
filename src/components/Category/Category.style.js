@@ -5,13 +5,13 @@ const styles = {
     },
 
     categoryTitle: {
-        fontWeight: 'bold !important',
+        fontWeight: 'bold',
     },
 
     viewMoreBtn: {
-        textTransform: 'none !important',
-        color: 'black !important',
-        margin: 'auto 0 auto auto !important',
+        textTransform: 'none',
+        color: 'black',
+        margin: 'auto 0 auto auto',
     }
 }
 

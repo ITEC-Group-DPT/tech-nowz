@@ -1,43 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
-// const styles = {
-//     userItemWrapper: {
-//         display: 'flex',
-//         justifyContent: 'end',
-//     },
-
-//     navItem: {
-//         marginRight: '.5rem',
-//         marginLeft: '.5rem',
-//         display: 'flex',
-//     },
-
-//     navLink: {
-//         color: 'white',
-//         textDecoration: 'none',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         padding: '.5rem 1rem',
-//         transition: '400ms',
-//         borderRadius: '25px',
-//         '&:hover': {
-//             backgroundColor: '#737373',
-//         }
-//     },
-
-//     icon: {
-//         fontSize: 'large',
-//     },
-
-//     navTitle: {
-//         fontSize: '.8rem',
-//         marginLeft: '15px',
-//     }
-
-// }
-
 const useStyles = makeStyles({
-
     userItemWrapper: {
         display: 'flex',
         justifyContent: 'end',
@@ -58,10 +21,7 @@ const useStyles = makeStyles({
         padding: '.5rem 1rem',
         transition: '400ms',
         borderRadius: '25px',
-        marginRight: {
-            xs: '0px',
-            lg: '20px',
-        },
+        //marginRight
         '&:hover': {
             backgroundColor: '#737373',
         }
@@ -78,5 +38,3 @@ const useStyles = makeStyles({
 });
 
 export default useStyles;
-
-//export default styles;

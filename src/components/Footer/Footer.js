@@ -4,12 +4,13 @@ import { Container, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { colors, icons } from '../../constant';
+import { Box } from '@mui/system';
+import { icons } from '../../constant';
 
 const Footer = () => {
     return (
         <>
-            <div style={styles.footer}>
+            <Box sx={styles.footer}>
                 <Container maxWidth="xs" >
                     <Grid container spacing={2}>
                         <Grid item xs={2}>
@@ -47,18 +48,18 @@ const Footer = () => {
                     </Grid>
                 </Container>
 
-                <div style={styles.addressWrapper}>
-                    <div style={styles.address}>
+                <Box sx={styles.addressWrapper}>
+                    <Box sx={styles.address}>
                         <Typography>227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam</Typography>
-                    </div>
-                </div>
+                    </Box>
+                </Box>
 
-            </div>
-            <div style={styles.bottomFooter}>
-                <div style={styles.copyright}>
+            </Box>
+            <Box sx={styles.bottomFooter}>
+                <Box sx={styles.copyright}>
                     <Typography>© 2021 Copyright: TechNow</Typography>
-                </div>
-            </div>
+                </Box>
+            </Box>
         </>
     )
 }

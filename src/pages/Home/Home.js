@@ -1,4 +1,6 @@
 import { React, useEffect, useState } from 'react'
+import styles from './Home.styles'
+import { Box } from '@mui/system';
 import Category from '../../components/Category/Category';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Banner from '../../components/Banner/Banner';
@@ -79,30 +81,30 @@ const Home = () => {
     const [topRatingList, settopRatingList] = useState([])
 
     useEffect(() => {
-        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=laptop')
-        .then(response => {
-            setLaptopList(response.data)
-        })
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=laptop&limit=8')
+            .then(response => {
+                setLaptopList(response.data)
+            })
 
-        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=monitor')
-        .then(response => {
-            setMonitorList(response.data)
-        })
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=monitor&limit=8')
+            .then(response => {
+                setMonitorList(response.data)
+            })
 
-        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=cpu')
-        .then(response => {
-            setCPUList(response.data)
-        })
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getProductCategory&typeOfProduct=cpu&limit=8')
+            .then(response => {
+                setCPUList(response.data)
+            })
 
-        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getTopRating')
-        .then(response => {
-            settopRatingList(response.data)
-        })
+        axios.get('http://technowdb.phuhanh.com.vn/api/productAPI.php?command=getTopRating&limit=10')
+            .then(response => {
+                settopRatingList(response.data)
+            })
 
     }, [])
 
     return (
-        <div style={{ minHeight: '100vh', backgroundColor: 'rgb(245, 245, 245)', paddingBottom: '100px' }}>
+        <Box sx={styles.box}>
             <Banner />
             <ProductSlider sliderTitle="New Arrival" productList={productList} />
             <ProductSlider sliderTitle="Top Seller" productList={productList} />
@@ -111,7 +113,7 @@ const Home = () => {
             <Category categoryName="Laptop" productList={laptopList} />
             <Category categoryName="Monitor" productList={monitorList} />
             <Category categoryName="CPU" productList={cpuList} />
-        </div >
+        </Box>
     )
 }
 

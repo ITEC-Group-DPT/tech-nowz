@@ -1,20 +1,20 @@
 import React from 'react'
-import Slider from "react-slick";
-import { Container, Button, Typography } from '@mui/material';
-import ProductItem from '../ProductItem/ProductItem';
 import styles from './ProductSlider.style'
-import IconButton from '@mui/material/IconButton';
 import { icons } from '../../constant';
+import Slider from "react-slick";
+import { Container, Typography } from '@mui/material';
+import ProductItem from '../ProductItem/ProductItem';
+import IconButton from '@mui/material/IconButton';
 
 const CustomNextArrow = ({ onClick }) => (
   <IconButton aria-label="next" component="span" size="large" onClick={onClick} sx={styles.nextArrow}>
-    <icons.Next fontSize="inherit"/>
+    <icons.Next fontSize="inherit" />
   </IconButton>
 )
 
 const CustomPrevArrow = ({ onClick }) => (
   <IconButton aria-label="prev" component="span" size="large" onClick={onClick} sx={styles.prevArrow}>
-    <icons.Prev fontSize="inherit"/>
+    <icons.Prev fontSize="inherit" />
   </IconButton>
 )
 
@@ -61,16 +61,11 @@ const ProductSlider = ({ sliderTitle, productList }) => {
       <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>{sliderTitle}</Typography>
       <Slider {...settings}>
         {productList.map(product => (
-            <ProductItem
-              productID={product.productID}
-              name={product.name}
-              img1={product.img1}
-              rating={product.rating}
-              sold={product.sold}
-              price={product.price}
-              key={product.productID}
-              isSlider
-            />
+          <ProductItem
+            product={product}
+            key={product.productID}
+            isSlider
+          />
         ))}
       </Slider>
     </Container>

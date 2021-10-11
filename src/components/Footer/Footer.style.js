@@ -2,7 +2,6 @@ import { colors } from '../../constant';
 
 const styles = {
     footer: {
-        marginTop: '3rem !important',
         backgroundColor: colors.primary,
         color: 'white',
         padding: '2rem',
@@ -36,7 +35,7 @@ const styles = {
             borderBottomColor: 'white',
         },
         '& .MuiInput-underline:hover:before': {
-            borderBottomColor: 'white',
+            borderBottomColor: 'white !important',
         },
         '& .MuiInput-underline:after': {
             borderBottomColor: 'white',
@@ -50,18 +49,18 @@ const styles = {
     },
 
     icon: {
-        fontSize: '2rem !important',
+        fontSize: '2rem',
     },
 
     signUp: {
-        fontSize: '1rem !important',
+        fontSize: '1rem',
         textAlign: 'center',
     },
 
     subscribeBtn : {
-        color: 'white !important',
-        border: 'solid 1px #FFFFFF !important',
-        textTransform: 'none !important',
+        color: 'white',
+        border: 'solid 1px #FFFFFF',
+        textTransform: 'none',
         "&:hover": {
             border: 'solid 1px #FFFFFF',
         },

@@ -1,9 +1,9 @@
 const styles = {
     sliderTitle: {
-        fontSize: '1.8rem !important',
-        fontWeight: 'bold !important',
+        fontSize: '1.8rem',
+        fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: '25px !important',
+        marginBottom: '25px',
     },
 
     nextArrow: {
