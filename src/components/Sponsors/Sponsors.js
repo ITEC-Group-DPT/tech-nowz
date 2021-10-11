@@ -4,15 +4,12 @@ import { Container, Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, Typography } from '@mui/material';
-
 import sponsor1 from '../../img/sponsor-1.png';
 import sponsor2 from '../../img/sponsor-2.jpeg';
 import sponsor3 from '../../img/sponsor-3.jpeg';
 import sponsor4 from '../../img/sponsor-4.jpg';
 import sponsor5 from '../../img/sponsor-5.png';
 import sponsor6 from '../../img/sponsor-6.jpg';
-import { style } from '@mui/system';
-
 
 const Sponsors = () => {
     return (

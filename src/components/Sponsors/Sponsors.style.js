@@ -19,13 +19,6 @@ const styles = {
     },
 
     sponsor: {
-        // width: {
-        //     sx: '400px',
-
-        // },
-        // height: {
-        //     sx: '400px',
-        // }
         height: "200px",
         width: '100%',
     },

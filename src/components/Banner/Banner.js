@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './Banner.style';
-import './styles.css';
 import Slider from "react-slick";
 import { Container } from '@mui/material';
 import IconButton from '@mui/material/IconButton';

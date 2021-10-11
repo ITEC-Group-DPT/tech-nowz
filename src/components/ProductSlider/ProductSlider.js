@@ -3,31 +3,18 @@ import Slider from "react-slick";
 import { Container, Button, Typography } from '@mui/material';
 import ProductItem from '../ProductItem/ProductItem';
 import styles from './ProductSlider.style'
-import './styles.css'
 import IconButton from '@mui/material/IconButton';
 import { icons } from '../../constant';
 
 const CustomNextArrow = ({ onClick }) => (
-  <IconButton aria-label="next" component="span" size="large" onClick={onClick} style={{
-    position: "absolute",
-    padding: 0,
-    right: "40px",
-    top: "50%",
-    zIndex: '1000',
-  }}>
-    <icons.Next fontSize="inherit" />
+  <IconButton aria-label="next" component="span" size="large" onClick={onClick} sx={styles.nextArrow}>
+    <icons.Next fontSize="inherit"/>
   </IconButton>
 )
 
 const CustomPrevArrow = ({ onClick }) => (
-  <IconButton aria-label="prev" component="span" size="large" onClick={onClick} style={{
-    position: "absolute",
-    padding: 0,
-    left: "20px",
-    top: "50%",
-    zIndex: '1000',
-  }}>
-    <icons.Prev fontSize="inherit" />
+  <IconButton aria-label="prev" component="span" size="large" onClick={onClick} sx={styles.prevArrow}>
+    <icons.Prev fontSize="inherit"/>
   </IconButton>
 )
 
@@ -69,7 +56,6 @@ const settings = {
 }
 
 const ProductSlider = ({ sliderTitle, productList }) => {
-
   return (
     <Container maxWidth="lg" style={{ marginBottom: '100px' }}>
       <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>{sliderTitle}</Typography>
@@ -85,7 +71,6 @@ const ProductSlider = ({ sliderTitle, productList }) => {
               key={product.productID}
               isSlider
             />
-
         ))}
       </Slider>
     </Container>
