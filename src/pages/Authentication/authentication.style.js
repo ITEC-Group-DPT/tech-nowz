@@ -27,8 +27,6 @@ const styles = {
         justifyContent: 'center',
 
         borderRadius: { xs: '10px', md: '10px 0 0 10px' },
-        // borderTopLeftRadius: '10px',
-        // borderBottomLeftRadius: '10px',
     },
     formContainerRight: {
         flex: 1,
@@ -40,8 +38,6 @@ const styles = {
         justifyContent: 'center',
 
         borderRadius: { xs: '10px', md: '0px 10px 10px 0px' },
-        // borderTopRightRadius: '10px',
-        // borderBottomRightRadius: '10px',
     },
     input: {
         backgroundColor: '#eee',
@@ -56,6 +52,7 @@ const styles = {
         fontSize: '1.8rem',
         margin: 0,
         fontWeight: 'bold',
+        textAlign:'center',
         lineHeight: 1.2,
     },
     subTitle: {
