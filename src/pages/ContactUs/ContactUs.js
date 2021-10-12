@@ -1,9 +1,10 @@
 import React from 'react'
+import { Typography } from '@mui/material';
 
 const ContactUs = () => {
     return (
         <div>
-            <h1>Contact Us</h1>
+            <Typography style={{minHeight: '50vh', fontSize: '3rem'}}>Contact Us</Typography>
         </div>
     )
 }

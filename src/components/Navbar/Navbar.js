@@ -1,40 +1,127 @@
-import React from 'react'
-import useStyles from './NavItem.style';
+import { React, useState, useEffect } from 'react'
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import NavItem from './NavItem/NavItem';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import NavItem from './NavItem';
-
+import NavItemUser from './NavItemUser/NavItemUser';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import { colors, icons } from '../../constant';
+import useStyles from './Navbar.styles';
 
 const Navbar = () => {
     const styles = useStyles();
 
-    return (
-        <Box sx={{ flexGrow: 1 }}>
+    // popUpNav
+    const [isPopUp, setIsPopUp] = useState(false)
+    useEffect(() => {
+        const appBar = document.querySelector(".appBar");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                setIsPopUp(!entry.isIntersecting)
+            })
+        }, { threshold: 1 })
+        observer.observe(appBar)
+    }, [])
 
-            <AppBar position="sticky" sx= {{backgroundColor: colors.primary}}>
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+    // responsiveNav(drawer)
+    const isMatch = useMediaQuery("(max-width: 950px)")
 
-                    <NavItem href='/' title='Home' icon={<icons.Home className={styles.icon}/>}/>
-                    <NavItem href='/' title='Hot Discount' icon={<icons.Offer className={styles.icon}/>}/>
-                    <NavItem href='/' title='Shipping Policy' icon={<icons.Truck className={styles.icon}/>}/>
-                    <NavItem href='/contactus' title='Contact Us' icon={<icons.Phone className={styles.icon}/>}/>
+    const openSide = 'left' // can be 'right', 'top' or 'bottom'
 
-                </Toolbar>
-            </AppBar>
+    const [state, setState] = useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
+
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+
+    const list = (anchor) => (
+        <Box
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                <ListItem button key='home'>
+                    <NavItem href='/' title='Home' icon={<icons.Home />} />
+                </ListItem>
+
+                <ListItem button key='Hot Discount'>
+                    <NavItem href='/' title='Hot Discount' icon={<icons.Offer />} />
+                </ListItem>
+
+                <ListItem button key='Shipping Policy'>
+                    <NavItem href='/' title='Shipping Policy' icon={<icons.Truck />} />
+                </ListItem>
+
+                <ListItem button key='Contact Us'>
+                    <NavItem href='/contactus' title='Contact Us' icon={<icons.Phone />} />
+                </ListItem>
+
+            </List>
         </Box>
+    );
+
+    // main
+    return (
+        <AppBar position="sticky" sx={{ backgroundColor: colors.primary, top: '-1px' }} className="appBar">
+            <Toolbar>
+                <Container maxWidth='xl'>
+                    <Grid container spacing={2}>
+                        {isMatch ? (
+                            <Grid item xs={3}>
+                                <IconButton aria-label="menu" size="medium" onClick={toggleDrawer(openSide, true)}>
+                                    <icons.Menu style={{ color: 'white' }} />
+                                </IconButton>
+                                <Drawer
+                                    classes={{ paper: styles.paper }}
+                                    anchor={openSide}
+                                    open={state[openSide]}
+                                    onClose={toggleDrawer(openSide, false)}
+                                >
+                                    {list(openSide)}
+                                </Drawer>
+                            </Grid>
+
+                        ) : (
+                            <>
+                                <Grid item xs={2}>
+                                    <NavItem href='/' title='Home' icon={<icons.Home />} />
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <NavItem href='/' title='Hot Discount' icon={<icons.Offer />} />
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <NavItem href='/' title='Shipping Policy' icon={<icons.Truck />} />
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <NavItem href='/contactus' title='Contact Us' icon={<icons.Phone />} />
+                                </Grid>
+                            </>
+                        )}
+                        <Grid item xs={9} md={4}>
+                            <NavItemUser isPopUp={isPopUp} />
+                        </Grid>
+                    </Grid>
+                </Container>
+
+            </Toolbar>
+        </AppBar>
     );
 
 }

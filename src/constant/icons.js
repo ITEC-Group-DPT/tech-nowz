@@ -12,6 +12,9 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -28,6 +31,9 @@ const icons = {
     User: PersonOutlineOutlinedIcon,
     Search: SearchIcon,
     AddCart: AddShoppingCartOutlinedIcon,
+    Next: NavigateNextIcon,
+    Prev: NavigateBeforeIcon,
+    Menu: MenuIcon,
 }
 
 export default icons;

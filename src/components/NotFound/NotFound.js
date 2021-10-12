@@ -1,9 +1,10 @@
 import React from 'react'
+import { Typography } from '@mui/material';
 
 const NotFound = () => {
     return (
         <div>
-            <h1>404 Not Found!</h1>
+            <Typography style={{minHeight: '100vh', fontSize: '3rem'}}>Page Not Found! (Error: 404)</Typography>
         </div>
     )
 }
