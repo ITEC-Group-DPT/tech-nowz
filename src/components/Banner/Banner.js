@@ -53,7 +53,8 @@ const Banners = () => {
             <Slider {...settings}>
                 <div>
                     <div style={styles.slideShowWrapper}>
-                        <img style={styles.slideShow} src={slideShow1} alt="slide1" />
+                        <img
+                            style={styles.slideShow} src={slideShow1} alt="slide1" />
                     </div>
                 </div>
                 <div>

@@ -20,12 +20,12 @@ const CustomPrevArrow = ({ onClick }) => (
 
 const settings = {
   dots: true,
-  speed: 500,
+  speed: 350,
   infinite: true,
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: false,
-  autoplaySpeed: 5000,
+  autoplaySpeed: 3500,
   pauseOnHover: true,
   swipeToSlide: true,
   centerPadding: '60px',

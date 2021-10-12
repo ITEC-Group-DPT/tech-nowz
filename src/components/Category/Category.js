@@ -6,6 +6,7 @@ import { Box } from '@mui/system';
 import ProductItem from '../ProductItem/ProductItem';
 
 const Category = ({ categoryName, productList }) => {
+    if (productList.length === 0) return <></>;
     return (
         <Container maxWidth="lg" sx={{ marginTop: '60px' }}>
             <Box sx={styles.category}>

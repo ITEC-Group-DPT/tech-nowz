@@ -6,11 +6,13 @@ const styles = {
     },
 
     slideShowWrapper: {
-
+        width: '100%',
+        height:'120%',
     },
 
     slideShow: {
-
+        width: '100%',
+        height:'100%',
     },
 }
 
