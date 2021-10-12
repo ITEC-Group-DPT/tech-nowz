@@ -1,11 +1,13 @@
 import React from 'react'
+import styles from './NotFound.styles'
 import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
 
 const NotFound = () => {
     return (
-        <div>
-            <Typography style={{minHeight: '100vh', fontSize: '3rem'}}>Page Not Found! (Error: 404)</Typography>
-        </div>
+        <Box sx={styles.wrapper}>
+            <Typography component="div" sx={styles.typo}>Page Not Found! (Error: 404)</Typography>
+        </Box>
     )
 }
 
