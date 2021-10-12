@@ -1,14 +1,9 @@
-import React from 'react'
-import AppNavigation from './navigation/AppNavigation';
-import { Provider } from 'react-redux';
-import store from './store/createStore';
-
-const App = () => {
+const App = () =>  {
   return (
-      <Provider store={store}>
-        <AppNavigation />
-      </Provider>
-  )
+    <div className="App">
+      <h1>Hello Technowz</h1>
+    </div>
+  );
 }
 
 export default App;
