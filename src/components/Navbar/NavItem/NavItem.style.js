@@ -1,23 +1,23 @@
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
+const styles = {
     navItem: {
         marginRight: '.5rem',
         marginLeft: '.5rem',
         display: 'flex',
-    },
-
-    navLink: {
         color: 'white',
-        textDecoration: 'none',
         display: 'flex',
         justifyContent: 'center',
         padding: '.5rem 1rem',
         transition: '400ms',
         borderRadius: '25px',
+
         '&:hover': {
             backgroundColor: '#737373',
         }
+    },
+
+    navLink: {
+
+        textDecoration: 'none',
     },
 
     icon: {
@@ -30,7 +30,6 @@ const useStyles = makeStyles({
     navTitle: {
         fontSize: '.8rem !important',
     }
+}
 
-});
-
-export default useStyles;
+export default styles;

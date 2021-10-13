@@ -10,11 +10,16 @@ const styles = {
     addressWrapper: {
         display: 'flex',
         justifyContent: 'center',
-        marginTop: '1.5rem',
+        mt: 4,
     },
 
     socialMedia: {
         display: 'flex',
+    },
+
+    newsletterWrapper: {
+        mt: 4,
+        alignItems: 'center',
     },
 
     newsletter: {
@@ -24,28 +29,10 @@ const styles = {
 
     textField: {
         width: '100%',
-        color: 'white',
-        "& .Mui-focused": {
-            color: "white !important",
-        },
-        "& .MuiFormLabel-root": {
-            color: "white",
-        },
-        '& .MuiInput-underline:before': {
-            borderBottomColor: 'white',
-        },
-        '& .MuiInput-underline:hover:before': {
-            borderBottomColor: 'white !important',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: 'white',
-        },
-    },
-
-    btnWrapper : {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        color: 'black',
+        backgroundColor: 'white',
+        borderRadius: '6px',
+        padding: '5px 12px',
     },
 
     icon: {
@@ -55,19 +42,36 @@ const styles = {
     signUp: {
         fontSize: '1rem',
         textAlign: 'center',
-    },
-
-    subscribeBtn : {
-        color: 'white',
-        border: 'solid 1px #FFFFFF',
-        textTransform: 'none',
-        "&:hover": {
-            border: 'solid 1px #FFFFFF',
+        mb: {
+            xs: 3,
+            lg: 0,
         },
     },
 
-    address : {
+    btnWrapper: {
+        display: {
+            xs: 'flex',
+            lg: 'block',
+        },
+        justifyContent: 'center',
+    },
 
+    subscribeBtn: {
+        color: 'white',
+        border: 'solid 1px #FFFFFF',
+        textTransform: 'none',
+        padding: '8px 20px',
+        ml: {
+            xs: 0,
+            lg: 4,
+        },
+        mt: {
+            xs: 3,
+            lg: 0,
+        },
+        "&:hover": {
+            border: 'solid 1px #FFFFFF',
+        },
     },
 
     bottomFooter: {
