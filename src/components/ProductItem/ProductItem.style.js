@@ -1,9 +1,19 @@
 const styles = {
+    link: {
+        textDecoration: 'none',
+    },
+
     card: {
         maxWidth: 345,
         minHeight: 350,
         borderRadius: '25px',
         boxShadow: 'none',
+
+
+        padding: {
+            lg: '.9rem',
+            xs: '0rem .5rem .5rem .5rem',
+        },
     },
 
     cardSlider: {
@@ -16,19 +26,17 @@ const styles = {
             xs: 0,
             md: '30px',
         },
-    },
-
-    cardActionArea: {
         padding: {
-            lg:'.9rem',
-            xs: '0rem .5rem .5rem .5rem',
+            lg: '.9rem',
+            xs: '0rem 1.1rem 1.1rem 1.1rem',
         },
     },
 
-    cardActionAreaSlider: {
-        padding: {
-            lg:'.9rem',
-            xs: '0rem 1.1rem 1.1rem 1.1rem',
+    box: {
+        '&:hover': {
+            transition: "transform 0.5s ease-in-out",
+            transform: "scale(1.03)",
+            backgroundColor: "white",
         },
     },
 
