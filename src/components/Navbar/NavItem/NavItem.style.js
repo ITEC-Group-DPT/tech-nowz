@@ -22,13 +22,13 @@ const useStyles = makeStyles({
 
     icon: {
         '& *': {
-            fontSize: 'large',
-            marginRight: '.5rem',
+            fontSize: 'large !important',
+            marginRight: '.5rem !important',
         }
     },
 
     navTitle: {
-        fontSize: '.8rem',
+        fontSize: '.8rem !important',
     }
 
 });

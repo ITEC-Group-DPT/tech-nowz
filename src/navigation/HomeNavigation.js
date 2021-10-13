@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-
 import Navbar from '../components/Navbar/Navbar';
 import Product from '../pages/Product/Product';
 import ContactUs from '../pages/ContactUs/ContactUs';
@@ -10,8 +9,6 @@ import Home from '../pages/Home/Home';
 import NotFound from '../components/NotFound/NotFound';
 import UpperNav from '../components/UpperNav/UpperNav';
 import Footer from '../components/Footer/Footer';
-
-
 
 const HomeNavigation = () => {
     return (

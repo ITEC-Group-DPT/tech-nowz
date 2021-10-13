@@ -28,12 +28,12 @@ const useStyles = makeStyles({
     },
 
     icon: {
-        fontSize: 'large',
+        fontSize: 'large !important',
     },
 
     navTitle: {
-        fontSize: '.8rem',
-        marginLeft: '15px',
+        fontSize: '.8rem !important',
+        marginLeft: '15px !important',
     }
 });
 
