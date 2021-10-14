@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from './ProductSlider.style'
-import { icons } from '../../constant';
-import Slider from "react-slick";
-import { Container, Typography } from '@mui/material';
-import ProductItem from '../ProductItem/ProductItem';
-import IconButton from '@mui/material/IconButton';
+import { icons } from '../../constant'
+import Slider from "react-slick"
+import { Container, Typography } from '@mui/material'
+import ProductItem from '../ProductItem/ProductItem'
+import IconButton from '@mui/material/IconButton'
+import { useSelector } from 'react-redux'
 
 const CustomNextArrow = ({ onClick }) => (
   <IconButton aria-label="next" component="span" size="large" onClick={onClick} sx={styles.nextArrow}>
@@ -24,8 +25,8 @@ const settings = {
   infinite: true,
   slidesToShow: 4,
   slidesToScroll: 1,
-  autoplay: false,
-  autoplaySpeed: 3500,
+  autoplay: true,
+  autoplaySpeed: 3000,
   pauseOnHover: true,
   swipeToSlide: true,
   centerPadding: '60px',
@@ -55,7 +56,9 @@ const settings = {
   ],
 }
 
-const ProductSlider = ({ sliderTitle, productList }) => {
+const ProductSlider = ({ sliderTitle }) => {
+  const productList = useSelector(state => state.ProductList.products[sliderTitle])
+  if (productList === undefined) return <></>
   return (
     <Container maxWidth="lg" style={{ marginBottom: '100px' }}>
       <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>{sliderTitle}</Typography>
