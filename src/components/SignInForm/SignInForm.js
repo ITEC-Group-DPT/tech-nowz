@@ -9,6 +9,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
     const minWidth = useMediaQuery('(min-width:900px)');
 
     const isHide = !minWidth && !isSignIn;
+
     if (isHide) return <></>;
     return (
         <Box sx={styles.formContainerLeft} ref={references}>
@@ -36,7 +37,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
             {
                (isSignIn && !minWidth) &&
-                <Button onClick={() => setIsSignIn(false)} 
+                <Button onClick={() => setIsSignIn(false)}
                     sx={styles.switch}>Don't have an account? Sign up
                 </Button>
             }

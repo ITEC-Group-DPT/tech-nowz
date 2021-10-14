@@ -19,7 +19,7 @@ const HomeNavigation = () => {
                 <Route exact path='/contactus' component={ContactUs}/>
                 <Route exact path='/' component={Home}/>
 
-                <Route path='/product/:id' component={Product}/>
+                <Route path='/product/:name' component={Product}/>
                 <Route path='/checkout' component={CartNavigation}/>
                 <Route path='/profile' component={ProfileNavigation}/>
 

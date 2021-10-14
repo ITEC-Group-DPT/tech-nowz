@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Footer.style';
-import { Container, Typography } from '@mui/material'
+import { Container, Input, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -34,13 +34,13 @@ const Footer = () => {
                     </Grid>
                 </Container>
 
-                <Container maxWidth="md">
-                    <Grid container spacing={2} mt={1}>
+                <Container maxWidth="lg">
+                    <Grid container spacing={0} mt={1} sx={styles.newsletterWrapper}>
                         <Grid item lg={3} xs={12}>
                             <Typography sx={styles.signUp}>Sign up for our newsletter</Typography>
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <TextField size='small' id="standard-basic" label="Email" variant="standard" sx={styles.textField} />
+                            <Input placeholder="Email address" disableUnderline sx={styles.textField} />
                         </Grid>
                         <Grid item lg={3} xs={12} sx={styles.btnWrapper}>
                             <Button sx={styles.subscribeBtn} variant="outlined">Subscribe</Button>

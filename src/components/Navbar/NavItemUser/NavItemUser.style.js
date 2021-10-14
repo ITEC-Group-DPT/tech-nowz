@@ -1,6 +1,4 @@
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
+const styles = {
     userItemWrapper: {
         display: 'flex',
         justifyContent: 'end',
@@ -14,8 +12,11 @@ const useStyles = makeStyles({
     },
 
     navLink: {
-        color: 'white',
         textDecoration: 'none',
+        color: 'white',
+    },
+
+    wrapper: {
         display: 'flex',
         justifyContent: 'center',
         padding: '.5rem 1rem',
@@ -28,13 +29,13 @@ const useStyles = makeStyles({
     },
 
     icon: {
-        fontSize: 'large !important',
+        fontSize: 'large',
     },
 
     navTitle: {
-        fontSize: '.8rem !important',
-        marginLeft: '15px !important',
+        fontSize: '.8rem',
+        marginLeft: '15px',
     }
-});
+};
 
-export default useStyles;
+export default styles;

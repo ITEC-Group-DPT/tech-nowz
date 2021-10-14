@@ -13,6 +13,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { colors, icons } from '../../constant';
 import useStyles from './Navbar.styles';
+import { Divider } from '@mui/material';
 
 const Navbar = () => {
     const styles = useStyles();
@@ -74,6 +75,18 @@ const Navbar = () => {
                 </ListItem>
 
             </List>
+            <Divider/>
+
+            <List sx={{marginTop: 'auto'}}>
+                <ListItem button key='cart'>
+                    <NavItem href='/checkout/cart' title='Cart' icon={<icons.Cart />} />
+                </ListItem>
+
+                <ListItem button key='user'>
+                    <NavItem href='/authentication' title='Login' icon={<icons.User />} />
+                </ListItem>
+            </List>
+
         </Box>
     );
 
