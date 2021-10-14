@@ -11,9 +11,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const CardAddress = ({ address }) => {
 	return (
-		<Card variant="outlined" sx={{ minWidth: 275, my: 2 }}>
+
+		<Card variant="outlined" sx={{ minWidth: 275, maxWidth:"80%", my: 2, mx:'auto' }}>
 			<CardContent >
-				<Typography variant="h6" component="div">
+				<Typography variant="p" sx={{fontSize:20}} component="div">
 					Name: {address.name} <br/>
 					Address: {address.address} <br/>
 					Phone: {address.phone}

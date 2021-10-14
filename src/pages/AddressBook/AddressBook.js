@@ -13,7 +13,7 @@ import {
 	CardActions,
 	Divider,
 } from "@mui/material";
-import CardAddress from "../../components/CardAddresss/CardAddress"
+import CardAddress from "../../components/CardAddresss/CardAddress";
 // import axios from "axios";
 const AddressBook = () => {
 	const [addressBook, setAddressBook] = useState([
@@ -40,20 +40,26 @@ const AddressBook = () => {
 	//       setAddressBook(res.data)
 	//     });
 	return (
-		<Container>
-			<Box sx={{ textAlign: "center", py: 10 }}>
-				<Typography variant="h1" component="div">
+		<div>
+			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
+				<Typography
+					variant="h1"
+					sx={{ fontWeight: "500" }}
+					component="div">
 					Address Book
 				</Typography>
 			</Box>
-			{addressBook.map(address => (
-				<CardAddress address={address} key={address.deliveryID}/>
-			))}
-			<FormControl fullWidth="true">
-				<InputLabel htmlFor="my-input">Email address</InputLabel>
-				<Input id="my-input" aria-describedby="my-helper-text" />
-			</FormControl>
-		</Container>
+			<Container>
+				<Divider />
+				{addressBook.map((address) => (
+					<CardAddress address={address} key={address.deliveryID} />
+				))}
+				<FormControl fullWidth="true">
+					<InputLabel htmlFor="my-input">Email address</InputLabel>
+					<Input id="my-input" aria-describedby="my-helper-text" />
+				</FormControl>
+			</Container>
+		</div>
 	);
 };
 
