@@ -12,7 +12,7 @@ const styles = {
         alignItems: 'center',
     },
     container: {
-        width: { xs: '90%', md: 900 },
+        width: { xs: '90%', md: 900},
         height:{ xs: '90%', md: 'auto' },
         display: 'flex',
         position: 'relative',

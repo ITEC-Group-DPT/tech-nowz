@@ -10,6 +10,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
 
     const isHide = (!minWidth && isSignIn);
     if (isHide) return <></>;
+    
     return (
         <Box sx={styles.formContainerRight} ref={references}>
             <Typography sx={styles.title}>Create Account

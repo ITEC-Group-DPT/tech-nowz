@@ -16,7 +16,6 @@ const styles = {
     },
 
     navLink: {
-
         textDecoration: 'none',
     },
 
