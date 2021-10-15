@@ -1,9 +1,17 @@
 import ActionType from "../actions/actionType";
+import { combineReducers } from "redux";
 
 const initState = {
     isLoading: false,
     products: {},
 };
+
+const HeheReducer = (state = initState, action) => {
+    return {
+        ...state,
+        isLoading: '?',
+    };
+}
 
 const ProductReducer = (state = initState, action) => {
     switch (action.type) {
@@ -29,4 +37,8 @@ const ProductReducer = (state = initState, action) => {
     }
 }
 
-export default ProductReducer;
+export default combineReducers({
+    ProductReducer,
+    HeheReducer,
+})
+;
