@@ -15,9 +15,9 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
         <Box sx={styles.formContainerLeft} ref={references}>
             <Typography sx={styles.title}>Sign in</Typography>
             <Box component="div" sx={styles.socialContainer}>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-facebook-f"></i></Link>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-google-plus-g"></i></Link>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-linkedin-in"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-facebook-f"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-google-plus-g"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-linkedin-in"></i></Link>
             </Box>
             <Typography variant="span" sx={styles.subTitle}>or use your TechNow account</Typography>
 
@@ -41,7 +41,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
                     sx={styles.switch}>Don't have an account? Sign up
                 </Button>
             }
-            <Link style={styles.back} to="/"><i class="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
+            <Link style={styles.back} to="/"><i className="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
 
             <Button
                 sx={styles.mainButton} variant="contained"
