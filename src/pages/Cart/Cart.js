@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './cart.style'
 
-import { Box, Typography, Card, Container, CardMedia, CardContent, Rating } from '@mui/material'
+import { Container } from '@mui/material'
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 
 const product = {
     "productID": 69,
@@ -12,32 +13,25 @@ const product = {
     "price": 5600000,
     "rating": 2.66545,
     "sold": 15,
+    "quantity": 2,
     "dateCreated": "2021-07-02 20:50:24",
     "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Headphone%2F09.webp?alt=media&token=17e9d962-608c-4325-aa60-c208f51b23a6",
 };
 const Cart = () => {
-    const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)
+
     return (
         <Container sx={styles.main}>
-            <Card sx={styles.productCard}>
-                <CardMedia
-                    component="img"
-                    sx={styles.productImg}
-                    image={product.img1}
+            <HorizontalProduct
+                product={product} 
+                canDelete
+                ratingSize = {"20px"}
+                onPressDelete = {() => console.log('press 1')}
+            />
+            <HorizontalProduct
+                product={product} 
+                canDelete
+                onPressDelete = {() => console.log('press 2')}
                 />
-
-                <CardContent sx = {styles.productContent}>
-                    <Typography sx = {styles.productName}>{product.name}</Typography>
-                    <Typography>{product.quantity && ("Quantity: " + product.quantity)}</Typography>
-
-                    <Rating size="small" readOnly value={product.rating} precision={0.5} />
-
-                </CardContent>
-
-                <CardContent sx ={styles.priceContainer}>
-                    <Typography sx = {styles.productPrice}>{formatedPrice}</Typography>
-                </CardContent>
-            </Card>
         </Container>
     )
 }
