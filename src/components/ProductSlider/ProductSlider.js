@@ -24,7 +24,7 @@ const settings = {
   dots: true,
   speed: 350,
   infinite: true,
-  slidesToShow: 4,
+  slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
@@ -37,7 +37,13 @@ const settings = {
 
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 1460,
+      settings: {
+        slidesToShow: 4,
+      }
+    },
+    {
+      breakpoint: 1190,
       settings: {
         slidesToShow: 3,
       }
@@ -49,7 +55,7 @@ const settings = {
       }
     },
     {
-      breakpoint: 480,
+      breakpoint: 500,
       settings: {
         slidesToShow: 1,
       }
@@ -67,7 +73,7 @@ const ProductSlider = ({ sliderTitle }) => {
 
   if (productList === undefined) return <></>
   return (
-    <Container maxWidth="lg" style={{ marginBottom: '100px' }}>
+    <Container maxWidth="xl" style={{ marginBottom: '100px' }}>
       <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>{sliderTitle}</Typography>
       <Slider {...settings}>
         {productList.map(product => (
