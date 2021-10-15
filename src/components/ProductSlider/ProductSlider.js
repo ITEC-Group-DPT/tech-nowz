@@ -1,11 +1,12 @@
-import React from 'react'
+import { React, useEffect } from 'react'
 import styles from './ProductSlider.style'
 import { icons } from '../../constant'
 import Slider from "react-slick"
 import { Container, Typography } from '@mui/material'
 import ProductItem from '../ProductItem/ProductItem'
 import IconButton from '@mui/material/IconButton'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getTopRating } from '../../store/actions/productAction'
 
 const CustomNextArrow = ({ onClick }) => (
   <IconButton aria-label="next" component="span" size="large" onClick={onClick} sx={styles.nextArrow}>
@@ -57,7 +58,13 @@ const settings = {
 }
 
 const ProductSlider = ({ sliderTitle }) => {
-  const productList = useSelector(state => state.ProductList.products[sliderTitle])
+  const dispatch = useDispatch()
+  useEffect(() => {
+      dispatch(getTopRating())
+  }, [])
+  const sanitizedTitle = sliderTitle.replace(/\s/g, '');
+  const productList = useSelector(state => state.ProductList.products[sanitizedTitle])
+
   if (productList === undefined) return <></>
   return (
     <Container maxWidth="lg" style={{ marginBottom: '100px' }}>
