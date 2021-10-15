@@ -4,12 +4,17 @@ import { Container, Button, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import { Box } from '@mui/system'
 import ProductItem from '../ProductItem/ProductItem'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductCategory } from '../../store/actions/productAction'
 
 const Category = ({ categoryName }) => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getProductCategory(categoryName))
+    }, [])
+
     const productList = useSelector(state => state.ProductList.products[categoryName])
-    const isLoading = useSelector(state => state.ProductList.isLoading);
+    //const isLoading = useSelector(state => state.ProductList.isLoading);
 
     if (productList === undefined) return <></>
     return (
