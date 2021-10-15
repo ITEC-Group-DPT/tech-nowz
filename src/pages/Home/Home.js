@@ -1,38 +1,32 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './Home.styles'
 import { Box } from '@mui/system';
 import Category from '../../components/Category/Category';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Banner from '../../components/Banner/Banner';
 import Sponsors from '../../components/Sponsors/Sponsors';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProductCategory, getTopRating } from '../../store/actions/productAction';
-
-import { getHehe } from '../../store/selectors'
+import {
+    getTopRatingAction,
+    getLaptopAction,
+    getMonitorAction,
+    getCPUAction,
+} from '../../store/actions/productAction.js'
+import {
+    topRatingSelector,
+    laptopSelector,
+    monitorSelector,
+    CPUSelector,
+} from '../../store/selectors'
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const heheObj = useSelector(getHehe);
-
-    const { isLoading, products } = heheObj
-    console.log('isLoading: ', isLoading);
-    console.log('products: ', products);
-
-    useEffect(() => {
-        dispatch(getProductCategory("Laptop"))
-        dispatch(getProductCategory("Monitor"))
-        dispatch(getProductCategory("CPU"))
-        dispatch(getTopRating())
-    }, []);
-
     return (
         <Box sx={styles.box}>
             <Banner />
-            {/* <ProductSlider sliderTitle="Top Rating" /> */}
+            <ProductSlider sliderTitle="Top Rating" action={getTopRatingAction} selector={topRatingSelector}/>
             <Sponsors />
-            {/* <Category categoryName="Laptop" />
-            <Category categoryName="Monitor" />
-            <Category categoryName="CPU" /> */}
+            <Category categoryName="Laptop" action={getLaptopAction} selector={laptopSelector} />
+            <Category categoryName="Monitor" action={getMonitorAction} selector={monitorSelector} />
+            <Category categoryName="CPU" action={getCPUAction} selector={CPUSelector} />
         </Box>
     )
 }

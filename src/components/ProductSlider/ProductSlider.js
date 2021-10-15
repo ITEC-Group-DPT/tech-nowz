@@ -6,20 +6,20 @@ import { Container, Typography } from '@mui/material'
 import ProductItem from '../ProductItem/ProductItem'
 import IconButton from '@mui/material/IconButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTopRating } from '../../store/actions/productAction'
+import ProductSkeleton from '../ProductSkeleton/ProductSkeleton'
+
+
 
 const CustomNextArrow = ({ onClick }) => (
   <IconButton aria-label="next" component="span" size="large" onClick={onClick} sx={styles.nextArrow}>
     <icons.Next fontSize="inherit" />
   </IconButton>
 )
-
 const CustomPrevArrow = ({ onClick }) => (
   <IconButton aria-label="prev" component="span" size="large" onClick={onClick} sx={styles.prevArrow}>
     <icons.Prev fontSize="inherit" />
   </IconButton>
 )
-
 const settings = {
   dots: true,
   speed: 350,
@@ -63,27 +63,32 @@ const settings = {
   ],
 }
 
-const ProductSlider = ({ sliderTitle }) => {
+const ProductSlider = ({ sliderTitle, action, selector }) => {
   const dispatch = useDispatch()
   useEffect(() => {
-      dispatch(getTopRating())
+    dispatch(action())
   }, [])
-  const sanitizedTitle = sliderTitle.replace(/\s/g, '');
-  const productList = useSelector(state => state.ProductList.products[sanitizedTitle])
 
-  if (productList === undefined) return <></>
+  const { isLoading, productList } = useSelector(selector)
+
   return (
     <Container maxWidth="xl" style={{ marginBottom: '100px' }}>
       <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>{sliderTitle}</Typography>
-      <Slider {...settings}>
-        {productList.map(product => (
-          <ProductItem
-            product={product}
-            key={product.productID}
-            isSlider
-          />
-        ))}
-      </Slider>
+      {isLoading ? (
+        <Slider {...settings}>
+          {Array(10).fill().map(() => (<ProductSkeleton isSlider />))}
+        </Slider>
+      ) : (
+        <Slider {...settings}>
+          {productList.map(product => (
+            <ProductItem
+              product={product}
+              key={product.productID}
+              isSlider
+            />
+          ))}
+        </Slider>
+      )}
     </Container>
   )
 }
