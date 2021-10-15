@@ -15,6 +15,7 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -34,6 +35,7 @@ const icons = {
     Next: NavigateNextIcon,
     Prev: NavigateBeforeIcon,
     Menu: MenuIcon,
+    Close: CloseIcon,
 }
 
 export default icons;

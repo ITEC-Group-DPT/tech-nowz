@@ -16,9 +16,9 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
             <Typography sx={styles.title}>Create Account
             </Typography>
             <Box component="div" style={styles.socialContainer}>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-facebook-f"></i></Link>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-google-plus-g"></i></Link>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-linkedin-in"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-facebook-f"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-google-plus-g"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-linkedin-in"></i></Link>
             </Box>
             <Typography variant="span" sx={styles.subTitle}>or use your email for registration
             </Typography>
