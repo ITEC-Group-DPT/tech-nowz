@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux'
 
 const Category = ({ categoryName }) => {
     const productList = useSelector(state => state.ProductList.products[categoryName])
+    const isLoading = useSelector(state => state.ProductList.isLoading);
+
     if (productList === undefined) return <></>
     return (
         <Container maxWidth="lg" sx={{ marginTop: '60px' }}>

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import AuthReducer from './authReducer'
-import GetProductListReducer from './getProductListReducer'
+import ProductReducer from './productReducer'
 
 const reducers = combineReducers({
     Authentication: AuthReducer,
-    ProductList: GetProductListReducer,
+    ProductList: ProductReducer,
 })
 
 const reducersIndex = (state, action) => reducers(state, action)
