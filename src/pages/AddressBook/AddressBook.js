@@ -12,10 +12,14 @@ import {
 	Button,
 	CardActions,
 	Divider,
+	Modal,
 } from "@mui/material";
 import CardAddress from "../../components/CardAddresss/CardAddress";
+import FormAddress from "../../components/FormAddress/FormAddress";
+import styles from "./addressbook.style";
 // import axios from "axios";
 const AddressBook = () => {
+	const [modelAppear, setModelAppear] = useState(false);
 	const [addressBook, setAddressBook] = useState([
 		{
 			deliveryID: 19,
@@ -39,6 +43,7 @@ const AddressBook = () => {
 	//     .then((res) => {
 	//       setAddressBook(res.data)
 	//     });
+
 	return (
 		<div>
 			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
@@ -54,11 +59,28 @@ const AddressBook = () => {
 				{addressBook.map((address) => (
 					<CardAddress address={address} key={address.deliveryID} />
 				))}
-				<FormControl fullWidth="true">
-					<InputLabel htmlFor="my-input">Email address</InputLabel>
-					<Input id="my-input" aria-describedby="my-helper-text" />
-				</FormControl>
 			</Container>
+			<Box sx={{ textAlign: "center", m: 2 }}>
+				<Button variant="outlined" onClick={() => setModelAppear(true)}>
+					Create new Address
+				</Button>
+			</Box>
+			<Modal open={modelAppear} onClose={() => setModelAppear(false)}>
+				<Box sx={styles.modal}>
+					<Box sx={{ textAlign: "center"}}>
+						<Typography
+							variant="h4"
+							sx={{ fontWeight: "500" }}
+							component="div">
+							New address
+						</Typography>
+					</Box>
+					<FormAddress
+						formCommand="edit"
+						setAppear={setModelAppear}
+					/>
+				</Box>
+			</Modal>
 		</div>
 	);
 };
