@@ -6,7 +6,7 @@ import { Box } from '@mui/system';
 import Badge from '@mui/material/Badge';
 import { icons } from '../../../constant';
 
-const NavUserItems = ({ isPopUp }) => {
+const NavUserItems = ({ isPopUp, userInfo }) => {
     return (
         <Fade in={isPopUp} timeout={500}>
             <Box sx={styles.userItemWrapper}>
@@ -20,12 +20,22 @@ const NavUserItems = ({ isPopUp }) => {
                         </Box>
                     </Link>
 
-                    <Link to='/authentication' style={styles.navLink}>
-                        <Box sx={styles.wrapper}>
-                            <icons.User sx={styles.icon} />
-                            <Typography sx={styles.navTitle}>Login</Typography>
-                        </Box>
-                    </Link>
+                    {
+                        userInfo.isEmpty ?
+                        <Link to='/authentication' style={styles.navLink}>
+                            <Box sx={styles.wrapper}>
+                                <icons.User sx={styles.icon} />
+                                <Typography sx={styles.navTitle}>Login</Typography>
+                            </Box>
+                        </Link>
+                        :
+                        <Link to='/' style={styles.navLink}>
+                            <Box sx={styles.wrapper}>
+                                <icons.User sx={styles.icon} />
+                                <Typography sx={styles.navTitle}>{userInfo.username}</Typography>
+                            </Box>
+                        </Link>
+                    }
                 </Box>
             </Box>
         </Fade>
