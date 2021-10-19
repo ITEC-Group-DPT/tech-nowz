@@ -13,6 +13,9 @@ import { Box } from '@mui/system';
 const ProductItem = ({ product, isSlider }) => {
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)
     const productURL = '/product/' + encodeURIComponent(product.name).replace(/%20/g, '-') + `?i=${product.productID}`;
+    
+
+
     return (
         <Link to={productURL} style={styles.link}>
             <Card sx={isSlider ? styles.cardSlider : styles.card}>

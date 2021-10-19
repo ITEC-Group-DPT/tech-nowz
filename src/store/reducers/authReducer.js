@@ -2,7 +2,9 @@ import ActionType from "../actions/actionType";
 
 const initState = {
     isLoading: false,
-    user: {},
+    user: {
+        isEmpty: true,
+    },
 };
 
 const AuthReducer = (state = initState, action) => {

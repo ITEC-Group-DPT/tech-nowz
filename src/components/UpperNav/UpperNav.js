@@ -9,8 +9,11 @@ import Badge from '@mui/material/Badge';
 import logo from '../../img/logo_sub.webp'
 import { icons } from '../../constant';
 import { Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const UpperNav = () => {
+
+    const userInfo = useSelector(state => state.Authentication.user);
     return (
         <Container maxWidth='xl' sx={styles.container}>
             <Grid container spacing={2}>
@@ -26,11 +29,11 @@ const UpperNav = () => {
                         multiline id="fullWidth"
                         InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
-                                <icons.Search />
-                              </InputAdornment>
+                                <InputAdornment position="end">
+                                    <icons.Search />
+                                </InputAdornment>
                             ),
-                          }} />
+                        }} />
                 </Grid>
                 <Grid item lg={3} xs={12} sx={styles.menuContainer}>
                     <Grid container spacing={1}>
@@ -43,10 +46,18 @@ const UpperNav = () => {
                             </Link>
                         </Grid>
                         <Grid item xs={6}>
-                            <Link to='/authentication' style={styles.menuItem}>
-                                <icons.User />
-                                <Typography sx={styles.menuTitle}>Login</Typography>
-                            </Link>
+                            {
+                                userInfo.isEmpty ?
+                                    <Link to='/authentication' style={styles.menuItem}>
+                                        <icons.User />
+                                        <Typography sx={styles.menuTitle}>Login</Typography>
+                                    </Link>
+                                    :
+                                    <Link to='/' style={styles.menuItem}>
+                                        <icons.User />
+                                        <Typography sx={styles.menuTitle}>{userInfo.username}</Typography>
+                                    </Link>
+                            }
                         </Grid>
                     </Grid>
                 </Grid>

@@ -14,10 +14,14 @@ import ListItem from '@mui/material/ListItem';
 import { colors, icons } from '../../constant';
 import useStyles from './Navbar.styles';
 import { Divider } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const styles = useStyles();
-
+    
+    const userInfo = useSelector(state => state.Authentication.user);
+    
+    console.log('userInfo: ', userInfo);
     // popUpNav
     const [isPopUp, setIsPopUp] = useState(false)
     useEffect(() => {
@@ -75,15 +79,20 @@ const Navbar = () => {
                 </ListItem>
 
             </List>
-            <Divider/>
+            <Divider />
 
-            <List sx={{marginTop: 'auto'}}>
+            <List sx={{ marginTop: 'auto' }}>
                 <ListItem button key='cart'>
                     <NavItem href='/checkout/cart' title='Cart' icon={<icons.Cart />} />
                 </ListItem>
 
                 <ListItem button key='user'>
-                    <NavItem href='/authentication' title='Login' icon={<icons.User />} />
+                    {
+                        userInfo.isEmpty ?
+                        <NavItem href='/authentication' title='Login' icon={<icons.User />} />
+                        : 
+                        <NavItem href='/' title={userInfo.username} icon={<icons.User />} />
+                    }
                 </ListItem>
             </List>
 
@@ -128,7 +137,10 @@ const Navbar = () => {
                             </>
                         )}
                         <Grid item xs={9} md={4}>
-                            <NavItemUser isPopUp={isPopUp} />
+                            <NavItemUser 
+                            userInfo = {userInfo}
+                            isPopUp={isPopUp} 
+                            />
                         </Grid>
                     </Grid>
                 </Container>
