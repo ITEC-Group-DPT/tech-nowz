@@ -12,7 +12,7 @@ const Login = (email, password) => {
                     console.log('sign in success');
 
                     const data = response.data.data;
-                    dispatch({ type: ActionType.LOGIN_SUCESS, data: data })
+                    dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
 
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     // history.push("/");
@@ -28,7 +28,7 @@ const Login = (email, password) => {
 
 const sessionLogin = (data) => {
     return dispatch => {
-        dispatch({ type: ActionType.LOGIN_SUCESS, data: data })
+        dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
     }
 }
 
