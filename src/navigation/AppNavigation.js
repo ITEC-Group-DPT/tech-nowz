@@ -11,10 +11,12 @@ const AppNavigation = () => {
 
     const dispatch = useDispatch();
     const userInfo = sessionStorage.getItem("userInfo");
-    dispatch(sessionLogin(JSON.parse(userInfo)));
+
+    if (userInfo != null)
+        dispatch(sessionLogin(JSON.parse(userInfo)));
     return (
         <Router>
-            <ScrollToTop/>
+            <ScrollToTop />
             <Switch>
                 <Route exact path='/authentication' component={Authentication} />
                 <Route path='/' component={HomeNavigation} />
