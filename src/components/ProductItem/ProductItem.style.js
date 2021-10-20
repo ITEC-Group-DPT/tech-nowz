@@ -8,8 +8,6 @@ const styles = {
         minHeight: 350,
         borderRadius: '25px',
         boxShadow: 'none',
-
-
         padding: {
             lg: '.9rem',
             xs: '0rem .5rem .5rem .5rem',
@@ -21,10 +19,9 @@ const styles = {
         minHeight: 350,
         borderRadius: '25px',
         boxShadow: 'none',
-
         marginRight: {
             xs: 0,
-            md: '30px',
+            md: '27px',
         },
         padding: {
             lg: '.9rem',
@@ -34,7 +31,7 @@ const styles = {
 
     box: {
         '&:hover': {
-            transition: "transform 0.5s ease-in-out",
+            transition: "transform 0.3s ease-in-out",
             transform: "scale(1.03)",
             backgroundColor: "white",
         },
