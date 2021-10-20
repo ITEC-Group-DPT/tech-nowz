@@ -1,4 +1,3 @@
-
 const styles = {
     main: {
         justifyContent:'center', 
