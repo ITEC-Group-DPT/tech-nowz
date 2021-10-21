@@ -8,6 +8,9 @@ const loginApi = (email, password) => {
     data.append("email", email);
     data.append("password", password);
 
+    // {headers: {
+    //     Userid: 13,
+    // }
     return axios.post(TEST_API_URL + "userAPI.php", data);
 }
 export { loginApi }
