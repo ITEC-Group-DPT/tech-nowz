@@ -5,7 +5,8 @@ const styles = {
     },
     title: {
         textAlign: "center",
-        fontSize: "2rem",
+        fontSize: {xs: "1rem", md: "2rem"},
+        fontFamily: "'Roboto Slab', serif",
     }
 };
 
