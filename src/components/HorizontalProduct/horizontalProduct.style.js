@@ -4,7 +4,7 @@ const styles = {
         display: 'flex',
         position: 'relative',
         alignItems: 'center',
-        width: '800px',
+        width: '100%',
         padding: "10px 5px",
         marginBottom: '24px',
         flex: 1,

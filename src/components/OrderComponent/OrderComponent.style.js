@@ -1,7 +1,6 @@
 
 const styles = {
     main: {
-
         alignItems:'center',
         display:'flex',
         flexDirection:'column'
@@ -9,7 +8,7 @@ const styles = {
     titleDiv:{
         display: "flex",
         justifyContent:'space-between',
-        width: '800px',
+        width: '70%',
     },
     title: {
         fontSize: "2rem"
@@ -18,6 +17,7 @@ const styles = {
         paddingRight: "0px",
     },
     productList: {
+        width: '70%',
         display:'flex',
         flexDirection: 'column',
     }
