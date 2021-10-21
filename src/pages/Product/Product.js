@@ -10,7 +10,11 @@ import Rating from '@mui/material/Rating'
 import { getProductAPI } from '../../api/api'
 import Slider from "react-slick"
 import Skeleton from '@mui/material/Skeleton'
-import { Divider } from '@mui/material';
+import { Divider } from '@mui/material'
+import Tab from '@mui/material/Tab'
+import TabContext from '@mui/lab/TabContext'
+import TabList from '@mui/lab/TabList'
+import TabPanel from '@mui/lab/TabPanel'
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -35,6 +39,7 @@ const CustomPrevArrow = ({ onClick }) => (
         <icons.Prev fontSize="inherit" />
     </IconButton>
 )
+
 const settings = {
     dots: true,
     speed: 450,
@@ -76,10 +81,15 @@ const Product = () => {
         console.log(product);
     }
 
+    const [tab, setTab] = React.useState('1');
+
+    const handleChange = (event, newValue) => {
+        setTab(newValue);
+    };
 
     return (
         <Box sx={styles.box}>
-            <Container maxWidth="xxl" sx={styles.upperContainer}>
+            <Container maxWidth="xl" sx={styles.upperContainer}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} lg={6.5}>
                         {product.isLoading ? (
@@ -131,11 +141,32 @@ const Product = () => {
                     </Grid>
                 </Grid>
             </Container >
-            <Box sx={styles.boxDesc}>
-                <Container maxWidth="xl" sx={styles.lowerContainer}>
-
-                </Container>
-            </Box>
+            <Container maxWidth="lg" sx={styles.lowerContainer}>
+                <Box>
+                    <TabContext value={tab}>
+                        <Box sx={styles.tabListWrapper} >
+                            <TabList onChange={handleChange} aria-label="Tabs" TabIndicatorProps={{
+                                style: { background: "black", height: "3px", top: "45px", color: "red" }
+                            }} textColor='inherit'>
+                                <Tab sx={styles.tabTitle} label="Specification" value="1" />
+                                <Tab sx={styles.tabTitle} label="Description" value="2" />
+                            </TabList>
+                        </Box>
+                        <TabPanel value="1">
+                            {product.isLoading ? ("") :
+                                (
+                                    <Typography sx={styles.spec}>{product.product.spec}</Typography>
+                                )}
+                        </TabPanel>
+                        <TabPanel value="2">
+                            {product.isLoading ? ("") :
+                                (
+                                    <Typography sx={styles.desc}>{product.product.description}</Typography>
+                                )}
+                        </TabPanel>
+                    </TabContext>
+                </Box>
+            </Container>
         </Box>
     )
 }

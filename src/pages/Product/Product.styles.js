@@ -4,7 +4,7 @@ const styles = {
     nextArrow: {
         position: "absolute",
         padding: 0,
-        right: "150px",
+        right: "100px",
         top: "45%",
         zIndex: '1000',
     },
@@ -12,7 +12,7 @@ const styles = {
     prevArrow: {
         position: "absolute",
         padding: 0,
-        left: "150px",
+        left: "100px",
         top: "45%",
         zIndex: '1000',
     },
@@ -22,7 +22,7 @@ const styles = {
     },
 
     upperContainer: {
-        minHeight: "90vh",
+        minHeight: "100vh",
     },
 
     image: {
@@ -33,7 +33,7 @@ const styles = {
     },
 
     imgSkeleton: {
-        bgcolor: '#e9e9e9',
+        bgcolor: '#e5e5e5',
         borderRadius: '25px',
         boxShadow: 'none',
         height: "600px",
@@ -87,7 +87,6 @@ const styles = {
         backgroundColor: "black",
     },
 
-
     pPrice: {
         textAlign: "center",
         fontSize: "1.3rem",
@@ -128,9 +127,33 @@ const styles = {
     },
 
     lowerContainer: {
-        bgcolor: "white",
-        minHeight: "50vh",
-        borderRadius: "25px",
+        minHeight: "80vh",
+    },
+
+    tabListWrapper: {
+        display: "flex",
+        justifyContent: "center",
+        mb: 5,
+    },
+
+    tabTitle: {
+        margin: "0 80px",
+        textTransform: 'none',
+        color: "black",
+        fontWeight: "bold",
+        fontSize: "1.1rem",
+    },
+
+    spec: {
+        whiteSpace: "pre-line",
+        lineHeight: 2,
+        fontWeight: 300,
+    },
+
+    desc: {
+        whiteSpace: "pre-line",
+        lineHeight: 2,
+        fontWeight: 300,
     }
 }
 
