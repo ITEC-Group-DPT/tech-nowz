@@ -6,9 +6,9 @@ import { Box } from '@mui/system';
 import Badge from '@mui/material/Badge';
 import { icons } from '../../../constant';
 
-const NavUserItems = ({ isPopUp, userInfo }) => {
+const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
     return (
-        <Fade in={isPopUp} timeout={500}>
+        <Fade in={isHome ? isPopUp : true} timeout={500}>
             <Box sx={styles.userItemWrapper}>
                 <Box sx={styles.navItem}>
                     <Link to='/checkout/cart' style={styles.navLink}>

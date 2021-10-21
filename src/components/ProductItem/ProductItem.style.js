@@ -88,6 +88,7 @@ const styles = {
             lg: '.6rem',
         },
         marginLeft: '5px',
+        alignSelf: "center",
     },
 
     pSoldSlider: {

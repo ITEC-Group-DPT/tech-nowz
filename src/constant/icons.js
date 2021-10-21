@@ -16,6 +16,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -36,6 +38,8 @@ const icons = {
     Prev: NavigateBeforeIcon,
     Menu: MenuIcon,
     Close: CloseIcon,
+    NotFavorite: FavoriteBorderIcon,
+    IsFavorite: FavoriteIcon,
 }
 
 export default icons;

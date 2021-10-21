@@ -8,8 +8,6 @@ import IconButton from '@mui/material/IconButton'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductSkeleton from '../ProductSkeleton/ProductSkeleton'
 
-
-
 const CustomNextArrow = ({ onClick }) => (
   <IconButton aria-label="next" component="span" size="large" onClick={onClick} sx={styles.nextArrow}>
     <icons.Next fontSize="inherit" />
