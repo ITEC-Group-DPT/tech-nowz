@@ -199,7 +199,7 @@ const orderList = {
         "sold": 54
       }
     ]
-  };
+};
 
 const OrderHistory = () => {
     function OrderList(props){
