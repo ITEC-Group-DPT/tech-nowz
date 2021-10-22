@@ -79,8 +79,8 @@ const Product = () => {
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
         getProductAPI(productID).then(response => {
-            if (response.data.success) { }
-            else { }
+            // if (response.data.success) { }
+            // else { }
             if (response.status === 200) {
                 setProduct({ "isLoading": false, ...response.data })
                 getProductCategoryAPI(response.data.product.type).then(response => {
@@ -172,12 +172,12 @@ const Product = () => {
 
                             {product.isLoading ? (
                                 <Box sx={styles.btnWrapper}>
-                                    <Skeleton variant="rectangle" animation="wave" sx={styles.skeletonButton}>
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonButton}>
                                         <Button variant="outlined" startIcon={product.isFavorite ? (<icons.IsFavorite />) : (<icons.NotFavorite />)} sx={styles.addBtn}>
                                             Add to Cart
                                         </Button>
                                     </Skeleton>
-                                    <Skeleton variant="rectangle" animation="wave" sx={styles.skeletonButton}>
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonButton}>
                                         <Button variant="contained" startIcon={<icons.AddCart />} sx={styles.addBtn}>
                                             Add to Cart
                                         </Button>
