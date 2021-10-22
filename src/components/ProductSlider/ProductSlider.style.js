@@ -11,7 +11,7 @@ const styles = {
         padding: 0,
         right:{
             xs: "10px",
-            lg: "-10px",
+            lg: "-14px",
         },
         top: "45%",
         zIndex: '1000',

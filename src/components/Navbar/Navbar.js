@@ -18,12 +18,15 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const styles = useStyles();
-    
+
     const userInfo = useSelector(state => state.Authentication.user);
-    
-    console.log('userInfo: ', userInfo);
+    //console.log('userInfo: ', userInfo);
+
     // popUpNav
-    const [isPopUp, setIsPopUp] = useState(false)
+    const [isPopUp, setIsPopUp] = useState(true)
+    let isHome = false
+    if (window.location.pathname === '/') isHome = true
+
     useEffect(() => {
         const appBar = document.querySelector(".appBar");
         const observer = new IntersectionObserver((entries) => {
@@ -33,6 +36,9 @@ const Navbar = () => {
         }, { threshold: 1 })
         observer.observe(appBar)
     }, [])
+
+
+
 
     // responsiveNav(drawer)
     const isMatch = useMediaQuery("(max-width: 950px)")
@@ -89,9 +95,9 @@ const Navbar = () => {
                 <ListItem button key='user'>
                     {
                         userInfo.isEmpty ?
-                        <NavItem href='/authentication' title='Login' icon={<icons.User />} />
-                        : 
-                        <NavItem href='/' title={userInfo.username} icon={<icons.User />} />
+                            <NavItem href='/authentication' title='Login' icon={<icons.User />} />
+                            :
+                            <NavItem href='/' title={userInfo.username} icon={<icons.User />} />
                     }
                 </ListItem>
             </List>
@@ -101,7 +107,7 @@ const Navbar = () => {
 
     // main
     return (
-        <AppBar position="sticky" sx={{ backgroundColor: colors.primary, top: '-1px' }} className="appBar">
+        <AppBar position="sticky" sx={{ backgroundColor: colors.primary, top: '-0.5px' }} className="appBar">
             <Toolbar>
                 <Container maxWidth='xl'>
                     <Grid container spacing={2}>
@@ -137,9 +143,10 @@ const Navbar = () => {
                             </>
                         )}
                         <Grid item xs={9} md={4}>
-                            <NavItemUser 
-                            userInfo = {userInfo}
-                            isPopUp={isPopUp} 
+                            <NavItemUser
+                                userInfo={userInfo}
+                                isHome = {isHome}
+                                isPopUp={isPopUp}
                             />
                         </Grid>
                     </Grid>
