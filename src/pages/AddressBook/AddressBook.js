@@ -43,13 +43,13 @@ const AddressBook = () => {
 	//     .then((res) => {
 	//       setAddressBook(res.data)
 	//     });
-
+	
 	return (
 		<div>
 			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
 				<Typography
 					variant="h1"
-					sx={{ fontWeight: "500" }}
+					sx={{ fontWeight: "500", fontSize:{xs:'50px',md:'80px',lg:'100px'} }}
 					component="div">
 					Address Book
 				</Typography>
