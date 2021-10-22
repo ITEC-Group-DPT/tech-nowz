@@ -7,6 +7,8 @@ const styles = {
         textAlign: "center",
         fontSize: {xs: "1rem", md: "2rem"},
         fontFamily: "'Roboto Slab', serif",
+        fontWeight: "bold",
+        marginTop: "5%"
     }
 };
 

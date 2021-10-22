@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './OrderComponent.style'
 import { Link } from 'react-router-dom';
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 
 const OrderComponent = ({ orderID, productList, }) => {
@@ -18,12 +18,12 @@ const OrderComponent = ({ orderID, productList, }) => {
     }
     return (
         <Box sx={styles.main}>
-            <div style={styles.titleDiv}>
-                <h1 style={styles.title}>Order: #{orderID}</h1>
+            <Box sx={styles.titleDiv}>
+                <Typography sx={styles.title}>Order: #{orderID}</Typography>
                 <Link style={styles.link} to={orderHistoryURL}>
-                    <Button style={styles.titleBtn}>See Detail</Button>
+                    <Button sx={styles.titleBtn}>See Detail</Button>
                 </Link>
-            </div>
+            </Box>
             <Box sx={styles.productList}>
                 <ProductList  productList={productList}/>
             </Box>

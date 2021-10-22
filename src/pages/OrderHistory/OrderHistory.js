@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './OrderHistory.style'
 
-import { Container } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import OrderComponent from '../../components/OrderComponent/OrderComponent';
 
 const orderList = {
@@ -61,7 +61,7 @@ const OrderHistory = () => {
 
     return(
         <Container>
-            <h1 style={styles.title}>My Orders</h1>
+            <Typography sx={styles.title}>My Orders</Typography>
             <OrderList orderList={orderList} />
         </Container>
     )
