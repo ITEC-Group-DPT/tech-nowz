@@ -67,38 +67,37 @@ const settingsRelatedProduct = {
 }
 
 const Product = () => {
-    const { name } = useParams()
+    //const { name } = useParams()
     const query = useQuery()
-    const id = query.get("i")
+    const productID = query.get("i")
     const [product, setProduct] = useState({ "isLoading": true })
     const [relatedProductList, setRelatedProductList] = useState([])
     const [tab, setTab] = React.useState('1')
     let formatedPrice
+    let productDesc = "Sản phẩm chưa có thông tin mô tả"
 
     useEffect(() => {
-        getProductAPI(id).then(response => {
-            // if (response.data.success) {}
-            // else {}
+        setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
+        getProductAPI(productID).then(response => {
+            if (response.data.success) { }
+            else { }
             if (response.status === 200) {
                 setProduct({ "isLoading": false, ...response.data })
-                console.log(response.data)
                 getProductCategoryAPI(response.data.product.type).then(response => {
                     // if (response.data.success) {}
                     // else {}
                     if (response.status === 200) {
                         setRelatedProductList(response.data)
-                        console.log("Related product list: ", response.data);
                     }
                 })
             }
         })
-    }, [])
+    }, [productID]) // when clicking on another product, productID is changed, this will trigger the useEffect again to call a new product API
 
-    if (product.isLoading === true)
-        console.log("LOADING...")
-    else {
+    if (product.isLoading === false) {
         formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product.price)
-        console.log(product)
+        if (product.product.description !== "")
+            productDesc = product.product.description
     }
 
     const handleChange = (event, newValue) => {
@@ -126,17 +125,43 @@ const Product = () => {
 
                     </Grid>
                     <Grid item xs={12} lg={6} sx={styles.wrapper}>
-                        <Box>
-                            {product.isLoading ? ("") : (
+                        <Box sx={styles.boxWrapper}>
+                            {product.isLoading ? (
+                                <Box>
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                        <Typography variant="h5" component="div" sx={styles.pName}>Tai nghe không dây Corsair Virtuoso RGB Co </Typography>
+                                    </Skeleton>
+                                    <Box sx={styles.boxCenter}>
+                                        <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                            <Typography variant="h5" component="div" sx={styles.pName}>Tai nghe không dây Corsair</Typography>
+                                        </Skeleton>
+                                    </Box>
+                                </Box>
+
+                            ) : (
                                 <Typography variant="h5" component="div" sx={styles.pName}>{product.product.name}</Typography>
                             )}
-                            {product.isLoading ? ("") : (
+
+                            {product.isLoading ? (
+                                <Box sx={styles.boxCenter}>
+                                    <Skeleton variant="text" animation="wave" sx={{ mt: 1, ...styles.skeletonColor }}>
+                                        <Rating size="small" readOnly value={5} precision={0.5} sx={styles.pRating} />
+                                    </Skeleton>
+                                </Box>
+                            ) : (
                                 <Box sx={styles.pRatingWrapper}>
                                     <Rating size="small" readOnly value={product.product.rating} precision={0.5} sx={styles.pRating} />
                                     <Typography variant="h5" sx={styles.pSold}>({product.product.sold})</Typography>
                                 </Box>
                             )}
-                            {product.isLoading ? ("") : (
+
+                            {product.isLoading ? (
+                                <Box sx={styles.boxCenter}>
+                                    <Skeleton variant="text" animation="wave" sx={{ mt: 4, ...styles.skeletonColor }}>
+                                        <Typography variant="h5" component="div" sx={styles.pPrice}>9,000,000,000d</Typography>
+                                    </Skeleton>
+                                </Box>
+                            ) : (
                                 <Box sx={styles.priceWrapper}>
                                     <Box sx={styles.dividerWrapper}>
                                         <Divider sx={styles.divider} />
@@ -145,7 +170,20 @@ const Product = () => {
                                 </Box>
                             )}
 
-                            {product.isLoading ? ("") : (
+                            {product.isLoading ? (
+                                <Box sx={styles.btnWrapper}>
+                                    <Skeleton variant="rectangle" animation="wave" sx={styles.skeletonButton}>
+                                        <Button variant="outlined" startIcon={product.isFavorite ? (<icons.IsFavorite />) : (<icons.NotFavorite />)} sx={styles.addBtn}>
+                                            Add to Cart
+                                        </Button>
+                                    </Skeleton>
+                                    <Skeleton variant="rectangle" animation="wave" sx={styles.skeletonButton}>
+                                        <Button variant="contained" startIcon={<icons.AddCart />} sx={styles.addBtn}>
+                                            Add to Cart
+                                        </Button>
+                                    </Skeleton>
+                                </Box>
+                            ) : (
                                 <Box sx={styles.btnWrapper}>
                                     <Button variant="outlined" startIcon={product.isFavorite ? (<icons.IsFavorite />) : (<icons.NotFavorite />)} sx={styles.favoriteBtn}>
                                         Add to Favorite
@@ -167,12 +205,48 @@ const Product = () => {
                             <TabList onChange={handleChange} aria-label="Tabs" TabIndicatorProps={{
                                 style: { background: "black", height: "3px", top: "45px", color: "red" }
                             }} textColor='inherit'>
-                                <Tab sx={styles.tabTitle} label="Specification" value="1" />
-                                <Tab sx={styles.tabTitle} label="Description" value="2" />
+                                {product.isLoading ? (
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonTab}>
+                                        <Tab sx={styles.tabTitle} value="1" />
+                                    </Skeleton>
+                                ) : (
+                                    <Tab sx={styles.tabTitle} label="Specification" value="1" />
+                                )}
+                                {product.isLoading ? (
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonTab}>
+                                        <Tab sx={styles.tabTitle} value="2" />
+                                    </Skeleton>
+                                ) : (
+                                    <Tab sx={styles.tabTitle} label="Description" value="2" />
+                                )}
                             </TabList>
                         </Box>
                         <TabPanel value="1">
-                            {product.isLoading ? ("") :
+                            {product.isLoading ? (
+                                <Box>
+                                    <Box sx={styles.boxCenter}>
+                                        <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                            <Typography sx={styles.details}>lorem lorem lorem lorem lorem lorem lorem lorem</Typography>
+                                        </Skeleton>
+                                    </Box>
+                                    <Box sx={styles.boxCenter}>
+                                        <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                            <Typography sx={styles.details}>lorem lorem lorem lorem lorem</Typography>
+                                        </Skeleton>
+                                    </Box>
+                                    <Box sx={styles.boxCenter}>
+                                        <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                            <Typography sx={styles.details}>lorem lorem lorem lorem lorem lorem lorem lorem</Typography>
+                                        </Skeleton>
+                                    </Box>
+                                    <Box sx={styles.boxCenter}>
+                                        <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                            <Typography sx={styles.details}>lorem lorem lorem lorem lorem</Typography>
+                                        </Skeleton>
+                                    </Box>
+                                </Box>
+
+                            ) :
                                 (
                                     <Typography sx={styles.details}>{product.product.spec}</Typography>
                                 )}
@@ -180,7 +254,7 @@ const Product = () => {
                         <TabPanel value="2">
                             {product.isLoading ? ("") :
                                 (
-                                    <Typography sx={styles.details}>{product.product.description}</Typography>
+                                    <Typography sx={styles.details}>{productDesc}</Typography>
                                 )}
                         </TabPanel>
                     </TabContext>
@@ -188,7 +262,7 @@ const Product = () => {
             </Container>
 
             <Container maxWidth="xl" sx={styles.relatedProductContainer}>
-            <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
+                <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
                 <Slider {...settingsRelatedProduct}>
                     {relatedProductList.map(product => (
                         <ProductItem

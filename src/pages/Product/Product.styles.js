@@ -30,24 +30,33 @@ const styles = {
     },
 
     image: {
-        height: "500px",
+        height: "550px",
         width: "100%",
         objectFit: 'contain',
         margin: 0,
     },
 
     imgSkeleton: {
-        bgcolor: '#e5e5e5',
-        borderRadius: '25px',
+        bgcolor: "rgb(245, 245, 245)",
+        borderRadius: '15px',
         boxShadow: 'none',
-        height: "600px",
-        width: "100%",
+        height: "500px",
+        width: "500px !important",
+        marginLeft: "100px",
+    },
+
+    skeletonColor: {
+        bgcolor: "rgb(245, 245, 245)",
     },
 
     wrapper: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+    },
+
+    boxWrapper: {
+        width: "100%",
     },
 
     pName: {
@@ -171,6 +180,24 @@ const styles = {
         textAlign: 'center',
         marginBottom: '25px',
     },
+
+    boxCenter: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    skeletonButton: {
+        bgcolor: "rgb(245, 245, 245)",
+        marginRight: "30px",
+        marginLeft: "30px",
+    },
+
+    skeletonTab: {
+        bgcolor: "rgb(245, 245, 245)",
+        marginRight: "50px",
+        marginLeft: "50px",
+    }
 }
 
 export default styles
