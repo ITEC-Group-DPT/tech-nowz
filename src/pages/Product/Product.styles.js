@@ -18,15 +18,19 @@ const styles = {
     },
 
     box: {
-        marginTop: "50px",
+        paddingTop: "40px",
+        bgcolor: "rgb(245, 245, 245)",
     },
 
-    upperContainer: {
-        minHeight: "100vh",
+    productContainer: {
+        minHeight: "85vh",
+        bgcolor: "white",
+        borderRadius: "15px",
+        padding: "100px",
     },
 
     image: {
-        height: "700px",
+        height: "500px",
         width: "100%",
         objectFit: 'contain',
         margin: 0,
@@ -48,7 +52,7 @@ const styles = {
 
     pName: {
         textAlign: "center",
-        fontSize: "2rem",
+        fontSize: "1.8rem",
         fontWeight: "bold",
         paddingRight: "0rem",
     },
@@ -60,11 +64,11 @@ const styles = {
     },
 
     pRating: {
-
+        fontSize: "1rem",
     },
 
     pSold: {
-        fontSize: ".7rem",
+        fontSize: ".6rem",
         marginLeft: '5px',
         alignSelf: "center",
     },
@@ -89,7 +93,7 @@ const styles = {
 
     pPrice: {
         textAlign: "center",
-        fontSize: "1.3rem",
+        fontSize: "1.1rem",
         fontWeight: "bold",
         mt: 2,
     },
@@ -126,14 +130,18 @@ const styles = {
         padding: "100px 0px",
     },
 
-    lowerContainer: {
-        minHeight: "80vh",
+    detailContainer: {
+        marginTop: "40px",
+        minHeight: "40vh",
+        bgcolor: "white",
+        borderRadius: "15px",
+        padding: "30px",
     },
 
     tabListWrapper: {
         display: "flex",
         justifyContent: "center",
-        mb: 5,
+        mb: 3,
     },
 
     tabTitle: {
@@ -144,17 +152,25 @@ const styles = {
         fontSize: "1.1rem",
     },
 
-    spec: {
+    details: {
         whiteSpace: "pre-line",
+        fontSize: ".95rem",
         lineHeight: 2,
         fontWeight: 300,
+        textAlign: "center",
     },
 
-    desc: {
-        whiteSpace: "pre-line",
-        lineHeight: 2,
-        fontWeight: 300,
-    }
+    relatedProductContainer: {
+        marginTop: "60px",
+        paddingBottom: "80px",
+    },
+
+    sliderTitle: {
+        fontSize: '1.4rem',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: '25px',
+    },
 }
 
 export default styles

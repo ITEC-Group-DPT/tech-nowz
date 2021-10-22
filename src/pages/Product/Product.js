@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Product.styles'
-import { useParams, useLocation } from "react-router-dom"
-import { Container, Grid, Typography } from '@mui/material'
-import { Box } from '@mui/system'
 import { icons } from '../../constant'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Rating from '@mui/material/Rating'
-import { getProductAPI } from '../../api/api'
+import { getProductAPI, getProductCategoryAPI } from '../../api/api'
+import ProductItem from '../../components/ProductItem/ProductItem'
+import { useParams, useLocation } from "react-router-dom"
+import { Container, Grid, Button, IconButton, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'
+import { Box } from '@mui/system'
 import Slider from "react-slick"
-import Skeleton from '@mui/material/Skeleton'
-import { Divider } from '@mui/material'
-import Tab from '@mui/material/Tab'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
@@ -34,20 +29,35 @@ const CustomNextArrow = ({ onClick }) => (
         <icons.Next fontSize="inherit" />
     </IconButton>
 )
+
 const CustomPrevArrow = ({ onClick }) => (
     <IconButton aria-label="prev" component="span" size="large" onClick={onClick} sx={styles.prevArrow}>
         <icons.Prev fontSize="inherit" />
     </IconButton>
 )
 
-const settings = {
+const settingsIMG = {
     dots: true,
-    speed: 450,
+    speed: 600,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    swipeToSlide: true,
+    centerPadding: '60px',
+
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
+}
+
+const settingsRelatedProduct = {
+    dots: true,
+    speed: 400,
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
     pauseOnHover: true,
     swipeToSlide: true,
     centerPadding: '60px',
@@ -60,44 +70,52 @@ const Product = () => {
     const { name } = useParams()
     const query = useQuery()
     const id = query.get("i")
-
     const [product, setProduct] = useState({ "isLoading": true })
+    const [relatedProductList, setRelatedProductList] = useState([])
+    const [tab, setTab] = React.useState('1')
     let formatedPrice
+
     useEffect(() => {
         getProductAPI(id).then(response => {
             // if (response.data.success) {}
             // else {}
             if (response.status === 200) {
                 setProduct({ "isLoading": false, ...response.data })
+                console.log(response.data)
+                getProductCategoryAPI(response.data.product.type).then(response => {
+                    // if (response.data.success) {}
+                    // else {}
+                    if (response.status === 200) {
+                        setRelatedProductList(response.data)
+                        console.log("Related product list: ", response.data);
+                    }
+                })
             }
         })
     }, [])
 
-    if (product.isLoading === true) {
-        console.log("LOADING...");
-    }
+    if (product.isLoading === true)
+        console.log("LOADING...")
     else {
         formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product.price)
-        console.log(product);
+        console.log(product)
     }
-
-    const [tab, setTab] = React.useState('1');
 
     const handleChange = (event, newValue) => {
         setTab(newValue);
-    };
+    }
 
     return (
         <Box sx={styles.box}>
-            <Container maxWidth="xl" sx={styles.upperContainer}>
-                <Grid container spacing={0}>
-                    <Grid item xs={12} lg={6.5}>
+            <Container maxWidth="xl" sx={styles.productContainer}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} lg={6}>
                         {product.isLoading ? (
-                            <Slider {...settings}>
+                            <Slider {...settingsIMG}>
                                 <Skeleton variant="rectangular" animation="wave" sx={styles.imgSkeleton} />
                             </Slider>
                         ) : (
-                            <Slider {...settings}>
+                            <Slider {...settingsIMG}>
                                 {getImgList(product.product).map(imgSrc => (
                                     <Box>
                                         <img src={imgSrc} style={styles.image} />
@@ -107,7 +125,7 @@ const Product = () => {
                         )}
 
                     </Grid>
-                    <Grid item xs={12} lg={5.5} sx={styles.wrapper}>
+                    <Grid item xs={12} lg={6} sx={styles.wrapper}>
                         <Box>
                             {product.isLoading ? ("") : (
                                 <Typography variant="h5" component="div" sx={styles.pName}>{product.product.name}</Typography>
@@ -141,7 +159,8 @@ const Product = () => {
                     </Grid>
                 </Grid>
             </Container >
-            <Container maxWidth="lg" sx={styles.lowerContainer}>
+
+            <Container maxWidth="lg" sx={styles.detailContainer}>
                 <Box>
                     <TabContext value={tab}>
                         <Box sx={styles.tabListWrapper} >
@@ -155,17 +174,30 @@ const Product = () => {
                         <TabPanel value="1">
                             {product.isLoading ? ("") :
                                 (
-                                    <Typography sx={styles.spec}>{product.product.spec}</Typography>
+                                    <Typography sx={styles.details}>{product.product.spec}</Typography>
                                 )}
                         </TabPanel>
                         <TabPanel value="2">
                             {product.isLoading ? ("") :
                                 (
-                                    <Typography sx={styles.desc}>{product.product.description}</Typography>
+                                    <Typography sx={styles.details}>{product.product.description}</Typography>
                                 )}
                         </TabPanel>
                     </TabContext>
                 </Box>
+            </Container>
+
+            <Container maxWidth="xl" sx={styles.relatedProductContainer}>
+            <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
+                <Slider {...settingsRelatedProduct}>
+                    {relatedProductList.map(product => (
+                        <ProductItem
+                            product={product}
+                            key={product.productID}
+                            isSlider
+                        />
+                    ))}
+                </Slider>
             </Container>
         </Box>
     )
