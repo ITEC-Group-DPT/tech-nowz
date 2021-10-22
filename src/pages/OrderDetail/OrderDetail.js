@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './OrderDetail.style'
 import { useParams, useLocation } from "react-router-dom";
-import { Container, Box } from '@mui/material'
+import { Container, Box, Typography } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 
 const useQuery = () => {
@@ -72,18 +72,18 @@ const OrderDetail = () => {
 
     return (
         <Container sx={styles.main}>
-            <h3 style={styles.title}>Order : #{id} </h3>
-            <p style={styles.content}><b>Created: </b>{formatDateDiff(order['orderInfo']['dateDiff'])}</p>
-            <h3 style={styles.title}>Customer Detail</h3>
-            <p style={styles.content}><b>Customer: </b>{order['orderInfo']['name']} - {order['orderInfo']['phone']}</p>
-            <p style={styles.content}><b>Address: </b>{order['orderInfo']['address']}</p>
-            <h3 style={styles.title}>Package Detail</h3>
+            <Typography variant="h3" sx={styles.title}>Order : #{id} </Typography>
+            <Typography variant="h6" sx={styles.content}><b>Created: </b>{formatDateDiff(order['orderInfo']['dateDiff'])}</Typography>
+            <Typography variant="h3" sx={styles.title}>Customer Detail</Typography>
+            <Typography variant="h6" sx={styles.content}><b>Customer: </b>{order['orderInfo']['name']} - {order['orderInfo']['phone']}</Typography>
+            <Typography variant="h6" sx={styles.content}><b>Address: </b>{order['orderInfo']['address']}</Typography>
+            <Typography variant="h3" sx={styles.title}>Package Detail</Typography>
             <Box sx={styles.productList}>
                 <ProductList productList={order['itemList']}/>
             </Box>
             <Box sx={styles.priceBox}>
-                <h3 style={styles.title}>Total Price</h3>
-                <h3 style={styles.price}>{Number(order['orderInfo']['totalPrice']).toLocaleString()}đ</h3>
+                <Typography variant="h3" sx={styles.title}>Total Price</Typography>
+                <Typography variant="h3" sx={styles.price}>{Number(order['orderInfo']['totalPrice']).toLocaleString()}đ</Typography>
             </Box>
         </Container>
     )
