@@ -4,17 +4,16 @@ const styles = {
         display: 'flex',
         position: 'relative',
         alignItems: 'center',
-        width: '100%',
-        padding: "0",
-        margin: '0',
+        width: { xs: '125%', md: '100%' },
+        marginTop: '3%',
         marginBottom: '3%',
         flex: 1,
         boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)',
     },
     productImg: {
-        height: '30%',
-        width: '30%',
-        objectFit: "cover"
+        height: '22%',
+        width: '22%',
+        objectFit: "contain"
     },
     productContent: {
         width: '30%',
@@ -23,7 +22,7 @@ const styles = {
     productName: {
         fontWeight: '600',
         fontFamily: "'Roboto Slab', serif",
-        fontSize: {xs: "0.6rem", md: "1rem"},
+        fontSize: {xs: "0.8rem", md: "1rem"},
     },
     priceContainer: {
         paddingLeft: '3%',
@@ -33,8 +32,8 @@ const styles = {
     },
     productPrice: {
         fontFamily: "'IBM Plex Serif', serif",
-        fontWeight: "800",
-        fontSize: {xs: "0.65rem", md: "0.9rem"},
+        fontWeight: "bold",
+        fontSize: "0.9rem",
     },
     ratingContainer: {
         width: '10%',
@@ -49,7 +48,7 @@ const styles = {
         fontFamily: "'IBM Plex Serif', serif",
     },
     productQuantity: {
-        fontSize: {xs: "0.65rem", md: "0.9rem"},
+        fontSize: {xs: "0.7rem", md: "0.9rem"},
         color: '#656565',
         fontFamily: "'IBM Plex Serif', serif",
     },

@@ -2,31 +2,35 @@ const styles = {
     main: {
         justifyContent:'center', 
         alignItems:'center',
-        marginTop: "3%",
+        marginTop: "3rem",
     },
     title: {
-        fontWeight: "bold",
-        fontSize: {xs: "1rem", md: "2rem"},
+        fontWeight: "600",
+        fontSize: "1.75rem",
         lineHeight: "1.5",
         fontFamily: "'Roboto Slab', serif",
+        marginBot: '1%',
+        marginTop: '3%',
     },
     content: {
-        fontSize: {xs: "1rem", md: "1.2rem"},
+        fontSize: "1rem",
         fontFamily: "'Roboto Slab', serif",
+        fontWeight: "100",
     },
     productList: {
         width: "80%",
-        fontSize: {xs: "1rem", md: "1.5rem"}
     },
     priceBox: {
+        alignItems:'center',
         display: "flex",
         justifyContent:'space-between',
-        width: "80%",
+        width: {xs: "100%", md: "80%"},
     },
     price: {
+        flexDirection: 'right',
         color: "red",
         fontFamily: "'Roboto Slab', serif",
-        fontSize: {xs: "1rem", md: "2rem"},
+        fontSize: "1.75rem",
         fontWeight: "bold",
     }
 };
