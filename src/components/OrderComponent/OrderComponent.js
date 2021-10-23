@@ -6,16 +6,18 @@ import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProd
 
 const OrderComponent = ({ orderID, productList, }) => {
     const orderHistoryURL = `/profile/orderhistory/${orderID}` ;
+
     function ProductList(props){
         const productList = props.productList;
         const products = productList.map((product) =>
-            <HorizontalProduct
-                product={product}
-                ratingSize = {"20px"}
-            />
+                <HorizontalProduct
+                    product={product}
+                    ratingSize = {"20px"}
+                />
         );
         return (products);
     }
+    
     return (
         <Box sx={styles.main}>
             <Box sx={styles.titleDiv}>

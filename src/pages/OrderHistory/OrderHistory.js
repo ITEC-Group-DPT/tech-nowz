@@ -1,53 +1,20 @@
-import React from 'react'
+import {React, useState,useEffect} from 'react'
 import styles from './OrderHistory.style'
-
 import { Container, Typography } from '@mui/material'
 import OrderComponent from '../../components/OrderComponent/OrderComponent';
-
-const orderList = {
-    "2876": [
-      {
-        "productID": 112,
-        "name": "Laptop ASUS ROG Strix G G531GT-AL017T",
-        "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Laptop%2F12.webp?alt=media&token=494850d3-5a82-4735-9a3b-e06156270f18",
-        "price": 27990000,
-        "quantity": 2,
-        "rating": 4.16473,
-        "sold": 36
-      },
-      {
-        "productID": 113,
-        "name": "Laptop Acer Predator Triton 500 PT515-52-72U2",
-        "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Laptop%2F13.webp?alt=media&token=3c996ee9-d17c-41de-a14f-cb9d764e96b6",
-        "price": 79990000,
-        "quantity": 1,
-        "rating": 4.69174,
-        "sold": 51
-      }
-    ],
-    "2877": [
-      {
-        "productID": 112,
-        "name": "Laptop ASUS ROG Strix G G531GT-AL017T",
-        "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Laptop%2F12.webp?alt=media&token=494850d3-5a82-4735-9a3b-e06156270f18",
-        "price": 27990000,
-        "quantity": 1,
-        "rating": 4.16473,
-        "sold": 36
-      },
-      {
-        "productID": 113,
-        "name": "Laptop Acer Predator Triton 500 PT515-52-72U2",
-        "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Laptop%2F13.webp?alt=media&token=3c996ee9-d17c-41de-a14f-cb9d764e96b6",
-        "price": 79990000,
-        "quantity": 1,
-        "rating": 4.69174,
-        "sold": 51
-      }
-    ]
-};
+import { getOrderListAPI } from '../../api/orderApi';
 
 const OrderHistory = () => {
+    const [orderList, getOrderList] = useState([])
+    useEffect(() => {
+        getOrderListAPI().then(response => {
+            if(response.data['success'] == true){
+                getOrderList(response.data['data'])
+            }
+        })
+    },[])
+   
+  
     function OrderList(props){
         const list = props.orderList;
         const orders = Object.keys(list).map((order, index) =>
