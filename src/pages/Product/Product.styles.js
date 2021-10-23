@@ -34,7 +34,7 @@ const styles = {
         borderRadius: "15px",
         padding: {
             xs: "40px 20px",
-            lg:"100px",
+            lg: "100px",
         },
     },
 

@@ -2,7 +2,7 @@ import ActionType from './actionType'
 import { loginApi } from '../../api/authApi'
 import axios from 'axios'
 const Login = (email, password,history) => {
-   
+
     return dispatch => {
 
         dispatch({ type: ActionType.START_LOGIN })
@@ -17,8 +17,8 @@ const Login = (email, password,history) => {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
 
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
-                    axios.defaults.headers.common['Userid'] = data.userID;
-                    // history.push("/");
+                    // axios.defaults.headers['Userid'] = data.userID;
+                    history.push("/");
                 }
                 else {
                     console.log('sign in fail');

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios';
 import ScrollToTop from '../components/ScrollToTop';
@@ -10,19 +10,28 @@ import { userInfoSelector } from '../store/selectors'
 import { useDispatch, useSelector } from 'react-redux';
 
 const AppNavigation = () => {
-
+    //axios.defaults.headers['Userid'] = 69;
     const { userID } = useSelector(state => userInfoSelector(state));
 
+    const dispatch = useDispatch();
     console.log('userID: ', userID);
+
     if (userID != undefined) {
-        axios.defaults.headers.post['Userid'] = userID;
+        console.log('axios header: ', userID);
+        axios.defaults.headers['Userid'] = userID;
+        console.log('axios: ',axios.defaults.headers);
     }
 
-    const dispatch = useDispatch();
-    const userInfo = sessionStorage.getItem("userInfo");
+    useEffect(() => {
+        const userInfo = sessionStorage.getItem("userInfo");
+        console.log('session get: ', userInfo);
+        if (userInfo != null) {
+            console.log('sessionLogin');
+            dispatch(sessionLogin(JSON.parse(userInfo)));
 
-    if (userInfo != null)
-        dispatch(sessionLogin(JSON.parse(userInfo)));
+        }
+    }, [])
+
     return (
         <Router>
             <ScrollToTop />

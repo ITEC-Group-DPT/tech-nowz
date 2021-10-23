@@ -4,7 +4,7 @@ import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/api'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useParams, useLocation } from "react-router-dom"
-import { Container, Grid, Button, IconButton, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'
+import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
 import TabContext from '@mui/lab/TabContext'
@@ -68,30 +68,30 @@ const settingsRelatedProduct = {
 
     responsive: [
         {
-          breakpoint: 1460,
-          settings: {
-            slidesToShow: 4,
-          }
+            breakpoint: 1460,
+            settings: {
+                slidesToShow: 4,
+            }
         },
         {
-          breakpoint: 1190,
-          settings: {
-            slidesToShow: 3,
-          }
+            breakpoint: 1190,
+            settings: {
+                slidesToShow: 3,
+            }
         },
         {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-          }
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+            }
         },
         {
-          breakpoint: 500,
-          settings: {
-            slidesToShow: 1,
-          }
+            breakpoint: 500,
+            settings: {
+                slidesToShow: 1,
+            }
         }
-      ],
+    ],
 }
 
 const Product = () => {
@@ -106,26 +106,22 @@ const Product = () => {
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
         getProductAPI(productID).then(response => {
-            // if (response.data.success) { }
-            // else { }
-            if (response.status === 200) {
-                setProduct({ "isLoading": false, ...response.data })
-                getProductCategoryAPI(response.data.product.type).then(response => {
-                    // if (response.data.success) {}
-                    // else {}
-                    if (response.status === 200) {
-                        setRelatedProductList({ "isLoading": false, "productList": [...response.data] })
+            if (response.data.success) {
+                const data = response.data.data
+                console.log(response);
+                setProduct({ "isLoading": false, ...data })
+                formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.product.price)
+                if (data.product.description !== "") {
+                    productDesc = data.product.description
+                }
+                getProductCategoryAPI(data.product.type).then(response => {
+                    if (response.data.success) {
+                        setRelatedProductList({ "isLoading": false, "productList": response.data.data })
                     }
                 })
             }
         })
     }, [productID]) // when clicking on another product, productID is changed, this will trigger the useEffect again to call a new product API
-
-    if (product.isLoading === false) {
-        formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product.price)
-        if (product.product.description !== "")
-            productDesc = product.product.description
-    }
 
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -144,7 +140,12 @@ const Product = () => {
                             <Slider {...settingsIMG}>
                                 {getImgList(product.product).map(imgSrc => (
                                     <Box>
-                                        <img src={imgSrc} style={styles.image} />
+                                        <CardMedia
+                                            component="img"
+                                            image={imgSrc}
+                                            alt="product image"
+                                            sx={styles.image}
+                                        />
                                     </Box>
                                 ))}
                             </Slider>
