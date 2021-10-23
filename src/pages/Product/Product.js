@@ -65,6 +65,33 @@ const settingsRelatedProduct = {
 
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
+
+    responsive: [
+        {
+          breakpoint: 1460,
+          settings: {
+            slidesToShow: 4,
+          }
+        },
+        {
+          breakpoint: 1190,
+          settings: {
+            slidesToShow: 3,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+          }
+        },
+        {
+          breakpoint: 500,
+          settings: {
+            slidesToShow: 1,
+          }
+        }
+      ],
 }
 
 const Product = () => {
@@ -128,12 +155,14 @@ const Product = () => {
                         <Box sx={styles.boxWrapper}>
                             {product.isLoading ? (
                                 <Box>
-                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
-                                        <Typography variant="h5" component="div" sx={styles.pName}>Tai nghe không dây Corsair Virtuoso RGB Co </Typography>
-                                    </Skeleton>
                                     <Box sx={styles.boxCenter}>
                                         <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
-                                            <Typography variant="h5" component="div" sx={styles.pName}>Tai nghe không dây Corsair</Typography>
+                                            <Typography variant="h5" component="div" sx={styles.pName}>lorem lorem lorem lorem lorem lorem</Typography>
+                                        </Skeleton>
+                                    </Box>
+                                    <Box sx={styles.boxCenter}>
+                                        <Skeleton variant="text" animation="wave" sx={styles.skeletonColor}>
+                                            <Typography variant="h5" component="div" sx={styles.pName}>lorem lorem lorem lorem</Typography>
                                         </Skeleton>
                                     </Box>
                                 </Box>
@@ -269,21 +298,31 @@ const Product = () => {
             </Container>
 
             <Container maxWidth="xl" sx={styles.relatedProductContainer}>
-                <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
+
                 {relatedProductList.isLoading ? (
-                    <Slider {...settingsRelatedProduct}>
-                        {Array(10).fill().map(() => (<ProductSkeleton isSlider />))}
-                    </Slider>
+                    <Box>
+                        <Box sx={styles.boxCenter}>
+                            <Skeleton variant="text" animation="wave" sx={styles.skeletonTitle}>
+                                <Typography gutterBottom variant="h5" component="div">lorem lorem lorem</Typography>
+                            </Skeleton>
+                        </Box>
+                        <Slider {...settingsRelatedProduct}>
+                            {Array(10).fill().map(() => (<ProductSkeleton isSlider />))}
+                        </Slider>
+                    </Box>
                 ) : (
-                    <Slider {...settingsRelatedProduct}>
-                        {relatedProductList.productList.map(product => (
-                            <ProductItem
-                                product={product}
-                                key={product.productID}
-                                isSlider
-                            />
-                        ))}
-                    </Slider>
+                    <Box>
+                        <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
+                        <Slider {...settingsRelatedProduct}>
+                            {relatedProductList.productList.map(product => (
+                                <ProductItem
+                                    product={product}
+                                    key={product.productID}
+                                    isSlider
+                                />
+                            ))}
+                        </Slider>
+                    </Box>
                 )}
             </Container>
         </Box>

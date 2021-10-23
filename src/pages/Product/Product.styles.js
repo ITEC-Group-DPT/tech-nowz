@@ -4,7 +4,10 @@ const styles = {
     nextArrow: {
         position: "absolute",
         padding: 0,
-        right: "100px",
+        right:{
+            xs: "10px",
+            lg: "100px",
+        },
         top: "45%",
         zIndex: '1000',
     },
@@ -12,7 +15,10 @@ const styles = {
     prevArrow: {
         position: "absolute",
         padding: 0,
-        left: "100px",
+        left:{
+            xs: "10px",
+            lg: "100px",
+        },
         top: "45%",
         zIndex: '1000',
     },
@@ -26,11 +32,17 @@ const styles = {
         minHeight: "85vh",
         bgcolor: "white",
         borderRadius: "15px",
-        padding: "100px",
+        padding: {
+            xs: "40px 20px",
+            lg:"100px",
+        },
     },
 
     image: {
-        height: "550px",
+        height: {
+            xs: "400px",
+            lg: "550px",
+        },
         width: "100%",
         objectFit: 'contain',
         margin: 0,
@@ -40,9 +52,15 @@ const styles = {
         bgcolor: "rgb(245, 245, 245)",
         borderRadius: '15px',
         boxShadow: 'none',
-        height: "500px",
+        height: {
+            xs: "350px",
+            lg: "500px",
+        },
         width: "500px !important",
-        marginLeft: "100px",
+        marginLeft: {
+            xs: 0,
+            lg: "100px",
+        },
     },
 
     skeletonColor: {
@@ -50,6 +68,10 @@ const styles = {
     },
 
     wrapper: {
+        mt: {
+            xs: 5,
+            lg: 0,
+        },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -61,7 +83,10 @@ const styles = {
 
     pName: {
         textAlign: "center",
-        fontSize: "1.9rem",
+        fontSize: {
+            xs: "1.45rem",
+            lg: "1.9rem",
+        },
         fontWeight: "bold",
         paddingRight: "0rem",
     },
@@ -73,11 +98,17 @@ const styles = {
     },
 
     pRating: {
-        fontSize: "1.1rem",
+        fontSize: {
+            xs: "1rem",
+            lg: "1.1rem",
+        },
     },
 
     pSold: {
-        fontSize: ".7rem",
+        fontSize: {
+            xs: ".65rem",
+            lg: ".7rem",
+        },
         marginLeft: '5px',
         alignSelf: "center",
     },
@@ -102,7 +133,10 @@ const styles = {
 
     pPrice: {
         textAlign: "center",
-        fontSize: "1.2rem",
+        fontSize: {
+            xs: "1rem",
+            lg: "1.2rem",
+        },
         fontWeight: "bold",
         mt: 2,
     },
@@ -114,10 +148,16 @@ const styles = {
     },
 
     favoriteBtn: {
-        padding: ".8rem",
+        padding: {
+            xs: ".5rem",
+            lg: ".8rem",
+        },
         color: "black",
         border: "none",
-        marginRight: "60px",
+        marginRight: {
+            xs: "20px",
+            lg: "60px",
+        },
         textTransform: 'none',
         '&:hover': {
             border: "none",
@@ -127,7 +167,10 @@ const styles = {
 
     addBtn: {
         bgcolor: colors.primary,
-        padding: ".8rem 1.5rem",
+        padding: {
+            xs: ".5rem 1rem",
+            lg: ".8rem 1.5rem",
+        },
         textTransform: 'none',
         '&:hover': {
             bgcolor: "#525252",
@@ -144,29 +187,45 @@ const styles = {
         minHeight: "40vh",
         bgcolor: "white",
         borderRadius: "15px",
-        padding: "30px",
+        padding: {
+            xs: "20px",
+            lg: "30px",
+        },
     },
 
     tabListWrapper: {
         display: "flex",
         justifyContent: "center",
-        mb: 3,
+        mb: {
+            xs: 0,
+            lg: 3,
+        },
     },
 
     tabTitle: {
-        margin: "0 80px",
+        margin: {
+            xs: "0 15px",
+            lg: "0 80px",
+        },
         textTransform: 'none',
         color: "black",
         fontWeight: "bold",
-        fontSize: "1.1rem",
+        fontSize: {
+            xs: ".9rem",
+            lg: "1.1rem",
+        },
     },
 
     details: {
         whiteSpace: "pre-line",
-        fontSize: ".95rem",
+        fontSize: {
+            xs: ".8rem",
+            lg: ".95rem",
+        },
         lineHeight: 2,
         fontWeight: 300,
         textAlign: "center",
+        padding: 0,
     },
 
     relatedProductContainer: {
@@ -197,7 +256,12 @@ const styles = {
         bgcolor: "rgb(245, 245, 245)",
         marginRight: "50px",
         marginLeft: "50px",
-    }
+    },
+
+    skeletonTitle: {
+        bgcolor: '#ededed',
+        mb: 4,
+    },
 }
 
 export default styles
