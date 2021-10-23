@@ -18,7 +18,7 @@ const Login = (email, password,history) => {
 
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     axios.defaults.headers.common['Userid'] = data.userID;
-                    history.push("/");
+                    // history.push("/");
                 }
                 else {
                     console.log('sign in fail');
