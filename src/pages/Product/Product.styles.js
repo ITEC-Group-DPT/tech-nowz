@@ -61,7 +61,7 @@ const styles = {
 
     pName: {
         textAlign: "center",
-        fontSize: "1.8rem",
+        fontSize: "1.9rem",
         fontWeight: "bold",
         paddingRight: "0rem",
     },
@@ -73,11 +73,11 @@ const styles = {
     },
 
     pRating: {
-        fontSize: "1rem",
+        fontSize: "1.1rem",
     },
 
     pSold: {
-        fontSize: ".6rem",
+        fontSize: ".7rem",
         marginLeft: '5px',
         alignSelf: "center",
     },
@@ -102,13 +102,13 @@ const styles = {
 
     pPrice: {
         textAlign: "center",
-        fontSize: "1.1rem",
+        fontSize: "1.2rem",
         fontWeight: "bold",
         mt: 2,
     },
 
     btnWrapper: {
-        marginTop: "50px",
+        marginTop: "70px",
         display: "flex",
         justifyContent: "center",
     },

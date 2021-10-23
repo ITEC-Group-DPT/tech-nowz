@@ -10,6 +10,7 @@ import Slider from "react-slick"
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
+import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -71,10 +72,9 @@ const Product = () => {
     const query = useQuery()
     const productID = query.get("i")
     const [product, setProduct] = useState({ "isLoading": true })
-    const [relatedProductList, setRelatedProductList] = useState([])
+    const [relatedProductList, setRelatedProductList] = useState({ "isLoading": true, "productList": [] })
     const [tab, setTab] = React.useState('1')
-    let formatedPrice
-    let productDesc = "Sản phẩm chưa có thông tin mô tả"
+    let formatedPrice, productDesc = "Sản phẩm chưa có thông tin mô tả"
 
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
@@ -87,7 +87,7 @@ const Product = () => {
                     // if (response.data.success) {}
                     // else {}
                     if (response.status === 200) {
-                        setRelatedProductList(response.data)
+                        setRelatedProductList({ "isLoading": false, "productList": [...response.data] })
                     }
                 })
             }
@@ -183,11 +183,18 @@ const Product = () => {
                                         </Button>
                                     </Skeleton>
                                 </Box>
+
                             ) : (
                                 <Box sx={styles.btnWrapper}>
-                                    <Button variant="outlined" startIcon={product.isFavorite ? (<icons.IsFavorite />) : (<icons.NotFavorite />)} sx={styles.favoriteBtn}>
-                                        Add to Favorite
-                                    </Button>
+                                    {product.favorite ? (
+                                        <Button variant="outlined" startIcon={<icons.IsFavorite style={{ color: "red" }} />} sx={styles.favoriteBtn}>
+                                            Remove Favorite
+                                        </Button>
+                                    ) : (
+                                        <Button variant="outlined" startIcon={<icons.NotFavorite />} sx={styles.favoriteBtn}>
+                                            Add Favorite
+                                        </Button>
+                                    )}
                                     <Button variant="contained" startIcon={<icons.AddCart />} sx={styles.addBtn}>
                                         Add to Cart
                                     </Button>
@@ -263,15 +270,21 @@ const Product = () => {
 
             <Container maxWidth="xl" sx={styles.relatedProductContainer}>
                 <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
-                <Slider {...settingsRelatedProduct}>
-                    {relatedProductList.map(product => (
-                        <ProductItem
-                            product={product}
-                            key={product.productID}
-                            isSlider
-                        />
-                    ))}
-                </Slider>
+                {relatedProductList.isLoading ? (
+                    <Slider {...settingsRelatedProduct}>
+                        {Array(10).fill().map(() => (<ProductSkeleton isSlider />))}
+                    </Slider>
+                ) : (
+                    <Slider {...settingsRelatedProduct}>
+                        {relatedProductList.productList.map(product => (
+                            <ProductItem
+                                product={product}
+                                key={product.productID}
+                                isSlider
+                            />
+                        ))}
+                    </Slider>
+                )}
             </Container>
         </Box>
     )
