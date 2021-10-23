@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "../../pages/Authentication/authentication.style"
-import { Link } from 'react-router-dom';
+import { Link,useHistory} from 'react-router-dom';
 import { Input, Button, FormControl, Typography, Slide, easing } from '@mui/material';
 import { Box } from '@mui/system';
+
 
 import { useDispatch } from "react-redux";
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -11,6 +12,7 @@ import { Login } from "../../store/actions/authAction";
 const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const minWidth = useMediaQuery('(min-width:900px)');
     const isHide = !minWidth && !isSignIn;
 
@@ -18,7 +20,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
     const [password, setPassword] = useState("");
 
     const loginSubmit = () => {
-        dispatch(Login(email, password));
+        dispatch(Login(email, password,history));
     }
 
     if (isHide) return <></>;
