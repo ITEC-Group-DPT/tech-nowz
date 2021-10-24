@@ -22,7 +22,7 @@ const styles = {
     productName: {
         fontWeight: '600',
         fontFamily: "'Roboto Slab', serif",
-        fontSize: {xs: "0.8rem", md: "1rem"},
+        fontSize: { xs: "0.8rem", md: "1rem" },
     },
     priceContainer: {
         paddingLeft: '3%',
@@ -43,12 +43,12 @@ const styles = {
         marginTop: '1%',
     },
     productSold: {
-        fontSize: {xs: "0.7rem", md: "1rem"},
+        fontSize: { xs: "0.7rem", md: "1rem" },
         paddingLeft: '1%',
         fontFamily: "'IBM Plex Serif', serif",
     },
     productQuantity: {
-        fontSize: {xs: "0.7rem", md: "1rem"},
+        fontSize: { xs: "0.7rem", md: "1rem" },
         color: '#656565',
         fontFamily: "'IBM Plex Serif', serif",
     },
