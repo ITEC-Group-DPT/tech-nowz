@@ -5,11 +5,11 @@ import OrderComponent from '../../components/OrderComponent/OrderComponent';
 import { getOrderListAPI } from '../../api/orderApi';
 
 const OrderHistory = () => {
-	const [orderList, getOrderList] = useState([]);
+	const [orderList, setOrderList] = useState([]);
 	useEffect(() => {
 		getOrderListAPI().then((response) => {
 			if (response.data['success'] === true) {
-				getOrderList(response.data['data']);
+				setOrderList(response.data['data']);
 			}
 		});
 	}, []);
