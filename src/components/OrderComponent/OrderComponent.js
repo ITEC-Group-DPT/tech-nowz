@@ -13,22 +13,22 @@ const OrderComponent = ({ orderID, productList }) => {
 		));
 		return products;
 	}
-
-	return (
-		<Box sx={styles.main}>
-			<Container sx={styles.titleDiv}>
-				<Typography sx={styles.title}>Order: #{orderID}</Typography>
-				<Link style={styles.link} to={orderHistoryURL}>
-					<Button sx={styles.titleBtn}>See Detail</Button>
-				</Link>
-			</Container>
-			<Box sx={styles.contentDiv}>
-				<Box sx={styles.productList}>
-					<ProductList productList={productList} />
-				</Box>
-			</Box>
-		</Box>
-	);
-};
+    
+    return (
+        <Box sx={styles.main}>
+            <Box sx={styles.titleDiv}>
+                <Typography sx={styles.title}>Order: #{orderID}</Typography>
+                <Link style={styles.link} to={orderHistoryURL}>
+                    <Button sx={styles.titleBtn}>See Detail</Button>
+                </Link>
+            </Box>
+            <Box sx={styles.contentDiv}>
+                <Box sx={styles.productList}>
+                    <ProductList  productList={productList}/>
+                </Box>
+            </Box>
+        </Box>
+    )
+}
 
 export default OrderComponent;
