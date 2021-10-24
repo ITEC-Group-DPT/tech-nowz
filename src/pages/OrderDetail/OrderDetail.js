@@ -11,7 +11,7 @@ const OrderDetail = () => {
 	const [order, setOrderDetail] = useState([]);
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
-			if (response.data['success'] == true) {
+			if (response.data['success'] === true) {
 				setOrderDetail(response.data['data']);
 			}
 		});
@@ -41,7 +41,7 @@ const OrderDetail = () => {
 
 	return (
 		<Container sx={styles.main}>
-			{order.length != 0 ? (
+			{order.length !== 0 ? (
 				<div>
 					<Typography variant="h3" sx={styles.title}>
 						Order : #{id}{' '}
