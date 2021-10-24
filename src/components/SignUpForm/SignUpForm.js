@@ -16,9 +16,9 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
             <Typography sx={styles.title}>Create Account
             </Typography>
             <Box component="div" style={styles.socialContainer}>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-facebook-f"></i></Link>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-google-plus-g"></i></Link>
-                <Link to="#" style={styles.socialLink}><i class="fab fa-linkedin-in"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-facebook-f"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-google-plus-g"></i></Link>
+                <Link to="#" style={styles.socialLink}><i className="fab fa-linkedin-in"></i></Link>
             </Box>
             <Typography variant="span" sx={styles.subTitle}>or use your email for registration
             </Typography>
@@ -27,6 +27,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 sx={styles.input}
                 placeholder="Email"
                 disableUnderline
+                type="email"
                 fullWidth
             />
 
@@ -41,6 +42,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 sx={styles.input}
                 placeholder="Password"
                 disableUnderline
+                type="password"
                 fullWidth
             />
 
@@ -48,6 +50,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 sx={styles.input}
                 placeholder="Confirm Password"
                 disableUnderline
+                type="password"
                 fullWidth
             />
 
@@ -58,7 +61,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                     Already have an account? Sign in
                 </Button>
             }
-            <Link style={styles.back} to="/"><i class="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
+            <Link style={styles.back} to="/"><i className="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
 
             <Button
                 sx={styles.mainButton} variant="contained"

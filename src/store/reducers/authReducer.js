@@ -2,7 +2,9 @@ import ActionType from "../actions/actionType";
 
 const initState = {
     isLoading: false,
-    user: {},
+    user: {
+        isEmpty: true,
+    },
 };
 
 const AuthReducer = (state = initState, action) => {
@@ -12,7 +14,7 @@ const AuthReducer = (state = initState, action) => {
                 ...state,
                 isLoading: true,
             }
-        case ActionType.LOGIN_SUCESS:
+        case ActionType.LOGIN_SUCCESS:
             return {
                 user: action.data,
                 isLoading: true,
