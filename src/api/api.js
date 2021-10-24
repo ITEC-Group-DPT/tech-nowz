@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios';
 import { BASE_API_URL, TEST_API_URL } from '../constant/string'
 
 const getProductCategoryAPI = (category, limit = 8) => {
@@ -11,4 +11,14 @@ const getTopRatingAPI = (limit = 10) => {
     return axios.get(TEST_API_URL + `productAPI.php?command=${command}&limit=${limit}`);
 }
 
-export { getProductCategoryAPI, getTopRatingAPI };
+const getProductAPI = (productID) => {
+    //temporary for testing
+    let command = "getProduct";
+    // let header = {
+    //     "Userid": 20,
+    // }
+
+    return axios.get(TEST_API_URL + `productAPI.php?command=${command}&productID=${productID}`);
+}
+
+export { getProductCategoryAPI, getTopRatingAPI, getProductAPI };

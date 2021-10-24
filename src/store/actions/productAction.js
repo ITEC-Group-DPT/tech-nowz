@@ -6,10 +6,11 @@ const getTopRatingAction = () => {
         dispatch({ type: ActionType.START_GET_TOP_RATING });
         getTopRatingAPI()
             .then(response => {
-                if (response.status === 200) {
+                console.log('response rating: ', response);
+                if (response.data.success) {
                     dispatch({
                         type: ActionType.GET_TOP_RATING_SUCCESS,
-                        data: response.data,
+                        data: response.data.data,
                     })
                 } else {
                     dispatch({ type: ActionType.GET_TOP_RATING_FAIL });
@@ -23,10 +24,10 @@ const getLaptopAction = () => {
         dispatch({ type: ActionType.START_GET_LAPTOP_LIST });
         getProductCategoryAPI("Laptop")
             .then(response => {
-                if (response.status === 200) {
+                if (response.data.success) {
                     dispatch({
                         type: ActionType.GET_LAPTOP_LIST_SUCCESS,
-                        data: response.data,
+                        data: response.data.data,
                     })
                 } else {
                     dispatch({ type: ActionType.GET_LAPTOP_LIST_FAIL });
@@ -40,10 +41,10 @@ const getMonitorAction = () => {
         dispatch({ type: ActionType.START_GET_MONITOR_LIST });
         getProductCategoryAPI("Monitor")
             .then(response => {
-                if (response.status === 200) {
+                if (response.data.success) {
                     dispatch({
                         type: ActionType.GET_MONITOR_LIST_SUCCESS,
-                        data: response.data,
+                        data: response.data.data,
                     })
                 } else {
                     dispatch({ type: ActionType.GET_MONITOR_LIST_FAIL });
@@ -57,10 +58,10 @@ const getCPUAction = () => {
         dispatch({ type: ActionType.START_GET_CPU_LIST });
         getProductCategoryAPI("CPU")
             .then(response => {
-                if (response.status === 200) {
+                if (response.data.success) {
                     dispatch({
                         type: ActionType.GET_CPU_LIST_SUCCESS,
-                        data: response.data,
+                        data: response.data.data,
                     })
                 } else {
                     dispatch({ type: ActionType.GET_CPU_LIST_FAIL });
