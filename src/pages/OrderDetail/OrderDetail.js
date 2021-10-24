@@ -37,14 +37,6 @@ const OrderDetail = () => {
 		return `${Math.round(value)} ${type} ago`;
 	}
 
-	const dateDiff = formatDateDiff(order['orderInfo']['dateDiff']);
-	const totalPrice =
-		Number(order['orderInfo']['totalPrice']).toLocaleString() + 'đ';
-	const name = order['orderInfo']['name'];
-	const phone = order['orderInfo']['phone'];
-	const address = order['orderInfo']['address'];
-	const productList = order['itemList'];
-
 	return (
 		<Container sx={styles.main}>
 			{order.length !== 0 ? (
@@ -54,31 +46,34 @@ const OrderDetail = () => {
 					</Typography>
 					<Typography variant="h6" sx={styles.content}>
 						<b>Created: </b>
-						{dateDiff}
+						{formatDateDiff(order['orderInfo']['dateDiff'])}
 					</Typography>
 					<Typography variant="h3" sx={styles.title}>
 						Customer Detail
 					</Typography>
 					<Typography variant="h6" sx={styles.content}>
 						<b>Customer: </b>
-						{name} - {phone}
+						{order['orderInfo']['name']} -{' '}
+						{order['orderInfo']['phone']}
 					</Typography>
 					<Typography variant="h6" sx={styles.content}>
 						<b>Address: </b>
-						{address}
+						{order['orderInfo']['address']}
 					</Typography>
 					<Typography variant="h3" sx={styles.title}>
 						Package Detail
 					</Typography>
 					<Box sx={styles.productList}>
-						<ProductList productList={productList} />
+						<ProductList productList={order['itemList']} />
 					</Box>
 					<Box sx={styles.priceBox}>
 						<Typography variant="h3" sx={styles.title}>
 							Total Price
 						</Typography>
 						<Typography variant="h3" sx={styles.price}>
-							{totalPrice}
+							{Number(
+								order['orderInfo']['totalPrice']
+							).toLocaleString() + 'đ'}
 						</Typography>
 					</Box>
 				</div>
