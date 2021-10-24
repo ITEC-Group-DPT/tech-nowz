@@ -11,17 +11,17 @@ if (object) {
 
     console.log('userID: ', userID);
     // Alter defaults after instance has been created
-    instance.defaults.headers.common['Userid'] = userID;
+    instance.defaults.headers.common['userid'] = userID;
 }
 
 instance.interceptors.request.use(
     config => {
-        if (!config.headers.Userid) {
+        if (!config.headers.userid) {
             console.log('run interceptor');
             const token = JSON.parse(sessionStorage.getItem("userInfo"));
 
             if (token) {
-                config.headers.Userid = token.userID;
+                config.headers.userid = token.userID;
             }
         }
 
