@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
 	FormControl,
 	InputLabel,
@@ -17,39 +17,68 @@ import {
 import CardAddress from "../../components/CardAddresss/CardAddress";
 import FormAddress from "../../components/FormAddress/FormAddress";
 import styles from "./addressbook.style";
+import { getAddressBook, deleteAddressBook } from "../../api/addressApi";
 // import axios from "axios";
 const AddressBook = () => {
 	const [modelAppear, setModelAppear] = useState(false);
-	const [addressBook, setAddressBook] = useState([
-		{
-			deliveryID: 19,
-			address: "Huỳnh Văn Bánh, P.13, Phu Nhuan, Ho Chi Minh",
-			name: "Minh Đạo",
-			phone: "0785031700",
-			userID: 13,
-		},
-		{
-			deliveryID: 20,
-			address: "471 Tung Thien Vuong Street, 12, 8, HCM City",
-			name: "hehe",
-			phone: "0822453279",
-			userID: 13,
-		},
-	]);
-	//   axios
-	//     .get(
-	//       "http://technowdb.phuhanh.com.vn/api/deliAPi.php?command=getdelivery&userID=13"
-	//     )
-	//     .then((res) => {
-	//       setAddressBook(res.data)
-	//     });
-	
+	const [addressBook, setAddressBook] = useState([]);
+
+	useEffect(() => {
+		getaddress();
+	}, []);
+
+	function getaddress() {
+		getAddressBook().then((res) => {
+			setAddressBook(res.data.data);
+		});
+	}
+
+	// function onSubmit(command,)
+	function onCreate(id, name, address, phone) {
+		let obj = {
+			deliveryID: id,
+			address: address,
+			name: name,
+			phone: phone,
+		};
+		let newLs = addressBook;
+		newLs.push(obj);
+		setAddressBook(newLs);
+	}
+	function onEdit(id, name, address, phone) {
+		let obj = {
+			deliveryID: id,
+			address: address,
+			name: name,
+			phone: phone,
+		};
+
+		let indexbyid = addressBook.findIndex(
+			(address) => address.deliveryID == id
+		);
+		console.log(addressBook);
+		addressBook[indexbyid] = obj;
+		console.log(addressBook);
+		setAddressBook(addressBook);
+	}
+	function onDelete(id) {
+		deleteAddressBook(id).then((res) => {
+			const newLs = addressBook.filter(
+				(address) => address.deliveryID !== id
+			);
+			setAddressBook(newLs);
+		});
+	}
+
 	return (
 		<div>
 			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
 				<Typography
 					variant="h1"
-					sx={{ fontWeight: "500", fontSize:{xs:'50px',md:'80px',lg:'100px'} }}
+					sx={{
+						fontWeight: "500",
+						fontSize: { xs: "50px", md: "80px", lg: "100px" },
+					}}
 					component="div">
 					Address Book
 				</Typography>
@@ -57,7 +86,12 @@ const AddressBook = () => {
 			<Container>
 				<Divider />
 				{addressBook.map((address) => (
-					<CardAddress address={address} key={address.deliveryID} />
+					<CardAddress
+						address={address}
+						key={address.deliveryID}
+						onEdit={onEdit}
+						onDelete={onDelete}
+					/>
 				))}
 			</Container>
 			<Box sx={{ textAlign: "center", m: 2 }}>
@@ -67,7 +101,7 @@ const AddressBook = () => {
 			</Box>
 			<Modal open={modelAppear} onClose={() => setModelAppear(false)}>
 				<Box sx={styles.modal}>
-					<Box sx={{ textAlign: "center"}}>
+					<Box sx={{ textAlign: "center" }}>
 						<Typography
 							variant="h4"
 							sx={{ fontWeight: "500" }}
@@ -76,7 +110,8 @@ const AddressBook = () => {
 						</Typography>
 					</Box>
 					<FormAddress
-						formCommand="edit"
+						formCommand="create"
+						formSubmit={onCreate}
 						setAppear={setModelAppear}
 					/>
 				</Box>

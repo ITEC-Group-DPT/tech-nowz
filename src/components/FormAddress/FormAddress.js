@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, createRef } from "react";
 import {
 	Input,
 	InputLabel,
@@ -9,6 +9,8 @@ import {
 	TextField,
 	Container,
 } from "@mui/material";
+import { createAddressBook } from "../../api/addressApi";
+
 let defaultAddress = {
 	deliveryID: 0,
 	address: "",
@@ -16,11 +18,51 @@ let defaultAddress = {
 	phone: "",
 	userID: 0,
 };
-
-const FormAddress = ({ address = defaultAddress, formCommand, setAppear }) => {
-	console.log(address, formCommand);
+const FormAddress = ({
+	address = defaultAddress,
+	formCommand,
+	formSubmit,
+	setAppear,
+}) => {
 	let arrAddress = address.address.split(", ");
-	console.log(arrAddress);
+	const [form, setFormAddress] = useState({
+		name: address.name,
+		addressInForm: arrAddress[0],
+		ward: arrAddress[1],
+		district: arrAddress[2],
+		city: arrAddress[3],
+		phone: address.phone,
+	});
+	// const [addressForm,setAddress] = useState(arrAddress[0])
+	// const [ward,setWard] = useState(arrAddress[1])
+	// const [district,setDistrict] = useState(arrAddress[2])
+	// const [city,setCity] = useState(arrAddress[3])
+	// const [phone,setPhone] = useState(address.phone)
+	function handleSubmit(e) {
+		e.preventDefault();
+		let id = address.deliveryID;
+		let joinAddress =
+			form.addressInForm +
+			", " +
+			form.ward +
+			", " +
+			form.district +
+			", " +
+			form.city;
+
+		if (formCommand == "create") {
+			createAddressBook(form.name, joinAddress, form.phone).then(res => {
+				let id = res.data
+				console.log(id);
+				formSubmit(id,form.name, joinAddress, form.phone)
+				setAppear(false)
+			});
+		}else if (formCommand == "edit") {
+			formSubmit(id, form.name, joinAddress, form.phone)
+			setAppear(false)
+		}
+
+	}
 	return (
 		<Box sx={{ p: 2, my: 1 }}>
 			<FormControl fullWidth="true">
@@ -28,8 +70,11 @@ const FormAddress = ({ address = defaultAddress, formCommand, setAppear }) => {
 					sx={{ mb: 2 }}
 					name="name"
 					label="Name"
+					onChange={(e) =>
+						setFormAddress({ ...form, name: e.target.value })
+					}
 					placeholder="Type your name here"
-					defaultValue={address.name}
+					defaultValue={form.name}
 					variant="standard"
 				/>
 				<TextField
@@ -37,15 +82,13 @@ const FormAddress = ({ address = defaultAddress, formCommand, setAppear }) => {
 					name="address"
 					label="Address"
 					placeholder="Type your address here"
-					defaultValue={arrAddress[0]}
-					variant="standard"
-				/>
-				<TextField
-					sx={{ mb: 2 }}
-					name="address"
-					label="Address"
-					placeholder="Type your address here"
-					defaultValue={arrAddress[1]}
+					onChange={(e) =>
+						setFormAddress({
+							...form,
+							addressInForm: e.target.value,
+						})
+					}
+					defaultValue={form.addressInForm}
 					variant="standard"
 				/>
 				<TextField
@@ -53,7 +96,21 @@ const FormAddress = ({ address = defaultAddress, formCommand, setAppear }) => {
 					name="ward"
 					label="Ward"
 					placeholder="Type your ward here"
-					defaultValue={arrAddress[2]}
+					onChange={(e) =>
+						setFormAddress({ ...form, ward: e.target.value })
+					}
+					defaultValue={form.ward}
+					variant="standard"
+				/>
+				<TextField
+					sx={{ mb: 2 }}
+					name="district"
+					label="District"
+					placeholder="Type your district here"
+					onChange={(e) =>
+						setFormAddress({ ...form, district: e.target.value })
+					}
+					defaultValue={form.district}
 					variant="standard"
 				/>
 				<TextField
@@ -61,15 +118,22 @@ const FormAddress = ({ address = defaultAddress, formCommand, setAppear }) => {
 					name="city"
 					label="City"
 					placeholder="Type your city here"
-					defaultValue={arrAddress[3]}
+					onChange={(e) =>
+						setFormAddress({ ...form, city: e.target.value })
+					}
+					defaultValue={form.city}
 					variant="standard"
+					required
 				/>
 				<TextField
 					sx={{ mb: 2 }}
 					name="phone"
 					label="Phone"
 					placeholder="Type your phone here"
-					defaultValue={address.phone}
+					onChange={(e) =>
+						setFormAddress({ ...form, phone: e.target.value })
+					}
+					defaultValue={form.phone}
 					variant="standard"
 				/>
 				<Container sx={{ textAlign: "center" }}>
@@ -83,8 +147,10 @@ const FormAddress = ({ address = defaultAddress, formCommand, setAppear }) => {
 					</Button>
 					<Button
 						sx={{ mx: 1 }}
+						onClick={(e) => handleSubmit(e)}
 						variant="outlined"
 						size="small"
+						type="submit"
 						color="success">
 						Submit
 					</Button>

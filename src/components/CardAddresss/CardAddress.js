@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ExitToAppSharp } from "@mui/icons-material";
 import FormAddress from "../FormAddress/FormAddress";
 
-const CardAddress = ({ address }) => {
+const CardAddress = ({address,onDelete,onEdit}) => {
 	const [formAppear, setFormAppear] = useState(false);
 	return (
 		<Card
@@ -43,6 +43,7 @@ const CardAddress = ({ address }) => {
 					Edit
 				</Button>
 				<Button
+					onClick={()=> onDelete(address.deliveryID)}
 					variant="outlined"
 					size="small"
 					color="error"
@@ -51,7 +52,7 @@ const CardAddress = ({ address }) => {
 				</Button>
 			</CardActions>
 			{formAppear 
-			?  <FormAddress address={address} formCommand='edit' setAppear={setFormAppear}/>
+			?  <FormAddress address={address} formCommand='edit' formSubmit={editform} setAppear={setFormAppear}/>
 			: <></>}
 		</Card>
 	);
