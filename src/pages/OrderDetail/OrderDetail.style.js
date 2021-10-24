@@ -2,7 +2,8 @@ const styles = {
     main: {
         justifyContent:'center', 
         alignItems:'center',
-        marginTop: "3rem",
+        marginTop: "10%",
+        marginBottom: "10%",
     },
     title: {
         fontWeight: "600",

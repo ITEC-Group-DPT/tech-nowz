@@ -1,19 +1,23 @@
 
 const styles = {
-    main: {
-        justifyContent: 'center',
+    main:{
+        marginTop: "5%",
+        marginBottom: "5%",
+    },
+    contentDiv: {
         alignItems:'center',
         display:'flex',
         flexDirection:'column',
-        width: '100%',
-        marginTop: "3%",
+        width: {xs:'80%', md: '100%'},
     },
     titleDiv:{
+        alignItems: 'center',
         display: "flex",
         justifyContent:'space-between',
-        width: {xs: "95%", md: "80%"},
+        width: { xs: '100%', md: '85%' },
         fontFamily: "'Roboto Slab', serif",
         fontSize: {xs: "1rem", md: "2rem"},
+        padding:'0',
     },
     title: {
         fontWeight:"bold",
@@ -25,11 +29,9 @@ const styles = {
         color: "black",
     },
     productList: {
-        width: {xs: "95%", md: "80%"},
+        width: {xs: "100%", md: "80%"},
         display:'flex',
         flexDirection: 'column',
-        margin: '0',
-        padding: '0',
     },
     link : {
         textDecoration: "none"

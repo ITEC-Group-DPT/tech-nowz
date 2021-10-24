@@ -27,7 +27,7 @@ const OrderHistory = () => {
     }
 
     return(
-        <Container>
+        <Container sx={styles.main}>
             <Typography sx={styles.title}>My Orders</Typography>
             <OrderList orderList={orderList} />
         </Container>

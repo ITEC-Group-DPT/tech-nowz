@@ -7,10 +7,10 @@ import NotFound from '../../components/NotFound/NotFound';
 import { getOrderDetailAPI } from '../../api/orderApi';
 
 const OrderDetail = () => {
-    const { orderID } = useParams();
+    const { id } = useParams();
     const [order, getOrderDetail] = useState([])
     useEffect(() => {
-        getOrderDetailAPI(orderID).then(response => {
+        getOrderDetailAPI(id).then(response => {
             if(response.data['success'] == true){
                 getOrderDetail(response.data['data'])
             }
@@ -46,7 +46,7 @@ const OrderDetail = () => {
         <Container sx={styles.main}>
             {order.length != 0 ?
                 <div>
-                    <Typography variant="h3" sx={styles.title}>Order : #{orderID} </Typography>
+                    <Typography variant="h3" sx={styles.title}>Order : #{id} </Typography>
                     <Typography variant="h6" sx={styles.content}><b>Created: </b>{formatDateDiff(order['orderInfo']['dateDiff'])}</Typography>
                     <Typography variant="h3" sx={styles.title}>Customer Detail</Typography>
                     <Typography variant="h6" sx={styles.content}><b>Customer: </b>{order['orderInfo']['name']} - {order['orderInfo']['phone']}</Typography>

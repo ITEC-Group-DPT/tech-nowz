@@ -33,22 +33,22 @@ const styles = {
     productPrice: {
         fontFamily: "'IBM Plex Serif', serif",
         fontWeight: "bold",
-        fontSize: "0.9rem",
+        fontSize: "1rem",
     },
     ratingContainer: {
         width: '10%',
         display: 'flex',
         flex: 1,
         alignItems: 'center',
-        marginTop: '2%',
+        marginTop: '1%',
     },
     productSold: {
-        fontSize: {xs: "0.65rem", md: "0.9rem"},
+        fontSize: {xs: "0.7rem", md: "1rem"},
         paddingLeft: '1%',
         fontFamily: "'IBM Plex Serif', serif",
     },
     productQuantity: {
-        fontSize: {xs: "0.7rem", md: "0.9rem"},
+        fontSize: {xs: "0.7rem", md: "1rem"},
         color: '#656565',
         fontFamily: "'IBM Plex Serif', serif",
     },
