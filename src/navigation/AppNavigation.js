@@ -10,17 +10,8 @@ import { userInfoSelector } from '../store/selectors'
 import { useDispatch, useSelector } from 'react-redux';
 
 const AppNavigation = () => {
-    //axios.defaults.headers['Userid'] = 69;
-    const { userID } = useSelector(state => userInfoSelector(state));
 
     const dispatch = useDispatch();
-    console.log('userID: ', userID);
-
-    if (userID != undefined) {
-        console.log('axios header: ', userID);
-        axios.defaults.headers['Userid'] = userID;
-        console.log('axios: ',axios.defaults.headers);
-    }
 
     useEffect(() => {
         const userInfo = sessionStorage.getItem("userInfo");
@@ -28,7 +19,6 @@ const AppNavigation = () => {
         if (userInfo != null) {
             console.log('sessionLogin');
             dispatch(sessionLogin(JSON.parse(userInfo)));
-
         }
     }, [])
 
