@@ -16,7 +16,7 @@ const HorizontalProduct = ({
 	canDelete,
 	onPressDelete,
 	ratingSizeMedium = '1rem',
-	raingSizeSmall = '0.8rem',
+	ratingSizeSmall = '0.8rem',
 }) => {
 	const formatedPrice = new Intl.NumberFormat('vi-VN', {
 		style: 'currency',
@@ -45,7 +45,7 @@ const HorizontalProduct = ({
 						readOnly
 						sx={{
 							fontSize: {
-								xs: raingSizeSmall,
+								xs: ratingSizeSmall,
 								md: ratingSizeMedium,
 							},
 						}}
