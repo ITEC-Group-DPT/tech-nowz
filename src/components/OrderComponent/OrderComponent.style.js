@@ -14,14 +14,14 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'space-between',
 		width: { xs: '100%', md: '85%' },
-		fontFamily: "'Roboto Slab', serif",
+		fontFamily: 'Roboto Slab, serif',
 		fontSize: { xs: '1rem', md: '2rem' },
 		padding: '0',
 	},
 	title: {
 		fontWeight: 'bold',
 		fontSize: { xs: '1rem', md: '2rem' },
-		fontFamily: "'Roboto Slab', serif",
+		fontFamily: 'Roboto Slab, serif',
 	},
 	titleBtn: {
 		fontSize: { xs: '0.7rem', md: '1rem' },

@@ -22,6 +22,7 @@ const HorizontalProduct = ({
 		style: 'currency',
 		currency: 'VND',
 	}).format(product.price);
+
 	return (
 		<Card sx={styles.productCard}>
 			{canDelete && (

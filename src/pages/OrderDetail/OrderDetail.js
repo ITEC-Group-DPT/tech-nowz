@@ -11,11 +11,20 @@ const OrderDetail = () => {
 	const [order, getOrderDetail] = useState([]);
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
-			if (response.data['success'] == true) {
+			if (response.data['success'] === true) {
 				getOrderDetail(response.data['data']);
 			}
 		});
 	}, []);
+
+	function ProductList(props) {
+		const productList = props.productList;
+		const products = productList.map((product) => (
+			<HorizontalProduct product={product} ratingSize={'20px'} />
+		));
+		return products;
+	}
+
 	function formatDateDiff(value) {
 		let type;
 		if (value >= 1440) {
@@ -36,16 +45,9 @@ const OrderDetail = () => {
 	const address = order['orderInfo']['address'];
 	const productList = order['itemList'];
 
-	function ProductList(props) {
-		const productList = props.productList;
-		const products = productList.map((product) => (
-			<HorizontalProduct product={product} ratingSize={'20px'} />
-		));
-		return products;
-	}
 	return (
 		<Container sx={styles.main}>
-			{order.length != 0 ? (
+			{order.length !== 0 ? (
 				<div>
 					<Typography variant="h3" sx={styles.title}>
 						Order : #{id}{' '}

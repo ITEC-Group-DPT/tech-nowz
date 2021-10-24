@@ -8,7 +8,7 @@ const OrderHistory = () => {
 	const [orderList, getOrderList] = useState([]);
 	useEffect(() => {
 		getOrderListAPI().then((response) => {
-			if (response.data['success'] == true) {
+			if (response.data['success'] === true) {
 				getOrderList(response.data['data']);
 			}
 		});
