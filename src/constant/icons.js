@@ -18,6 +18,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -40,6 +43,9 @@ const icons = {
     Close: CloseIcon,
     NotFavorite: FavoriteBorderIcon,
     IsFavorite: FavoriteIcon,
+    Order: ReceiptLongOutlinedIcon,
+    Address: LocationOnOutlinedIcon,
+    SignOut: LogoutOutlinedIcon,
 }
 
 export default icons;

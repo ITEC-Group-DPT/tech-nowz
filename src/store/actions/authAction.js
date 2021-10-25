@@ -1,12 +1,9 @@
 import ActionType from './actionType'
 import { loginApi } from '../../api/authApi'
-import axios from 'axios'
+
 const Login = (email, password,history) => {
-
     return dispatch => {
-
         dispatch({ type: ActionType.START_LOGIN })
-
         loginApi(email, password)
             .then(response => {
                 console.log('response: ', response);
@@ -17,7 +14,6 @@ const Login = (email, password,history) => {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
 
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
-                    // axios.defaults.headers['Userid'] = data.userID;
                     history.push("/");
                 }
                 else {
@@ -35,4 +31,11 @@ const sessionLogin = (data) => {
     }
 }
 
-export { Login, sessionLogin };
+const logOut = () => {
+    return dispatch => {
+        dispatch({ type: ActionType.LOGOUT})
+        sessionStorage.removeItem("userInfo");
+    }
+}
+
+export { Login, sessionLogin, logOut };
