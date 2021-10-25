@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios';
 import { BASE_API_URL, TEST_API_URL } from '../constant/string'
 
 const getFavoriteListApi = () => {
