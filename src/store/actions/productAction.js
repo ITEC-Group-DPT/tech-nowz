@@ -1,5 +1,5 @@
 import ActionType from './actionType'
-import { getProductCategoryAPI, getTopRatingAPI } from "../../api/api.js"
+import { getProductCategoryAPI, getTopRatingAPI } from "../../api/productApi"
 
 const getTopRatingAction = () => {
     return dispatch => {
