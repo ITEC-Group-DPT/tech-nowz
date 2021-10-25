@@ -1,45 +1,53 @@
-
 const styles = {
     productCard: {
         display: 'flex',
         position: 'relative',
         alignItems: 'center',
-        width: '800px',
-        padding: "10px 5px",
-        marginBottom: '24px',
+
+        paddingLeft: {xs: '5%',md:'2%'},
+        marginTop: {xs: '3%',md:'1.5%'},
         flex: 1,
         boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)',
     },
     productImg: {
-        height: '180px',
-        flex: 1
+        height: '22%',
+        width: '22%',
+        objectFit: "contain"
     },
     productContent: {
+        width: '30%',
         flex: 3,
     },
     productName: {
         fontWeight: '600',
         fontFamily: "'Roboto Slab', serif",
-        paddingRight: '46px'
+        fontSize: {xs: "0.8rem", md: "1rem"},
     },
     priceContainer: {
+        paddingLeft: '3%',
+        margin: '0',
+        width: "100%",
         flex: 1,
     },
     productPrice: {
         fontFamily: "'IBM Plex Serif', serif",
+        fontWeight: "bold",
+        fontSize: "1rem",
     },
     ratingContainer: {
+        width: '10%',
         display: 'flex',
+        flex: 1,
         alignItems: 'center',
-        marginTop: '6px',
+        marginTop: '1%',
     },
     productSold: {
-        fontSize: '12px',
-        paddingLeft: '2px',
+        fontSize: {xs: "0.7rem", md: "1rem"},
+        paddingLeft: '1%',
         fontFamily: "'IBM Plex Serif', serif",
     },
     productQuantity: {
-        fontSize: '14px',
+        fontSize: {xs: "0.7rem", md: "1rem"},
         color: '#656565',
         fontFamily: "'IBM Plex Serif', serif",
     },
@@ -51,8 +59,8 @@ const styles = {
         top: 0,
     },
     closeIc: {
-        width: '22px',
-        height: '22px',
+        width: '3%',
+        height: '3%',
     },
 };
 

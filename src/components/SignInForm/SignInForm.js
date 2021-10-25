@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../pages/Authentication/authentication.style"
-import { Link } from 'react-router-dom';
-import { Input, Button, FormControl, Typography, Slide } from '@mui/material';
+import { Link,useHistory} from 'react-router-dom';
+import { Input, Button, FormControl, Typography, Slide, easing } from '@mui/material';
 import { Box } from '@mui/system';
+
+
+import { useDispatch } from "react-redux";
 import useMediaQuery from '@mui/material/useMediaQuery';
+
+import { Login } from "../../store/actions/authAction";
 const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
     const minWidth = useMediaQuery('(min-width:900px)');
-
     const isHide = !minWidth && !isSignIn;
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const loginSubmit = () => {
+        dispatch(Login(email, password,history));
+    }
 
     if (isHide) return <></>;
     return (
@@ -23,6 +36,9 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
             <Input
                 sx={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
                 placeholder="Email"
                 disableUnderline
                 fullWidth
@@ -30,13 +46,16 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
             <Input
                 sx={styles.input}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 disableUnderline
+                type="password"
                 fullWidth
             />
 
             {
-               (isSignIn && !minWidth) &&
+                (isSignIn && !minWidth) &&
                 <Button onClick={() => setIsSignIn(false)}
                     sx={styles.switch}>Don't have an account? Sign up
                 </Button>
@@ -44,7 +63,9 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
             <Link style={styles.back} to="/"><i className="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
 
             <Button
-                sx={styles.mainButton} variant="contained"
+                onClick={loginSubmit}
+                sx={styles.mainButton}
+                variant="contained"
             >Sign In
             </Button>
 

@@ -27,6 +27,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 sx={styles.input}
                 placeholder="Email"
                 disableUnderline
+                type="email"
                 fullWidth
             />
 
@@ -41,6 +42,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 sx={styles.input}
                 placeholder="Password"
                 disableUnderline
+                type="password"
                 fullWidth
             />
 
@@ -48,6 +50,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 sx={styles.input}
                 placeholder="Confirm Password"
                 disableUnderline
+                type="password"
                 fullWidth
             />
 
@@ -58,7 +61,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                     Already have an account? Sign in
                 </Button>
             }
-            <Link style={styles.back} to="/"><i class="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
+            <Link style={styles.back} to="/"><i className="bi bi-arrow-left"></i>&nbsp; Back to home</Link>
 
             <Button
                 sx={styles.mainButton} variant="contained"

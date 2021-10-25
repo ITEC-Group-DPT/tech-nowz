@@ -1,19 +1,38 @@
 import ActionType from './actionType'
+import { loginApi } from '../../api/authApi'
+import axios from 'axios'
+const Login = (email, password,history) => {
 
-const login = (email, password) => {
     return dispatch => {
-        dispatch({type: ActionType.START_LOGIN})
-        if (email === "hehe@gmail.com" && password === "1") {
-            const data = {
-                userID: 123,
-                username: "Kurozemi",
-            }
-            dispatch({type: ActionType.LOGIN_SUCESS,data:data} )
-        }
-        else {
-            dispatch({type:ActionType.LOGIN_FAIL});
-        }
+
+        dispatch({ type: ActionType.START_LOGIN })
+
+        loginApi(email, password)
+            .then(response => {
+                console.log('response: ', response);
+                if (response.data.success) {
+                    console.log('sign in success');
+
+                    const data = response.data.data;
+                    dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
+
+                    sessionStorage.setItem("userInfo", JSON.stringify(data));
+                    // axios.defaults.headers['Userid'] = data.userID;
+                    history.push("/");
+                }
+                else {
+                    console.log('sign in fail');
+                    dispatch({ type: ActionType.LOGIN_FAIL });
+
+                }
+            })
     }
 }
 
-export {login};
+const sessionLogin = (data) => {
+    return dispatch => {
+        dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
+    }
+}
+
+export { Login, sessionLogin };

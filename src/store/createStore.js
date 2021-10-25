@@ -1,10 +1,14 @@
-import {createStore, applyMiddleware } from 'redux'
+import {createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
 import reducer from './reducers'
 
-//create store 
-let store = createStore(
+//compose middleware and other enhancers (redux chrome dev tool)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+//create store
+const store = createStore(
     reducer,
-    applyMiddleware(thunk)
+    composeEnhancers(applyMiddleware(thunk))
 )
+
 export default store
