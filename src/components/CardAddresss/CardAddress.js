@@ -52,7 +52,7 @@ const CardAddress = ({address,onDelete,onEdit}) => {
 				</Button>
 			</CardActions>
 			{formAppear 
-			?  <FormAddress address={address} formCommand='edit' formSubmit={editform} setAppear={setFormAppear}/>
+			?  <FormAddress address={address} formCommand='edit' formSubmit={onEdit} setAppear={setFormAppear}/>
 			: <></>}
 		</Card>
 	);

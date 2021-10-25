@@ -29,6 +29,7 @@ const AddressBook = () => {
 
 	function getaddress() {
 		getAddressBook().then((res) => {
+			if (res.data.success == true) 
 			setAddressBook(res.data.data);
 		});
 	}
@@ -56,17 +57,20 @@ const AddressBook = () => {
 		let indexbyid = addressBook.findIndex(
 			(address) => address.deliveryID == id
 		);
-		console.log(addressBook);
-		addressBook[indexbyid] = obj;
-		console.log(addressBook);
-		setAddressBook(addressBook);
+		let newLs = JSON.parse(JSON.stringify(addressBook));
+
+		newLs[indexbyid] = obj;
+
+		setAddressBook(newLs);
 	}
 	function onDelete(id) {
 		deleteAddressBook(id).then((res) => {
-			const newLs = addressBook.filter(
-				(address) => address.deliveryID !== id
-			);
-			setAddressBook(newLs);
+			if (res.data.success == true) {
+				const newLs = addressBook.filter(
+					(address) => address.deliveryID !== id
+				);
+				setAddressBook(newLs);
+			}
 		});
 	}
 

@@ -9,7 +9,7 @@ import {
 	TextField,
 	Container,
 } from "@mui/material";
-import { createAddressBook } from "../../api/addressApi";
+import { createAddressBook, editAddressBook } from "../../api/addressApi";
 
 let defaultAddress = {
 	deliveryID: 0,
@@ -51,17 +51,27 @@ const FormAddress = ({
 			form.city;
 
 		if (formCommand == "create") {
-			createAddressBook(form.name, joinAddress, form.phone).then(res => {
-				let id = res.data
-				console.log(id);
-				formSubmit(id,form.name, joinAddress, form.phone)
-				setAppear(false)
-			});
-		}else if (formCommand == "edit") {
-			formSubmit(id, form.name, joinAddress, form.phone)
-			setAppear(false)
+			createAddressBook(form.name, joinAddress, form.phone).then(
+				(res) => {
+					// console.log(res);
+					if (res.data.success == true) {
+						let id = res.data.data;
+						formSubmit(id, form.name, joinAddress, form.phone);
+						setAppear(false);
+					}
+				}
+			);
+		} else if (formCommand == "edit") {
+			editAddressBook(id, form.name, joinAddress, form.phone).then(
+				(res) => {
+					console.log(res);
+					if (res.data.success == true) {
+						formSubmit(id, form.name, joinAddress, form.phone);
+						setAppear(false);
+					}
+				}
+			);
 		}
-
 	}
 	return (
 		<Box sx={{ p: 2, my: 1 }}>

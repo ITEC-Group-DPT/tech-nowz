@@ -21,7 +21,15 @@ const deleteAddressBook = (id)=>{
     data.append("command", "delete");
     data.append("deliID", id);
     return axios.post(TEST_API_URL + `deliAPI.php`,data, {headers: header});
- 
 }
-
-export { getAddressBook,createAddressBook,deleteAddressBook};
+const editAddressBook =(id,name,address,phone) => {
+    let header = {userid: 17}
+    let data = new FormData();
+    data.append("command", "update");
+    data.append("deliID",id)
+    data.append("name", name);
+    data.append("address", address);
+    data.append("phone", phone);
+    return axios.post(TEST_API_URL + `deliAPI.php`,data, {headers: header});
+}
+export { getAddressBook,createAddressBook,deleteAddressBook,editAddressBook};
