@@ -31,10 +31,11 @@ const sessionLogin = (data) => {
     }
 }
 
-const logOut = () => {
+const logOut = (history) => {
     return dispatch => {
         dispatch({ type: ActionType.LOGOUT})
-        sessionStorage.removeItem("userInfo");
+        sessionStorage.removeItem("userInfo")
+        history.push("/")
     }
 }
 

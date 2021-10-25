@@ -3,8 +3,6 @@ import styles from "../../pages/Authentication/authentication.style"
 import { Link,useHistory} from 'react-router-dom';
 import { Input, Button, FormControl, Typography, Slide, easing } from '@mui/material';
 import { Box } from '@mui/system';
-
-
 import { useDispatch } from "react-redux";
 import useMediaQuery from '@mui/material/useMediaQuery';
 

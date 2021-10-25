@@ -1,6 +1,6 @@
 import { React, useState, useRef, useEffect } from 'react'
 import styles from './NavItemUser.style'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOut } from "../../../store/actions/authAction";
 import { Typography, Fade, Button, MenuList, MenuItem, Badge, Divider, Popper, Paper, Grow, ClickAwayListener } from '@mui/material';
@@ -31,9 +31,10 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
         prevOpen.current = open;
     }, [open]);
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+    const history = useHistory()
     const handleSignOut = () => {
-        dispatch(logOut());
+        dispatch(logOut(history));
     }
 
     return (
