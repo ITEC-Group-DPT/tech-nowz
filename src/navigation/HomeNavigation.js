@@ -22,7 +22,7 @@ const HomeNavigation = () => {
                 <Route path='/product/:name' component={Product}/>
                 <Route path='/checkout' component={CartNavigation}/>
                 <Route path='/profile' component={ProfileNavigation}/>
-
+                
                 <Route path='/' component={NotFound}/>
             </Switch>
             <Footer/>
