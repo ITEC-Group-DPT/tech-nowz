@@ -24,13 +24,15 @@ const UpperNav = () => {
 
 	useEffect(() => {
 		if (searchValue !== '') {
-			setTimeout(() => {
+			const delay = setTimeout(() => {
 				searchProductsAPI(searchValue).then((response) => {
 					if (response.data['success'] === true) {
 						setSearchResult(response.data['data']);
+						console.log(searchResult);
 					}
 				});
-			}, 200);
+			}, 500);
+			return () => clearTimeout(delay);
 		} else {
 			setSearchResult([]);
 		}

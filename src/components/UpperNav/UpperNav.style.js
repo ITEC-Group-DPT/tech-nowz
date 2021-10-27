@@ -34,7 +34,7 @@ const styles = {
 		margin: '0',
 	},
 	searchBar: {
-		width: '102%',
+		width: { xs: '104%', md: '102%' },
 	},
 	searchResult: {
 		position: 'absolute',
