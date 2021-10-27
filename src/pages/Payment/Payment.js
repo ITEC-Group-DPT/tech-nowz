@@ -93,48 +93,79 @@ const Payment = () => {
 
 	function onClickRadioBtn(id) {
 		console.log(id);
-		if (id == -1) {
+		if (id === -1) {
 			setChosenAddress(-1);
 		} else {
-			let indexbyid = addressBook.findIndex(
-				(address) => address.deliveryID == id
-			);
-			console.log(indexbyid);
-			setChosenAddress(indexbyid);
-			console.log(addressBook[indexbyid]);
+			setChosenAddress(id);		
 		}
 	}
 
 	return (
 		<div>
-			<FormControl sx={{ px: "5rem", mt: "2rem" }} component="fieldset">
-				<Typography
-					variant="h5"
-					sx={{ fontWeight: "600" }}
-					component="div">
-					Address Book
-				</Typography>
-				<Typography variant="p" component="div">
-					(you can edit exists address book by choosing and editing
-					below)
-				</Typography>
-				<RadioGroup value={chosenAddress}>
-					{/* newAddress */}
-					{/* <RadioAddressPayment
+			<Typography variant="h5" sx={{ fontWeight: "600" }} component="div">
+				Address Book
+			</Typography>
+			<Typography variant="p" component="div">
+				(you can edit exists address book by choosing and editing below)
+			</Typography>
+			{/* newAddress */}
+			{/* <RadioAddressPayment
 						onClick={onClickRadioBtn}
 						disabled={disableAddress}
 					/> */}
-					{addressBook.map((address) => (
-						<RadioAddressPayment
-							key ={addressBook.deliveryID}
-							chosenAddress={chosenAddress}
-							address={address}
-							onClick={onClickRadioBtn}
-							disabled={disableAddress}
-						/>
-					))}
-				</RadioGroup>
-			</FormControl>
+			{addressBook.map((address) => (
+				<RadioAddressPayment
+					key={addressBook.deliveryID}
+					chosenAddress={chosenAddress}
+					address={address}
+					onClickAddress={onClickRadioBtn}
+					disabled={disableAddress}
+				/>
+			))}
+			{/* <Radio
+				checked={chosenAddress === addressBook[0].deliveryID}
+				onChange={() => onClickRadioBtn(addressBook[0].deliveryID)}
+				value={addressBook[0].deliveryID}
+				// inputProps={{ "aria-label": "A" }}
+			/>
+			<Radio
+				checked={chosenAddress == addressBook[1].deliveryID}
+				onChange={() => onClickRadioBtn(addressBook[1].deliveryID)}
+				value={addressBook[1].deliveryID}
+				// inputProps={{ "aria-label": "A" }}
+			/> */}
+			{/* <Box
+				sx={{ display: "flex", alignItems: "center" }}
+				onClick={() => onClickRadioBtn(addressBook[0].deliveryID)}>
+				<Radio
+					checked={chosenAddress == addressBook[0].deliveryID}
+					onChange={()=>onClickRadioBtn(addressBook[0].deliveryID)}
+					value={addressBook[0].deliveryID}
+					// inputProps={{ "aria-label": "A" }}
+				/>
+
+				<Typography variant="p" sx={{ fontSize: 16 }} component="div">
+					Name: {addressBook[0].name} <br />
+					Address: {addressBook[0].address} <br />
+					Phone: {addressBook[0].phone}
+				</Typography>
+			</Box>
+			<Box
+				sx={{ display: "flex", alignItems: "center" }}
+				onClick={() => onClickRadioBtn(addressBook[1].deliveryID)}>
+				<Radio
+					checked={chosenAddress === addressBook[1].deliveryID	}
+					onChange={()=>onClickRadioBtn(addressBook[1].deliveryID)}
+					value={addressBook[1].deliveryID}
+					// inputProps={{ "aria-label": "A" }}
+				/>
+
+				<Typography variant="p" sx={{ fontSize: 16 }} component="div">
+					Name: {addressBook[1].name} <br />
+					Address: {addressBook[1].address} <br />
+					Phone: {addressBook[1].phone}
+				</Typography>
+			</Box> */}
 		</div>
 	);
 };
