@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import styles from './UpperNav.style';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
@@ -8,11 +8,32 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Badge from '@mui/material/Badge';
 import logo from '../../img/logo_sub.webp';
 import { icons } from '../../constant';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { searchProductsAPI } from '../../api/productApi';
+import HorizontalProduct from '../HorizontalProduct/HorizontalProduct';
 
 const UpperNav = () => {
 	const userInfo = useSelector((state) => state.Authentication.user);
+	const [searchValue, setSearchValue] = useState('');
+	const handleChange = (event) => {
+		setSearchValue(event.target.value);
+	};
+
+	const [searchResult, setSearchResult] = useState([]);
+
+	useEffect(() => {
+		if (searchValue !== '') {
+			searchProductsAPI(searchValue).then((response) => {
+				if (response.data['success'] === true) {
+					setSearchResult(response.data['data']);
+				}
+			});
+		} else {
+			setSearchResult([]);
+		}
+	}, [searchValue]);
+
 	return (
 		<Container maxWidth="xl" sx={styles.container}>
 			<Grid container spacing={2}>
@@ -21,14 +42,15 @@ const UpperNav = () => {
 						<img style={styles.logo} src={logo} alt="" />
 					</Link>
 				</Grid>
-				<Grid item lg={6} xs={12}>
+				<Grid item lg={6} xs={12} sx={styles.searchComponent}>
 					<TextField
-						fullWidth
+						sx={styles.searchBar}
 						size="small"
 						label="Search"
 						placeholder="Product names..."
 						multiline
-						id="fullWidth"
+						value={searchValue}
+						onChange={handleChange}
 						InputProps={{
 							endAdornment: (
 								<InputAdornment position="end">
@@ -37,6 +59,17 @@ const UpperNav = () => {
 							),
 						}}
 					/>
+					<Box sx={styles.searchResult}>
+						{searchResult.map((product) => (
+							<HorizontalProduct
+								product={product}
+								imageSize="10%"
+								marginTop="0"
+								width="100%"
+								pricePadding="0"
+							/>
+						))}
+					</Box>
 				</Grid>
 				<Grid item lg={3} xs={12} sx={styles.menuContainer}>
 					<Grid container spacing={1}>

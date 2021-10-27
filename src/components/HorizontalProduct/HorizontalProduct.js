@@ -17,6 +17,10 @@ const HorizontalProduct = ({
 	onPressDelete,
 	ratingSizeMedium = '1rem',
 	ratingSizeSmall = '0.8rem',
+	imageSize,
+	marginTop,
+	width,
+	pricePadding,
 }) => {
 	const formatedPrice = new Intl.NumberFormat('vi-VN', {
 		style: 'currency',
@@ -24,7 +28,17 @@ const HorizontalProduct = ({
 	}).format(product.price);
 
 	return (
-		<Card sx={styles.productCard}>
+		<Card
+			sx={Object.assign(
+				styles.productCard,
+				marginTop && {
+					marginTop: marginTop,
+				},
+				width && {
+					width: width,
+				}
+			)}
+		>
 			{canDelete && (
 				<Button onClick={onPressDelete} sx={styles.buttonClose}>
 					<icons.Close sx={styles.closeIc} />
@@ -32,7 +46,13 @@ const HorizontalProduct = ({
 			)}
 			<CardMedia
 				component="img"
-				sx={styles.productImg}
+				sx={Object.assign(
+					styles.productImg,
+					imageSize && {
+						height: imageSize,
+						width: imageSize,
+					}
+				)}
 				image={product.img1}
 			/>
 			<CardContent sx={styles.productContent}>
@@ -59,7 +79,14 @@ const HorizontalProduct = ({
 				</Box>
 			</CardContent>
 			<CardContent sx={styles.priceContainer}>
-				<Typography sx={styles.productPrice}>
+				<Typography
+					sx={
+						(Object.assign(styles.productPrice),
+						pricePadding && {
+							paddingLeft: pricePadding,
+						})
+					}
+				>
 					{formatedPrice}
 				</Typography>
 			</CardContent>

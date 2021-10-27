@@ -28,6 +28,19 @@ const styles = {
 	menuTitle: {
 		marginLeft: '.7rem',
 	},
+	searchComponent: {
+		position: 'relative',
+		paddingLeft: '0 !important',
+		margin: '0',
+	},
+	searchBar: {
+		width: '102%',
+	},
+	searchResult: {
+		position: 'absolute',
+		zIndex: '10000',
+		width: '100%',
+	},
 };
 
 export default styles;
