@@ -1,19 +1,18 @@
-import React from 'react'
+import { React, useRef } from 'react'
+import { useSelector } from 'react-redux';
 import styles from './UpperNav.style'
 import { Link } from 'react-router-dom'
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Badge from '@mui/material/Badge';
+import { Box, Typography, Button, Grid, Container, TextField, InputAdornment, Badge } from '@mui/material';
 import logo from '../../img/logo_sub.webp'
 import { icons } from '../../constant';
-import { Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const UpperNav = () => {
+    const userInfo = useSelector(state => state.Authentication.user)
 
-    const userInfo = useSelector(state => state.Authentication.user);
+    const anchorRef = useRef(null)
+    const clickRef = useRef(null)
+
     return (
         <Container maxWidth='xl' sx={styles.container}>
             <Grid container spacing={2}>
@@ -37,7 +36,7 @@ const UpperNav = () => {
                 </Grid>
                 <Grid item lg={3} xs={12} sx={styles.menuContainer}>
                     <Grid container spacing={1}>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} sx={styles.menuWrapper}>
                             <Link to='/checkout/cart' style={styles.menuItem}>
                                 <Badge badgeContent={1} color="error">
                                     <icons.Cart />
@@ -53,10 +52,21 @@ const UpperNav = () => {
                                         <Typography sx={styles.menuTitle}>Login</Typography>
                                     </Link>
                                     :
-                                    <Link to='/' style={styles.menuItem}>
-                                        <icons.User />
-                                        <Typography sx={styles.menuTitle}>{userInfo.username}</Typography>
-                                    </Link>
+                                    <Box>
+                                        <Button
+                                            ref={anchorRef}
+                                            id="composition-button"
+                                            aria-controls={open ? 'composition-menu' : undefined}
+                                            aria-expanded={open ? 'true' : undefined}
+                                            aria-haspopup="true"
+                                            onClick={() => clickRef.current()}
+                                            sx={styles.btnNav}
+                                        >
+                                            <icons.User />
+                                            <Typography sx={styles.menuTitle}>{userInfo.username}</Typography>
+                                        </Button>
+                                        <ProfileMenu anchorRef={anchorRef} clickRef={clickRef} />
+                                    </Box>
                             }
                         </Grid>
                     </Grid>

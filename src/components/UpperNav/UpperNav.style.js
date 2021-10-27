@@ -22,6 +22,12 @@ const styles = {
         alignItems: 'center',
     },
 
+    menuWrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     menuItem: {
         display: 'flex',
         justifyContent: 'center',
@@ -32,6 +38,15 @@ const styles = {
 
     menuTitle: {
         marginLeft: '.7rem',
+    },
+
+    btnNav: {
+        textTransform: "none",
+        textDecoration: 'none',
+        color: 'black',
+        '&:hover': {
+            backgroundColor: 'white',
+        }
     },
 }
 
