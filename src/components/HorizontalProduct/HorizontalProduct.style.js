@@ -61,10 +61,10 @@ const styles = {
         right: 0,
         top: 0,
     },
-    closeIc: {
-        width: '3%',
-        height: '3%',
-    },
+    // closeIc: {
+    //     width: '3%',
+    //     height: '3%',
+    // },
 };
 
 export default styles;

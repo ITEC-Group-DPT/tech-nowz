@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './cart.style'
 
+import { getCart } from '../../store/actions/cartAction';
+import { cartSelector } from "../../store/selectors"
+
+import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 
@@ -19,19 +23,26 @@ const product = {
 };
 const Cart = () => {
 
+    const { cartList, totalPrice, totalQuantity } = useSelector(cartSelector);
+    console.log('cartList: ', cartList);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        dispatch(getCart());
+    }, [])
     return (
         <Container sx={styles.main}>
-            <HorizontalProduct
-                product={product} 
-                canDelete
-                ratingSize = {"20px"}
-                onPressDelete = {() => console.log('press 1')}
-            />
-            <HorizontalProduct
-                product={product} 
-                canDelete
-                onPressDelete = {() => console.log('press 2')}
-                />
+            {
+                cartList ?
+                    cartList.map(product =>
+                        <HorizontalProduct
+                            product={product}
+                            canDelete
+                            onPressDelete={() => console.log('press 1')}
+                        />)
+                    : <></>
+            }
         </Container>
     )
 }
