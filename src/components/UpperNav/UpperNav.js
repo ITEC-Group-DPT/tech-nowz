@@ -24,11 +24,13 @@ const UpperNav = () => {
 
 	useEffect(() => {
 		if (searchValue !== '') {
-			searchProductsAPI(searchValue).then((response) => {
-				if (response.data['success'] === true) {
-					setSearchResult(response.data['data']);
-				}
-			});
+			setTimeout(() => {
+				searchProductsAPI(searchValue).then((response) => {
+					if (response.data['success'] === true) {
+						setSearchResult(response.data['data']);
+					}
+				});
+			}, 200);
 		} else {
 			setSearchResult([]);
 		}
