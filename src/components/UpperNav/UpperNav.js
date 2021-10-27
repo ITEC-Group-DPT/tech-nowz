@@ -28,7 +28,7 @@ const UpperNav = () => {
 				searchProductsAPI(searchValue).then((response) => {
 					if (response.data['success'] === true) {
 						setSearchResult(response.data['data']);
-						console.log(searchResult);
+						console.log(response.data.data);
 					}
 				});
 			}, 500);
