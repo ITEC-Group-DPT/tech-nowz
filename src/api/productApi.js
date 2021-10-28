@@ -17,22 +17,11 @@ const getTopRatingAPI = (limit = 10) => {
 };
 
 const getProductAPI = (productID) => {
-<<<<<<<< HEAD:src/api/productApi.js
-    let command = "getProduct";
-    return axios.get(TEST_API_URL + `productAPI.php?command=${command}&productID=${productID}`);
-}
-========
-	//temporary for testing
 	let command = 'getProduct';
-	// let header = {
-	//     "Userid": 20,
-	// }
-
 	return axios.get(
 		TEST_API_URL +
 			`productAPI.php?command=${command}&productID=${productID}`
 	);
 };
->>>>>>>> main:src/api/api.js
 
 export { getProductCategoryAPI, getTopRatingAPI, getProductAPI };
