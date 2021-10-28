@@ -197,7 +197,11 @@ const styles = {
 
     loadingIndicator: {
         color: "white",
-    }
+    },
+
+    showPWIcon: {
+        fontSize: "1.3rem",
+    },
 };
 
 export default styles;

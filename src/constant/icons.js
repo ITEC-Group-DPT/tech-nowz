@@ -21,6 +21,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -46,6 +48,8 @@ const icons = {
     Order: ReceiptLongOutlinedIcon,
     Address: LocationOnOutlinedIcon,
     SignOut: LogoutOutlinedIcon,
+    ShowIcon: VisibilityOutlinedIcon,
+    HideIcon: VisibilityOffOutlinedIcon,
 }
 
 export default icons;
