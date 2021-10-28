@@ -29,6 +29,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 
     const isRedBorder = (type) => ({
         border: type ? ("1px red solid") : ("none"),
+        borderRadius: '10px',
     })
 
     const onClickEmail = () => {
@@ -69,14 +70,16 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
                 <Typography component="div" sx={styles.subTitle}>or use your TechNow account</Typography>
 
                 <Input
-                    sx={{ ...styles.input, ...isRedBorder(authErrors.email) }}
+                    sx={isRedBorder(authErrors.email)}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onClick={onClickEmail}
                     type="email"
+                    name="email"
                     placeholder="Email"
                     disableUnderline
                     fullWidth
+                    inputProps={{style: styles.input}}
                 />
                 <Typography component="div" sx={styles.errorMsg}>{authErrors.email}</Typography>
 
@@ -86,10 +89,12 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
                     onChange={handleChange('value')}
                     onClick={onClickPassword}
                     type={password.showPassword ? 'text' : 'password'}
+                    name="password"
                     //inputRef={inputRef}
                     placeholder="Password"
                     disableUnderline
                     fullWidth
+                    inputProps={{style: {padding: 0}}}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton

@@ -43,14 +43,11 @@ const styles = {
 
     input: {
         backgroundColor: '#eee',
-        padding: '12px 15px',
-
-        fontSize: '0.7rem',
+        padding: '17px 15px',
+        width: '100%',
+        fontSize: '0.75rem',
         borderRadius: '10px',
         fontFamily: "'Montserrat', sans-serif",
-        "&:focus" :{
-            border: "2px black solid !important",
-        },
     },
 
     redBorder: {
