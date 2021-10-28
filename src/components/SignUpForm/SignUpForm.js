@@ -6,8 +6,10 @@ import { Box } from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery';
 const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
 	const minWidth = useMediaQuery('(min-width:900px)');
+
 	const isHide = !minWidth && isSignIn;
 	if (isHide) return <></>;
+
 	return (
 		<Box sx={styles.formContainerRight} ref={references}>
 			<Typography sx={styles.title}>Create Account</Typography>

@@ -1,12 +1,21 @@
-import { React, useState } from 'react';
-import { Button, FormControl, Box, TextField, Container } from '@mui/material';
-import { createAddressBook, editAddressBook } from '../../api/addressApi';
+import { React, useState, createRef } from "react";
+import {
+	Input,
+	InputLabel,
+	Button,
+	FormControl,
+	FormHelperText,
+	Box,
+	TextField,
+	Container,
+} from "@mui/material";
+import { createAddressBook, editAddressBook } from "../../api/addressApi";
 
 let defaultAddress = {
 	deliveryID: 0,
-	address: '',
-	name: '',
-	phone: '',
+	address: "",
+	name: "",
+	phone: "",
 	userID: 0,
 };
 const FormAddress = ({
@@ -15,7 +24,7 @@ const FormAddress = ({
 	formSubmit,
 	setAppear,
 }) => {
-	let arrAddress = address.address.split(', ');
+	let arrAddress = address.address.split(", ");
 	const [form, setFormAddress] = useState({
 		name: address.name,
 		addressInForm: arrAddress[0],
@@ -34,29 +43,29 @@ const FormAddress = ({
 		let id = address.deliveryID;
 		let joinAddress =
 			form.addressInForm +
-			', ' +
+			", " +
 			form.ward +
-			', ' +
+			", " +
 			form.district +
-			', ' +
+			", " +
 			form.city;
 
-		if (formCommand === 'create') {
+		if (formCommand == "create") {
 			createAddressBook(form.name, joinAddress, form.phone).then(
 				(res) => {
 					// console.log(res);
-					if (res.data.success === true) {
+					if (res.data.success == true) {
 						let id = res.data.data;
 						formSubmit(id, form.name, joinAddress, form.phone);
 						setAppear(false);
 					}
 				}
 			);
-		} else if (formCommand === 'edit') {
+		} else if (formCommand == "edit") {
 			editAddressBook(id, form.name, joinAddress, form.phone).then(
 				(res) => {
 					console.log(res);
-					if (res.data.success === true) {
+					if (res.data.success == true) {
 						formSubmit(id, form.name, joinAddress, form.phone);
 						setAppear(false);
 					}
@@ -137,14 +146,13 @@ const FormAddress = ({
 					defaultValue={form.phone}
 					variant="standard"
 				/>
-				<Container sx={{ textAlign: 'center' }}>
+				<Container sx={{ textAlign: "center" }}>
 					<Button
 						sx={{ mx: 1 }}
 						onClick={() => setAppear(false)}
 						variant="outlined"
 						size="small"
-						color="error"
-					>
+						color="error">
 						Cancel
 					</Button>
 					<Button
@@ -153,8 +161,7 @@ const FormAddress = ({
 						variant="outlined"
 						size="small"
 						type="submit"
-						color="success"
-					>
+						color="success">
 						Submit
 					</Button>
 				</Container>

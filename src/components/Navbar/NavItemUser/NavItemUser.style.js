@@ -19,6 +19,7 @@ const styles = {
 		padding: '.5rem 1rem',
 		transition: '400ms',
 		borderRadius: '25px',
+		//marginRight
 		'&:hover': {
 			backgroundColor: '#737373',
 		},

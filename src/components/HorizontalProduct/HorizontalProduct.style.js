@@ -3,6 +3,7 @@ const styles = {
 		display: 'flex',
 		position: 'relative',
 		alignItems: 'center',
+
 		paddingLeft: { xs: '5%', md: '2%' },
 		marginTop: { xs: '3%', md: '1.5%' },
 		flex: 1,

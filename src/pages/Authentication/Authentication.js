@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button, Slide, Fade, Typography } from '@mui/material';
+
 import SignInForm from '../../components/SignInForm/SignInForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import styles from './authentication.style';

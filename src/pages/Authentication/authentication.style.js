@@ -139,7 +139,7 @@ const styles = {
 		lineHeight: '20px',
 		letterSpacing: '0.5px',
 		margin: '20px 40px 30px',
-		fontFamily: 'IBM Plex Serif, serif',
+		fontFamily: "'IBM Plex Serif', serif",
 	},
 	overlayButton: {
 		borderColor: 'white !important',

@@ -1,9 +1,13 @@
-import { Container } from '@mui/material';
-import React from 'react';
-import styles from './HotCategory.style';
+import { Container } from '@mui/material'
+import React from 'react'
+import styles from './HotCategory.styles'
 
 const HotCategory = () => {
-	return <Container maxWidth="lg"></Container>;
-};
+    return (
+        <Container maxWidth='lg'>
+            
+        </Container>
+    )
+}
 
-export default HotCategory;
+export default HotCategory
