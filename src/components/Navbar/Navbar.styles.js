@@ -3,7 +3,7 @@ import { colors } from '../../constant';
 
 const useStyles = makeStyles({
 	paper: {
-		background: colors.primary,
+		background: `${colors.primary} !important`,
 	},
 });
 

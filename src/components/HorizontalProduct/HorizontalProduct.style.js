@@ -3,6 +3,7 @@ const styles = {
 		display: 'flex',
 		position: 'relative',
 		alignItems: 'center',
+
 		paddingLeft: { xs: '5%', md: '2%' },
 		marginTop: { xs: '3%', md: '1.5%' },
 		flex: 1,
@@ -20,7 +21,7 @@ const styles = {
 	productName: {
 		fontWeight: '600',
 		fontFamily: 'Roboto Slab, serif',
-		fontSize: { xs: '0.8rem', md: '1rem' },
+		fontSize: { xs: '0.75rem', md: '1rem' },
 	},
 	priceContainer: {
 		paddingLeft: '3%',
@@ -31,7 +32,10 @@ const styles = {
 	productPrice: {
 		fontFamily: 'IBM Plex Serif, serif',
 		fontWeight: 'bold',
-		fontSize: '1rem',
+		fontSize: {
+			xs: '.7rem',
+			md: '1rem',
+		},
 	},
 	ratingContainer: {
 		width: '10%',
@@ -41,12 +45,12 @@ const styles = {
 		marginTop: '1%',
 	},
 	productSold: {
-		fontSize: { xs: '0.7rem', md: '1rem' },
+		fontSize: { xs: '0.6rem', md: '1rem' },
 		paddingLeft: '1%',
 		fontFamily: 'IBM Plex Serif, serif',
 	},
 	productQuantity: {
-		fontSize: { xs: '0.7rem', md: '1rem' },
+		fontSize: { xs: '0.65rem', md: '1rem' },
 		color: '#656565',
 		fontFamily: 'IBM Plex Serif, serif',
 	},

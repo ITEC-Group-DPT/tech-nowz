@@ -1,13 +1,38 @@
 import axios from './axios';
 import { BASE_API_URL, TEST_API_URL } from '../constant/string';
 
-const searchProductsAPI = (searchValue) => {
-	//temporary for testing
-	let command = 'searchProducts';
+const getProductCategoryAPI = (category, limit = 8) => {
+	let command = 'getProductCategory';
 	return axios.get(
 		TEST_API_URL +
-			`productAPI.php?command=${command}&searchValue=${searchValue}`
+			`productAPI.php?command=${command}&typeOfProduct=${category}&limit=${limit}`
 	);
 };
 
-export { searchProductsAPI };
+const getTopRatingAPI = (limit = 10) => {
+	let command = 'getTopRating';
+	return axios.get(
+		TEST_API_URL + `productAPI.php?command=${command}&limit=${limit}`
+	);
+};
+
+const getProductAPI = (productID) => {
+<<<<<<<< HEAD:src/api/productApi.js
+    let command = "getProduct";
+    return axios.get(TEST_API_URL + `productAPI.php?command=${command}&productID=${productID}`);
+}
+========
+	//temporary for testing
+	let command = 'getProduct';
+	// let header = {
+	//     "Userid": 20,
+	// }
+
+	return axios.get(
+		TEST_API_URL +
+			`productAPI.php?command=${command}&productID=${productID}`
+	);
+};
+>>>>>>>> main:src/api/api.js
+
+export { getProductCategoryAPI, getTopRatingAPI, getProductAPI };
