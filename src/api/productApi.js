@@ -24,4 +24,17 @@ const getProductAPI = (productID) => {
 	);
 };
 
-export { getProductCategoryAPI, getTopRatingAPI, getProductAPI };
+const searchProductsAPI = (searchValue) => {
+	let command = 'searchProducts';
+	return axios.get(
+		TEST_API_URL +
+			`productAPI.php?command=${command}&searchValue=${searchValue}`
+	);
+};
+
+export {
+	getProductCategoryAPI,
+	getTopRatingAPI,
+	getProductAPI,
+	searchProductsAPI,
+};
