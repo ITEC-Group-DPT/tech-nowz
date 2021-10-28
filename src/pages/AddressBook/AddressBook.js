@@ -1,36 +1,28 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect } from 'react';
 import {
-	FormControl,
-	InputLabel,
-	Input,
-	Box,
 	Container,
-	FormHelperText,
-	Card,
 	Typography,
-	CardContent,
 	Button,
-	CardActions,
 	Divider,
 	Modal,
-} from "@mui/material";
-import CardAddress from "../../components/CardAddresss/CardAddress";
-import FormAddress from "../../components/FormAddress/FormAddress";
-import styles from "./addressbook.style";
-import { getAddressBook, deleteAddressBook } from "../../api/addressApi";
+	Box,
+} from '@mui/material';
+import CardAddress from '../../components/CardAddresss/CardAddress';
+import FormAddress from '../../components/FormAddress/FormAddress';
+import styles from './addressbook.style';
+import { getAddressBook, deleteAddressBook } from '../../api/addressApi';
 // import axios from "axios";
 const AddressBook = () => {
 	const [modelAppear, setModelAppear] = useState(false);
 	const [addressBook, setAddressBook] = useState([]);
 
 	useEffect(() => {
-		getaddress();
+		getAddress();
 	}, []);
 
-	function getaddress() {
+	function getAddress() {
 		getAddressBook().then((res) => {
-			if (res.data.success == true) 
-			setAddressBook(res.data.data);
+			if (res.data.success === true) setAddressBook(res.data.data);
 		});
 	}
 
@@ -54,18 +46,18 @@ const AddressBook = () => {
 			phone: phone,
 		};
 
-		let indexbyid = addressBook.findIndex(
-			(address) => address.deliveryID == id
+		let indexByID = addressBook.findIndex(
+			(address) => address.deliveryID === id
 		);
 		let newLs = JSON.parse(JSON.stringify(addressBook));
 
-		newLs[indexbyid] = obj;
+		newLs[indexByID] = obj;
 
 		setAddressBook(newLs);
 	}
 	function onDelete(id) {
 		deleteAddressBook(id).then((res) => {
-			if (res.data.success == true) {
+			if (res.data.success === true) {
 				const newLs = addressBook.filter(
 					(address) => address.deliveryID !== id
 				);
@@ -76,14 +68,15 @@ const AddressBook = () => {
 
 	return (
 		<div>
-			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
+			<Box sx={{ textAlign: 'center', py: 10, bgcolor: '#e9ecef' }}>
 				<Typography
 					variant="h1"
 					sx={{
-						fontWeight: "500",
-						fontSize: { xs: "50px", md: "80px", lg: "100px" },
+						fontWeight: '500',
+						fontSize: { xs: '50px', md: '80px', lg: '100px' },
 					}}
-					component="div">
+					component="div"
+				>
 					Address Book
 				</Typography>
 			</Box>
@@ -98,18 +91,19 @@ const AddressBook = () => {
 					/>
 				))}
 			</Container>
-			<Box sx={{ textAlign: "center", m: 2 }}>
+			<Box sx={{ textAlign: 'center', m: 2 }}>
 				<Button variant="outlined" onClick={() => setModelAppear(true)}>
 					Create new Address
 				</Button>
 			</Box>
 			<Modal open={modelAppear} onClose={() => setModelAppear(false)}>
 				<Box sx={styles.modal}>
-					<Box sx={{ textAlign: "center" }}>
+					<Box sx={{ textAlign: 'center' }}>
 						<Typography
 							variant="h4"
-							sx={{ fontWeight: "500" }}
-							component="div">
+							sx={{ fontWeight: '500' }}
+							component="div"
+						>
 							New address
 						</Typography>
 					</Box>

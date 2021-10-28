@@ -6,7 +6,6 @@ const styles = {
 		borderRadius: '25px',
 		boxShadow: 'none',
 	},
-
 	rectangularSlider: {
 		maxWidth: 345,
 		minHeight: 350,
