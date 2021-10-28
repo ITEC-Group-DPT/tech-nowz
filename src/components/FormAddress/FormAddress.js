@@ -1,4 +1,4 @@
-import { React, useState, createRef } from "react";
+import { React, useState, useEffect } from "react";
 import {
 	Input,
 	InputLabel,
@@ -25,16 +25,29 @@ const FormAddress = ({
 	setAppear,
 	paymentChooseNewAddress = false,
 }) => {
-	console.log(address);
-	let arrAddress = address.address.split(", ");
+	// console.log(address);
+	let arrAddress = ["","","",""];
 	const [form, setFormAddress] = useState({
-		name: address.name,
-		addressInForm: arrAddress[0],
-		ward: arrAddress[1],
-		district: arrAddress[2],
-		city: arrAddress[3],
-		phone: address.phone,
+		name: "",
+		addressInForm: "",
+		ward: "",
+		district: "",
+		city: "",
+		phone: "",
 	});
+
+	useEffect(() => {
+		arrAddress = address.address.split(", ");
+		if (arrAddress.length == 1) arrAddress = ["","","",""] //for change textfield
+		setFormAddress({
+			name: address.name,
+			addressInForm: arrAddress[0],
+			ward: arrAddress[1],
+			district: arrAddress[2],
+			city: arrAddress[3],
+			phone: address.phone,
+		});
+	}, [address])
 	// const [addressForm,setAddress] = useState(arrAddress[0])
 	// const [ward,setWard] = useState(arrAddress[1])
 	// const [district,setDistrict] = useState(arrAddress[2])
@@ -86,21 +99,21 @@ const FormAddress = ({
 						setFormAddress({ ...form, name: e.target.value })
 					}
 					placeholder="Type your name here"
-					defaultValue={form.name}
+					value={form.name}
 					variant="standard"
 				/>
 				<TextField
 					sx={{ mb: 2 }}
 					name="address"
 					label="Address"
-					placeholder="Type your address here"
 					onChange={(e) =>
 						setFormAddress({
 							...form,
 							addressInForm: e.target.value,
 						})
 					}
-					defaultValue={form.addressInForm}
+					placeholder="Type your address here"
+					value={form.addressInForm}
 					variant="standard"
 				/>
 				<TextField
@@ -111,7 +124,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, ward: e.target.value })
 					}
-					defaultValue={form.ward}
+					value={form.ward}
 					variant="standard"
 				/>
 				<TextField
@@ -122,7 +135,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, district: e.target.value })
 					}
-					defaultValue={form.district}
+					value={form.district}
 					variant="standard"
 				/>
 				<TextField
@@ -133,7 +146,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, city: e.target.value })
 					}
-					defaultValue={form.city}
+					value={form.city}
 					variant="standard"
 					required
 				/>
@@ -145,7 +158,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, phone: e.target.value })
 					}
-					defaultValue={form.phone}
+					value={form.phone}
 					variant="standard"
 				/>
 				<Container sx={{ textAlign: "center" }}>

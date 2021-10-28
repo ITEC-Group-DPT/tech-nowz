@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormAddress from "../FormAddress/FormAddress";
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 
-export default function PaymentStepper({address}) {
+export default function PaymentStepper({ address }) {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [skipped, setSkipped] = React.useState(new Set());
 	const isStepOptional = (step) => {
@@ -59,9 +59,9 @@ export default function PaymentStepper({address}) {
 				{steps.map((label, index) => {
 					const stepProps = {};
 					const labelProps = {};
-					if (isStepOptional(index)) {
+					if (index == 0 ) {
 						labelProps.optional = (
-							<Typography variant="caption">Optional</Typography>
+							<Typography variant="caption">dasd</Typography>
 						);
 					}
 					if (isStepSkipped(index)) {
@@ -89,11 +89,7 @@ export default function PaymentStepper({address}) {
 					<Typography sx={{ mt: 2, mb: 1 }}>
 						Step {activeStep + 1}
 					</Typography>
-					{address == -1 ? (
-						<FormAddress />
-					) : (
-						<FormAddress address={address} />
-					)}
+					<FormAddress address={address} />
 					<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
 						<Button
 							color="inherit"

@@ -14,6 +14,7 @@ import { getAddressBook, createAddressBook } from "../../api/addressApi";
 import RadioAddressPayment from "../../components/RadioAddressPayment/RadioAddressPayment";
 import PaymentStepper from "../../components/PaymentStepper/PaymentStepper";
 import FormAddress from "../../components/FormAddress/FormAddress";
+import AddressBook from "../AddressBook/AddressBook";
 
 // const addressBook = [
 // 	{
@@ -56,50 +57,29 @@ import FormAddress from "../../components/FormAddress/FormAddress";
 const Payment = () => {
 	const [addressBook, setAddressBook] = useState([
 		{
-			deliveryID: 34,
-			address:
-				"57, Nguyễn Cửu Đàm, phường Tân Sơn Nhì, quận Tân Phú, tan son nhì, Thành phố Hồ Chí Minh, Vietnam",
-			name: "qwe",
-			phone: "0945461850",
-			userID: 17,
+			deliveryID: 31,
+			address: "turơng minh, nam Phú 123, PSd, ướerwerwerwer",
+			name: "phú trương",
+			phone: "123123wer",
+			userID: 14,
 		},
 		{
-			deliveryID: 36,
-			address: "111",
-			name: "112",
-			phone: "121212",
-			userID: 17,
-		},
-		{
-			deliveryID: 37,
-			address: "57 Nguyễn Cửu Đàm, asd, asd, Ho Chi Minh City",
-			name: "Trương Minh Nam Phú",
-			phone: "+84945461850",
-			userID: 17,
-		},
-		{
-			deliveryID: 38,
-			address: "asd, asd, asd, ads",
-			name: "asd",
-			phone: "+84945461850",
-			userID: 17,
-		},
-		{
-			deliveryID: 39,
-			address: "sd, sd, sd, sdsd",
-			name: "sd",
-			phone: "sdsd",
-			userID: 17,
+			deliveryID: 46,
+			address: "yt, yty, tyt, yty",
+			name: "123",
+			phone: "7832736178238123",
+			userID: 14,
 		},
 	]);
 	const [chosenIDAddress, setChosenIDAddress] = useState(-1); //-1 is default, create new address, for radio
-	const [arrAddress, setArrAddress] = useState([]);
+	const [chosenAddress, setchosenAddress] = useState();
 	const [disableAddress, setDisableAddress] = useState(false);
 
 	function onClickRadioBtn(id) {
+		console.log(id);
 		if (id == -1) {
 			setChosenIDAddress(-1);
-			setArrAddress([]);
+			setchosenAddress();
 		} else {
 			setChosenIDAddress(id);
 			let indexbyid = addressBook.findIndex(
@@ -108,7 +88,7 @@ const Payment = () => {
 			// let address = JSON.parse(JSON.stringify(addressBook[indexbyid]))
 			// console.log(addressBook[indexbyid]);
 			// console.log(chosenIDAddress);
-			setArrAddress([addressBook[indexbyid]]);
+			setchosenAddress(addressBook[indexbyid]);
 			// console.log(indexOfAddress);
 		}
 	}
@@ -141,14 +121,12 @@ const Payment = () => {
 					/>
 				))}
 			</Container>
-			{chosenIDAddress == -1 ? (
-				<FormAddress />
-			) : (
-				arrAddress.map((address) => <FormAddress address={address} />)
-			)}
+		
+			{/* <FormAddress address={chosenAddress} /> */}
+		
 			{/* <FormAddress address={indexOfAddress}/> */}
 
-			{/* <PaymentStepper address={chosenAddress === -1 ? chosenAddress : addressBook[indexOfAddress] }/> */}
+			<PaymentStepper address={chosenAddress}/>
 		</div>
 	);
 };
