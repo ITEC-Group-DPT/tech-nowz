@@ -23,7 +23,9 @@ const FormAddress = ({
 	formCommand,
 	formSubmit,
 	setAppear,
+	paymentChooseNewAddress = false,
 }) => {
+	console.log(address);
 	let arrAddress = address.address.split(", ");
 	const [form, setFormAddress] = useState({
 		name: address.name,
@@ -147,14 +149,16 @@ const FormAddress = ({
 					variant="standard"
 				/>
 				<Container sx={{ textAlign: "center" }}>
-					<Button
-						sx={{ mx: 1 }}
-						onClick={() => setAppear(false)}
-						variant="outlined"
-						size="small"
-						color="error">
-						Cancel
-					</Button>
+					{paymentChooseNewAddress == false && (
+						<Button
+							sx={{ mx: 1 }}
+							onClick={() => setAppear(false)}
+							variant="outlined"
+							size="small"
+							color="error">
+							Cancel
+						</Button>
+					)}
 					<Button
 						sx={{ mx: 1 }}
 						onClick={(e) => handleSubmit(e)}

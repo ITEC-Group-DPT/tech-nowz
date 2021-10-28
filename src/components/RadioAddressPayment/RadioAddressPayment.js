@@ -4,18 +4,27 @@ import { FormControlLabel, Radio, Typography } from "@mui/material";
 
 const RadioAddressPayment = ({
 	onClickAddress,
-    chosenAddress,
+	chosenAddress,
 	address = { deliveryID: -1 },
-	disabled = false,
+	disabled,
 }) => {
 	return (
 		<Box
-			sx={{ display: "flex", alignItems: "center" }}
-			onClick={()=> onClickAddress(address.deliveryID)}>
+			sx={{
+				display: "flex",
+				alignItems: "center",
+				m: 1,
+				pr: 2,
+				border: 1,
+				width: "fit-content",
+				borderRadius: 1,
+			}}
+			onClick={() => disabled == false && onClickAddress(address.deliveryID)}>
 			<Radio
 				checked={chosenAddress == address.deliveryID}
 				value={address.deliveryID}
 				name={address.deliveryID}
+				disabled={disabled}
 				// inputProps={{ "aria-label": "A" }}
 			/>
 			{address.deliveryID == -1 ? (

@@ -6,11 +6,15 @@ import {
 	FormControlLabel,
 	Radio,
 	Typography,
+	Container,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import CardAddress from "../../components/CardAddresss/CardAddress";
 import { getAddressBook, createAddressBook } from "../../api/addressApi";
 import RadioAddressPayment from "../../components/RadioAddressPayment/RadioAddressPayment";
+import PaymentStepper from "../../components/PaymentStepper/PaymentStepper";
+import FormAddress from "../../components/FormAddress/FormAddress";
+
 // const addressBook = [
 // 	{
 // 		deliveryID: 34,
@@ -88,84 +92,63 @@ const Payment = () => {
 			userID: 17,
 		},
 	]);
-	const [chosenAddress, setChosenAddress] = useState(34); //-1 is default, create new address
+	const [chosenIDAddress, setChosenIDAddress] = useState(-1); //-1 is default, create new address, for radio
+	const [arrAddress, setArrAddress] = useState([]);
 	const [disableAddress, setDisableAddress] = useState(false);
 
 	function onClickRadioBtn(id) {
-		console.log(id);
-		if (id === -1) {
-			setChosenAddress(-1);
+		if (id == -1) {
+			setChosenIDAddress(-1);
+			setArrAddress([]);
 		} else {
-			setChosenAddress(id);		
+			setChosenIDAddress(id);
+			let indexbyid = addressBook.findIndex(
+				(address) => address.deliveryID == id
+			);
+			// let address = JSON.parse(JSON.stringify(addressBook[indexbyid]))
+			// console.log(addressBook[indexbyid]);
+			// console.log(chosenIDAddress);
+			setArrAddress([addressBook[indexbyid]]);
+			// console.log(indexOfAddress);
 		}
 	}
 
 	return (
 		<div>
-			<Typography variant="h5" sx={{ fontWeight: "600" }} component="div">
-				Address Book
-			</Typography>
-			<Typography variant="p" component="div">
-				(you can edit exists address book by choosing and editing below)
-			</Typography>
-			{/* newAddress */}
-			{/* <RadioAddressPayment
-						onClick={onClickRadioBtn}
-						disabled={disableAddress}
-					/> */}
-			{addressBook.map((address) => (
+			<Container sx={{ mt: 2 }}>
+				<Typography
+					variant="h4"
+					sx={{ fontWeight: "600" }}
+					component="div">
+					Address Book
+				</Typography>
+				<Typography variant="p" component="div">
+					(you can edit exists address book by choosing and editing
+					below)
+				</Typography>
+				{/* newAddress */}
 				<RadioAddressPayment
-					key={addressBook.deliveryID}
-					chosenAddress={chosenAddress}
-					address={address}
 					onClickAddress={onClickRadioBtn}
+					chosenAddress={chosenIDAddress}
 					disabled={disableAddress}
 				/>
-			))}
-			{/* <Radio
-				checked={chosenAddress === addressBook[0].deliveryID}
-				onChange={() => onClickRadioBtn(addressBook[0].deliveryID)}
-				value={addressBook[0].deliveryID}
-				// inputProps={{ "aria-label": "A" }}
-			/>
-			<Radio
-				checked={chosenAddress == addressBook[1].deliveryID}
-				onChange={() => onClickRadioBtn(addressBook[1].deliveryID)}
-				value={addressBook[1].deliveryID}
-				// inputProps={{ "aria-label": "A" }}
-			/> */}
-			{/* <Box
-				sx={{ display: "flex", alignItems: "center" }}
-				onClick={() => onClickRadioBtn(addressBook[0].deliveryID)}>
-				<Radio
-					checked={chosenAddress == addressBook[0].deliveryID}
-					onChange={()=>onClickRadioBtn(addressBook[0].deliveryID)}
-					value={addressBook[0].deliveryID}
-					// inputProps={{ "aria-label": "A" }}
-				/>
+				{addressBook.map((address) => (
+					<RadioAddressPayment
+						chosenAddress={chosenIDAddress}
+						address={address}
+						onClickAddress={onClickRadioBtn}
+						disabled={disableAddress}
+					/>
+				))}
+			</Container>
+			{chosenIDAddress == -1 ? (
+				<FormAddress />
+			) : (
+				arrAddress.map((address) => <FormAddress address={address} />)
+			)}
+			{/* <FormAddress address={indexOfAddress}/> */}
 
-				<Typography variant="p" sx={{ fontSize: 16 }} component="div">
-					Name: {addressBook[0].name} <br />
-					Address: {addressBook[0].address} <br />
-					Phone: {addressBook[0].phone}
-				</Typography>
-			</Box>
-			<Box
-				sx={{ display: "flex", alignItems: "center" }}
-				onClick={() => onClickRadioBtn(addressBook[1].deliveryID)}>
-				<Radio
-					checked={chosenAddress === addressBook[1].deliveryID	}
-					onChange={()=>onClickRadioBtn(addressBook[1].deliveryID)}
-					value={addressBook[1].deliveryID}
-					// inputProps={{ "aria-label": "A" }}
-				/>
-
-				<Typography variant="p" sx={{ fontSize: 16 }} component="div">
-					Name: {addressBook[1].name} <br />
-					Address: {addressBook[1].address} <br />
-					Phone: {addressBook[1].phone}
-				</Typography>
-			</Box> */}
+			{/* <PaymentStepper address={chosenAddress === -1 ? chosenAddress : addressBook[indexOfAddress] }/> */}
 		</div>
 	);
 };
