@@ -2,10 +2,9 @@ import React, { useState, useRef } from "react"
 import styles from "../../pages/Authentication/authentication.style"
 import { Link, useHistory } from 'react-router-dom'
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Input, Button, Typography, CircularProgress, IconButton, InputAdornment } from '@mui/material'
+import { Input, Button, Typography, CircularProgress, IconButton, InputAdornment, useMediaQuery } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from "react-redux"
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { Login, removeEmailError, removePasswordError } from "../../store/actions/authAction"
 import { authErrorSelector, authIsLoadingSelector } from '../../store/selectors'
 import { icons } from "../../constant"
@@ -25,7 +24,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
     })
 
     const loginSubmit = () => {
-        dispatch(Login(email, password, history))
+        dispatch(Login(email, password.value, history))
     }
 
     const isRedBorder = (type) => ({
