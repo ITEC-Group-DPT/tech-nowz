@@ -41,6 +41,15 @@ const styles = {
 		zIndex: '10000',
 		width: '100%',
 	},
+	noProductCard: {
+		width: '100%',
+		display: 'flex',
+		flex: 1,
+		alignItems: 'center',
+		paddingLeft: { xs: '5%', md: '2%' },
+		marginTop: { xs: '3%', md: '1.5%' },
+		boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)',
+	},
 };
 
 export default styles;

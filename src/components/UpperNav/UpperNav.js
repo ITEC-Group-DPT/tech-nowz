@@ -1,14 +1,19 @@
 import { React, useState, useEffect } from 'react';
 import styles from './UpperNav.style';
 import { Link } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Badge from '@mui/material/Badge';
+import {
+	Grid,
+	Container,
+	TextField,
+	InputAdornment,
+	Typography,
+	Box,
+	Badge,
+	Card,
+	CardContent,
+} from '@mui/material';
 import logo from '../../img/logo_sub.webp';
 import { icons } from '../../constant';
-import { Typography, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { searchProductsAPI } from '../../api/productApi';
 import HorizontalProduct from '../HorizontalProduct/HorizontalProduct';
@@ -21,20 +26,29 @@ const UpperNav = () => {
 	};
 
 	const [searchResult, setSearchResult] = useState([]);
+	const [searchStatus, setSearchStatus] = useState(0); // 0: no search input, 1: has data, 2: no data found
 	useEffect(() => {
 		if (searchValue !== '') {
 			const delay = setTimeout(() => {
 				searchProductsAPI(searchValue).then((response) => {
 					if (response.data['success'] === true) {
 						setSearchResult(response.data['data']);
+						if (response.data['data'].length !== 0) {
+							setSearchStatus(1);
+						} else {
+							setSearchStatus(2);
+						}
 					}
 				});
 			}, 500);
 			return () => clearTimeout(delay);
 		} else {
 			setSearchResult([]);
+			setSearchStatus(0);
 		}
 	}, [searchValue]);
+
+	console.log(searchStatus);
 
 	return (
 		<Container maxWidth="xl" sx={styles.container}>
@@ -62,15 +76,34 @@ const UpperNav = () => {
 						}}
 					/>
 					<Box sx={styles.searchResult}>
-						{searchResult.map((product) => (
-							<HorizontalProduct
-								product={product}
-								imageSize="10%"
-								marginTop="0"
-								width="100%"
-								pricePadding="0"
-							/>
-						))}
+						{searchStatus !== 2 ? (
+							searchResult.map((product) => {
+								const productURL = `/product/${encodeURIComponent(
+									product.name
+								).replace(/%20/g, '-')}?i=${product.productID}`;
+								return (
+									<Link
+										to={productURL}
+										style={{ textDecoration: 'none' }}
+									>
+										<HorizontalProduct
+											product={product}
+											imageSize="10%"
+											marginTop="0"
+											width="100%"
+											pricePadding="0"
+										/>
+									</Link>
+								);
+							})
+						) : (
+							<Card sx={styles.noProductCard}>
+								<CardContent>
+									<Typography>No product found</Typography>
+								</CardContent>
+							</Card>
+							// when no product is found
+						)}
 					</Box>
 				</Grid>
 				<Grid item lg={3} xs={12} sx={styles.menuContainer}>
