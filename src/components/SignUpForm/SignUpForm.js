@@ -31,6 +31,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 type="email"
                 fullWidth
             />
+            <Typography component="div" sx={styles.errorMsg}></Typography>
 
             <Input
                 sx={styles.input}
@@ -38,6 +39,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 disableUnderline
                 fullWidth
             />
+            <Typography component="div" sx={styles.errorMsg}></Typography>
 
             <Input
                 sx={styles.input}
@@ -46,6 +48,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 type="password"
                 fullWidth
             />
+            <Typography component="div" sx={styles.errorMsg}></Typography>
 
             <Input
                 sx={styles.input}
@@ -54,6 +57,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                 type="password"
                 fullWidth
             />
+            <Typography component="div" sx={styles.errorMsg}></Typography>
 
             {
                 (!isSignIn && !minWidth) &&

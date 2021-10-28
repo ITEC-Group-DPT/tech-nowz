@@ -6,19 +6,15 @@ const Login = (email, password,history) => {
         dispatch({ type: ActionType.START_LOGIN })
         loginApi(email, password)
             .then(response => {
-                console.log('response: ', response);
+                const data = response.data.data;
                 if (response.data.success) {
-                    console.log('sign in success');
-
-                    const data = response.data.data;
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
-
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     history.push("/");
                 }
                 else {
-                    console.log('sign in fail');
-                    dispatch({ type: ActionType.LOGIN_FAIL });
+                    console.log(data);
+                    dispatch({ type: ActionType.LOGIN_FAIL, data: data  });
 
                 }
             })
@@ -31,6 +27,18 @@ const sessionLogin = (data) => {
     }
 }
 
+const removeEmailError = () => {
+    return dispatch => {
+        dispatch({ type: ActionType.REMOVE_EMAIL_ERROR })
+    }
+}
+
+const removePasswordError = () => {
+    return dispatch => {
+        dispatch({ type: ActionType.REMOVE_PASSWORD_ERROR })
+    }
+}
+
 const logOut = (history) => {
     return dispatch => {
         dispatch({ type: ActionType.LOGOUT})
@@ -39,4 +47,4 @@ const logOut = (history) => {
     }
 }
 
-export { Login, sessionLogin, logOut };
+export { Login, sessionLogin, removeEmailError, removePasswordError, logOut };
