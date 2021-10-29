@@ -57,6 +57,13 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 			dispatch(removePasswordError())
 	}
 
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			signInSubmit()
+		}
+	}
+
 	if (isHide) return <></>;
 	return (
 		<Box sx={styles.formContainerLeft} ref={references}>
@@ -74,6 +81,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 					value={email.value}
 					onChange={(e) => setEmail({ ...email, value: e.target.value })}
 					onClick={onClickRemoveEmailError}
+					onKeyDown={handleKeyDown}
 					type="email"
 					name="email"
 					placeholder="Email"
@@ -88,6 +96,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 					value={password.value}
 					onChange={(e) => setPassword({ ...password, value: e.target.value })}
 					onClick={onClickRemovePasswordError}
+					onKeyDown={handleKeyDown}
 					type={password.showPassword ? 'text' : 'password'}
 					//inputRef={inputRef}
 					placeholder="Password"

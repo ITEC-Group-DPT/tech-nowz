@@ -15,7 +15,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
     const history = useHistory()
     const authErrors = useSelector(authErrorSelector)
     const isLoading = useSelector(authIsLoadingSelector)
-    
+
     const minWidth = useMediaQuery('(min-width:900px)');
     const isHide = (!minWidth && isSignIn);
 
@@ -122,6 +122,13 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
         event.preventDefault()
     }
 
+    const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			signUpSubmit()
+		}
+	}
+
     if (isHide) return <></>;
 
     return (
@@ -142,6 +149,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                     value={email.value}
                     onChange={(e) => setEmail({ ...email, value: e.target.value })}
                     onClick={removeEmailError}
+                    onKeyDown={handleKeyDown}
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -156,6 +164,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                     value={username.value}
                     onChange={(e) => setUsername({ ...username, value: e.target.value })}
                     onClick={removeUsernameError}
+                    onKeyDown={handleKeyDown}
                     type="text"
                     name="username"
                     placeholder="Username"
@@ -170,6 +179,7 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                     value={password1.value}
                     onChange={(e) => setPassword1({ ...password1, value: e.target.value })}
                     onClick={removePassword1Error}
+                    onKeyDown={handleKeyDown}
                     type={password1.showPassword ? 'text' : 'password'}
                     //inputRef={inputRef}
                     placeholder="Password"
@@ -196,6 +206,8 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
                     value={password2.value}
                     onChange={(e) => setPassword2({ ...password2, value: e.target.value })}
                     onClick={removePassword2Error}
+                    onKeyDown={handleKeyDown}
+
                     type={password2.showPassword ? 'text' : 'password'}
                     //inputRef={inputRef}
                     placeholder="Confirm password"
