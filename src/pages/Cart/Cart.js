@@ -6,7 +6,7 @@ import { cartSelector } from "../../store/selectors"
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
-import {getCart,removeProductFromCart} from "../../store/actions/cartAction"
+import {removeProductFromCart} from "../../store/actions/cartAction"
 
 const Cart = () => {
 
@@ -14,9 +14,6 @@ const Cart = () => {
     console.log('cartList: ', cartList);
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getCart());
-    }, [])
     return (
         <Container sx={styles.main}>
             {
@@ -26,7 +23,7 @@ const Cart = () => {
                             product={product}
                             canDelete
                             onPressDelete={
-                                () => dispatch(removeProductFromCart(product.productID))
+                                () => dispatch(removeProductFromCart(product))
                             }
                         />)
                     : <></>

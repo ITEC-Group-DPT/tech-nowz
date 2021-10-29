@@ -42,8 +42,7 @@ const addProductToCart = (product) => {
 
     const productID = product.productID;
 
-
-    const productData  = {
+    const productData = {
         productID: productID,
         rating: product.rating,
         name: product.name,
@@ -52,15 +51,19 @@ const addProductToCart = (product) => {
         quantity: 1,
         price: product.price,
     }
+
     return dispatch => {
+        dispatch({
+            type: ActionType.START_ADD_PRODUCT_TO_CART,
+            data: productData,
+        })
         addProductToCartApi(productID).then(response => {
             if (response.data.success) {
                 const data = response.data.data;
 
                 dispatch({
-                    type: ActionType.ADD_PRODUCT_TO_CART,
-                    data: productData,
-                    newQuantity: data.totalQuantity,
+                    type: ActionType.GET_CART_QUANTITY,
+                    quantity: data.totalQuantity,
                     message: data.message,
                 });
             }
@@ -68,21 +71,28 @@ const addProductToCart = (product) => {
     }
 }
 
-const removeProductFromCart = (productID) => {
+const removeProductFromCart = (product) => {
 
+    const productID = product.productID;
     return dispatch => {
+        dispatch({
+            type: ActionType.REMOVE_PRODUCT_FROM_CART,
+            productID: productID,
+            quantity: product.quantity,
+        });
         removeProductFromCartApi(productID).then(response => {
             if (response.data.success) {
                 const data = response.data.data;
-                console.log('response remove: ',response);
+                console.log('response remove: ', response);
+
                 dispatch({
-                    type: ActionType.REMOVE_PRODUCT_FROM_CART,
-                    productID: productID,
+                    type: ActionType.GET_CART_QUANTITY,
                     quantity: data.totalQuantity,
+                    message: "Remove item from cart"
                 });
             }
         })
     }
 }
 
-export { getCart,getCartQuantity, addProductToCart, removeProductFromCart };
+export { getCart, getCartQuantity, addProductToCart, removeProductFromCart };

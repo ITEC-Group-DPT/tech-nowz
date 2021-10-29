@@ -8,7 +8,7 @@ import { sessionLogin } from '../store/actions/authAction';
 
 import { userInfoSelector } from '../store/selectors'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartQuantity } from '../store/actions/cartAction';
+import { getCart } from '../store/actions/cartAction';
 
 const AppNavigation = () => {
 
@@ -20,7 +20,7 @@ const AppNavigation = () => {
         if (userInfo != null) {
             console.log('sessionLogin');
             dispatch(sessionLogin(JSON.parse(userInfo)));
-            dispatch(getCartQuantity());
+            dispatch(getCart());
         }
     }, [])
 
