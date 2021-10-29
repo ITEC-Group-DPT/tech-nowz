@@ -7,6 +7,7 @@ import {
 	Radio,
 	Typography,
 	Container,
+	Divider,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import CardAddress from "../../components/CardAddresss/CardAddress";
@@ -85,17 +86,17 @@ const Payment = () => {
 			let indexbyid = addressBook.findIndex(
 				(address) => address.deliveryID == id
 			);
-			// let address = JSON.parse(JSON.stringify(addressBook[indexbyid]))
+			let addressbyid = JSON.parse(JSON.stringify(addressBook[indexbyid]))
 			// console.log(addressBook[indexbyid]);
 			// console.log(chosenIDAddress);
-			setchosenAddress(addressBook[indexbyid]);
+			setchosenAddress(addressbyid);
 			// console.log(indexOfAddress);
 		}
 	}
 
 	return (
 		<div>
-			<Container sx={{ mt: 2 }}>
+			<Container sx={{ my: 2 }}>
 				<Typography
 					variant="h4"
 					sx={{ fontWeight: "600" }}
@@ -121,12 +122,12 @@ const Payment = () => {
 					/>
 				))}
 			</Container>
-		
+			<Divider/>		
 			{/* <FormAddress address={chosenAddress} /> */}
 		
 			{/* <FormAddress address={indexOfAddress}/> */}
 
-			<PaymentStepper address={chosenAddress}/>
+			<PaymentStepper address={chosenAddress} chosenID={chosenIDAddress}/>
 		</div>
 	);
 };

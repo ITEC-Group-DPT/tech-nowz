@@ -6,9 +6,10 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormAddress from "../FormAddress/FormAddress";
+import {Container} from "@mui/material"; 
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 
-export default function PaymentStepper({ address }) {
+export default function PaymentStepper({ address,chosenID }) {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [skipped, setSkipped] = React.useState(new Set());
 	const isStepOptional = (step) => {
@@ -20,6 +21,7 @@ export default function PaymentStepper({ address }) {
 	};
 
 	const handleNext = () => {
+		console.log(activeStep);
 		let newSkipped = skipped;
 		if (isStepSkipped(activeStep)) {
 			newSkipped = new Set(newSkipped.values());
@@ -54,7 +56,7 @@ export default function PaymentStepper({ address }) {
 	};
 
 	return (
-		<Box sx={{ width: "100%" }}>
+		<Box sx={{maxWidth:'90%', mx:'auto',my:5}}>
 			<Stepper activeStep={activeStep}>
 				{steps.map((label, index) => {
 					const stepProps = {};
@@ -85,13 +87,15 @@ export default function PaymentStepper({ address }) {
 					</Box>
 				</React.Fragment>
 			) : (
-				<React.Fragment>
-					<Typography sx={{ mt: 2, mb: 1 }}>
+				<Container>
+					<React.Fragment>
+					{/* <Typography sx={{ mt: 2, mb: 1 }}>
 						Step {activeStep + 1}
-					</Typography>
-					<FormAddress address={address} />
+					</Typography> */}
+					{activeStep==0 && <FormAddress address={address} activeStep={activeStep} formCommand={chosenID == -1 ?'create' : 'edit'} />}
 					<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
 						<Button
+							variant="outlined"
 							color="inherit"
 							disabled={activeStep === 0}
 							onClick={handleBack}
@@ -100,7 +104,7 @@ export default function PaymentStepper({ address }) {
 						</Button>
 						<Box sx={{ flex: "1 1 auto" }} />
 
-						<Button onClick={handleNext}>
+						<Button onClick={handleNext} variant="outlined">
 							{activeStep === steps.length - 2
 								? "Finish?"
 								: activeStep === steps.length - 1
@@ -109,6 +113,9 @@ export default function PaymentStepper({ address }) {
 						</Button>
 					</Box>
 				</React.Fragment>
+				</Container>
+				
+				
 			)}
 		</Box>
 	);

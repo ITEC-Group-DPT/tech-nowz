@@ -23,6 +23,7 @@ const FormAddress = ({
 	formCommand,
 	formSubmit,
 	setAppear,
+	activeStep,
 	paymentChooseNewAddress = false,
 }) => {
 	// console.log(address);
@@ -53,6 +54,9 @@ const FormAddress = ({
 	// const [district,setDistrict] = useState(arrAddress[2])
 	// const [city,setCity] = useState(arrAddress[3])
 	// const [phone,setPhone] = useState(address.phone)
+	function test(){
+		console.log(1);
+	}
 	function handleSubmit(e) {
 		e.preventDefault();
 		let id = address.deliveryID;
