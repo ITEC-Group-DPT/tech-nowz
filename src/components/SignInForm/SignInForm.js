@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import styles from "../../pages/Authentication/authentication.style"
 import { Link, useHistory } from 'react-router-dom'
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -7,24 +7,37 @@ import { Box } from '@mui/system'
 import { useDispatch, useSelector } from "react-redux"
 import { signIn, removeEmailError, removePasswordError } from "../../store/actions/authAction"
 import { authErrorSelector, authIsLoadingSelector } from '../../store/selectors'
+import validator from 'validator'
 import { icons } from "../../constant"
 
 const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	//const inputRef = useRef()
-	const minWidth = useMediaQuery('(min-width:900px)')
-	const isHide = !minWidth && !isSignIn
 	const authErrors = useSelector(authErrorSelector)
 	const isLoading = useSelector(authIsLoadingSelector)
-	const [email, setEmail] = useState("")
+
+	const minWidth = useMediaQuery('(min-width:900px)')
+	const isHide = !minWidth && !isSignIn
+
+	const [email, setEmail] = useState({
+		value: "",
+		error: undefined,
+	})
 	const [password, setPassword] = useState({
 		value: "",
 		showPassword: false,
 	})
 
+	useEffect(() => {
+		setEmail({ ...email, error: authErrors.emailSignIn })
+	}, [authErrors.emailSignIn])
+
 	const signInSubmit = () => {
-		dispatch(signIn(email, password.value, history))
+		if (validator.isEmail(email.value) === false)
+			setEmail({ ...email, error: "Email is invalid" })
+		else
+			dispatch(signIn(email.value, password.value, history))
 	}
 
 	const isRedBorder = (type) => ({
@@ -35,6 +48,8 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 	const onClickRemoveEmailError = () => {
 		if (authErrors.emailSignIn)
 			dispatch(removeEmailError())
+		else if (email.error)
+			setEmail({ ...email, error: undefined })
 	}
 
 	const onClickRemovePasswordError = () => {
@@ -55,9 +70,9 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 				<Typography component="div" sx={styles.subTitle}>or use your TechNow account</Typography>
 
 				<Input
-					sx={isRedBorder(authErrors.emailSignIn)}
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					sx={isRedBorder(email.error)}
+					value={email.value}
+					onChange={(e) => setEmail({ ...email, value: e.target.value })}
 					onClick={onClickRemoveEmailError}
 					type="email"
 					name="email"
@@ -66,7 +81,7 @@ const SignInForm = ({ isSignIn, setIsSignIn, references }) => {
 					fullWidth
 					inputProps={{ style: styles.input }}
 				/>
-				<Typography component="div" sx={styles.errorMsg}>{authErrors.emailSignIn}</Typography>
+				<Typography component="div" sx={styles.errorMsg}>{email.error}</Typography>
 
 				<Input
 					sx={{ ...styles.input, ...isRedBorder(authErrors.password) }}

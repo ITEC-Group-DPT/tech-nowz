@@ -11,13 +11,13 @@ import validator from 'validator'
 import { icons } from "../../constant"
 
 const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
-
-    const minWidth = useMediaQuery('(min-width:900px)');
     const dispatch = useDispatch()
     const history = useHistory()
-    const isHide = (!minWidth && isSignIn);
     const authErrors = useSelector(authErrorSelector)
     const isLoading = useSelector(authIsLoadingSelector)
+    
+    const minWidth = useMediaQuery('(min-width:900px)');
+    const isHide = (!minWidth && isSignIn);
 
     const [email, setEmail] = useState({
         value: "",
@@ -65,7 +65,6 @@ const SignUpForm = ({ isSignIn, setIsSignIn, references }) => {
     const signUpSubmit = () => {
         if (checkInputs())
             dispatch(signUp(email.value, username.value, password2.value, history))
-        //console.log('DISPATCH');
     }
 
     const checkStrLength = (str, start, end) => {
