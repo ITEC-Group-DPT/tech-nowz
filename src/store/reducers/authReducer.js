@@ -12,12 +12,22 @@ const initState = {
 
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
-        //sign in
-        case ActionType.START_SIGNIN:
+        //common
+        case ActionType.START_LOGIN:
             return {
                 ...state,
                 isLoading: true,
             }
+        case ActionType.LOGIN_SUCCESS:
+            return {
+                error: {
+                    isEmpty: true,
+                },
+                user: action.data,
+                isLoading: false,
+            }
+
+        //sign in
         case ActionType.REMOVE_EMAIL_ERROR:
             return {
                 ...state,
@@ -32,14 +42,6 @@ const AuthReducer = (state = initState, action) => {
                     password: undefined,
                 }
             }
-        case ActionType.SIGNIN_SUCCESS:
-            return {
-                error: {
-                    isEmpty: true,
-                },
-                user: action.data,
-                isLoading: false,
-            }
         case ActionType.SIGNIN_FAIL:
             return {
                 ...state,
@@ -51,25 +53,12 @@ const AuthReducer = (state = initState, action) => {
             }
 
         //sign up
-        case ActionType.START_SIGNUP:
-            return {
-                ...state,
-                isLoading: true,
-            }
         case ActionType.REMOVE_EMAIL_SIGNUP_ERROR:
             return {
                 ...state,
                 error: {
                     emailSignUp: undefined,
                 }
-            }
-        case ActionType.SIGNUP_SUCCESS:
-            return {
-                error: {
-                    isEmpty: true,
-                },
-                user: action.data,
-                isLoading: false,
             }
         case ActionType.SIGNUP_FAIL:
             return {

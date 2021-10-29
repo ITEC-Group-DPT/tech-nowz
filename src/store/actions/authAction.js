@@ -3,12 +3,12 @@ import { signInApi, signUpApi } from '../../api/authApi'
 
 const signIn = (email, password, history) => {
     return dispatch => {
-        dispatch({ type: ActionType.START_SIGNIN })
+        dispatch({ type: ActionType.START_LOGIN })
         signInApi(email, password)
             .then(response => {
                 const data = response.data.data;
                 if (response.data.success) {
-                    dispatch({ type: ActionType.SIGNIN_SUCCESS, data: data })
+                    dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     history.push("/");
                 }
@@ -20,12 +20,12 @@ const signIn = (email, password, history) => {
 
 const signUp = (email, username, password, history) => {
     return dispatch => {
-        dispatch({ type: ActionType.START_SIGNUP })
+        dispatch({ type: ActionType.START_LOGIN })
         signUpApi(email, username, password)
             .then(response => {
                 const data = response.data.data;
                 if (response.data.success) {
-                    dispatch({ type: ActionType.SIGNUP_SUCCESS, data: data })
+                    dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     history.push("/");
                 }
@@ -37,7 +37,7 @@ const signUp = (email, username, password, history) => {
 
 const sessionLogin = (data) => {
     return dispatch => {
-        dispatch({ type: ActionType.SIGNIN_SUCCESS, data: data })
+        dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
     }
 }
 
