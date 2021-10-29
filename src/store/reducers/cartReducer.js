@@ -35,7 +35,7 @@ const CartReducer = (state = initState, action) => {
                     message: action.message,
                 },
             }
-        case (ActionType.START_ADD_PRODUCT_TO_CART):
+        case (ActionType.ADD_PRODUCT_TO_CART):
             newCart = JSON.parse(JSON.stringify(state.cart));
 
             let indexAdd = newCart["cartList"].findIndex(product =>
@@ -53,6 +53,7 @@ const CartReducer = (state = initState, action) => {
                     ...state.cart,
                     cartList: newCart["cartList"],
                     totalQuantity: newQuantity,
+                    message: "",
                 },
             }
         case (ActionType.REMOVE_PRODUCT_FROM_CART):
@@ -76,6 +77,7 @@ const CartReducer = (state = initState, action) => {
                     ...state.cart,
                     cartList: newCart["cartList"],
                     totalQuantity: newTotalQuantity.toString(),
+                    message: "",
                 }
 
             }

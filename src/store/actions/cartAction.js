@@ -54,7 +54,7 @@ const addProductToCart = (product) => {
 
     return dispatch => {
         dispatch({
-            type: ActionType.START_ADD_PRODUCT_TO_CART,
+            type: ActionType.ADD_PRODUCT_TO_CART,
             data: productData,
         })
         addProductToCartApi(productID).then(response => {
@@ -88,7 +88,7 @@ const removeProductFromCart = (product) => {
                 dispatch({
                     type: ActionType.GET_CART_QUANTITY,
                     quantity: data.totalQuantity,
-                    message: "Remove item from cart"
+                    message: data.message,
                 });
             }
         })
