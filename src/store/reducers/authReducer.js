@@ -12,7 +12,8 @@ const initState = {
 
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
-        case ActionType.START_LOGIN:
+        //sign in
+        case ActionType.START_SIGNIN:
             return {
                 ...state,
                 isLoading: true,
@@ -21,7 +22,7 @@ const AuthReducer = (state = initState, action) => {
             return {
                 ...state,
                 error: {
-                    email: undefined,
+                    emailSignIn: undefined,
                 },
             }
         case ActionType.REMOVE_PASSWORD_ERROR:
@@ -31,7 +32,7 @@ const AuthReducer = (state = initState, action) => {
                     password: undefined,
                 }
             }
-        case ActionType.LOGIN_SUCCESS:
+        case ActionType.SIGNIN_SUCCESS:
             return {
                 error: {
                     isEmpty: true,
@@ -39,15 +40,47 @@ const AuthReducer = (state = initState, action) => {
                 user: action.data,
                 isLoading: false,
             }
-        case ActionType.LOGIN_FAIL:
+        case ActionType.SIGNIN_FAIL:
             return {
                 ...state,
                 error: {
-                    email: action.data.errorEmail,
+                    emailSignIn: action.data.errorEmail,
                     password: action.data.errorPassword,
                 },
                 isLoading: false,
             }
+
+        //sign up
+        case ActionType.START_SIGNUP:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case ActionType.REMOVE_EMAIL_SIGNUP_ERROR:
+            return {
+                ...state,
+                error: {
+                    emailSignUp: undefined,
+                }
+            }
+        case ActionType.SIGNUP_SUCCESS:
+            return {
+                error: {
+                    isEmpty: true,
+                },
+                user: action.data,
+                isLoading: false,
+            }
+        case ActionType.SIGNUP_FAIL:
+            return {
+                ...state,
+                error: {
+                    emailSignUp: action.data,
+                },
+                isLoading: false,
+            }
+
+        //sign out
         case ActionType.LOGOUT:
             return {
                 ...state,

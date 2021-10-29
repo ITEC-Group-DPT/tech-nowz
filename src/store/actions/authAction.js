@@ -1,29 +1,43 @@
 import ActionType from './actionType'
-import { loginApi } from '../../api/authApi'
+import { signInApi, signUpApi } from '../../api/authApi'
 
-const Login = (email, password,history) => {
+const signIn = (email, password, history) => {
     return dispatch => {
-        dispatch({ type: ActionType.START_LOGIN })
-        loginApi(email, password)
+        dispatch({ type: ActionType.START_SIGNIN })
+        signInApi(email, password)
             .then(response => {
                 const data = response.data.data;
                 if (response.data.success) {
-                    dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
+                    dispatch({ type: ActionType.SIGNIN_SUCCESS, data: data })
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     history.push("/");
                 }
-                else {
-                    console.log(data);
-                    dispatch({ type: ActionType.LOGIN_FAIL, data: data  });
+                else
+                    dispatch({ type: ActionType.SIGNIN_FAIL, data: data  });
+            })
+    }
+}
 
+const signUp = (email, username, password, history) => {
+    return dispatch => {
+        dispatch({ type: ActionType.START_SIGNUP })
+        signUpApi(email, username, password)
+            .then(response => {
+                const data = response.data.data;
+                if (response.data.success) {
+                    dispatch({ type: ActionType.SIGNUP_SUCCESS, data: data })
+                    sessionStorage.setItem("userInfo", JSON.stringify(data));
+                    history.push("/");
                 }
+                else
+                    dispatch({ type: ActionType.SIGNUP_FAIL, data: data  });
             })
     }
 }
 
 const sessionLogin = (data) => {
     return dispatch => {
-        dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
+        dispatch({ type: ActionType.SIGNIN_SUCCESS, data: data })
     }
 }
 
@@ -39,6 +53,12 @@ const removePasswordError = () => {
     }
 }
 
+const removeEmailSignUpError = () => {
+    return dispatch => {
+        dispatch({ type: ActionType.REMOVE_EMAIL_SIGNUP_ERROR})
+    }
+}
+
 const logOut = (history) => {
     return dispatch => {
         dispatch({ type: ActionType.LOGOUT})
@@ -47,4 +67,4 @@ const logOut = (history) => {
     }
 }
 
-export { Login, sessionLogin, removeEmailError, removePasswordError, logOut };
+export { signIn, signUp, sessionLogin, removeEmailError, removePasswordError, removeEmailSignUpError, logOut };
