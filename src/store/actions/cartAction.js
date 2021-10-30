@@ -52,46 +52,37 @@ const addProductToCart = (product) => {
         price: product.price,
     }
 
-    return dispatch => {
+    return async dispatch => {
         dispatch({
             type: ActionType.ADD_PRODUCT_TO_CART,
             data: productData,
         })
-        addProductToCartApi(productID).then(response => {
-            if (response.data.success) {
-                const data = response.data.data;
+        const response = await addProductToCartApi(productID);
+        console.log('add product response: ', response);
 
-                dispatch({
-                    type: ActionType.GET_CART_QUANTITY,
-                    quantity: data.totalQuantity,
-                    message: data.message,
-                });
-            }
-        })
+        if (!response.data.success) {
+            alert('add product fail')
+            //remove product if don't success
+        }
     }
 }
 
 const removeProductFromCart = (product) => {
 
     const productID = product.productID;
-    return dispatch => {
+    return async(dispatch) => {
         dispatch({
             type: ActionType.REMOVE_PRODUCT_FROM_CART,
             productID: productID,
             quantity: product.quantity,
         });
-        removeProductFromCartApi(productID).then(response => {
-            if (response.data.success) {
-                const data = response.data.data;
-                console.log('response remove: ', response);
+        const response = await removeProductFromCartApi(productID);
 
-                dispatch({
-                    type: ActionType.GET_CART_QUANTITY,
-                    quantity: data.totalQuantity,
-                    message: data.message,
-                });
-            }
-        })
+        console.log('remove product response: ', response);
+
+        if (!response.data.success) {
+            alert('remove product fail');
+        }
     }
 }
 
