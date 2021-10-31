@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Product.styles';
 import { icons } from '../../constant';
-import { getProductAPI, getProductCategoryAPI } from '../../api/productApi';
+import { getProductAPI, getProductCategoryAPI } from '../../api/api';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import { useParams, useLocation } from 'react-router-dom';
 import {
