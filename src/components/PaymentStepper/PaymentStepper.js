@@ -1,27 +1,36 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FormAddress from "../FormAddress/FormAddress";
-import {Container} from "@mui/material"; 
+import FormAddress from "../PaymentFormAddress/PaymentFormAddress";
+import {Container,Box} from "@mui/material"; 
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 
-export default function PaymentStepper({ address,chosenID }) {
+export default function PaymentStepper({ address, setAddress, setDisableAddress }) {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [skipped, setSkipped] = React.useState(new Set());
+	React.useEffect(() => {
+		if (activeStep != 0){
+			console.log(activeStep);
+			setDisableAddress(true);
+		} 
+		else {
+			console.log(activeStep);
+			setDisableAddress(false);
+		} 
+	}, [activeStep])
 	const isStepOptional = (step) => {
 		return step === 1;
 	};
-
 	const isStepSkipped = (step) => {
 		return skipped.has(step);
 	};
 
 	const handleNext = () => {
 		console.log(activeStep);
+		if (activeStep === 0 ) console.log(address);
 		let newSkipped = skipped;
 		if (isStepSkipped(activeStep)) {
 			newSkipped = new Set(newSkipped.values());
@@ -92,12 +101,12 @@ export default function PaymentStepper({ address,chosenID }) {
 					{/* <Typography sx={{ mt: 2, mb: 1 }}>
 						Step {activeStep + 1}
 					</Typography> */}
-					{activeStep==0 && <FormAddress address={address} activeStep={activeStep} formCommand={chosenID == -1 ?'create' : 'edit'} />}
+					{activeStep==0 && <FormAddress form={address} setChosenAddress={setAddress}/> }
 					<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
 						<Button
 							variant="outlined"
 							color="inherit"
-							disabled={activeStep === 0}
+							disabled={activeStep === 0 || activeStep === 2}
 							onClick={handleBack}
 							sx={{ mr: 1 }}>
 							Back

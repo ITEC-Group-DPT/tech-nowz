@@ -23,7 +23,6 @@ const FormAddress = ({
 	formCommand,
 	formSubmit,
 	setAppear,
-	activeStep,
 	paymentChooseNewAddress = false,
 }) => {
 	// console.log(address);
@@ -39,7 +38,10 @@ const FormAddress = ({
 
 	useEffect(() => {
 		arrAddress = address.address.split(", ");
-		if (arrAddress.length == 1) arrAddress = ["","","",""] //for change textfield
+		while (arrAddress.length < 4) { //for error process 
+			arrAddress.push("");
+		}
+		//if (arrAddress.length == 1) arrAddress = ["","","",""] //for change textfield
 		setFormAddress({
 			name: address.name,
 			addressInForm: arrAddress[0],
