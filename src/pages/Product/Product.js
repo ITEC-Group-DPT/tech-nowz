@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Product.styles'
 import { icons } from '../../constant'
-import { getProductAPI, getProductCategoryAPI } from '../../api/api'
+import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useParams, useLocation } from "react-router-dom"
 import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'

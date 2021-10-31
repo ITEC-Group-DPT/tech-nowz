@@ -11,7 +11,7 @@ if (object) {
 
     console.log('userID: ', userID);
     // Alter defaults after instance has been created
-    instance.defaults.headers.common['userid'] = userID;
+    instance.defaults.headers.common['Userid'] = userID;
 }
 
 instance.interceptors.request.use(
@@ -21,7 +21,7 @@ instance.interceptors.request.use(
             const token = JSON.parse(sessionStorage.getItem("userInfo"));
 
             if (token) {
-                config.headers.userid = token.userID;
+                config.headers.Userid = token.userID;
             }
         }
 
