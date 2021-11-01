@@ -101,23 +101,22 @@ const Product = () => {
     const [product, setProduct] = useState({ "isLoading": true })
     const [relatedProductList, setRelatedProductList] = useState({ "isLoading": true, "productList": [] })
     const [tab, setTab] = React.useState('1')
-    let formatedPrice, productDesc = "Sản phẩm chưa có thông tin mô tả"
 
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
         getProductAPI(productID).then(response => {
             if (response.data.success) {
                 const data = response.data.data
-                console.log(response);
+
+                data.product.price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.product.price)
+                if (data.product.description == "")
+                    data.product.description = "Sản phẩm chưa có thông tin mô tả"
+
                 setProduct({ "isLoading": false, ...data })
-                formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.product.price)
-                if (data.product.description !== "") {
-                    productDesc = data.product.description
-                }
+
                 getProductCategoryAPI(data.product.type).then(response => {
-                    if (response.data.success) {
+                    if (response.data.success)
                         setRelatedProductList({ "isLoading": false, "productList": response.data.data })
-                    }
                 })
             }
         })
@@ -196,7 +195,7 @@ const Product = () => {
                                     <Box sx={styles.dividerWrapper}>
                                         <Divider sx={styles.divider} />
                                     </Box>
-                                    <Typography variant="h5" component="div" sx={styles.pPrice}>{formatedPrice}</Typography>
+                                    <Typography variant="h5" component="div" sx={styles.pPrice}>{product.product.price}</Typography>
                                 </Box>
                             )}
 
@@ -291,7 +290,7 @@ const Product = () => {
                         <TabPanel value="2">
                             {product.isLoading ? ("") :
                                 (
-                                    <Typography sx={styles.details}>{productDesc}</Typography>
+                                    <Typography sx={styles.details}>{product.product.description}</Typography>
                                 )}
                         </TabPanel>
                     </TabContext>
