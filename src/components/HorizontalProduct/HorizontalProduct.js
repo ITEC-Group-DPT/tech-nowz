@@ -16,6 +16,8 @@ const HorizontalProduct = ({
 	product,
 	canDelete,
 	onPressDelete,
+	decreaseQuantity,
+	increaseQuantity,
 	ratingSizeMedium = '1rem',
 	ratingSizeSmall = '0.8rem',
 }) => {
@@ -37,8 +39,8 @@ const HorizontalProduct = ({
 				image={product.img1}
 			/>
 			<CardContent sx={styles.productContent}>
-				<Typography 
-				sx={styles.productName}>{product.name}</Typography>
+				<Typography
+					sx={styles.productName}>{product.name}</Typography>
 				<Typography sx={styles.productQuantity}>
 					{(product.quantity && !cartProduct) && 'Quantity: ' + product.quantity}
 				</Typography>
@@ -60,19 +62,27 @@ const HorizontalProduct = ({
 					</Typography>
 				</Box>
 			</CardContent>
-			<Box sx={styles.quantityContainer}>
-				<Typography
-					sx={styles.changeQty}
-				>
-					–
-				</Typography>
-				<Typography sx={styles.productCartQuantity}>{product.quantity}</Typography>
-				<Typography
-					sx={styles.changeQty}
-				>
-					＋
-				</Typography>
-			</Box>
+			{
+				cartProduct &&
+				<CardContent
+					sx={styles.quantityContainer}>
+
+					<Typography
+						onClick={decreaseQuantity}
+						sx={styles.changeQty}
+					>
+						–
+					</Typography>
+					<Typography sx={styles.productCartQuantity}>{product.quantity}</Typography>
+					<Typography
+						onClick={increaseQuantity}
+
+						sx={styles.changeQty}
+					>
+						＋
+					</Typography>
+				</CardContent>
+			}
 			<CardContent sx={styles.priceContainer}>
 				<Typography sx={styles.productPrice}>
 					{formatedPrice}

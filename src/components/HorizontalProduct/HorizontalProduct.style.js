@@ -32,8 +32,8 @@ const styles = {
         textOverflow: "ellipsis",
         display: "-webkit-box",
         overflow: "hidden",
-        "-webkit-line-clamp": "2",
-        "-webkit-box-orient": "vertical",
+        WebkitLineClamp: "2",
+        WebkitBoxOrient: "vertical",
     },
     priceContainer: {
         paddingLeft: '3%',
@@ -49,7 +49,7 @@ const styles = {
             xs: ".7rem",
             md: "1rem",
         },
-        minWidth: "72px"
+        minWidth: { sm: "72px", md: "100px" },
 
     },
     ratingContainer: {
@@ -82,12 +82,15 @@ const styles = {
         fontSize: { xs: "0.6rem", md: "0.9rem" },
         color: '#656565',
         fontFamily: "'IBM Plex Serif', serif",
+        userSelect: "none",
+
     },
     changeQty: {
         fontSize: { xs: "0.6rem", md: "0.8rem" },
         cursor: 'pointer',
         display: "flex",
         alignItems: 'center',
+        userSelect: "none",
     },
     buttonClose: {
         color: 'black',
@@ -98,8 +101,8 @@ const styles = {
 
     },
     closeIc: {
-        width: { xs: 18, md: 24 },
-        height: { xs: 18, md: 24 },
+        width: { xs: 18, md: 20 },
+        height: { xs: 18, md: 20 },
     },
 };
 

@@ -4,6 +4,9 @@ import {
     getCartQuantityApi,
     addProductToCartApi,
     removeProductFromCartApi,
+    increaseQuantityApi,
+    decreaseQuantityApi,
+    removeAllApi,
 } from "../../api/cartApi"
 
 const getCart = () => {
@@ -85,4 +88,63 @@ const removeProductFromCart = (product) => {
     }
 }
 
-export { getCart, getCartQuantity, addProductToCart, removeProductFromCart };
+const increseProductQuantity = (product) => {
+
+    const productID = product.productID;
+    return async(dispatch) => {
+        dispatch({
+            type: ActionType.INCREATE_QUANTITY_PRODUCT,
+            productID: productID,
+            productPrice: product.price,
+        })
+
+        const response = await increaseQuantityApi(productID);
+
+        if (!response.data.success) {
+            alert('increase quantity fail');
+        }
+    }
+}
+
+const decreseProductQuantity = (product) => {
+
+    const productID = product.productID;
+
+    return async(dispatch) => {
+        dispatch({
+            type: ActionType.DECREASE_QUANTITY_PRODUCT,
+            productID: productID,
+            productPrice: product.price
+        })
+
+        const response = await decreaseQuantityApi(productID);
+
+        if (!response.data.success) {
+            alert('decrease quantity fail');
+        }
+    }
+}
+
+const removeAllCart = () => {
+    return async(dispatch) => {
+        dispatch({
+            type: ActionType.REMOVE_ALL_CART,
+        })
+
+        const response = await removeAllApi();
+
+        if (!response.data.success) {
+            alert('remove cart fail');
+        }
+    }
+}
+
+export { 
+    getCart, 
+    getCartQuantity, 
+    addProductToCart, 
+    removeProductFromCart,
+    increseProductQuantity,
+    decreseProductQuantity,
+    removeAllCart,
+};

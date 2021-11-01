@@ -1,11 +1,12 @@
 
 const styles = {
     main: {
+        minHeight: "60vh",
         margin: {
-            xs: "8% 6%",
-            sm: "30px 0 30px 2%",
-            md: "50px 2%",
-            lg: "50px 10%"
+            xs: "12% 6%",
+            sm: "60px 0 30px 2%",
+            md: "80px 2%",
+            lg: "80px 10%"
         },
         display: { xs: "block", sm: "flex" },
     },
@@ -65,6 +66,26 @@ const styles = {
         // background: "#dc3545",
         fontSize: { sm: "0.6rem", md: "0.8rem" },
         width: "100%",
+    },
+    removeRow: {
+        position: "absolute",
+        top: "-35px",
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: 'center',
+    },
+    myCart: {
+        fontFamily: "'Roboto Slab', serif",
+        textTransform: "uppercase",
+        fontSize: "1.5rem",
+    },
+    removeAll: {
+        textTransform: "none",
+        fontFamily: "'Roboto Slab', serif",
+        color: "gray",
+        fontWeight: "300",
+        fontSize: "12px",
     },
 };
 

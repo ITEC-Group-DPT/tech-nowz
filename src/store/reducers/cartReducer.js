@@ -62,7 +62,6 @@ const CartReducer = (state = initState, action) => {
                 cart: newCart,
             }
         case (ActionType.REMOVE_PRODUCT_FROM_CART):
-            console.log('action remove: ', action);
             newCart = JSON.parse(JSON.stringify(state.cart))
 
             let indexRemove = newCart["cartList"].findIndex(product =>
@@ -81,6 +80,49 @@ const CartReducer = (state = initState, action) => {
             return {
                 ...state,
                 cart: newCart,
+            }
+        case (ActionType.INCREATE_QUANTITY_PRODUCT):
+            newCart = JSON.parse(JSON.stringify(state.cart))
+
+            let indexIncrease = newCart["cartList"]
+                .findIndex(product =>
+                    product.productID == action.productID
+                );
+            if (indexIncrease != -1) {
+                newCart["cartList"][indexIncrease].quantity++;
+                newCart.totalQuantity++;
+                newCart.totalPrice += action.productPrice;
+            }
+
+            return {
+                ...state,
+                cart: newCart,
+            }
+        case (ActionType.DECREASE_QUANTITY_PRODUCT):
+            newCart = JSON.parse(JSON.stringify(state.cart))
+
+            let indexDecrease = newCart["cartList"]
+                .findIndex(product =>
+                    product.productID == action.productID
+                );
+            if (indexDecrease != -1) {
+                newCart["cartList"][indexDecrease].quantity--;
+                newCart.totalQuantity--;
+                newCart.totalPrice -= action.productPrice;
+            }
+
+            return {
+                ...state,
+                cart: newCart,
+            }
+        case (ActionType.REMOVE_ALL_CART):
+            return {
+                ...state,
+                cart: {
+                    totalQuantity: 0,
+                    totalPrice: 0,
+                    cartList: [],
+                },
             }
         default: return state;
     }
