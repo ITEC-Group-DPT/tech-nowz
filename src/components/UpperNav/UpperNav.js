@@ -11,12 +11,9 @@ import { icons } from '../../constant';
 import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
-import {cartSelector} from '../../store/selectors'
 const UpperNav = () => {
 
     const userInfo = useSelector(state => state.Authentication.user);
-
-    const cart = useSelector(cartSelector);
     return (
         <Container maxWidth='xl' sx={styles.container}>
             <Grid container spacing={2}>
@@ -42,7 +39,7 @@ const UpperNav = () => {
                     <Grid container spacing={1}>
                         <Grid item xs={6}>
                             <Link to='/checkout/cart' style={styles.menuItem}>
-                                <Badge badgeContent={cart.totalQuantity || 0} color="error">
+                                <Badge badgeContent={1} color="error">
                                     <icons.Cart />
                                 </Badge>
                                 <Typography sx={styles.menuTitle}>Cart</Typography>

@@ -4,15 +4,14 @@ const styles = {
         position: 'relative',
         alignItems: 'center',
 
-        paddingLeft: "2%",
-        marginTop: { xs: '3%', md: '1.5%' },
+        paddingLeft: {xs: '5%',md:'2%'},
+        marginTop: {xs: '3%',md:'1.5%'},
         flex: 1,
         boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)',
     },
     productImg: {
-        padding: "10px 0",
-        height: { xs: '17%', sm: '20%' },
-        width: { xs: '17%', sm: '20%' },
+        height: '22%',
+        width: '22%',
         objectFit: "contain"
     },
     productContent: {
@@ -20,27 +19,15 @@ const styles = {
         flex: 3,
     },
     productName: {
-        fontWeight: '300',
+        fontWeight: '600',
         fontFamily: "'Roboto Slab', serif",
-        fontSize: {
-            xs: "0.75rem",
-            md: "1rem"
-        },
-
-        //max 2 line
-        lineHeight: "16px",
-        textOverflow: "ellipsis",
-        display: "-webkit-box",
-        overflow: "hidden",
-        "-webkit-line-clamp": "2",
-        "-webkit-box-orient": "vertical",
+        fontSize: {xs: "0.75rem", md: "1rem"},
     },
     priceContainer: {
         paddingLeft: '3%',
         margin: '0',
         width: "100%",
         flex: 1,
-        paddingBottom: "16px !important",
     },
     productPrice: {
         fontFamily: "'IBM Plex Serif', serif",
@@ -49,8 +36,6 @@ const styles = {
             xs: ".7rem",
             md: "1rem",
         },
-        minWidth: "72px"
-
     },
     ratingContainer: {
         width: '10%',
@@ -60,34 +45,14 @@ const styles = {
         marginTop: '1%',
     },
     productSold: {
-        fontSize: { xs: "0.6rem", md: "1rem" },
+        fontSize: {xs: "0.6rem", md: "1rem"},
         paddingLeft: '1%',
         fontFamily: "'IBM Plex Serif', serif",
     },
-    quantityContainer: {
-        padding: "4px 0",
-        display: "flex",
-        width: { xs: "60px", md: "80px" },
-        borderRadius: "0.25rem",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        border: "1px solid rgb(230, 230, 230)"
-    },
     productQuantity: {
-        fontSize: { xs: "0.65rem", md: "1rem" },
+        fontSize: {xs: "0.65rem", md: "1rem"},
         color: '#656565',
         fontFamily: "'IBM Plex Serif', serif",
-    },
-    productCartQuantity: {
-        fontSize: { xs: "0.6rem", md: "0.9rem" },
-        color: '#656565',
-        fontFamily: "'IBM Plex Serif', serif",
-    },
-    changeQty: {
-        fontSize: { xs: "0.6rem", md: "0.8rem" },
-        cursor: 'pointer',
-        display: "flex",
-        alignItems: 'center',
     },
     buttonClose: {
         color: 'black',
@@ -95,11 +60,10 @@ const styles = {
         minWidth: 0,
         right: 0,
         top: 0,
-
     },
     closeIc: {
-        width: { xs: 18, md: 24 },
-        height: { xs: 18, md: 24 },
+        width: '3%',
+        height: '3%',
     },
 };
 

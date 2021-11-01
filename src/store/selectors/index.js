@@ -17,15 +17,10 @@ const CPUSelector = state => {
 const userInfoSelector = state => {
     return state.Authentication.user;
 }
-
-const cartSelector = state => {
-    return state.CartList.cart;
-}
 export {
     topRatingSelector,
     laptopSelector,
     monitorSelector,
     CPUSelector,
     userInfoSelector,
-    cartSelector
 }

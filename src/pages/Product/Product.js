@@ -12,10 +12,6 @@ import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
 
-//redux
-import { addProductToCart } from '../../store/actions/cartAction'
-import { useDispatch } from 'react-redux'
-
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 }
@@ -107,10 +103,6 @@ const Product = () => {
     const [tab, setTab] = React.useState('1')
     let formatedPrice, productDesc = "Sản phẩm chưa có thông tin mô tả"
 
-    const dispatch = useDispatch();
-    const addItemToCart = () => {
-        dispatch(addProductToCart(product.product));
-    }
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
         getProductAPI(productID).then(response => {
@@ -229,16 +221,11 @@ const Product = () => {
                                             Remove Favorite
                                         </Button>
                                     ) : (
-                                        <Button
-                                            variant="outlined" startIcon={<icons.NotFavorite />} sx={styles.favoriteBtn}>
+                                        <Button variant="outlined" startIcon={<icons.NotFavorite />} sx={styles.favoriteBtn}>
                                             Add Favorite
                                         </Button>
                                     )}
-                                    <Button
-                                        onClick={addItemToCart} variant="contained"
-                                        startIcon={<icons.AddCart />}
-                                        sx={styles.addBtn}
-                                    >
+                                    <Button variant="contained" startIcon={<icons.AddCart />} sx={styles.addBtn}>
                                         Add to Cart
                                     </Button>
                                 </Box>

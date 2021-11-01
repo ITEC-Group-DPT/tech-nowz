@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './Home.styles'
 import { Box } from '@mui/system';
 import Category from '../../components/Category/Category';
@@ -22,7 +22,7 @@ const Home = () => {
     return (
         <Box sx={styles.box}>
             <Banner />
-            <ProductSlider sliderTitle="Top Rating" action={getTopRatingAction} selector={topRatingSelector} />
+            <ProductSlider sliderTitle="Top Rating" action={getTopRatingAction} selector={topRatingSelector}/>
             <Sponsors />
             <Category categoryName="Laptop" action={getLaptopAction} selector={laptopSelector} />
             <Category categoryName="Monitor" action={getMonitorAction} selector={monitorSelector} />

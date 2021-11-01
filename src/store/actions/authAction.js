@@ -1,6 +1,6 @@
 import ActionType from './actionType'
 import { loginApi } from '../../api/authApi'
-import {getCart} from "../actions/cartAction"
+import axios from 'axios'
 const Login = (email, password,history) => {
 
     return dispatch => {
@@ -15,7 +15,7 @@ const Login = (email, password,history) => {
 
                     const data = response.data.data;
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
-                    dispatch(getCart());
+
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     // axios.defaults.headers['Userid'] = data.userID;
                     history.push("/");
