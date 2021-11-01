@@ -12,6 +12,7 @@ import {
 import icons from '../../constant/icons';
 
 const HorizontalProduct = ({
+	cartProduct,
 	product,
 	canDelete,
 	onPressDelete,
@@ -36,9 +37,10 @@ const HorizontalProduct = ({
 				image={product.img1}
 			/>
 			<CardContent sx={styles.productContent}>
-				<Typography sx={styles.productName}>{product.name}</Typography>
+				<Typography 
+				sx={styles.productName}>{product.name}</Typography>
 				<Typography sx={styles.productQuantity}>
-					{product.quantity && 'Quantity: ' + product.quantity}
+					{(product.quantity && !cartProduct) && 'Quantity: ' + product.quantity}
 				</Typography>
 				<Box sx={styles.ratingContainer}>
 					<Rating
@@ -58,6 +60,19 @@ const HorizontalProduct = ({
 					</Typography>
 				</Box>
 			</CardContent>
+			<Box sx={styles.quantityContainer}>
+				<Typography
+					sx={styles.changeQty}
+				>
+					–
+				</Typography>
+				<Typography sx={styles.productCartQuantity}>{product.quantity}</Typography>
+				<Typography
+					sx={styles.changeQty}
+				>
+					＋
+				</Typography>
+			</Box>
 			<CardContent sx={styles.priceContainer}>
 				<Typography sx={styles.productPrice}>
 					{formatedPrice}
