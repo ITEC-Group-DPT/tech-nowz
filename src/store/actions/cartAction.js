@@ -74,11 +74,10 @@ const removeProductFromCart = (product) => {
         dispatch({
             type: ActionType.REMOVE_PRODUCT_FROM_CART,
             productID: productID,
+            price: product.price,
             quantity: product.quantity,
         });
         const response = await removeProductFromCartApi(productID);
-
-        console.log('remove product response: ', response);
 
         if (!response.data.success) {
             alert('remove product fail');

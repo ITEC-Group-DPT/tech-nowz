@@ -4,6 +4,7 @@ const initState = {
     isLoading: false,
     cart: {
         totalQuantity: 0,
+        totalPrice: 0,
     },
 }
 
@@ -18,7 +19,11 @@ const CartReducer = (state = initState, action) => {
             }
         case (ActionType.GET_CART_LIST_SUCCESS):
             return {
-                cart: action.data,
+                cart: {
+                    ...action.data,
+                    totalQuantity: parseInt(action.data.totalQuantity),
+                    totalPrice: parseInt(action.data.totalPrice),
+                },
                 isLoading: false,
             }
         case (ActionType.GET_CART_LIST_FAIL):
@@ -42,42 +47,40 @@ const CartReducer = (state = initState, action) => {
                 product.productID == action.data.productID
             );
 
-            if (indexAdd != -1) newCart["cartList"][indexAdd].quantity++;
-            else newCart["cartList"].push(action.data);
+            if (indexAdd != -1) {
+                newCart["cartList"][indexAdd].quantity++
+            }
+            else {
+                newCart["cartList"].push(action.data);
+            }
 
-            const newQuantity = (parseInt(state.cart.totalQuantity) + 1).toString();
+            newCart.totalPrice += action.data.price;
+            newCart.totalQuantity++;
 
             return {
                 ...state,
-                cart: {
-                    ...state.cart,
-                    cartList: newCart["cartList"],
-                    totalQuantity: newQuantity,
-                },
+                cart: newCart,
             }
         case (ActionType.REMOVE_PRODUCT_FROM_CART):
-
+            console.log('action remove: ', action);
             newCart = JSON.parse(JSON.stringify(state.cart))
 
             let indexRemove = newCart["cartList"].findIndex(product =>
                 product.productID == action.productID
             );
 
-            var newTotalQuantity = parseInt(state.cart.totalQuantity);
             if (indexRemove != -1) {
+                // let productQty = newCart["cartList"][indexRemove].quantity;
                 newCart["cartList"].splice(indexRemove, 1);
-                newTotalQuantity -= action.quantity;
+
+                newCart.totalQuantity -= action.quantity;
+                newCart.totalPrice -= (action.price * action.quantity);
             }
 
 
             return {
                 ...state,
-                cart: {
-                    ...state.cart,
-                    cartList: newCart["cartList"],
-                    totalQuantity: newTotalQuantity.toString(),
-                }
-
+                cart: newCart,
             }
         default: return state;
     }
