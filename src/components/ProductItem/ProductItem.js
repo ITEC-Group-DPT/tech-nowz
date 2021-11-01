@@ -10,10 +10,15 @@ import { icons } from '../../constant';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 
+//redux & api
+import { useDispatch } from 'react-redux';
+
 const ProductItem = ({ product, isSlider }) => {
+
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)
     const productURL = '/product/' + encodeURIComponent(product.name).replace(/%20/g, '-') + `?i=${product.productID}`;
     
+ 
     return (
         <Link to={productURL} style={styles.link}>
             <Card sx={isSlider ? styles.cardSlider : styles.card}>
@@ -40,9 +45,6 @@ const ProductItem = ({ product, isSlider }) => {
                         <Typography variant="h6" component="div" sx={isSlider ? styles.pPriceSlider : styles.pPrice}>
                             {formatedPrice}
                         </Typography>
-                        <Button size="small" sx={styles.pAddCart}>
-                            <icons.AddCart />
-                        </Button>
                     </CardActions>
                 </Box>
             </Card>

@@ -1,38 +1,66 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './cart.style'
 
-import { Container } from '@mui/material'
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import { cartSelector } from "../../store/selectors"
 
-const product = {
-    "productID": 69,
-    "type": "Headphone",
-    "description": "",
-    "spec": "- Kết nối: Wirless (đầu thu USB) \n- Drive: 50mm / 32 Ohm \n- Thời gian sử dụng pin lên đến 20 giờ \n- Led RGB tích hợp \n- Âm thanh 7.1 Surround",
-    "name": "Tai nghe không dây Corsair Virtuoso RGB Gunmetal",
-    "price": 5600000,
-    "rating": 2.66545,
-    "sold": 15,
-    "quantity": 2,
-    "dateCreated": "2021-07-02 20:50:24",
-    "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Headphone%2F09.webp?alt=media&token=17e9d962-608c-4325-aa60-c208f51b23a6",
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { Container, Box, Typography, Button } from '@mui/material'
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import { removeProductFromCart } from "../../store/actions/cartAction"
+
 const Cart = () => {
 
+    const { cartList, totalPrice, totalQuantity } = useSelector(cartSelector);
+
+    const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
+    console.log('cartList: ', cartList);
+
+    const dispatch = useDispatch();
     return (
-        <Container sx={styles.main}>
-            <HorizontalProduct
-                product={product} 
-                canDelete
-                ratingSize = {"20px"}
-                onPressDelete = {() => console.log('press 1')}
-            />
-            <HorizontalProduct
-                product={product} 
-                canDelete
-                onPressDelete = {() => console.log('press 2')}
-                />
-        </Container>
+        <Box sx={styles.main}>
+            <Box sx={{ flex: 7 }}>
+                {
+                    cartList ?
+                        cartList.map(product =>
+                            <HorizontalProduct
+                                cartProduct
+                                product={product}
+                                canDelete
+                                onPressDelete={
+                                    () => dispatch(removeProductFromCart(product))
+                                }
+                            />)
+                        : <></>
+                }
+            </Box>
+            <Box sx={styles.summary}>
+                <Box sx={styles.summaryData}>
+                    <Typography sx={styles.orderSummary}>
+                        Order Summary
+                    </Typography>
+
+                    <Box sx={styles.taxContainer}>
+                        <Typography sx={styles.summaryTitle}>Tax</Typography>
+                        <Typography sx={styles.tax}>0đ</Typography>
+                    </Box>
+
+                    <Box sx={styles.totalContainer}>
+                        <Typography sx={styles.summaryTitle}>Total</Typography>
+                        <Typography sx={styles.total}>
+                            {formatedPrice}</Typography>
+                    </Box>
+                </Box>
+
+                <Button
+                    sx={styles.checkoutButton}
+                    variant="contained"
+                    color="error"
+                >
+                    Checkout
+                </Button>
+            </Box>
+
+        </Box>
     )
 }
 
