@@ -78,7 +78,6 @@ const emptyAddress = {
 	city: "",
 	phone: "",
 };
-
 const emptycartlist = {
 	cartList: [
 		{
@@ -117,20 +116,20 @@ const testcart = [
 		sold: 14,
 		quantity: 7,
 		price: 3400000,
-	},
+	}
 ];
 const Payment = () => {
 	const [addressBook, setAddressBook] = useState([]);
-	const [cartList, setCartList] = useState(emptycartlist);
+	const [cartList, setCartList] = useState([]);
 	useEffect(() => {
 		getAddressBook().then((res) => {
 			if (res.data.success == true) setAddressBook(res.data.data);
 		});
-		// getCartApi().then(res => {
-		// 	if (res.data.success == true){
-		// 		setCartList(res.data.data);
-		// 	}
-		// });
+		getCartApi().then(res => {
+			if (res.data.success == true){
+				setCartList(res.data.data);
+			}
+		});
 	}, []);
 
 	const [chosenIDAddress, setChosenIDAddress] = useState(-1); //-1 is default, create new address, for radio
@@ -152,7 +151,6 @@ const Payment = () => {
 		};
 	}
 	function onClickRadioBtn(id) {
-		console.log(id);
 		if (id == -1) {
 			setChosenIDAddress(-1);
 			setChosenAddress(emptyAddress);
@@ -204,6 +202,7 @@ const Payment = () => {
 
 			{/* <FormAddress address={indexOfAddress}/> */}
 			<PaymentStepper
+				idaddress={chosenIDAddress}
 				address={chosenAddress}
 				setAddress={setChosenAddress}
 				setDisableAddress={setDisableAddress}

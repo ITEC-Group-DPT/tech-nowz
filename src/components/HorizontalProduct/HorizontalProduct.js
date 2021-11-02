@@ -20,7 +20,6 @@ const HorizontalProduct = ({
 	ratingSizeMedium = "1rem",
 	ratingSizeSmall = "0.8rem",
 }) => {
-	console.log(product);
 	const formatedPrice = new Intl.NumberFormat("vi-VN", {
 		style: "currency",
 		currency: "VND",
