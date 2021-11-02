@@ -37,6 +37,7 @@ const styles = {
 		objectFit: 'contain',
 	},
 	pNameWrapper: {
+		minHeight:"50px",
 		padding: {
 			xs: '0px 10px',
 			lg: '10px',
@@ -49,13 +50,24 @@ const styles = {
 			lg: '.85rem',
 		},
 		fontWeight: '500',
-		minHeight: '80px',
+		lineHeight: "20px",
+		textOverflow: "ellipsis",
+        display: "-webkit-box",
+        overflow: "hidden",
+        WebkitLineClamp: "2",
+        WebkitBoxOrient: "vertical",
 	},
 	pNameSlider: {
 		margin: 0,
 		fontSize: '.85rem',
 		fontWeight: '500',
-		minHeight: '80px',
+		lineHeight: "20px",
+		textOverflow: "ellipsis",
+        display: "-webkit-box",
+        overflow: "hidden",
+        WebkitLineClamp: "2",
+        WebkitBoxOrient: "vertical",
+
 	},
 	pRatingWrapper: {
 		display: 'flex',

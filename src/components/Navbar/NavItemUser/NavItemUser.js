@@ -22,7 +22,7 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
                     <Link to='/checkout/cart' style={styles.navLink}>
                         <Box sx={styles.wrapper}>
                             <Badge badgeContent={cart.totalQuantity || 0} color="error">
-                                <icons.Cart />
+                                <icons.Cart sx={styles.icon} />
                             </Badge>
                             <Typography sx={styles.navTitle}>Cart</Typography>
                         </Box>

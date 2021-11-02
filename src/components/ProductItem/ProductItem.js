@@ -35,11 +35,7 @@ const ProductItem = ({ product, isSlider }) => {
 						sx={styles.pImage}
 					/>
 					<CardContent sx={styles.pNameWrapper}>
-						<Typography
-							variant="h6"
-							component="div"
-							sx={isSlider ? styles.pNameSlider : styles.pName}
-						>
+						<Typography sx={isSlider ? styles.pNameSlider : styles.pName}>
 							{product.name}
 						</Typography>
 					</CardContent>
@@ -53,19 +49,12 @@ const ProductItem = ({ product, isSlider }) => {
 								isSlider ? styles.pRatingSlider : styles.pRating
 							}
 						/>
-						<Typography
-							variant="h5"
-							sx={isSlider ? styles.pSoldSlider : styles.pSold}
-						>
+						<Typography sx={isSlider ? styles.pSoldSlider : styles.pSold}>
 							({product.sold})
 						</Typography>
 					</div>
 					<CardActions sx={styles.cardBottom}>
-						<Typography
-							variant="h6"
-							component="div"
-							sx={isSlider ? styles.pPriceSlider : styles.pPrice}
-						>
+						<Typography sx={isSlider ? styles.pPriceSlider : styles.pPrice}>
 							{formatedPrice}
 						</Typography>
 					</CardActions>

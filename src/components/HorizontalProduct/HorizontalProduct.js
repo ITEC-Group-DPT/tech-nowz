@@ -105,12 +105,7 @@ const HorizontalProduct = ({
 			}
 			<CardContent sx={styles.priceContainer}>
 				<Typography
-					sx={
-						(Object.assign(styles.productPrice),
-						pricePadding && {
-							paddingLeft: pricePadding,
-						})
-					}
+					sx={styles.productPrice}
 				>
 					{formatedPrice}
 				</Typography>

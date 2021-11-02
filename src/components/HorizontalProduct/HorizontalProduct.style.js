@@ -24,12 +24,11 @@ const styles = {
         fontWeight: '300',
         fontFamily: "'Roboto Slab', serif",
         fontSize: {
-            xs: "0.75rem",
-            md: "1rem"
+            xs: "13px",
+            md: "16px"
         },
 
         //max 2 line
-        lineHeight: "16px",
         textOverflow: "ellipsis",
         display: "-webkit-box",
         overflow: "hidden",
@@ -47,10 +46,10 @@ const styles = {
         fontFamily: "'IBM Plex Serif', serif",
         fontWeight: "bold",
         fontSize: {
-            xs: ".7rem",
-            md: "1rem",
+            xs: "11px",
+            md: "16px",
         },
-        minWidth: { sm: "72px", md: "100px" },
+       minWidth: {xs: "70px", md: "100px" },
 
     },
     ratingContainer: {
