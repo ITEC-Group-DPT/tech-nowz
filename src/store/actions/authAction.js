@@ -1,5 +1,6 @@
 import ActionType from './actionType'
 import { signInApi, signUpApi } from '../../api/authApi'
+import { getCart } from "../actions/cartAction"
 
 const signIn = (email, password, history) => {
     return dispatch => {
@@ -9,11 +10,12 @@ const signIn = (email, password, history) => {
                 const data = response.data.data;
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
+                    dispatch(getCart());
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
                     history.push("/");
                 }
                 else
-                    dispatch({ type: ActionType.SIGNIN_FAIL, data: data  });
+                    dispatch({ type: ActionType.SIGNIN_FAIL, data: data });
             })
     }
 }
@@ -27,10 +29,11 @@ const signUp = (email, username, password, history) => {
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
                     sessionStorage.setItem("userInfo", JSON.stringify(data));
+                    dispatch(getCart());
                     history.push("/");
                 }
                 else
-                    dispatch({ type: ActionType.SIGNUP_FAIL, data: data  });
+                    dispatch({ type: ActionType.SIGNUP_FAIL, data: data });
             })
     }
 }
@@ -55,16 +58,24 @@ const removePasswordError = () => {
 
 const removeEmailSignUpError = () => {
     return dispatch => {
-        dispatch({ type: ActionType.REMOVE_EMAIL_SIGNUP_ERROR})
+        dispatch({ type: ActionType.REMOVE_EMAIL_SIGNUP_ERROR })
     }
 }
 
 const logOut = (history) => {
     return dispatch => {
-        dispatch({ type: ActionType.LOGOUT})
+        dispatch({ type: ActionType.LOGOUT })
         sessionStorage.removeItem("userInfo")
         history.push("/")
     }
 }
 
-export { signIn, signUp, sessionLogin, removeEmailError, removePasswordError, removeEmailSignUpError, logOut };
+export {
+    signIn,
+    signUp,
+    sessionLogin,
+    removeEmailError,
+    removePasswordError,
+    removeEmailSignUpError,
+    logOut
+};

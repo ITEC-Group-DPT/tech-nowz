@@ -1,6 +1,5 @@
-import React,{useEffect} from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ScrollToTop from '../components/ScrollToTop';
 import Authentication from '../pages/Authentication/Authentication';
 import HomeNavigation from './HomeNavigation';
@@ -8,6 +7,7 @@ import { sessionLogin } from '../store/actions/authAction';
 
 import { userInfoSelector } from '../store/selectors'
 import { useDispatch, useSelector } from 'react-redux';
+import { getCart } from '../store/actions/cartAction';
 
 const AppNavigation = () => {
 
@@ -15,10 +15,10 @@ const AppNavigation = () => {
 
     useEffect(() => {
         const userInfo = sessionStorage.getItem("userInfo");
-        console.log('session get: ', userInfo);
         if (userInfo != null) {
             console.log('sessionLogin');
             dispatch(sessionLogin(JSON.parse(userInfo)));
+            dispatch(getCart());
         }
     }, [])
 
@@ -33,4 +33,4 @@ const AppNavigation = () => {
     )
 }
 
-export default AppNavigation
+export default AppNavigation;

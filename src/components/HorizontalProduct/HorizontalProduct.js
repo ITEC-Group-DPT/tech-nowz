@@ -12,11 +12,18 @@ import {
 import icons from '../../constant/icons';
 
 const HorizontalProduct = ({
+	cartProduct,
 	product,
 	canDelete,
 	onPressDelete,
+	decreaseQuantity,
+	increaseQuantity,
 	ratingSizeMedium = '1rem',
 	ratingSizeSmall = '0.8rem',
+	imageSize,
+	marginTop,
+	width,
+	pricePadding,
 }) => {
 	const formatedPrice = new Intl.NumberFormat('vi-VN', {
 		style: 'currency',
@@ -24,7 +31,17 @@ const HorizontalProduct = ({
 	}).format(product.price);
 
 	return (
-		<Card sx={styles.productCard}>
+		<Card
+			sx={Object.assign(
+				styles.productCard,
+				marginTop && {
+					marginTop: marginTop,
+				},
+				width && {
+					width: width,
+				}
+			)}
+		>
 			{canDelete && (
 				<Button onClick={onPressDelete} sx={styles.buttonClose}>
 					<icons.Close sx={styles.closeIc} />
@@ -32,13 +49,20 @@ const HorizontalProduct = ({
 			)}
 			<CardMedia
 				component="img"
-				sx={styles.productImg}
+				sx={Object.assign(
+					styles.productImg,
+					imageSize && {
+						height: imageSize,
+						width: imageSize,
+					}
+				)}
 				image={product.img1}
 			/>
 			<CardContent sx={styles.productContent}>
-				<Typography sx={styles.productName}>{product.name}</Typography>
+				<Typography
+					sx={styles.productName}>{product.name}</Typography>
 				<Typography sx={styles.productQuantity}>
-					{product.quantity && 'Quantity: ' + product.quantity}
+					{(product.quantity && !cartProduct) && 'Quantity: ' + product.quantity}
 				</Typography>
 				<Box sx={styles.ratingContainer}>
 					<Rating
@@ -58,8 +82,36 @@ const HorizontalProduct = ({
 					</Typography>
 				</Box>
 			</CardContent>
+			{
+				cartProduct &&
+				<CardContent
+					sx={styles.quantityContainer}>
+
+					<Typography
+						onClick={decreaseQuantity}
+						sx={styles.changeQty}
+					>
+						–
+					</Typography>
+					<Typography sx={styles.productCartQuantity}>{product.quantity}</Typography>
+					<Typography
+						onClick={increaseQuantity}
+
+						sx={styles.changeQty}
+					>
+						＋
+					</Typography>
+				</CardContent>
+			}
 			<CardContent sx={styles.priceContainer}>
-				<Typography sx={styles.productPrice}>
+				<Typography
+					sx={
+						(Object.assign(styles.productPrice),
+						pricePadding && {
+							paddingLeft: pricePadding,
+						})
+					}
+				>
 					{formatedPrice}
 				</Typography>
 			</CardContent>

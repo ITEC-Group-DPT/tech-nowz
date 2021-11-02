@@ -35,8 +35,8 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
                                 <Button
                                     ref={anchorRef}
                                     id="composition-button"
-                                    aria-controls={open ? 'composition-menu' : undefined}
-                                    aria-expanded={open ? 'true' : undefined}
+                                    aria-controls={'composition-menu'}
+                                    aria-expanded={'true'}
                                     aria-haspopup="true"
                                     onClick={() => clickRef.current()}
                                     sx={styles.btnNav}
@@ -54,4 +54,3 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
 }
 
 export default NavUserItems
-

@@ -1,39 +1,119 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './cart.style'
 
-import { Container } from '@mui/material'
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import { cartSelector } from "../../store/selectors"
 
-const product = {
-    "productID": 69,
-    "type": "Headphone",
-    "description": "",
-    "spec": "- Kết nối: Wirless (đầu thu USB) \n- Drive: 50mm / 32 Ohm \n- Thời gian sử dụng pin lên đến 20 giờ \n- Led RGB tích hợp \n- Âm thanh 7.1 Surround",
-    "name": "Tai nghe không dây Corsair Virtuoso RGB Gunmetal",
-    "price": 5600000,
-    "rating": 2.66545,
-    "sold": 15,
-    "quantity": 2,
-    "dateCreated": "2021-07-02 20:50:24",
-    "img1": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Headphone%2F09.webp?alt=media&token=17e9d962-608c-4325-aa60-c208f51b23a6",
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { Container, Box, Typography, Button } from '@mui/material'
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import { removeProductFromCart, increseProductQuantity, decreseProductQuantity, removeAllCart } from "../../store/actions/cartAction"
+import EmptyCart from '../../components/EmptyCart/EmptyCart';
+
 const Cart = () => {
 
+    const { cartList, totalPrice, isLoading } = useSelector(cartSelector);
+
+    const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
+    console.log('cartList: ', cartList);
+
+    const dispatch = useDispatch();
+
+    const removeAllProduct = () => {
+        dispatch(removeAllCart());
+    }
+    const increaseQuantity = (product) => {
+        dispatch(increseProductQuantity(product));
+    }
+
+    const decreaseQuantity = (product) => {
+        if (product.quantity > 1) {
+            dispatch(decreseProductQuantity(product));
+        }
+    }
+
+    const deleteProduct = (product) => {
+        dispatch(removeProductFromCart(product));
+    }
     return (
-        <Container sx={styles.main}>
-            <HorizontalProduct
-                product={product} 
-                canDelete
-                ratingSize = {"20px"}
-                onPressDelete = {() => console.log('press 1')}
-            />
-            <HorizontalProduct
-                product={product} 
-                canDelete
-                onPressDelete = {() => console.log('press 2')}
-                />
-        </Container>
+        <Box sx={styles.main}>
+            {
+                (cartList && cartList.length == 0)
+                    ? <EmptyCart />
+                    : null
+            }
+            {cartList && cartList.length != 0 ?
+                <Box sx={{ flex: 7, position: "relative" }}>
+                    <Box>
+                        <Box sx={styles.removeRow}>
+                            <Typography
+                                sx={styles.myCart}
+                            >
+                                My Cart
+                            </Typography>
+
+                            <Button
+                                onClick={removeAllProduct}
+                                color="error"
+                                sx={styles.removeAll}
+                            >
+                                Remove all
+                            </Button>
+                        </Box>
+                        {cartList.map(product =>
+                            <HorizontalProduct
+                                key={product.productID}
+                                cartProduct
+                                product={product}
+                                canDelete
+                                onPressDelete={() =>
+                                    deleteProduct(product)
+                                }
+                                increaseQuantity={() => increaseQuantity(product)
+                                }
+                                decreaseQuantity={() => decreaseQuantity(product)
+                                }
+                            />)
+                        }
+                    </Box>
+
+
+                </Box>
+                : null
+            }
+            {
+                cartList && cartList.length != 0 ?
+                    <Box sx={styles.summary}>
+                        <Box sx={styles.summaryData}>
+                            <Typography sx={styles.orderSummary}>
+                                Order Summary
+                            </Typography>
+
+                            <Box sx={styles.taxContainer}>
+                                <Typography sx={styles.summaryTitle}>Tax</Typography>
+                                <Typography sx={styles.tax}>0đ</Typography>
+                            </Box>
+
+                            <Box sx={styles.totalContainer}>
+                                <Typography sx={styles.summaryTitle}>Total</Typography>
+                                <Typography sx={styles.total}>
+                                    {formatedPrice}</Typography>
+                            </Box>
+                        </Box>
+
+                        <Button
+                            sx={styles.checkoutButton}
+                            variant="contained"
+                            color="error"
+                        >
+                            Checkout
+                        </Button>
+                    </Box>
+                    : null
+            }
+
+        </Box>
     )
 }
 
 export default Cart
+

@@ -1,4 +1,4 @@
-import colors from "./colors";
-import icons from "./icons"
+import colors from './colors';
+import icons from './icons';
 
-export {colors, icons};
+export { colors, icons };
