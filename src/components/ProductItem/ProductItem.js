@@ -10,6 +10,9 @@ import { icons } from '../../constant';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 
+//redux & api
+import { useDispatch } from 'react-redux';
+
 const ProductItem = ({ product, isSlider }) => {
 	const formatedPrice = new Intl.NumberFormat('vi-VN', {
 		style: 'currency',
@@ -65,9 +68,6 @@ const ProductItem = ({ product, isSlider }) => {
 						>
 							{formatedPrice}
 						</Typography>
-						<Button size="small" sx={styles.pAddCart}>
-							<icons.AddCart />
-						</Button>
 					</CardActions>
 				</Box>
 			</Card>

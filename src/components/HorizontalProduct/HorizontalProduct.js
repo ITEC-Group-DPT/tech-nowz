@@ -12,9 +12,12 @@ import {
 import icons from '../../constant/icons';
 
 const HorizontalProduct = ({
+	cartProduct,
 	product,
 	canDelete,
 	onPressDelete,
+	decreaseQuantity,
+	increaseQuantity,
 	ratingSizeMedium = '1rem',
 	ratingSizeSmall = '0.8rem',
 	imageSize,
@@ -56,9 +59,10 @@ const HorizontalProduct = ({
 				image={product.img1}
 			/>
 			<CardContent sx={styles.productContent}>
-				<Typography sx={styles.productName}>{product.name}</Typography>
+				<Typography
+					sx={styles.productName}>{product.name}</Typography>
 				<Typography sx={styles.productQuantity}>
-					{product.quantity && 'Quantity: ' + product.quantity}
+					{(product.quantity && !cartProduct) && 'Quantity: ' + product.quantity}
 				</Typography>
 				<Box sx={styles.ratingContainer}>
 					<Rating
@@ -78,6 +82,27 @@ const HorizontalProduct = ({
 					</Typography>
 				</Box>
 			</CardContent>
+			{
+				cartProduct &&
+				<CardContent
+					sx={styles.quantityContainer}>
+
+					<Typography
+						onClick={decreaseQuantity}
+						sx={styles.changeQty}
+					>
+						–
+					</Typography>
+					<Typography sx={styles.productCartQuantity}>{product.quantity}</Typography>
+					<Typography
+						onClick={increaseQuantity}
+
+						sx={styles.changeQty}
+					>
+						＋
+					</Typography>
+				</CardContent>
+			}
 			<CardContent sx={styles.priceContainer}>
 				<Typography
 					sx={
