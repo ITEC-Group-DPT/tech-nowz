@@ -1,4 +1,4 @@
-import { React, useState,useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import {
 	FormControl,
 	FormLabel,
@@ -12,12 +12,13 @@ import {
 import { Box } from "@mui/system";
 import CardAddress from "../../components/CardAddresss/CardAddress";
 import { getAddressBook, createAddressBook } from "../../api/addressApi";
+import { getCartApi } from "../../api/cartApi";
 import RadioAddressPayment from "../../components/RadioAddressPayment/RadioAddressPayment";
 import PaymentStepper from "../../components/PaymentStepper/PaymentStepper";
 import FormAddress from "../../components/FormAddress/FormAddress";
 import AddressBook from "../AddressBook/AddressBook";
-
-const addressBook =[
+import HorizontalProduct from "../../components/HorizontalProduct/HorizontalProduct";
+const addressBook = [
 	{
 		deliveryID: 31,
 		address: "turơng minh, nam Phú 123, PSd, ướerwerwerwer",
@@ -68,8 +69,7 @@ const addressBook =[
 		phone: "sdsd",
 		userID: 17,
 	},
-]
-
+];
 const emptyAddress = {
 	name: "",
 	addressInForm: "",
@@ -78,15 +78,61 @@ const emptyAddress = {
 	city: "",
 	phone: "",
 };
+
+const emptycartlist = {
+	cartList: [
+		{
+			productID: 2,
+			name: "CPU AMD Ryzen 3 2200G",
+			img1: "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu2.webp?alt=media&token=c1f59c93-085e-479b-9472-3165d38acce4",
+			sold: 51,
+			quantity: 2,
+			price: 2590000,
+		},
+		{
+			productID: 3,
+			name: "CPU Intel Core i3 9100",
+			img1: "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu3.webp?alt=media&token=6fe4200f-79b7-4b10-ae4d-b8c4cd686c34",
+			sold: 14,
+			quantity: 7,
+			price: 3400000,
+		},
+	],
+	totalPrice: 28980000,
+	totalQuantity: "9",
+};
+const testcart = [
+	{
+		productID: 2,
+		name: "CPU AMD Ryzen 3 2200G",
+		img1: "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu2.webp?alt=media&token=c1f59c93-085e-479b-9472-3165d38acce4",
+		sold: 51,
+		quantity: 2,
+		price: 2590000,
+	},
+	{
+		productID: 3,
+		name: "CPU Intel Core i3 9100",
+		img1: "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu3.webp?alt=media&token=6fe4200f-79b7-4b10-ae4d-b8c4cd686c34",
+		sold: 14,
+		quantity: 7,
+		price: 3400000,
+	},
+];
 const Payment = () => {
 	const [addressBook, setAddressBook] = useState([]);
-
+	const [cartList, setCartList] = useState(emptycartlist);
 	useEffect(() => {
 		getAddressBook().then((res) => {
-			if (res.data.success == true) 
-			setAddressBook(res.data.data);
+			if (res.data.success == true) setAddressBook(res.data.data);
 		});
-	}, [])
+		// getCartApi().then(res => {
+		// 	if (res.data.success == true){
+		// 		setCartList(res.data.data);
+		// 	}
+		// });
+	}, []);
+
 	const [chosenIDAddress, setChosenIDAddress] = useState(-1); //-1 is default, create new address, for radio
 	const [chosenAddress, setChosenAddress] = useState(emptyAddress);
 	const [disableAddress, setDisableAddress] = useState(false);
@@ -126,7 +172,7 @@ const Payment = () => {
 	}
 
 	return (
-		<Box sx={{minHeight:"65%"}}>
+		<Box sx={{ minHeight: "65%" }}>
 			<Container sx={{ my: 2 }}>
 				<Typography
 					variant="h4"
@@ -157,11 +203,11 @@ const Payment = () => {
 			{/* <FormAddress address={chosenAddress} /> */}
 
 			{/* <FormAddress address={indexOfAddress}/> */}
-
 			<PaymentStepper
 				address={chosenAddress}
 				setAddress={setChosenAddress}
 				setDisableAddress={setDisableAddress}
+				cartList={cartList}
 			/>
 		</Box>
 	);

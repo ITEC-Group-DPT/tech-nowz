@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './HorizontalProduct.style';
+import React from "react";
+import styles from "./HorizontalProduct.style";
 import {
 	Box,
 	Typography,
@@ -8,20 +8,22 @@ import {
 	CardContent,
 	Button,
 	Rating,
-} from '@mui/material';
-import icons from '../../constant/icons';
+} from "@mui/material";
+import icons from "../../constant/icons";
 
 const HorizontalProduct = ({
 	cartProduct,
 	product,
 	canDelete,
 	onPressDelete,
-	ratingSizeMedium = '1rem',
-	ratingSizeSmall = '0.8rem',
+	noQuantityChange,
+	ratingSizeMedium = "1rem",
+	ratingSizeSmall = "0.8rem",
 }) => {
-	const formatedPrice = new Intl.NumberFormat('vi-VN', {
-		style: 'currency',
-		currency: 'VND',
+	console.log(product);
+	const formatedPrice = new Intl.NumberFormat("vi-VN", {
+		style: "currency",
+		currency: "VND",
 	}).format(product.price);
 
 	return (
@@ -37,10 +39,11 @@ const HorizontalProduct = ({
 				image={product.img1}
 			/>
 			<CardContent sx={styles.productContent}>
-				<Typography 
-				sx={styles.productName}>{product.name}</Typography>
+				<Typography sx={styles.productName}>{product.name}</Typography>
 				<Typography sx={styles.productQuantity}>
-					{(product.quantity && !cartProduct) && 'Quantity: ' + product.quantity}
+					{product.quantity &&
+						!cartProduct &&
+						"Quantity: " + product.quantity}
 				</Typography>
 				<Box sx={styles.ratingContainer}>
 					<Rating
@@ -61,17 +64,11 @@ const HorizontalProduct = ({
 				</Box>
 			</CardContent>
 			<Box sx={styles.quantityContainer}>
-				<Typography
-					sx={styles.changeQty}
-				>
-					–
+				{!noQuantityChange && <Typography sx={styles.changeQty}>–</Typography>}
+				<Typography sx={styles.productCartQuantity}>
+					{product.quantity}
 				</Typography>
-				<Typography sx={styles.productCartQuantity}>{product.quantity}</Typography>
-				<Typography
-					sx={styles.changeQty}
-				>
-					＋
-				</Typography>
+				<Typography sx={styles.changeQty}>{noQuantityChange ? 'x' : '-'}</Typography>
 			</Box>
 			<CardContent sx={styles.priceContainer}>
 				<Typography sx={styles.productPrice}>
