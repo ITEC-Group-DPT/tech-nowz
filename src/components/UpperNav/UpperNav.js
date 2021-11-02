@@ -114,7 +114,7 @@ const UpperNav = () => {
 					</Box>
 				</Grid>
 				<Grid item lg={3} xs={12} sx={styles.menuContainer}>
-					<Grid container spacing={1}>
+					<Grid container spacing={1} sx = {{alignItems:"center"}}>
 						<Grid item xs={6}>
 							<Link to="/checkout/cart" style={styles.menuItem}>
 								<Badge badgeContent={cart.totalQuantity || 0} color="error">
