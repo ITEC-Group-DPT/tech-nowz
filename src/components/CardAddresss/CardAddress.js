@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ExitToAppSharp } from "@mui/icons-material";
 import FormAddress from "../FormAddress/FormAddress";
 
-const CardAddress = ({address,onDelete,onEdit}) => {
+const CardAddress = ({ address, onDelete, onEdit, btnAppear = true }) => {
 	const [formAppear, setFormAppear] = useState(false);
 	return (
 		<Card
@@ -28,32 +28,41 @@ const CardAddress = ({address,onDelete,onEdit}) => {
 					Phone: {address.phone}
 				</Typography>
 			</CardContent>
-
-			<Divider sx={{ mx: 2 }}></Divider>
-
-			<CardActions
-				sx={{ justifyContent: "flex-end", bgcolor: "#f5f5f5" }}>
-				<Button
-					disabled={formAppear}
-					onClick={()=> setFormAppear(true)}
-					variant="outlined"
-					size="small"
-					color="success"
-					startIcon={<DeleteIcon fontSize="small" />}>
-					Edit
-				</Button>
-				<Button
-					onClick={()=> onDelete(address.deliveryID)}
-					variant="outlined"
-					size="small"
-					color="error"
-					startIcon={<DeleteIcon fontSize="small" />}>
-					Delete
-				</Button>
-			</CardActions>
-			{formAppear 
-			?  <FormAddress address={address} formCommand='edit' formSubmit={onEdit} setAppear={setFormAppear}/>
-			: <></>}
+			{btnAppear && (
+				<div>
+					<Divider sx={{ mx: 2 }}></Divider>
+					<CardActions
+						sx={{ justifyContent: "flex-end", bgcolor: "#f5f5f5" }}>
+						<Button
+							disabled={formAppear}
+							onClick={() => setFormAppear(true)}
+							variant="outlined"
+							size="small"
+							color="success"
+							startIcon={<DeleteIcon fontSize="small" />}>
+							Edit
+						</Button>
+						<Button
+							onClick={() => onDelete(address.deliveryID)}
+							variant="outlined"
+							size="small"
+							color="error"
+							startIcon={<DeleteIcon fontSize="small" />}>
+							Delete
+						</Button>
+					</CardActions>
+					{formAppear ? (
+						<FormAddress
+							address={address}
+							formCommand="edit"
+							formSubmit={onEdit}
+							setAppear={setFormAppear}
+						/>
+					) : (
+						<></>
+					)}
+				</div>
+			)}
 		</Card>
 	);
 };

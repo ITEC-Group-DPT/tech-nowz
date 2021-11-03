@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './HorizontalProduct.style';
+import React from "react";
+import styles from "./HorizontalProduct.style";
 import {
 	Box,
 	Typography,
@@ -8,8 +8,8 @@ import {
 	CardContent,
 	Button,
 	Rating,
-} from '@mui/material';
-import icons from '../../constant/icons';
+} from "@mui/material";
+import icons from "../../constant/icons";
 
 const HorizontalProduct = ({
 	cartProduct,
@@ -25,9 +25,9 @@ const HorizontalProduct = ({
 	width,
 	pricePadding,
 }) => {
-	const formatedPrice = new Intl.NumberFormat('vi-VN', {
-		style: 'currency',
-		currency: 'VND',
+	const formatedPrice = new Intl.NumberFormat("vi-VN", {
+		style: "currency",
+		currency: "VND",
 	}).format(product.price);
 
 	return (
@@ -62,7 +62,9 @@ const HorizontalProduct = ({
 				<Typography
 					sx={styles.productName}>{product.name}</Typography>
 				<Typography sx={styles.productQuantity}>
-					{(product.quantity && !cartProduct) && 'Quantity: ' + product.quantity}
+					{product.quantity &&
+						!cartProduct &&
+						"Quantity: " + product.quantity}
 				</Typography>
 				<Box sx={styles.ratingContainer}>
 					<Rating
