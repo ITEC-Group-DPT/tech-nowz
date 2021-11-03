@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Home.styles'
 import { Box } from '@mui/system';
 import Category from '../../components/Category/Category';
