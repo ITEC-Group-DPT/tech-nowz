@@ -12,9 +12,10 @@ const getOrderDetailAPI = (orderID) => {
 		TEST_API_URL + `orderAPI.php?command=${command}&orderID=${orderID}`
 	);
 };
-const createOrder= (name, address, phone,totalPrice,cartList) => {
+const createOrder= (deliID,name, address, phone,totalPrice,cartList) => {
 	let data = new FormData();
 	data.append("command", "createOrder");
+	data.append("deliID", deliID);
 	data.append("name", name);
 	data.append("address", address);
 	data.append("phone", phone);
