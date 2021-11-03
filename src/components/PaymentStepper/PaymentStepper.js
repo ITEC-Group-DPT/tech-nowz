@@ -70,11 +70,12 @@ export default function PaymentStepper({
 				let arr = [product.productID, product.quantity]
 				productIDs.push(arr)
 			}
-			if (idaddress == -1){
-				createAddressBook(address.name,joinAddress,address.phone)	
-			}else editAddressBook(idaddress ,address.name,joinAddress,address.phone)
+			// if (idaddress == -1){
+			// 	createAddressBook(address.name,joinAddress,address.phone)	
+			// }else editAddressBook(idaddress ,address.name,joinAddress,address.phone)
 
 			createOrder(
+				idaddress,
 				address.name,
 				joinAddress,
 				address.phone,
