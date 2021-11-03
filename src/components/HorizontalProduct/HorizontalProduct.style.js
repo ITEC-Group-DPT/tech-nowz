@@ -92,17 +92,6 @@ const styles = {
         alignItems: 'center',
         userSelect: "none",
     },
-    productCartQuantity: {
-        fontSize: { xs: "0.6rem", md: "0.9rem" },
-        color: '#656565',
-        fontFamily: "'IBM Plex Serif', serif",
-    },
-    changeQty: {
-        fontSize: { xs: "0.6rem", md: "0.8rem" },
-        cursor: 'pointer',
-        display: "flex",
-        alignItems: 'center',
-    },
     buttonClose: {
         color: 'black',
         position: 'absolute',

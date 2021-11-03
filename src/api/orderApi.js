@@ -12,14 +12,5 @@ const getOrderDetailAPI = (orderID) => {
 		TEST_API_URL + `orderAPI.php?command=${command}&orderID=${orderID}`
 	);
 };
-const createOrder= (name, address, phone,totalPrice,cartList) => {
-	let data = new FormData();
-	data.append("command", "createOrder");
-	data.append("name", name);
-	data.append("address", address);
-	data.append("phone", phone);
-	data.append("totalPrice", totalPrice);
-	data.append("list", JSON.stringify(cartList));
-	return axios.post(TEST_API_URL + `orderAPI.php`, data);
-};
-export { getOrderListAPI, getOrderDetailAPI,createOrder};
+
+export { getOrderListAPI, getOrderDetailAPI };

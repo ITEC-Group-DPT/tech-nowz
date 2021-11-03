@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, createRef } from "react";
 import {
 	Input,
 	InputLabel,
@@ -23,42 +23,21 @@ const FormAddress = ({
 	formCommand,
 	formSubmit,
 	setAppear,
-	paymentChooseNewAddress = false,
 }) => {
-	// console.log(address);
-	let arrAddress = ["","","",""];
+	let arrAddress = address.address.split(", ");
 	const [form, setFormAddress] = useState({
-		name: "",
-		addressInForm: "",
-		ward: "",
-		district: "",
-		city: "",
-		phone: "",
+		name: address.name,
+		addressInForm: arrAddress[0],
+		ward: arrAddress[1],
+		district: arrAddress[2],
+		city: arrAddress[3],
+		phone: address.phone,
 	});
-
-	useEffect(() => {
-		arrAddress = address.address.split(", ");
-		while (arrAddress.length < 4) { //for error process 
-			arrAddress.push("");
-		}
-		//if (arrAddress.length == 1) arrAddress = ["","","",""] //for change textfield
-		setFormAddress({
-			name: address.name,
-			addressInForm: arrAddress[0],
-			ward: arrAddress[1],
-			district: arrAddress[2],
-			city: arrAddress[3],
-			phone: address.phone,
-		});
-	}, [address])
 	// const [addressForm,setAddress] = useState(arrAddress[0])
 	// const [ward,setWard] = useState(arrAddress[1])
 	// const [district,setDistrict] = useState(arrAddress[2])
 	// const [city,setCity] = useState(arrAddress[3])
 	// const [phone,setPhone] = useState(address.phone)
-	function test(){
-		console.log(1);
-	}
 	function handleSubmit(e) {
 		e.preventDefault();
 		let id = address.deliveryID;
@@ -105,21 +84,21 @@ const FormAddress = ({
 						setFormAddress({ ...form, name: e.target.value })
 					}
 					placeholder="Type your name here"
-					value={form.name}
+					defaultValue={form.name}
 					variant="standard"
 				/>
 				<TextField
 					sx={{ mb: 2 }}
 					name="address"
 					label="Address"
+					placeholder="Type your address here"
 					onChange={(e) =>
 						setFormAddress({
 							...form,
 							addressInForm: e.target.value,
 						})
 					}
-					placeholder="Type your address here"
-					value={form.addressInForm}
+					defaultValue={form.addressInForm}
 					variant="standard"
 				/>
 				<TextField
@@ -130,7 +109,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, ward: e.target.value })
 					}
-					value={form.ward}
+					defaultValue={form.ward}
 					variant="standard"
 				/>
 				<TextField
@@ -141,7 +120,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, district: e.target.value })
 					}
-					value={form.district}
+					defaultValue={form.district}
 					variant="standard"
 				/>
 				<TextField
@@ -152,7 +131,7 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, city: e.target.value })
 					}
-					value={form.city}
+					defaultValue={form.city}
 					variant="standard"
 					required
 				/>
@@ -164,20 +143,18 @@ const FormAddress = ({
 					onChange={(e) =>
 						setFormAddress({ ...form, phone: e.target.value })
 					}
-					value={form.phone}
+					defaultValue={form.phone}
 					variant="standard"
 				/>
 				<Container sx={{ textAlign: "center" }}>
-					{paymentChooseNewAddress == false && (
-						<Button
-							sx={{ mx: 1 }}
-							onClick={() => setAppear(false)}
-							variant="outlined"
-							size="small"
-							color="error">
-							Cancel
-						</Button>
-					)}
+					<Button
+						sx={{ mx: 1 }}
+						onClick={() => setAppear(false)}
+						variant="outlined"
+						size="small"
+						color="error">
+						Cancel
+					</Button>
 					<Button
 						sx={{ mx: 1 }}
 						onClick={(e) => handleSubmit(e)}
