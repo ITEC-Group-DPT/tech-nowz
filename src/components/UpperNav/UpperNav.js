@@ -1,4 +1,4 @@
-import { React, useState, useEffect,useRef } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import styles from './UpperNav.style';
 import { Link } from 'react-router-dom';
 import {
@@ -25,7 +25,7 @@ const UpperNav = () => {
 	const userInfo = useSelector((state) => state.Authentication.user);
 	const cart = useSelector(cartSelector);
 	const anchorRef = useRef(null)
-    const clickRef = useRef(null)
+	const clickRef = useRef(null)
 
 	const [searchValue, setSearchValue] = useState('');
 	const handleChange = (event) => {
@@ -84,25 +84,15 @@ const UpperNav = () => {
 					/>
 					<Box sx={styles.searchResult}>
 						{searchStatus !== 2 ? (
-							searchResult.map((product) => {
-								const productURL = `/product/${encodeURIComponent(
-									product.name
-								).replace(/%20/g, '-')}?i=${product.productID}`;
-								return (
-									<Link
-										to={productURL}
-										style={{ textDecoration: 'none' }}
-									>
-										<HorizontalProduct
-											product={product}
-											imageSize="10%"
-											marginTop="0"
-											width="100%"
-											pricePadding="0"
-										/>
-									</Link>
-								);
-							})
+							searchResult.map((product) => (
+								<HorizontalProduct
+									product={product}
+									imageSize="10%"
+									marginTop="0"
+									width="100%"
+									pricePadding="0"
+								/>
+							))
 						) : (
 							<Card sx={styles.noProductCard}>
 								<CardContent>
@@ -114,7 +104,7 @@ const UpperNav = () => {
 					</Box>
 				</Grid>
 				<Grid item lg={3} xs={12} sx={styles.menuContainer}>
-					<Grid container spacing={1} sx = {{alignItems:"center"}}>
+					<Grid container spacing={1} sx={{ alignItems: "center" }}>
 						<Grid item xs={6}>
 							<Link to="/checkout/cart" style={styles.menuItem}>
 								<Badge badgeContent={cart.totalQuantity || 0} color="error">
@@ -138,20 +128,20 @@ const UpperNav = () => {
 								</Link>
 							) : (
 								<Box>
-								<Button
-									ref={anchorRef}
-									id="composition-button"
-									aria-controls={'composition-menu'}
-									aria-expanded={'true'}
-									aria-haspopup="true"
-									onClick={() => clickRef.current()}
-									sx={styles.btnNav}
-								>
-									<icons.User />
-									<Typography sx={styles.menuTitle}>{userInfo.username}</Typography>
-								</Button>
-								<ProfileMenu anchorRef={anchorRef} clickRef={clickRef} />
-							</Box>
+									<Button
+										ref={anchorRef}
+										id="composition-button"
+										aria-controls={'composition-menu'}
+										aria-expanded={'true'}
+										aria-haspopup="true"
+										onClick={() => clickRef.current()}
+										sx={styles.btnNav}
+									>
+										<icons.User />
+										<Typography sx={styles.menuTitle}>{userInfo.username}</Typography>
+									</Button>
+									<ProfileMenu anchorRef={anchorRef} clickRef={clickRef} />
+								</Box>
 							)}
 						</Grid>
 					</Grid>
