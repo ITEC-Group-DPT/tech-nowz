@@ -11,6 +11,7 @@ import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
+import { changeFavoriteApi } from '../../api/favoriteApi'
 
 //redux
 import { addProductToCart } from '../../store/actions/cartAction'
@@ -105,12 +106,23 @@ const Product = () => {
     const [product, setProduct] = useState({ "isLoading": true })
     const [relatedProductList, setRelatedProductList] = useState({ "isLoading": true, "productList": [] })
     const [formatted, setformatted] = useState({})
+    const [isFavorite, setIsFavorite] = useState()
     const [tab, setTab] = React.useState('1')
+
+    const changeFavorite = () => {
+        changeFavoriteApi(productID).then(response => {
+            console.log(response.data)
+            if (response.data.success == true) {
+                setIsFavorite(response.data.data.isLike)
+            }
+        })
+    }
 
     const dispatch = useDispatch();
     const addItemToCart = () => {
         dispatch(addProductToCart(product.product));
     }
+
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true
         setTab('1'); // when clicking on another product, the showing tab is spec
@@ -126,6 +138,8 @@ const Product = () => {
                     price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.product.price),
                     desc: formattedDesc,
                 })
+
+                setIsFavorite(data.favorite)
 
                 setProduct({ "isLoading": false, ...data })
 
@@ -230,13 +244,22 @@ const Product = () => {
 
                             ) : (
                                 <Box sx={styles.btnWrapper}>
-                                    {product.favorite ? (
-                                        <Button variant="outlined" startIcon={<icons.IsFavorite style={{ color: "red" }} />} sx={styles.favoriteBtn}>
+                                    {isFavorite ? (
+                                        <Button
+                                            variant="outlined"
+                                            startIcon={<icons.IsFavorite style={{ color: "red" }} />}
+                                            sx={styles.favoriteBtn}
+                                            onClick={changeFavorite}
+                                        >
                                             Remove Favorite
                                         </Button>
                                     ) : (
                                         <Button
-                                            variant="outlined" startIcon={<icons.NotFavorite />} sx={styles.favoriteBtn}>
+                                            variant="outlined"
+                                            startIcon={<icons.NotFavorite />}
+                                            sx={styles.favoriteBtn}
+                                            onClick={changeFavorite}
+                                        >
                                             Add Favorite
                                         </Button>
                                     )}
