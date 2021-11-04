@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./HorizontalProduct.style";
 import {
 	Box,
@@ -10,14 +10,14 @@ import {
 	Rating,
 } from "@mui/material";
 import icons from "../../constant/icons";
+import { changeQuantityApi } from "../../api/cartApi"
 
 const HorizontalProduct = ({
 	cartProduct,
 	product,
 	canDelete,
 	onPressDelete,
-	decreaseQuantity,
-	increaseQuantity,
+	changeQuantity,
 	ratingSizeMedium = '1rem',
 	ratingSizeSmall = '0.8rem',
 	imageSize,
@@ -29,7 +29,41 @@ const HorizontalProduct = ({
 		style: "currency",
 		currency: "VND",
 	}).format(product.price);
+	const [quantityDifference, setQuantityDifference] = useState(0);
 
+	const increaseQuantity = () => {
+		setQuantityDifference(quantityDifference + 1);
+		changeQuantity(product, 1);
+	}
+
+	const decreaseQuantity = () => {
+		if (product.quantity > 1) {
+			setQuantityDifference(quantityDifference - 1);
+			changeQuantity(product, -1);
+		}
+	}
+
+	useEffect(() => {
+
+		if (quantityDifference != 0) {
+			var timeout = setTimeout(() => {
+				setQuantityDifference(0);
+				changeQuantityApi(product.productID, quantityDifference).then(response => {
+					if (response.data.success) {
+						console.log('change quantity: ', quantityDifference);
+					}
+					else {
+						console.log("Something wrong is happend");
+					}
+				});
+
+			}, 600);
+		}
+
+		return () => {
+			clearTimeout(timeout);
+		}
+	}, [quantityDifference])
 	return (
 		<Card
 			sx={Object.assign(

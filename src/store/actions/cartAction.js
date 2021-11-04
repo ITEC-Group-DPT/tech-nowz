@@ -4,8 +4,7 @@ import {
     getCartQuantityApi,
     addProductToCartApi,
     removeProductFromCartApi,
-    increaseQuantityApi,
-    decreaseQuantityApi,
+    changeQuantityApi,
     removeAllApi,
 } from "../../api/cartApi"
 
@@ -88,40 +87,22 @@ const removeProductFromCart = (product) => {
     }
 }
 
-const increseProductQuantity = (product) => {
+const changeProductQuantity = (product,quantity) => {
 
     const productID = product.productID;
-    return async(dispatch) => {
+    return (dispatch) => {
         dispatch({
-            type: ActionType.INCREATE_QUANTITY_PRODUCT,
+            type: ActionType.CHANGE_QUANTITY_PRODUCT,
             productID: productID,
             productPrice: product.price,
+            quantity: quantity,
         })
 
-        const response = await increaseQuantityApi(productID);
+        // const response = await changeQuantityApi(productID,quantity);
 
-        if (!response.data.success) {
-            alert('increase quantity fail');
-        }
-    }
-}
-
-const decreseProductQuantity = (product) => {
-
-    const productID = product.productID;
-
-    return async(dispatch) => {
-        dispatch({
-            type: ActionType.DECREASE_QUANTITY_PRODUCT,
-            productID: productID,
-            productPrice: product.price
-        })
-
-        const response = await decreaseQuantityApi(productID);
-
-        if (!response.data.success) {
-            alert('decrease quantity fail');
-        }
+        // if (!response.data.success) {
+        //     alert('change quantity fail');
+        // }
     }
 }
 
@@ -144,7 +125,6 @@ export {
     getCartQuantity, 
     addProductToCart, 
     removeProductFromCart,
-    increseProductQuantity,
-    decreseProductQuantity,
+    changeProductQuantity,
     removeAllCart,
 };
