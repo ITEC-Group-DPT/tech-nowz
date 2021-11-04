@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct'
-import styles from './Favorite.style'
+import styles from './Favorite.styles'
 import { Container, Typography } from '@mui/material'
 import { getFavoriteListApi, changeFavoriteApi } from '../../api/favoriteApi'
 import { Box } from '@mui/system'
