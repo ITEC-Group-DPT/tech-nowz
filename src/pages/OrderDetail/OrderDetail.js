@@ -40,49 +40,51 @@ const OrderDetail = () => {
 	}
 
 	return (
-		<Container sx={styles.main}>
-			{order.length !== 0 ? (
-				<div>
-					<Typography variant="h3" sx={styles.title}>
-						Order : #{id}{' '}
-					</Typography>
-					<Typography variant="h6" sx={styles.content}>
-						<b>Created: </b>
-						{formatDateDiff(order['orderInfo']['dateDiff'])}
-					</Typography>
-					<Typography variant="h3" sx={styles.title}>
-						Customer Detail
-					</Typography>
-					<Typography variant="h6" sx={styles.content}>
-						<b>Customer: </b>
-						{order['orderInfo']['name']} -{' '}
-						{order['orderInfo']['phone']}
-					</Typography>
-					<Typography variant="h6" sx={styles.content}>
-						<b>Address: </b>
-						{order['orderInfo']['address']}
-					</Typography>
-					<Typography variant="h3" sx={styles.title}>
-						Package Detail
-					</Typography>
-					<Box sx={styles.productList}>
-						<ProductList productList={order['itemList']} />
-					</Box>
-					<Box sx={styles.priceBox}>
+		<Box sx={styles.box}>
+			<Container sx={styles.main}>
+				{order.length !== 0 ? (
+					<div>
 						<Typography variant="h3" sx={styles.title}>
-							Total Price
+							Order : #{id}{' '}
 						</Typography>
-						<Typography variant="h3" sx={styles.price}>
-							{Number(
-								order['orderInfo']['totalPrice']
-							).toLocaleString() + 'đ'}
+						<Typography variant="h6" sx={styles.content}>
+							<b>Created: </b>
+							{formatDateDiff(order['orderInfo']['dateDiff'])}
 						</Typography>
-					</Box>
-				</div>
-			) : (
-				<NotFound></NotFound>
-			)}
-		</Container>
+						<Typography variant="h3" sx={styles.title}>
+							Customer Detail
+						</Typography>
+						<Typography variant="h6" sx={styles.content}>
+							<b>Customer: </b>
+							{order['orderInfo']['name']} -{' '}
+							{order['orderInfo']['phone']}
+						</Typography>
+						<Typography variant="h6" sx={styles.content}>
+							<b>Address: </b>
+							{order['orderInfo']['address']}
+						</Typography>
+						<Typography variant="h3" sx={styles.title}>
+							Package Detail
+						</Typography>
+						<Box sx={styles.productList}>
+							<ProductList productList={order['itemList']} />
+						</Box>
+						<Box sx={styles.priceBox}>
+							<Typography variant="h3" sx={styles.title}>
+								Total Price
+							</Typography>
+							<Typography variant="h3" sx={styles.price}>
+								{Number(
+									order['orderInfo']['totalPrice']
+								).toLocaleString() + 'đ'}
+							</Typography>
+						</Box>
+					</div>
+				) : (
+					<NotFound></NotFound>
+				)}
+			</Container>
+		</Box>
 	);
 };
 

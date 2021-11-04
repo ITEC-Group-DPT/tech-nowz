@@ -19,7 +19,7 @@ const HorizontalProduct = ({
 	decreaseQuantity,
 	increaseQuantity,
 	ratingSizeMedium = '1rem',
-	ratingSizeSmall = '0.8rem',
+	ratingSizeSmall = '0.6rem',
 	imageSize,
 	marginTop,
 	width,
@@ -61,11 +61,7 @@ const HorizontalProduct = ({
 			<CardContent sx={styles.productContent}>
 				<Typography
 					sx={styles.productName}>{product.name}</Typography>
-				<Typography sx={styles.productQuantity}>
-					{product.quantity &&
-						!cartProduct &&
-						"Quantity: " + product.quantity}
-				</Typography>
+
 				<Box sx={styles.ratingContainer}>
 					<Rating
 						size="small"
@@ -77,12 +73,17 @@ const HorizontalProduct = ({
 							},
 						}}
 						value={product.rating}
-						precision={0.1}
+						precision={0.5}
 					/>
 					<Typography sx={styles.productSold}>
 						({product.sold})
 					</Typography>
 				</Box>
+				<Typography sx={styles.productQuantity}>
+					{product.quantity &&
+						!cartProduct &&
+						"Quantity: " + product.quantity}
+				</Typography>
 			</CardContent>
 			{
 				cartProduct &&

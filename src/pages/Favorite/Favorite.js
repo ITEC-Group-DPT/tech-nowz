@@ -5,7 +5,6 @@ import { Container, Typography } from '@mui/material'
 import { getFavoriteListApi, changeFavoriteApi } from '../../api/favoriteApi'
 import { Box } from '@mui/system'
 
-
 const Favorite = () => {
     const [list, setFavoriteList] = useState([]);
 
@@ -32,9 +31,9 @@ const Favorite = () => {
     }
 
     return (
-        <Box sx={{ my: '20px' }}>
-            <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Favorite</Typography>
-            <Container sx={{ mx: 'auto' }}>
+        <Box sx={styles.box}>
+            <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Favorites</Typography>
+            <Container maxWidth="md">
                 {
                     list.map(product =>
                         <HorizontalProduct

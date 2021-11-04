@@ -1,7 +1,12 @@
 const styles = {
+	box: {
+		minHeight: '100vh',
+		backgroundColor: 'rgb(245, 245, 245)',
+		paddingBottom: '100px',
+        paddingTop: '50px',
+	},
 	main: {
-		marginBottom: '24px',
-		paddingLeft: { xs: '2%', md: '4%' },
+		//paddingLeft: { xs: '2%', md: '4%' },
 	},
 	title: {
 		fontWeight: '600',

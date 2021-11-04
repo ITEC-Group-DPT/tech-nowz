@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import styles from './OrderHistory.style';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 import OrderComponent from '../../components/OrderComponent/OrderComponent';
 import { getOrderListAPI } from '../../api/orderApi';
 
@@ -14,7 +14,7 @@ const OrderHistory = () => {
 		});
 	}, []);
 
-	function OrderList(props) {
+	const OrderList = (props) => {
 		const list = props.orderList;
 		const orders = Object.keys(list).map((order, index) => (
 			<OrderComponent
@@ -26,10 +26,12 @@ const OrderHistory = () => {
 	}
 
 	return (
-		<Container sx={styles.main}>
-			<Typography sx={styles.title}>My Orders</Typography>
-			<OrderList orderList={orderList} />
-		</Container>
+		<Box sx={styles.box}>
+			<Container sx={styles.main}>
+				<Typography sx={styles.title}>Order History</Typography>
+				<OrderList orderList={orderList} />
+			</Container>
+		</Box>
 	);
 };
 

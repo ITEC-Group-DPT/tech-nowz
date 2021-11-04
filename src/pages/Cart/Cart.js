@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styles from './cart.style'
+import styles from './Cart.styles'
 
 import { cartSelector } from "../../store/selectors"
 
@@ -35,82 +35,84 @@ const Cart = () => {
         dispatch(removeProductFromCart(product));
     }
     return (
-        <Box sx={styles.main}>
-            {
-                (cartList && cartList.length == 0)
-                    ? <EmptyCart />
+        <Box sx={styles.box}>
+            <Box sx={styles.main}>
+                {
+                    (cartList && cartList.length == 0)
+                        ? <EmptyCart />
+                        : null
+                }
+                {cartList && cartList.length != 0 ?
+                    <Box sx={styles.cartListWrapper}>
+                        <Box>
+                            <Box sx={styles.removeRow}>
+                                <Typography
+                                    sx={styles.myCart}
+                                >
+                                    My Cart
+                                </Typography>
+
+                                <Button
+                                    onClick={removeAllProduct}
+                                    color="error"
+                                    sx={styles.removeAll}
+                                >
+                                    Remove all
+                                </Button>
+                            </Box>
+                            {cartList.map(product =>
+                                <HorizontalProduct
+                                    key={product.productID}
+                                    cartProduct
+                                    product={product}
+                                    canDelete
+                                    onPressDelete={() =>
+                                        deleteProduct(product)
+                                    }
+                                    increaseQuantity={() => increaseQuantity(product)
+                                    }
+                                    decreaseQuantity={() => decreaseQuantity(product)
+                                    }
+                                />)
+                            }
+                        </Box>
+
+
+                    </Box>
                     : null
-            }
-            {cartList && cartList.length != 0 ?
-                <Box sx={{ flex: 7, position: "relative" }}>
-                    <Box>
-                        <Box sx={styles.removeRow}>
-                            <Typography
-                                sx={styles.myCart}
-                            >
-                                My Cart
-                            </Typography>
+                }
+                {
+                    cartList && cartList.length != 0 ?
+                        <Box sx={styles.summary}>
+                            <Box sx={styles.summaryData}>
+                                <Typography sx={styles.orderSummary}>
+                                    Order Summary
+                                </Typography>
+
+                                <Box sx={styles.taxContainer}>
+                                    <Typography sx={styles.summaryTitle}>Tax</Typography>
+                                    <Typography sx={styles.tax}>0đ</Typography>
+                                </Box>
+
+                                <Box sx={styles.totalContainer}>
+                                    <Typography sx={styles.summaryTitle}>Total</Typography>
+                                    <Typography sx={styles.total}>
+                                        {formatedPrice}</Typography>
+                                </Box>
+                            </Box>
 
                             <Button
-                                onClick={removeAllProduct}
+                                sx={styles.checkoutButton}
+                                variant="contained"
                                 color="error"
-                                sx={styles.removeAll}
                             >
-                                Remove all
+                                Checkout
                             </Button>
                         </Box>
-                        {cartList.map(product =>
-                            <HorizontalProduct
-                                key={product.productID}
-                                cartProduct
-                                product={product}
-                                canDelete
-                                onPressDelete={() =>
-                                    deleteProduct(product)
-                                }
-                                increaseQuantity={() => increaseQuantity(product)
-                                }
-                                decreaseQuantity={() => decreaseQuantity(product)
-                                }
-                            />)
-                        }
-                    </Box>
+                        : null
+                }
 
-
-                </Box>
-                : null
-            }
-            {
-                cartList && cartList.length != 0 ?
-                    <Box sx={styles.summary}>
-                        <Box sx={styles.summaryData}>
-                            <Typography sx={styles.orderSummary}>
-                                Order Summary
-                            </Typography>
-
-                            <Box sx={styles.taxContainer}>
-                                <Typography sx={styles.summaryTitle}>Tax</Typography>
-                                <Typography sx={styles.tax}>0đ</Typography>
-                            </Box>
-
-                            <Box sx={styles.totalContainer}>
-                                <Typography sx={styles.summaryTitle}>Total</Typography>
-                                <Typography sx={styles.total}>
-                                    {formatedPrice}</Typography>
-                            </Box>
-                        </Box>
-
-                        <Button
-                            sx={styles.checkoutButton}
-                            variant="contained"
-                            color="error"
-                        >
-                            Checkout
-                        </Button>
-                    </Box>
-                    : null
-            }
-
+            </Box>
         </Box>
     )
 }

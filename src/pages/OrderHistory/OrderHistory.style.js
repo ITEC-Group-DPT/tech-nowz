@@ -1,14 +1,18 @@
 const styles = {
-	main: {
-		marginTop: '5%',
-		marginBottom: '5%',
+	box: {
+		minHeight: '100vh',
+		backgroundColor: 'rgb(245, 245, 245)',
+		paddingBottom: '100px',
+        paddingTop: '50px',
 	},
 	title: {
-		textAlign: 'center',
-		fontSize: { xs: '1rem', md: '2rem' },
-		fontFamily: 'Roboto Slab, serif',
-		fontWeight: 'bold',
-		marginTop: '5%',
+		fontSize: {
+            xs: "1.5rem",
+            lg: "2rem",
+        },
+        fontWeight: 'bold',
+        textAlign: 'center',
+		marginBottom: "25px",
 	},
 };
 
