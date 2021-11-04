@@ -26,6 +26,7 @@ const HorizontalProduct = ({
 	width,
 	pricePadding,
 }) => {
+
 	const formatedPrice = new Intl.NumberFormat("vi-VN", {
 		style: "currency",
 		currency: "VND",

@@ -66,13 +66,18 @@ const Cart = () => {
                                     cartProduct
                                     product={product}
                                     canDelete
-                                    onPressDelete={() =>
+                                    onPressDelete={(e) => {
+                                        e.preventDefault()
                                         deleteProduct(product)
-                                    }
-                                    increaseQuantity={() => increaseQuantity(product)
-                                    }
-                                    decreaseQuantity={() => decreaseQuantity(product)
-                                    }
+                                    }}
+                                    increaseQuantity={(e) => {
+                                        e.preventDefault()
+                                        increaseQuantity(product)
+                                    }}
+                                    decreaseQuantity={(e) => {
+                                        e.preventDefault()
+                                        decreaseQuantity(product)
+                                    }}
                                 />)
                             }
                         </Box>

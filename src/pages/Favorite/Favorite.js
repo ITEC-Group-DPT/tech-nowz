@@ -41,7 +41,10 @@ const Favorite = () => {
                             key={product.productID}
                             canDelete={true}
                             ratingSize={"20px"}
-                            onPressDelete={() => onDelete(product.productID)}
+                            onPressDelete={(e) => {
+                                e.preventDefault()
+                                onDelete(product.productID)
+                            }}
                         />
                     )
                 }
