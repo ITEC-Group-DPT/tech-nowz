@@ -72,9 +72,8 @@ const styles = {
 	searchResult: {
 		position: 'absolute',
 		top: {
-			xs: '23%',
-			md: '15%',
-			lg: '8%',
+			xs: '175px',
+			lg: '70px',
 		},
 		left: {
 			xs: '0%',
