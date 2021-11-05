@@ -74,9 +74,13 @@ const UpperNav = () => {
 
 	console.log(searchStatus)
 
+	const isZIndex = (isOpen) => ({
+		zIndex: isOpen ? ("1400") : ("1200"),
+	})
+
 
 	return (
-		<Grid container spacing={0} sx={styles.container}>
+		<Grid container spacing={0} sx={{...styles.container, ...isZIndex(openSearch)}}>
 			<Grid item lg={3} xs={12} sx={styles.logoWrapper}>
 				<Link to="/">
 					<img style={styles.logo} src={logo} alt="" />

@@ -7,7 +7,6 @@ const styles = {
 			md: '17px 20px',
 			lg: '17px 150px',
 		},
-		zIndex: 1400,
 		backgroundColor: 'white',
 		position: 'relative',
 	},
