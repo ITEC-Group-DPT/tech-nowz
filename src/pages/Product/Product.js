@@ -11,11 +11,14 @@ import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
+
+import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
 
 //redux
-import { addProductToCart } from '../../store/actions/cartAction'
-import { useDispatch } from 'react-redux'
+import { cartSelector } from "../../store/selectors"
+import { addProductToCart, changeProductQuantity } from '../../store/actions/cartAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -107,7 +110,10 @@ const Product = () => {
     const [relatedProductList, setRelatedProductList] = useState({ "isLoading": true, "productList": [] })
     const [formatted, setformatted] = useState({})
     const [isFavorite, setIsFavorite] = useState()
-    const [tab, setTab] = React.useState('1')
+    const [tab, setTab] = React.useState('1');
+
+    const cart = useSelector(cartSelector);
+    const [quantityDifference, setQuantityDifference] = useState(0);
 
     const changeFavorite = () => {
         changeFavoriteApi(productID).then(response => {
@@ -120,8 +126,41 @@ const Product = () => {
 
     const dispatch = useDispatch();
     const addItemToCart = () => {
-        dispatch(addProductToCart(product.product));
+
+        let productIndex = cart["cartList"].findIndex(item => item.productID == productID);
+
+        //new product
+        if (productIndex == -1) {
+            dispatch(addProductToCart(product.product));
+        }
+        //existing product
+        else {
+            setQuantityDifference(quantityDifference + 1);
+            dispatch(changeProductQuantity(product.product, 1));
+        }
     }
+
+    useEffect(() => {
+        if (quantityDifference != 0) {
+            var timeout = setTimeout(() => {
+                let changeQuantity = quantityDifference;
+                setQuantityDifference(0);
+                changeQuantityApi(productID, changeQuantity).then(response => {
+                    if (response.data.success) {
+                        console.log('change quantity: ', changeQuantity);
+                    }
+                    else {
+                        console.log("Something wrong is happend");
+                    }
+                });
+
+            }, 500);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        }
+    }, [quantityDifference])
 
     useEffect(() => {
         setProduct({ "isLoading": true }) // when clicking on another product, the isLoading is set to true

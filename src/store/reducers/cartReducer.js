@@ -43,16 +43,8 @@ const CartReducer = (state = initState, action) => {
         case (ActionType.ADD_PRODUCT_TO_CART):
             newCart = JSON.parse(JSON.stringify(state.cart));
 
-            let indexAdd = newCart["cartList"].findIndex(product =>
-                product.productID == action.data.productID
-            );
-
-            if (indexAdd != -1) {
-                newCart["cartList"][indexAdd].quantity++
-            }
-            else {
-                newCart["cartList"].push(action.data);
-            }
+            newCart["cartList"].push(action.data);
+            
 
             newCart.totalPrice += action.data.price;
             newCart.totalQuantity++;
