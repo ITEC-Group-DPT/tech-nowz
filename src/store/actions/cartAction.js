@@ -97,12 +97,6 @@ const changeProductQuantity = (product,quantity) => {
             productPrice: product.price,
             quantity: quantity,
         })
-
-        // const response = await changeQuantityApi(productID,quantity);
-
-        // if (!response.data.success) {
-        //     alert('change quantity fail');
-        // }
     }
 }
 

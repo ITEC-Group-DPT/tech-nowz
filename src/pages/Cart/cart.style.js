@@ -67,6 +67,7 @@ const styles = {
         fontSize: { sm: "0.6rem", md: "0.8rem" },
         width: "100%",
     },
+
     removeRow: {
         position: "absolute",
         top: "-35px",

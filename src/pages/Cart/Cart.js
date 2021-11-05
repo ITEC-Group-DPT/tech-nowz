@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styles from './cart.style'
 
 import { cartSelector } from "../../store/selectors"
-
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Box, Typography, Button } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
@@ -11,13 +11,13 @@ import EmptyCart from '../../components/EmptyCart/EmptyCart';
 
 const Cart = () => {
 
+    const history = useHistory();
     const { cartList, totalPrice, isLoading } = useSelector(cartSelector);
 
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
 
     const dispatch = useDispatch();
 
-    // var timeout;
     const changeQuantity = (product, quantity) => {
         dispatch(changeProductQuantity(product, quantity));
     }
@@ -62,7 +62,7 @@ const Cart = () => {
                                 onPressDelete={() =>
                                     deleteProduct(product)
                                 }
-                                changeQuantity = {changeQuantity}
+                                changeQuantity={changeQuantity}
                             />)
                         }
                     </Box>
@@ -92,6 +92,7 @@ const Cart = () => {
                         </Box>
 
                         <Button
+                            onClick={() => history.push("/checkout/payment")}
                             sx={styles.checkoutButton}
                             variant="contained"
                             color="error"

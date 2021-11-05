@@ -47,17 +47,18 @@ const HorizontalProduct = ({
 
 		if (quantityDifference != 0) {
 			var timeout = setTimeout(() => {
+				let changeQuantity = quantityDifference;
 				setQuantityDifference(0);
-				changeQuantityApi(product.productID, quantityDifference).then(response => {
+				changeQuantityApi(product.productID, changeQuantity).then(response => {
 					if (response.data.success) {
-						console.log('change quantity: ', quantityDifference);
+						console.log('change quantity: ', changeQuantity);
 					}
 					else {
 						console.log("Something wrong is happend");
 					}
 				});
 
-			}, 600);
+			}, 500);
 		}
 
 		return () => {
