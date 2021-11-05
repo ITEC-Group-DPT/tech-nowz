@@ -6,12 +6,6 @@ import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Banner from '../../components/Banner/Banner';
 import Sponsors from '../../components/Sponsors/Sponsors';
 import {
-	getTopRatingAction,
-	getLaptopAction,
-	getMonitorAction,
-	getCPUAction,
-} from '../../store/actions/productAction.js';
-import {
 	topRatingSelector,
 	laptopSelector,
 	monitorSelector,
@@ -19,14 +13,16 @@ import {
 } from '../../store/selectors';
 
 const Home = () => {
+
+    
     return (
         <Box sx={styles.box}>
             <Banner />
-            <ProductSlider sliderTitle="Top Rating" action={getTopRatingAction} selector={topRatingSelector} />
+            <ProductSlider sliderTitle="Top Rating" selector={topRatingSelector} />
             <Sponsors />
-            <Category categoryName="Laptop" action={getLaptopAction} selector={laptopSelector} />
-            <Category categoryName="Monitor" action={getMonitorAction} selector={monitorSelector} />
-            <Category categoryName="CPU" action={getCPUAction} selector={CPUSelector} />
+            <Category categoryName="Laptop"selector={laptopSelector} />
+            <Category categoryName="Monitor" selector={monitorSelector} />
+            <Category categoryName="CPU" selector={CPUSelector} />
         </Box>
     )
 }

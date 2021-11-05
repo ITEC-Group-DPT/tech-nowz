@@ -141,9 +141,17 @@ const styles = {
 			lg: '60px',
 		},
 		textTransform: 'none',
+		fontSize: {
+			xs: "15px",
+			lg: "18px",
+		},
 		'&:hover': {
 			border: 'none',
 			bgcolor: '#efefef',
+		},
+		minWidth: {
+			xs: "170px",
+			lg: "200px",
 		},
 	},
 	addBtn: {
@@ -151,6 +159,10 @@ const styles = {
 		padding: {
 			xs: '.5rem 1rem',
 			lg: '.8rem 1.5rem',
+		},
+		fontSize: {
+			xs: "15px",
+			lg: "18px",
 		},
 		textTransform: 'none',
 		'&:hover': {
