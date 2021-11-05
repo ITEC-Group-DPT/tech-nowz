@@ -71,11 +71,7 @@ const settings = {
 	],
 };
 
-const ProductSlider = ({ sliderTitle, action, selector }) => {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(action());
-	}, []);
+const ProductSlider = ({ sliderTitle, selector }) => {
 
 	const { isLoading, productList } = useSelector(selector);
 	console.log('product List', productList);
