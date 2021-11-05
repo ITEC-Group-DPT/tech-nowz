@@ -1,12 +1,24 @@
+import { makeStyles } from '@mui/styles';
+
 const styles = {
 	container: {
-		paddingTop: '1rem',
-		paddingBottom: '1rem',
+		padding: {
+			xs: '17px 10px',
+			md: '17px 20px',
+			lg: '17px 150px',
+		},
+		zIndex: 1400,
+		backgroundColor: 'white',
+		position: 'relative',
 	},
 	logoWrapper: {
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
+		mb: {
+			xs: 2,
+			lg: 0,
+		}
 	},
 	logo: {
 		overflow: 'hidden',
@@ -20,44 +32,83 @@ const styles = {
 	},
 	menuItem: {
 		display: 'flex',
+		height: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
 		textDecoration: 'none',
 		color: 'black',
 	},
+	icon: {
+		fontSize: {
+			xs: '26px',
+			lg: '28px',
+		},
+	},
 	menuTitle: {
 		marginLeft: '.7rem',
+		fontSize: {
+			xs: '16px',
+			lg: '20px',
+		},
 	},
 	searchComponent: {
 		position: 'relative',
-		paddingLeft: '0 !important',
-		margin: '0',
+	},
+	searchBarWrapper: {
+		display: 'flex',
+		justifyContent: "center",
+		mb: {
+			xs: 2,
+			lg: 0,
+		}
 	},
 	searchBar: {
-		width: { xs: '104%', md: '102%' },
+		width: {
+			xs: '90%',
+			md: '80%',
+			lg: "100%",
+		},
 	},
 	searchResult: {
 		position: 'absolute',
-		zIndex: '10000',
-		width: '100%',
-	},
-	noProductCard: {
-		width: '100%',
-		display: 'flex',
-		flex: 1,
-		alignItems: 'center',
-		paddingLeft: { xs: '5%', md: '2%' },
-		marginTop: { xs: '3%', md: '1.5%' },
-		boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)',
+		top: {
+			xs: '23%',
+			md: '15%',
+			lg: '8%',
+		},
+		left: {
+			xs: '0%',
+			md: '11%',
+			lg: '28.7%',
+		},
+		width: {
+			xs: "100%",
+			md: "76%",
+			lg: "41.7%",
+		},
 	},
 	btnNav: {
-        textTransform: "none",
-        textDecoration: 'none',
-        color: 'black',
-        '&:hover': {
-            backgroundColor: 'white',
-        }
-    },
+		textTransform: "none",
+		textDecoration: 'none',
+		color: 'black',
+		'&:hover': {
+			backgroundColor: 'white',
+		}
+	},
 };
 
-export default styles;
+const useStyles = makeStyles({
+	root: {
+		"& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": { // normal border
+			borderColor: "black",
+		},
+		"&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": { // hover border
+			borderColor: "black",
+		},
+		"& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": { // focused border
+			border: "1px solid black",
+		},
+	}
+})
+
+export { styles, useStyles };

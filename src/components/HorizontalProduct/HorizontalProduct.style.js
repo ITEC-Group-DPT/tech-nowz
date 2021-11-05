@@ -5,7 +5,7 @@ const styles = {
         alignItems: 'center',
 
         padding: {
-            xs: "0px",
+            xs: "10px",
             md: "10px 15px",
         },
         marginBottom: { xs: '18px', md: '30px' },
@@ -15,13 +15,19 @@ const styles = {
         userSelect: "none",
     },
     productImg: {
-        height: "20%",
-        width: "20%",
-        objectFit: "contain"
+        height: {
+            xs: "25%",
+            lg: "20%",
+        },
+        width: {
+            xs: "25%",
+            lg: "20%",
+        },
+        objectFit: "contain",
     },
     productContent: {
         padding: {
-            xs:"10px",
+            xs: "0px 10px",
             md: "16px",
         },
         width: '30%',
