@@ -17,18 +17,26 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'space-between',
 		width: { xs: '100%', md: '80%' },
-		//fontFamily: 'Roboto Slab, serif',
-		fontSize: { xs: '1rem', md: '2rem' },
 		padding: '0px',
+		mb: {
+			xs: 1,
+			md: 2,
+		},
 	},
 	title: {
 		fontWeight: 'bold',
-		fontSize: { xs: '.9rem', md: '1.5rem' },
+		fontSize: {
+            xs: "19px",
+            lg: "25px",
+        },
 		//fontFamily: 'Roboto Slab, serif',
 	},
 	titleBtn: {
 		textTransform: "none",
-		fontSize: { xs: '0.7rem', md: '.9rem' },
+		fontSize: {
+            xs: "14px",
+            lg: "18px",
+        },
 		color: 'black',
 	},
 	productList: {

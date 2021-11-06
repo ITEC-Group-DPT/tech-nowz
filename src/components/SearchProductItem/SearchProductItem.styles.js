@@ -37,7 +37,7 @@ const styles = {
         //fontFamily: "'Roboto Slab', serif",
         fontSize: {
             xs: "13px",
-            md: "17px"
+            md: "15px"
         },
 
         //max 2 line
@@ -59,7 +59,7 @@ const styles = {
         fontWeight: "700",
         fontSize: {
             xs: "11px",
-            md: "17px",
+            md: "15px",
         },
        minWidth: {xs: "70px", md: "100px" },
     },

@@ -39,16 +39,13 @@ const styles = {
 	},
 	icon: {
 		fontSize: {
-			xs: '26px',
-			lg: '28px',
+			xs: '22px',
+			lg: '25px',
 		},
 	},
 	menuTitle: {
 		marginLeft: '.7rem',
-		fontSize: {
-			xs: '16px',
-			lg: '20px',
-		},
+		fontSize: '18px'
 	},
 	searchComponent: {
 		position: 'relative',

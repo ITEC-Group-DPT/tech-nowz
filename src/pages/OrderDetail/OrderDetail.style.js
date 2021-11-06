@@ -24,7 +24,7 @@ const styles = {
 	},
 	title: {
 		fontWeight: '600',
-		fontSize: { xs: '20px', md: '26px' },
+		fontSize: { xs: '20px', md: '25px' },
 		mb: 2,
 	},
 	content: {

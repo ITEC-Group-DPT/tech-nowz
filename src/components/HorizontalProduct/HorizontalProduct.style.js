@@ -3,14 +3,16 @@ const styles = {
         display: 'flex',
         position: 'relative',
         alignItems: 'center',
-
         padding: {
             xs: "10px",
             md: "10px 15px",
         },
-        marginBottom: { xs: '18px', md: '30px' },
+        marginBottom: { xs: '14px', md: '20px' },
         flex: 1,
-        borderRadius: "25px",
+        borderRadius: {
+            xs: "10px",
+            md: "25px",
+        },
         boxShadow: "none",
         userSelect: "none",
     },
@@ -38,7 +40,7 @@ const styles = {
         //fontFamily: "'Roboto Slab', serif",
         fontSize: {
             xs: "13px",
-            md: "20px"
+            md: "17px"
         },
 
         //max 2 line
@@ -60,7 +62,7 @@ const styles = {
         fontWeight: "700",
         fontSize: {
             xs: "11px",
-            md: "18px",
+            md: "16px",
         },
        minWidth: {xs: "70px", md: "100px" },
 
@@ -100,7 +102,6 @@ const styles = {
         color: '#656565',
         //fontFamily: "'IBM Plex Serif', serif",
         userSelect: "none",
-
     },
     changeQty: {
         fontSize: { xs: "0.6rem", md: "0.8rem" },

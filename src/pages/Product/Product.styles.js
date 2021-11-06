@@ -31,13 +31,13 @@ const styles = {
 		borderRadius: '15px',
 		padding: {
 			xs: '40px 20px',
-			lg: '100px',
+			lg: '60px 80px',
 		},
 	},
 	image: {
 		height: {
 			xs: '400px',
-			lg: '550px',
+			lg: '520px',
 		},
 		width: '100%',
 		objectFit: 'contain',
@@ -75,8 +75,8 @@ const styles = {
 	pName: {
 		textAlign: 'center',
 		fontSize: {
-			xs: '1.45rem',
-			lg: '1.9rem',
+			xs: '26px',
+			lg: '33px',
 		},
 		fontWeight: 'bold',
 		paddingRight: '0rem',
@@ -118,8 +118,8 @@ const styles = {
 	pPrice: {
 		textAlign: 'center',
 		fontSize: {
-			xs: '1rem',
-			lg: '1.2rem',
+			xs: '20px',
+			lg: '22px',
 		},
 		fontWeight: 'bold',
 		mt: 2,
@@ -131,8 +131,8 @@ const styles = {
 	},
 	favoriteBtn: {
 		padding: {
-			xs: '.5rem',
-			lg: '.8rem',
+			xs: '10px 15px',
+			lg: '12px 20px',
 		},
 		color: 'black',
 		border: 'none',
@@ -142,8 +142,8 @@ const styles = {
 		},
 		textTransform: 'none',
 		fontSize: {
-			xs: "15px",
-			lg: "18px",
+			xs: "14px",
+			lg: "16px",
 		},
 		'&:hover': {
 			border: 'none',
@@ -157,12 +157,12 @@ const styles = {
 	addBtn: {
 		bgcolor: colors.primary,
 		padding: {
-			xs: '.5rem 1rem',
-			lg: '.8rem 1.5rem',
+			xs: '10px 15px',
+			lg: '12px 20px',
 		},
 		fontSize: {
-			xs: "15px",
-			lg: "18px",
+			xs: "14px",
+			lg: "16px",
 		},
 		textTransform: 'none',
 		'&:hover': {
