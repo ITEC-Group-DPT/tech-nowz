@@ -5,39 +5,79 @@ const styles = {
 		paddingBottom: '100px',
         paddingTop: '50px',
 	},
-	main: {
-		//paddingLeft: { xs: '2%', md: '4%' },
+	divider: {
+		 mt: {
+			xs: 2,
+			md: 4,
+		 },
+		 mb: {
+			xs: 2,
+			md: 4,
+		 },
+	},
+	wrapper: {
+		backgroundColor: "white",
+		borderRadius: "25px",
+		display: "flex",
+		alignItems: "center",
+		padding: "30px 40px !important",
 	},
 	title: {
 		fontWeight: '600',
-		fontSize: { xs: '1.5rem', md: '1.75rem' },
-		lineHeight: '1.5',
-		//fontFamily: 'Roboto Slab, serif',
-		marginTop: '3%',
+		fontSize: { xs: '20px', md: '26px' },
+		mb: 2,
 	},
 	content: {
-		fontSize: '1rem',
-		//fontFamily: 'Roboto Slab, serif',
-		fontWeight: '100',
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		mb: 1,
 	},
-	productList: {
-		width: { xs: '100%', md: '80%' },
-	},
-	priceBox: {
-		alignItems: 'center',
+	priceWrapper: {
 		display: 'flex',
-		marginTop: '24px',
-		justifyContent: 'space-between',
-		width: { xs: '100%', md: '80%' },
+		mt: 1,
 	},
-	price: {
-		flexDirection: 'right',
-		color: 'red',
-		marginTop: '3%',
-		//fontFamily: 'Roboto Slab, serif',
-		fontSize: { xs: '1.5rem', md: '1.75rem' },
-		fontWeight: 'bold',
+	upperTitles: {
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		fontWeight: "500",
 	},
+	upperValues: {
+		ml: 'auto',
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		fontWeight: "500",
+	},
+	lowerPriceWrapper: {
+		mt: 2,
+		display: 'flex',
+	},
+	lowerTitles: {
+		fontWeight: "600",
+		fontSize: {
+			xs: '15px',
+			md: '20px',
+		},
+	},
+	lowerValues: {
+		fontWeight: "600",
+		fontSize: {
+			xs: '15px',
+			md: '20px',
+		},
+		ml: 'auto',
+	},
+	productTitle: {
+		textAlign: "center",
+		fontWeight: '600',
+		fontSize: { xs: '20px', md: '26px' },
+		mb: 2,
+	}
 };
 
 export default styles;
