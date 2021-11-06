@@ -7,11 +7,8 @@ import ProductItem from '../ProductItem/ProductItem';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
 
-const Category = ({ categoryName, action, selector }) => {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(action());
-	}, []);
+const Category = ({ categoryName, selector }) => {
+
 	const { isLoading, productList } = useSelector(selector);
 	return (
 		<Container maxWidth="lg" sx={{ marginTop: '60px' }}>

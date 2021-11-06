@@ -43,16 +43,8 @@ const CartReducer = (state = initState, action) => {
         case (ActionType.ADD_PRODUCT_TO_CART):
             newCart = JSON.parse(JSON.stringify(state.cart));
 
-            let indexAdd = newCart["cartList"].findIndex(product =>
-                product.productID == action.data.productID
-            );
-
-            if (indexAdd != -1) {
-                newCart["cartList"][indexAdd].quantity++
-            }
-            else {
-                newCart["cartList"].push(action.data);
-            }
+            newCart["cartList"].push(action.data);
+            
 
             newCart.totalPrice += action.data.price;
             newCart.totalQuantity++;
@@ -81,34 +73,17 @@ const CartReducer = (state = initState, action) => {
                 ...state,
                 cart: newCart,
             }
-        case (ActionType.INCREATE_QUANTITY_PRODUCT):
+        case (ActionType.CHANGE_QUANTITY_PRODUCT):
             newCart = JSON.parse(JSON.stringify(state.cart))
 
-            let indexIncrease = newCart["cartList"]
+            let indexQuantity = newCart["cartList"]
                 .findIndex(product =>
                     product.productID == action.productID
                 );
-            if (indexIncrease != -1) {
-                newCart["cartList"][indexIncrease].quantity++;
-                newCart.totalQuantity++;
-                newCart.totalPrice += action.productPrice;
-            }
-
-            return {
-                ...state,
-                cart: newCart,
-            }
-        case (ActionType.DECREASE_QUANTITY_PRODUCT):
-            newCart = JSON.parse(JSON.stringify(state.cart))
-
-            let indexDecrease = newCart["cartList"]
-                .findIndex(product =>
-                    product.productID == action.productID
-                );
-            if (indexDecrease != -1) {
-                newCart["cartList"][indexDecrease].quantity--;
-                newCart.totalQuantity--;
-                newCart.totalPrice -= action.productPrice;
+            if (indexQuantity != -1) {
+                newCart["cartList"][indexQuantity].quantity += action.quantity;
+                newCart.totalQuantity += action.quantity;
+                newCart.totalPrice += (action.productPrice * action.quantity);
             }
 
             return {

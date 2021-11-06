@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./HorizontalProduct.style";
 import { Link } from 'react-router-dom';
 import {
@@ -11,14 +11,14 @@ import {
 	Rating,
 } from "@mui/material";
 import icons from "../../constant/icons";
+import { changeQuantityApi } from "../../api/cartApi"
 
 const HorizontalProduct = ({
 	cartProduct,
 	product,
 	canDelete,
 	onPressDelete,
-	decreaseQuantity,
-	increaseQuantity,
+	changeQuantity,
 	ratingSizeMedium = '1rem',
 	ratingSizeSmall = '0.6rem',
 	imageSize,
@@ -31,12 +31,49 @@ const HorizontalProduct = ({
 		style: "currency",
 		currency: "VND",
 	}).format(product.price);
+	const [quantityDifference, setQuantityDifference] = useState(0);
 
 	const productURL =
 		'/product/' +
 		encodeURIComponent(product.name).replace(/%20/g, '-') +
 		`?i=${product.productID}`;
 
+	const increaseQuantity = (e) => {
+		e.preventDefault();
+		setQuantityDifference(quantityDifference + 1);
+		changeQuantity(product, 1);
+	}
+
+	const decreaseQuantity = (e) => {
+		e.preventDefault();
+		if (product.quantity > 1) {
+			setQuantityDifference(quantityDifference - 1);
+			changeQuantity(product, -1);
+		}
+	}
+
+	useEffect(() => {
+
+		if (quantityDifference != 0) {
+			var timeout = setTimeout(() => {
+				let changeQuantity = quantityDifference;
+				setQuantityDifference(0);
+				changeQuantityApi(product.productID, changeQuantity).then(response => {
+					if (response.data.success) {
+						console.log('change quantity: ', changeQuantity);
+					}
+					else {
+						console.log("Something wrong is happend");
+					}
+				});
+
+			}, 500);
+		}
+
+		return () => {
+			clearTimeout(timeout);
+		}
+	}, [quantityDifference])
 	return (
 		<Link to={productURL} style={{ textDecoration: 'none' }}>
 			<Card

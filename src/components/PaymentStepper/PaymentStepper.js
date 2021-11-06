@@ -7,8 +7,11 @@ import Typography from "@mui/material/Typography";
 import FormAddress from "../PaymentFormAddress/PaymentFormAddress";
 import HorizontalProduct from "../HorizontalProduct/HorizontalProduct";
 import { createOrder } from "../../api/orderApi";
-import { createAddressBook,editAddressBook } from "../../api/addressApi";
 import { Container, Box, Divider } from "@mui/material";
+
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux"
+import { removeAllCart } from "../../store/actions/cartAction"
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 
 export default function PaymentStepper({
@@ -16,45 +19,20 @@ export default function PaymentStepper({
 	address,
 	setAddress,
 	setDisableAddress,
-	cartList,
+	cart,
 }) {
+	const history = useHistory();
+	const dispatch = useDispatch();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [disableFinish, setDisableFinish] = React.useState(false)
-	//const [skipped, setSkipped] = React.useState(new Set());
 	if (activeStep != 0) {
-		//console.log(activeStep);
 		setDisableAddress(true);
 	} else {
-		//console.log(activeStep);
 		setDisableAddress(false);
 	}
-	// React.useEffect(() => {
-	// 	if (activeStep != 0) {
-	// 		//console.log(activeStep);
-	// 		setDisableAddress(true);
-	// 	} else {
-	// 		//console.log(activeStep);
-	// 		setDisableAddress(false);
-	// 	}
-	// }, [activeStep]);
-	// const isStepOptional = (step) => {
-	// 	return step === 1;
-	// };
-	// const isStepSkipped = (step) => {
-	// 	return skipped.has(step);
-	// };
 
 	const handleNext = () => {
-		// console.log(activeStep);
-		// if (activeStep === 0) console.log(address);
-		// let newSkipped = skipped;
-		// if (isStepSkipped(activeStep)) {
-		// 	newSkipped = new Set(newSkipped.values());
-		// 	newSkipped.delete(activeStep);
-		// }
-		let prevStep = activeStep;
-		// console.log(address);
-		if (prevStep == 1) {
+		if (activeStep == 1) {
 			setDisableFinish(true)
 			let joinAddress =
 				address.addressInForm +
@@ -66,53 +44,31 @@ export default function PaymentStepper({
 				address.city;
 			// console.log("da gui");
 			let productIDs = []
-			for (const product of cartList.cartList) {
+			for (const product of cart.cartList) {
 				let arr = [product.productID, product.quantity]
 				productIDs.push(arr)
 			}
-			// if (idaddress == -1){
-			// 	createAddressBook(address.name,joinAddress,address.phone)	
-			// }else editAddressBook(idaddress ,address.name,joinAddress,address.phone)
 
 			createOrder(
 				idaddress,
 				address.name,
 				joinAddress,
 				address.phone,
-				cartList.totalPrice,
+				cart.totalPrice,
 				productIDs
 			).then((res) => {
 				//console.log(res.data);
 				if (res.data.success == true) {
-					setActiveStep((prevActiveStep) => prevActiveStep + 1);
+					dispatch(removeAllCart())
+					setActiveStep(activeStep + 1);
 				}
 			});
-		} else setActiveStep((prevActiveStep) => prevActiveStep + 1);
-		// setSkipped(newSkipped);
+		} else setActiveStep(activeStep + 1);
 	};
 
 	const handleBack = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep - 1);
+		setActiveStep(activeStep - 1);
 	};
-
-	// const handleSkip = () => {
-	// 	if (!isStepOptional(activeStep)) {
-	// 		// You probably want to guard against something like this,
-	// 		// it should never occur unless someone's actively trying to break something.
-	// 		throw new Error("You can't skip a step that isn't optional.");
-	// 	}
-
-	// 	setActiveStep((prevActiveStep) => prevActiveStep + 1);
-	// 	setSkipped((prevSkipped) => {
-	// 		const newSkipped = new Set(prevSkipped.values());
-	// 		newSkipped.add(activeStep);
-	// 		return newSkipped;
-	// 	});
-	// };
-
-	// const handleReset = () => {
-	// 	setActiveStep(0);
-	// };
 
 	return (
 		<Box sx={{ maxWidth: "90%", mx: "auto", my: 5 }}>
@@ -146,15 +102,17 @@ export default function PaymentStepper({
 							justifyContent: "center",
 							pt: 2,
 						}}>
-						<Button variant="outlined">Back to home page</Button>
+						<Button 
+						onClick = {() => history.push("/") }
+						variant="outlined"
+						>
+							Back to home page
+						</Button>
 					</Box>
 				</React.Fragment>
 			) : (
 				<Container>
 					<React.Fragment>
-						{/* <Typography sx={{ mt: 2, mb: 1 }}>
-							Step {activeStep + 1}
-						</Typography> */}
 						{activeStep == 0 ? (
 							<FormAddress
 								form={address}
@@ -162,7 +120,7 @@ export default function PaymentStepper({
 							/>
 						) : (
 							<Box sx={{ my: 2 }}>
-								{cartList["cartList"].map((product) => (
+								{cart["cartList"].map((product) => (
 									<HorizontalProduct
 										product={product}
 										noQuantityChange={true}
@@ -181,7 +139,7 @@ export default function PaymentStepper({
 									<Typography
 										variant="h6"
 										sx={{ fontSize: { xs: "1rem" } }}>
-										Total price: {cartList.totalQuantity}
+										Total price: {cart.totalQuantity}
 										{" unit(s)"}
 									</Typography>
 									<Typography
@@ -191,7 +149,7 @@ export default function PaymentStepper({
 										{Intl.NumberFormat("vi-VN", {
 											style: "currency",
 											currency: "VND",
-										}).format(cartList.totalPrice)}
+										}).format(cart.totalPrice)}
 									</Typography>
 								</Box>
 							</Box>

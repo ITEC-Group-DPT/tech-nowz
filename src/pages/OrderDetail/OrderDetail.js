@@ -18,8 +18,8 @@ const OrderDetail = () => {
 		});
 	}, []);
 
-	const formatDateDiff = (value) => {
-		let type;
+	function formatDateDiff(value) {
+		let type = "minutes";
 		if (value >= 1440) {
 			value /= 1440;
 			type = 'days';

@@ -2,33 +2,27 @@ import React, { useEffect } from 'react'
 import styles from './Cart.styles'
 
 import { cartSelector } from "../../store/selectors"
-
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Box, Typography, Button } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
-import { removeProductFromCart, increseProductQuantity, decreseProductQuantity, removeAllCart } from "../../store/actions/cartAction"
+import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
 import EmptyCart from '../../components/EmptyCart/EmptyCart';
 
 const Cart = () => {
 
+    const history = useHistory();
     const { cartList, totalPrice, isLoading } = useSelector(cartSelector);
 
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
-    console.log('cartList: ', cartList);
 
     const dispatch = useDispatch();
 
+    const changeQuantity = (product, quantity) => {
+        dispatch(changeProductQuantity(product, quantity));
+    }
     const removeAllProduct = () => {
         dispatch(removeAllCart());
-    }
-    const increaseQuantity = (product) => {
-        dispatch(increseProductQuantity(product));
-    }
-
-    const decreaseQuantity = (product) => {
-        if (product.quantity > 1) {
-            dispatch(decreseProductQuantity(product));
-        }
     }
 
     const deleteProduct = (product) => {
@@ -70,14 +64,7 @@ const Cart = () => {
                                         e.preventDefault()
                                         deleteProduct(product)
                                     }}
-                                    increaseQuantity={(e) => {
-                                        e.preventDefault()
-                                        increaseQuantity(product)
-                                    }}
-                                    decreaseQuantity={(e) => {
-                                        e.preventDefault()
-                                        decreaseQuantity(product)
-                                    }}
+                                    changeQuantity = {changeQuantity}
                                 />)
                             }
                         </Box>

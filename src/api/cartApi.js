@@ -27,23 +27,16 @@ const removeProductFromCartApi = (productID) => {
     return axios.post(TEST_API_URL + `cartAPI.php`, data);
 }
 
-const increaseQuantityApi = (productID) => {
+const changeQuantityApi = (productID,quantity) => {
     let data = new FormData();
 
-    data.append("command","increase");
+    data.append("command","changeQuantity");
     data.append("productID", productID);
+    data.append("quantity", quantity);
 
     return axios.post(TEST_API_URL + `cartAPI.php`, data);
 }
 
-const decreaseQuantityApi = (productID) => {
-    let data = new FormData();
-
-    data.append("command","decrease");
-    data.append("productID", productID);
-
-    return axios.post(TEST_API_URL + `cartAPI.php`, data);
-}
 
 const removeAllApi = () => {
     let data = new FormData();
@@ -58,7 +51,6 @@ export {
     addProductToCartApi,
     removeProductFromCartApi,
     getCartQuantityApi,
-    increaseQuantityApi,
-    decreaseQuantityApi,
+    changeQuantityApi,
     removeAllApi,
 };
