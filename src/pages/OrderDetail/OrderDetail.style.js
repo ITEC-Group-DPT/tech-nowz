@@ -12,12 +12,12 @@ const styles = {
 		fontWeight: '600',
 		fontSize: { xs: '1.5rem', md: '1.75rem' },
 		lineHeight: '1.5',
-		fontFamily: 'Roboto Slab, serif',
+		//fontFamily: 'Roboto Slab, serif',
 		marginTop: '3%',
 	},
 	content: {
 		fontSize: '1rem',
-		fontFamily: 'Roboto Slab, serif',
+		//fontFamily: 'Roboto Slab, serif',
 		fontWeight: '100',
 	},
 	productList: {
@@ -34,7 +34,7 @@ const styles = {
 		flexDirection: 'right',
 		color: 'red',
 		marginTop: '3%',
-		fontFamily: 'Roboto Slab, serif',
+		//fontFamily: 'Roboto Slab, serif',
 		fontSize: { xs: '1.5rem', md: '1.75rem' },
 		fontWeight: 'bold',
 	},

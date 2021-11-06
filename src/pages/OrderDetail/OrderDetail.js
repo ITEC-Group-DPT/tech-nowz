@@ -9,15 +9,16 @@ import { getOrderDetailAPI } from '../../api/orderApi';
 const OrderDetail = () => {
 	const { id } = useParams();
 	const [order, setOrderDetail] = useState([]);
+
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
-			if (response.data['success'] === true) {
-				setOrderDetail(response.data['data']);
+			if (response.data.success === true) {
+				setOrderDetail(response.data.data);
 			}
 		});
 	}, []);
 
-	function formatDateDiff(value) {
+	const formatDateDiff = (value) => {
 		let type;
 		if (value >= 1440) {
 			value /= 1440;
@@ -29,7 +30,7 @@ const OrderDetail = () => {
 		return `${Math.round(value)} ${type} ago`;
 	}
 
-	function ProductList(props) {
+	const ProductList = (props) => {
 		const productList = props.productList;
 		const products = productList.map((product) => (
 			<Box sx={{ width: '100%' }}>

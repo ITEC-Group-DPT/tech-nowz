@@ -19,7 +19,7 @@ const styles = {
 		padding: '.5rem 1rem',
 		transition: '400ms',
 		borderRadius: '25px',
-		//marginRight
+		mr: 1,
 		'&:hover': {
 			backgroundColor: '#737373',
 		},
@@ -38,7 +38,7 @@ const styles = {
         padding: '.5rem 1rem',
         transition: '400ms',
         borderRadius: '25px',
-        //marginRight
+        mr: 1,
         '&:hover': {
             backgroundColor: '#737373',
         }

@@ -76,6 +76,10 @@ const styles = {
         backgroundColor: "#333333",
         fontSize: { sm: "0.6rem", md: "1rem" },
         width: "100%",
+        transition: "400ms",
+        '&:hover': {
+            backgroundColor: "#565656",
+        }
     },
 
     cartListWrapper: {

@@ -103,7 +103,7 @@ const Navbar = () => {
 			className="appBar"
 		>
 			<Toolbar>
-				<Container maxWidth="xl">
+				<Container maxWidth="xl" sx={{padding: 0}}>
 					<Grid container spacing={2}>
 						{isMatch ? (
 							<Grid item xs={3}>

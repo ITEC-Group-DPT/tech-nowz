@@ -39,7 +39,6 @@ const UpperNav = () => {
 	const handleClick = (e) => {
 		if (searchValue !== '') {
 			setOpenSearch(true)
-			e.target.focus()
 		}
 	}
 
@@ -77,7 +76,6 @@ const UpperNav = () => {
 	const isZIndex = (isOpen) => ({
 		zIndex: isOpen ? ("1400") : ("1200"),
 	})
-
 
 	return (
 		<Grid container spacing={0} sx={{...styles.container, ...isZIndex(openSearch)}}>
