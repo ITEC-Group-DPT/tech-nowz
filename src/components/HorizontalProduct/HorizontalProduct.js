@@ -39,13 +39,11 @@ const HorizontalProduct = ({
 		`?i=${product.productID}`;
 
 	const increaseQuantity = (e) => {
-		e.preventDefault();
 		setQuantityDifference(quantityDifference + 1);
 		changeQuantity(product, 1);
 	}
 
 	const decreaseQuantity = (e) => {
-		e.preventDefault();
 		if (product.quantity > 1) {
 			setQuantityDifference(quantityDifference - 1);
 			changeQuantity(product, -1);
@@ -133,6 +131,7 @@ const HorizontalProduct = ({
 				{
 					cartProduct &&
 					<CardContent
+						onClick = {(e) => e.preventDefault()}
 						sx={styles.quantityContainer}>
 
 						<Typography
