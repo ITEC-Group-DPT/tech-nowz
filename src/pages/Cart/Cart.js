@@ -28,6 +28,10 @@ const Cart = () => {
     const deleteProduct = (product) => {
         dispatch(removeProductFromCart(product));
     }
+    const onCheckOut = () => {
+        history.push('/checkout/payment')
+    }
+    
     return (
         <Box sx={styles.box}>
             <Box sx={styles.main}>
@@ -97,6 +101,7 @@ const Cart = () => {
                                 sx={styles.checkoutButton}
                                 variant="contained"
                                 color="error"
+                                onClick={onCheckOut}
                             >
                                 Checkout
                             </Button>
