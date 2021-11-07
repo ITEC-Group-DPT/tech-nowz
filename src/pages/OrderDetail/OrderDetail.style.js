@@ -6,37 +6,31 @@ const styles = {
         paddingTop: '50px',
 	},
 	divider: {
-		 mt: {
-			xs: 2,
-			md: 4,
-		 },
-		 mb: {
-			xs: 2,
-			md: 4,
-		 },
+		 mt: 2,
+		 mb: 2,
 	},
 	wrapper: {
 		backgroundColor: "white",
-		borderRadius: "25px",
+		borderRadius: "5px",
 		display: "flex",
 		alignItems: "center",
 		padding: "30px 40px !important",
 	},
 	title: {
 		fontWeight: '600',
-		fontSize: { xs: '20px', md: '25px' },
-		mb: 2,
+		fontSize: { xs: '20px', md: '24px' },
+		mb: 1,
 	},
 	content: {
 		fontSize: {
 			xs: '14px',
 			md: '17px',
 		},
-		mb: 1,
+		//mb: 1,
 	},
 	priceWrapper: {
 		display: 'flex',
-		mt: 1,
+		//mt: 1,
 	},
 	upperTitles: {
 		fontSize: {
@@ -61,7 +55,7 @@ const styles = {
 		fontWeight: "600",
 		fontSize: {
 			xs: '15px',
-			md: '20px',
+			md: '24px',
 		},
 	},
 	lowerValues: {
@@ -71,6 +65,20 @@ const styles = {
 			md: '20px',
 		},
 		ml: 'auto',
+		color: 'red',
+	},
+	packageWrapper: {
+
+	},
+	productList: {
+		borderLeft: {
+			xs: 'none',
+			lg: '1px solid #e0e0e0'
+		},
+		paddingLeft: {
+			xs: 'none',
+			lg: '48px',
+		},
 	},
 	productTitle: {
 		textAlign: "center",

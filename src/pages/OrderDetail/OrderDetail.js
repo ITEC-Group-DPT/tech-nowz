@@ -67,15 +67,15 @@ const OrderDetail = () => {
 
 									<Divider sx={styles.divider} />
 
-									<Typography sx={styles.title}>
+									{/* <Typography sx={styles.title}>
 										Payment
 									</Typography>
 									<Typography sx={styles.content}>
 										on {order.orderInfo.dateCreated}
-									</Typography>
+									</Typography> */}
 
 									<Box sx={{mt: 4}}>
-										<Box sx={styles.priceWrapper}>
+										{/* <Box sx={styles.priceWrapper}>
 											<Typography sx={styles.upperTitles}>
 												Subtotal:
 											</Typography>
@@ -90,7 +90,7 @@ const OrderDetail = () => {
 											<Typography sx={styles.upperValues}>
 												Free
 											</Typography>
-										</Box>
+										</Box> */}
 										<Box sx={styles.lowerPriceWrapper}>
 											<Typography sx={styles.lowerTitles}>
 												Total price:
