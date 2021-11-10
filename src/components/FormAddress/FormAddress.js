@@ -154,12 +154,13 @@ const FormAddress = ({
 					}
 					value={form.city}
 					variant="standard"
-					required
+					
 				/>
 				<TextField
 					sx={{ mb: 2 }}
 					name="phone"
 					label="Phone"
+					type="number"
 					placeholder="Type your phone here"
 					onChange={(e) =>
 						setFormAddress({ ...form, phone: e.target.value })

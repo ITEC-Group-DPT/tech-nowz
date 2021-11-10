@@ -139,7 +139,7 @@ export default function PaymentStepper({
 									<Typography
 										variant="h6"
 										sx={{ fontSize: { xs: "1rem" } }}>
-										Total price: {cart.totalQuantity}
+										Total units: {cart.totalQuantity}
 										{" unit(s)"}
 									</Typography>
 									<Typography

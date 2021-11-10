@@ -1,16 +1,9 @@
 import { React, useState, useEffect } from "react";
 import {
-	FormControl,
-	InputLabel,
-	Input,
 	Box,
 	Container,
-	FormHelperText,
-	Card,
 	Typography,
-	CardContent,
 	Button,
-	CardActions,
 	Divider,
 	Modal,
 } from "@mui/material";
@@ -29,8 +22,7 @@ const AddressBook = () => {
 
 	function getaddress() {
 		getAddressBook().then((res) => {
-			if (res.data.success == true) 
-			setAddressBook(res.data.data);
+			if (res.data.success == true) setAddressBook(res.data.data);
 		});
 	}
 
