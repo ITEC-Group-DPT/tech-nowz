@@ -1,6 +1,6 @@
 const styles = {
 	box: {
-		minHeight: '100vh',
+		minHeight: '80vh',
 		backgroundColor: 'rgb(245, 245, 245)',
 		paddingBottom: '100px',
         paddingTop: '50px',

@@ -112,8 +112,7 @@ const styles = {
         textTransform: "none",
         //fontFamily: "'Roboto Slab', serif",
         paddingBottom: "0",
-        color: "black",
-        fontWeight: "300",
+        color: "#5b5b5b",
         fontSize: {
             xs: "12px",
             lg: "15px",

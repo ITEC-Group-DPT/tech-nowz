@@ -32,7 +32,7 @@ const Favorite = () => {
 
     return (
         <Box sx={styles.box}>
-            <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Favorites</Typography>
+            <Typography sx={styles.sliderTitle}>Favorites</Typography>
             <Container maxWidth="md">
                 {
                     list.map(product =>

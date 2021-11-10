@@ -1,5 +1,6 @@
+// import { makeStyles } from "@mui/styles";
 const styles = {
-    box: {
+	box: {
 		minHeight: '80vh',
 		backgroundColor: 'rgb(245, 245, 245)',
 		paddingBottom: '100px',
@@ -8,16 +9,29 @@ const styles = {
 			md: '50px',
 		},
 	},
-
-    sliderTitle: {
+	titleWrapper: {
+		display: "flex",
+		justifyContent: 'space-between',
+		alignItems: "center",
+		marginBottom: '25px',
+	},
+	title: {
         fontSize: {
             xs: "26px",
             lg: "32px",
         },
         fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: '25px',
     },
-};
 
+	addBtn: {
+		textTransform: "none",
+		color: "#5b5b5b",
+		fontSize: "16px",
+	},
+
+	dialog: {
+		minWidth: "100%",
+	}
+};
 export default styles;
