@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 //component
 import Navbar from '../components/Navbar/Navbar';
 import Product from '../pages/Product/Product';
+import CategoryPage from '../pages/CategoryPage/CategoryPage'
 import ContactUs from '../pages/ContactUs/ContactUs';
 import CartNavigation from './CartNavigation';
 import ProfileNavigation from './ProfileNavigation';
@@ -38,6 +39,7 @@ const HomeNavigation = () => {
 				<Route exact path="/contactus" component={ContactUs} />
 				<Route exact path="/" component={Home} />
 				<Route path="/product/:name" component={Product} />
+				<Route path="/category/:name" component={CategoryPage}  />
 				<Route path="/checkout" component={CartNavigation} />
 				<Route path="/profile" component={ProfileNavigation} />
 				<Route path="/" component={NotFound} />

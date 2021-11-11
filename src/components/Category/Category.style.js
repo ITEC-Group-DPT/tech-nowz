@@ -9,6 +9,9 @@ const styles = {
 	viewMoreBtn: {
 		textTransform: 'none',
 		color: 'black',
+	},
+	link: {
+		textDecoration: 'none',
 		margin: 'auto 0 auto auto',
 	},
 };
