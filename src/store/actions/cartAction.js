@@ -114,11 +114,29 @@ const removeAllCart = () => {
     }
 }
 
-export { 
-    getCart, 
-    getCartQuantity, 
-    addProductToCart, 
+const showCartNoti = () => {
+    return dispatch => {
+        dispatch({
+            type: ActionType.SHOW_CART_NOTI,
+        });
+    }
+}
+
+const hideCartNoti = () => {
+    return dispatch => {
+        dispatch({
+            type: ActionType.HIDE_CART_NOTI,
+        });
+    }
+}
+
+export {
+    getCart,
+    getCartQuantity,
+    addProductToCart,
     removeProductFromCart,
     changeProductQuantity,
     removeAllCart,
+    showCartNoti,
+    hideCartNoti,
 };

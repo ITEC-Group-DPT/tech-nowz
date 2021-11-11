@@ -2,6 +2,9 @@ import ActionType from "../actions/actionType";
 
 const initState = {
     isLoading: false,
+    notification: {
+        addToCart: false,
+    },
     cart: {
         totalQuantity: 0,
         totalPrice: 0,
@@ -19,6 +22,7 @@ const CartReducer = (state = initState, action) => {
             }
         case (ActionType.GET_CART_LIST_SUCCESS):
             return {
+                ...state,
                 cart: {
                     ...action.data,
                     totalQuantity: parseInt(action.data.totalQuantity),
@@ -44,7 +48,7 @@ const CartReducer = (state = initState, action) => {
             newCart = JSON.parse(JSON.stringify(state.cart));
 
             newCart["cartList"].push(action.data);
-            
+
 
             newCart.totalPrice += action.data.price;
             newCart.totalQuantity++;
@@ -98,6 +102,20 @@ const CartReducer = (state = initState, action) => {
                     totalPrice: 0,
                     cartList: [],
                 },
+            }
+        case (ActionType.SHOW_CART_NOTI):
+            return {
+                ...state,
+                notification: {
+                    addToCart: true,
+                }
+            }
+        case (ActionType.HIDE_CART_NOTI):
+            return {
+                ...state,
+                notification: {
+                    addToCart: false,
+                }
             }
         default: return state;
     }

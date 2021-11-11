@@ -27,7 +27,10 @@ const styles = {
 	addBtn: {
 		textTransform: "none",
 		color: "#5b5b5b",
-		fontSize: "16px",
+		fontSize: {
+			xs: "14px",
+			md: "16px",
+		},
 	},
 
 	dialog: {
