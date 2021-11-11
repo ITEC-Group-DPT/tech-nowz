@@ -36,7 +36,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { userInfoSelector } from "../../store/selectors";
 import FormProduct from "../../components/FormProduct/FormProduct";
-import { deleteProduct,editProduct } from "../../api/productApi";
+import { deleteProduct, editProduct } from "../../api/productApi";
 const useQuery = () => {
 	return new URLSearchParams(useLocation().search);
 };
@@ -163,22 +163,25 @@ const Product = () => {
 	const [productForm, setProductForm] = useState(defaultemptyProduct);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [formOpen, setFormOpen] = useState(false);
-	
-	function submitEditForm(){
-		setFormOpen(false);
-		editProduct(productForm,productID).then((response) => {
-			console.log(response.data);
-		});
 
-		// console.log(product);
-		// console.log(productForm);
-		// let newproduct = JSON.parse(JSON.stringify(product))
-		// newproduct.product.product = productForm
-		// console.log(newproduct.product.product);
-		// setProduct(newproduct)
+	function submitEditForm() {
+		setFormOpen(false);
+		editProduct(productForm, productID).then((response) => {
+			console.log(response.data);
+			console.log(product);
+			console.log(productForm);
+		
+			setProduct({
+				...product,
+				product: productForm
+			})
+
+			console.log(product);
+		
+		});
 	}
 
-	function deleteProduct(){
+	function onDeleteProduct() {
 		setModalOpen(false);
 		deleteProduct(productID).then((response) => {
 			console.log(response.data);
@@ -522,7 +525,7 @@ const Product = () => {
 					</Grid>
 				</Grid>
 			</Container>
-			{formOpen  && (
+			{formOpen && (
 				<Container maxWidth="lg" sx={styles.detailContainer}>
 					<FormProduct
 						form={productForm}
@@ -691,17 +694,17 @@ const Product = () => {
 			<Modal open={modalOpen} onClose={() => setModalOpen(false)}>
 				<Box sx={styles.modal}>
 					<h4>Are you sure to delete this product?</h4>
-					<Box sx={{textAlign: 'center'}}>
+					<Box sx={{ textAlign: "center" }}>
 						<Button
 							variant="outlined"
-							sx={{mx:1}}
-							onClick={()=>setModalOpen(false)}>
+							sx={{ mx: 1 }}
+							onClick={() => setModalOpen(false)}>
 							No
 						</Button>
 						<Button
 							variant="outlined"
-							sx={{mx:1,color:'red'}}
-							onClick={() => deleteProduct()}>
+							sx={{ mx: 1, color: "red" }}
+							onClick={() => onDeleteProduct()}>
 							Yes
 						</Button>
 					</Box>

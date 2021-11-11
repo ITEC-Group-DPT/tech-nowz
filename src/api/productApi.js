@@ -80,5 +80,5 @@ export {
 	searchProductsAPI,
 	createProduct,
 	editProduct,
-	deleteProduct
+	deleteProduct,
 };
