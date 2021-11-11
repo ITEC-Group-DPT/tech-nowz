@@ -1,22 +1,16 @@
 import { React, useState, useEffect } from "react";
 import {
-	FormControl,
-	InputLabel,
-	Input,
 	Box,
 	Container,
-	FormHelperText,
-	Card,
 	Typography,
-	CardContent,
 	Button,
-	CardActions,
-	Divider,
-	Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
+	Dialog, DialogTitle,
+	Collapse,
 } from "@mui/material";
 import CardAddress from "../../components/CardAddresss/CardAddress";
 import FormAddress from "../../components/FormAddress/FormAddress";
 import icons from "../../constant/icons";
+import { TransitionGroup } from 'react-transition-group';
 import styles from "./AddressBook.styles"
 import { getAddressBook, deleteAddressBook } from "../../api/addressApi";
 
@@ -89,21 +83,25 @@ const AddressBook = () => {
 						New address
 					</Button>
 				</Box>
-				{addressBook.map((address) => (
-					<CardAddress
-						address={address}
-						key={address.deliveryID}
-						onEdit={onEdit}
-						onDelete={onDelete}
-					/>
-				))}
+				<TransitionGroup>
+					{addressBook.map(address =>
+						<Collapse key={address.deliveryID}>
+							<CardAddress
+								address={address}
+								key={address.deliveryID}
+								onEdit={onEdit}
+								onDelete={onDelete}
+							/>
+						</Collapse>
+					)}
+				</TransitionGroup>
 			</Container>
 			<Dialog
 				open={modelAppear}
 				onClose={() => setModelAppear(false)}
 				sx={styles.dialog}
 			>
-				<DialogTitle sx={{textAlign: "center"}}>New Address</DialogTitle>
+				<DialogTitle sx={{ textAlign: "center" }}>New Address</DialogTitle>
 				<FormAddress
 					formCommand="create"
 					formSubmit={onCreate}

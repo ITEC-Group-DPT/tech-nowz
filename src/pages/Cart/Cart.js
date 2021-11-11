@@ -4,7 +4,8 @@ import styles from './Cart.styles'
 import { cartSelector } from "../../store/selectors"
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Box, Typography, Button } from '@mui/material'
+import { Container, Box, Typography, Button, Collapse } from '@mui/material'
+import { TransitionGroup } from 'react-transition-group';
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
 import EmptyCart from '../../components/EmptyCart/EmptyCart';
@@ -31,7 +32,7 @@ const Cart = () => {
     const onCheckOut = () => {
         history.push('/checkout/payment')
     }
-    
+
     return (
         <Box sx={styles.box}>
             <Box sx={styles.main}>
@@ -58,19 +59,23 @@ const Cart = () => {
                                     Remove all
                                 </Button>
                             </Box>
-                            {cartList.map(product =>
-                                <HorizontalProduct
-                                    key={product.productID}
-                                    cartProduct
-                                    product={product}
-                                    canDelete
-                                    onPressDelete={(e) => {
-                                        e.preventDefault()
-                                        deleteProduct(product)
-                                    }}
-                                    changeQuantity = {changeQuantity}
-                                />)
-                            }
+                            <TransitionGroup>
+                                {cartList.map(product =>
+                                    <Collapse key={product.productID}>
+                                        <HorizontalProduct
+                                            key={product.productID}
+                                            cartProduct
+                                            product={product}
+                                            canDelete
+                                            onPressDelete={(e) => {
+                                                e.preventDefault()
+                                                deleteProduct(product)
+                                            }}
+                                            changeQuantity={changeQuantity}
+                                        />
+                                    </Collapse>
+                                )}
+                            </TransitionGroup>
                         </Box>
 
 
