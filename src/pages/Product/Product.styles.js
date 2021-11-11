@@ -244,6 +244,17 @@ const styles = {
 		bgcolor: '#ededed',
 		mb: 4,
 	},
+	modal: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		width: 'fit-content',
+		bgcolor: "white",
+		border: "2px solid #000",
+		boxShadow: 24,
+		p: 4,
+	},
 };
 
 export default styles;

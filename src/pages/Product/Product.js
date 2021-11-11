@@ -15,6 +15,7 @@ import {
 	Divider,
 	Tab,
 	Skeleton,
+	Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Slider from "react-slick";
@@ -35,7 +36,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { userInfoSelector } from "../../store/selectors";
 import FormProduct from "../../components/FormProduct/FormProduct";
-
+import { deleteProduct,editProduct } from "../../api/productApi";
 const useQuery = () => {
 	return new URLSearchParams(useLocation().search);
 };
@@ -148,8 +149,6 @@ const Product = () => {
 	const productID = query.get("i");
 	const [product, setProduct] = useState({ isLoading: true });
 
-	const [productForm, setProductForm] = useState(defaultemptyProduct);
-
 	const [relatedProductList, setRelatedProductList] = useState({
 		isLoading: true,
 		productList: [],
@@ -161,6 +160,37 @@ const Product = () => {
 	const cart = useSelector(cartSelector);
 	const [quantityDifference, setQuantityDifference] = useState(0);
 
+	const [productForm, setProductForm] = useState(defaultemptyProduct);
+	const [modalOpen, setModalOpen] = useState(false);
+	const [formOpen, setFormOpen] = useState(false);
+	
+	function submitEditForm(){
+		setFormOpen(false);
+		editProduct(productForm,productID).then((response) => {
+			console.log(response.data);
+		});
+
+		// console.log(product);
+		// console.log(productForm);
+		// let newproduct = JSON.parse(JSON.stringify(product))
+		// newproduct.product.product = productForm
+		// console.log(newproduct.product.product);
+		// setProduct(newproduct)
+	}
+
+	function deleteProduct(){
+		setModalOpen(false);
+		deleteProduct(productID).then((response) => {
+			console.log(response.data);
+		});
+
+		// console.log(product);
+		// console.log(productForm);
+		// let newproduct = JSON.parse(JSON.stringify(product))
+		// newproduct.product.product = productForm
+		// console.log(newproduct.product.product);
+		// setProduct(newproduct)
+	}
 	const changeFavorite = () => {
 		changeFavoriteApi(productID).then((response) => {
 			console.log(response.data);
@@ -438,15 +468,67 @@ const Product = () => {
 									</Button>
 								</Box>
 							)}
+
+							{product.isLoading ? (
+								<Box sx={styles.btnWrapper}>
+									<Skeleton
+										variant="text"
+										animation="wave"
+										sx={styles.skeletonButton}>
+										<Button
+											variant="outlined"
+											startIcon={
+												product.isFavorite ? (
+													<icons.IsFavorite />
+												) : (
+													<icons.NotFavorite />
+												)
+											}
+											sx={styles.addBtn}>
+											Add to Cart
+										</Button>
+									</Skeleton>
+									<Skeleton
+										variant="text"
+										animation="wave"
+										sx={styles.skeletonButton}>
+										<Button
+											variant="contained"
+											startIcon={<icons.AddCart />}
+											sx={styles.addBtn}>
+											Add to Cart
+										</Button>
+									</Skeleton>
+								</Box>
+							) : (
+								<Box sx={styles.btnWrapper}>
+									<Button
+										variant="outlined"
+										sx={styles.favoriteBtn}
+										onClick={() => setModalOpen(true)}>
+										Delete
+									</Button>
+
+									<Button
+										onClick={addItemToCart}
+										onClick={() => setFormOpen(true)}
+										variant="contained"
+										sx={styles.addBtn}>
+										Edit
+									</Button>
+								</Box>
+							)}
 						</Box>
 					</Grid>
 				</Grid>
 			</Container>
-			{product.isLoading == false && (
+			{formOpen  && (
 				<Container maxWidth="lg" sx={styles.detailContainer}>
 					<FormProduct
 						form={productForm}
 						setProduct={setProductForm}
+						setAppear={setFormOpen}
+						handleSubmit={submitEditForm}
 					/>
 				</Container>
 			)}
@@ -606,6 +688,25 @@ const Product = () => {
 					</Box>
 				)}
 			</Container>
+			<Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+				<Box sx={styles.modal}>
+					<h4>Are you sure to delete this product?</h4>
+					<Box sx={{textAlign: 'center'}}>
+						<Button
+							variant="outlined"
+							sx={{mx:1}}
+							onClick={()=>setModalOpen(false)}>
+							No
+						</Button>
+						<Button
+							variant="outlined"
+							sx={{mx:1,color:'red'}}
+							onClick={() => deleteProduct()}>
+							Yes
+						</Button>
+					</Box>
+				</Box>
+			</Modal>
 		</Box>
 	);
 };

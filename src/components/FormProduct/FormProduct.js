@@ -11,15 +11,15 @@ import {
 	TextareaAutosize,
 	Typography,
 } from "@mui/material";
-function setAppearDef(e){
+function setDefault(e){
 	console.log(e);
 }
 const FormProduct = ({
 	form,
 	setProduct,
 	handleSubmit,
-	cancelAppear = true,
-	setAppear = setAppearDef
+	cancelBtnAppear = true,
+	setAppear = setDefault,
 }) => {
 	return (
 		<Box sx={{ p: 2, my: 1 }}>
@@ -189,7 +189,7 @@ const FormProduct = ({
 				/>
 			</FormControl>
 			<Container sx={{ textAlign: "center", my: 3 }}>
-				{cancelAppear && (
+				{cancelBtnAppear && (
 					<Button
 						sx={{ mx: 1 }}
 						onClick={() => setAppear(false)}

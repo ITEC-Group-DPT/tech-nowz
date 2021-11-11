@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import { React, useState } from "react";
 import { Container, Typography, Button, Divider, Modal } from "@mui/material";
 import FormProduct from "../../components/FormProduct/FormProduct";
-
+import { createProduct } from "../../api/productApi";
 const defaultemptyProduct = {
 	productID: 0,
 	type: "",
@@ -22,7 +22,9 @@ const defaultemptyProduct = {
 const AdminCreateNewProduct = () => {
 	const [productForm, setProductForm] = useState(defaultemptyProduct);
 	function handleSubmit(){
-		console.log(productForm);
+		createProduct(productForm).then((response) => {
+			console.log(response.data);
+		});
 	}
 	return (
 		<div>
@@ -39,7 +41,7 @@ const AdminCreateNewProduct = () => {
 			</Box>
 
 			<Container >
-				<FormProduct form={productForm} setProduct={setProductForm} handleSubmit={handleSubmit} cancelAppear={false} />
+				<FormProduct form={productForm} setProduct={setProductForm} handleSubmit={handleSubmit} cancelBtnAppear={false} />
 			</Container>
 		</div>
 	);
