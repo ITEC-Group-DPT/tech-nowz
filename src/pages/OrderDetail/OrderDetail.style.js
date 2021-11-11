@@ -3,18 +3,18 @@ const styles = {
 		minHeight: '80vh',
 		backgroundColor: 'rgb(245, 245, 245)',
 		paddingBottom: '100px',
-        paddingTop: '50px',
+		paddingTop: '50px',
 	},
 	divider: {
-		 mt: 2,
-		 mb: 2,
+		mt: 2,
+		mb: 2,
 	},
 	wrapper: {
-		backgroundColor: "white",
-		borderRadius: "5px",
-		display: "flex",
-		alignItems: "center",
-		padding: "30px 40px !important",
+		backgroundColor: 'white',
+		borderRadius: '5px',
+		display: 'flex',
+		alignItems: 'center',
+		padding: '30px 40px !important',
 	},
 	title: {
 		fontWeight: '600',
@@ -26,7 +26,7 @@ const styles = {
 			xs: '14px',
 			md: '17px',
 		},
-		//mb: 1,
+		// mt: '0.5',
 	},
 	priceWrapper: {
 		display: 'flex',
@@ -37,7 +37,7 @@ const styles = {
 			xs: '14px',
 			md: '17px',
 		},
-		fontWeight: "500",
+		fontWeight: '500',
 	},
 	upperValues: {
 		ml: 'auto',
@@ -45,21 +45,21 @@ const styles = {
 			xs: '14px',
 			md: '17px',
 		},
-		fontWeight: "500",
+		fontWeight: '500',
 	},
 	lowerPriceWrapper: {
 		mt: 2,
 		display: 'flex',
 	},
 	lowerTitles: {
-		fontWeight: "600",
+		fontWeight: '600',
 		fontSize: {
 			xs: '15px',
 			md: '24px',
 		},
 	},
 	lowerValues: {
-		fontWeight: "600",
+		fontWeight: '600',
 		fontSize: {
 			xs: '15px',
 			md: '20px',
@@ -67,13 +67,11 @@ const styles = {
 		ml: 'auto',
 		color: 'red',
 	},
-	packageWrapper: {
-
-	},
+	packageWrapper: {},
 	productList: {
 		borderLeft: {
 			xs: 'none',
-			lg: '1px solid #e0e0e0'
+			lg: '1px solid #e0e0e0',
 		},
 		paddingLeft: {
 			xs: 'none',
@@ -81,11 +79,19 @@ const styles = {
 		},
 	},
 	productTitle: {
-		textAlign: "center",
+		textAlign: 'center',
 		fontWeight: '600',
 		fontSize: { xs: '20px', md: '26px' },
 		mb: 2,
-	}
+	},
+	ratingTitle: {
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		pt: 0.4,
+		fontWeight: 'bold',
+	},
 };
 
 export default styles;
