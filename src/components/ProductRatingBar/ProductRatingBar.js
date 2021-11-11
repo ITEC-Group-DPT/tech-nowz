@@ -16,9 +16,9 @@ const ProductRatingBar = ({ orderID, productID, customerRating }) => {
 	const [ratingStar, setRatingStar] = useState(-1);
 	const [dialogOpen, setDialogOpen] = useState(false);
 
-	const openDialog = (event, newValue) => {
+	const openDialog = (event, newRatingValue) => {
 		setDialogOpen(true);
-		setRatingStar(newValue);
+		setRatingStar(newRatingValue);
 	};
 
 	const handleDialogClose = () => {
@@ -52,24 +52,26 @@ const ProductRatingBar = ({ orderID, productID, customerRating }) => {
 				onChange={openDialog}
 				precision={0.5}
 			/>
-			<Dialog
-				aria-labelledby="customized-dialog-title"
-				open={dialogOpen}
-				onClose={handleDialogClose}
-				value={ratingStar}
-			>
-				<DialogActions>
-					<DialogTitle>Confirmation</DialogTitle>
-					<DialogContent dividers>
+			<Dialog open={dialogOpen} onClose={handleDialogClose}>
+				<DialogActions sx={{ display: 'block' }}>
+					<DialogTitle sx={{ m: 0, p: 2 }}>Confirmation</DialogTitle>
+					<DialogContent sx={{ m: 0, p: 2 }}>
 						<Typography gutterBottom>
-							Do you want to rate this product {ratingStar + ' '}
+							Do you want to rate {ratingStar + ' '}
 							star(s) ?
 						</Typography>
 					</DialogContent>
-					<Button onClick={handleDialogSave} value={ratingStar}>
-						Save changes
-					</Button>
-					<Button onClick={handleDialogClose}>Cancel</Button>
+					<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+						<Button onClick={handleDialogSave} value={ratingStar}>
+							Save changes
+						</Button>
+						<Button
+							onClick={handleDialogClose}
+							sx={{ color: 'black' }}
+						>
+							Cancel
+						</Button>
+					</Box>
 				</DialogActions>
 			</Dialog>
 		</Box>
