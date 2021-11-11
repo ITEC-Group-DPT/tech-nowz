@@ -13,8 +13,6 @@ import {
 } from '../../store/selectors';
 
 const Home = () => {
-
-    
     return (
         <Box sx={styles.box}>
             <Banner />
