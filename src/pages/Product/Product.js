@@ -3,7 +3,7 @@ import styles from './Product.styles'
 import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
-import { useParams, useLocation } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
@@ -394,7 +394,12 @@ const Product = () => {
                     </Box>
                 ) : (
                     <Box>
-                        <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
+                        <Box sx={styles.relatedProductWrapper}>
+                            <Typography gutterBottom variant="h5" component="div" sx={styles.sliderTitle}>Related products</Typography>
+                            <Link style={styles.link} to={`/category/${product.isLoading ? "" : product.product.type}`}>
+                                <Button size="small" sx={styles.viewMoreBtn}>View more</Button>
+                            </Link>
+                        </Box>
                         <Slider {...settingsRelatedProduct}>
                             {relatedProductList.productList.map(product => (
                                 <ProductItem

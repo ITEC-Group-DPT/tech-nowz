@@ -220,10 +220,12 @@ const styles = {
 		paddingBottom: '80px',
 	},
 	sliderTitle: {
-		fontSize: '1.4rem',
+		fontSize: {
+			xs:	'20px',
+			md: '27px',
+		},
 		fontWeight: 'bold',
-		textAlign: 'center',
-		marginBottom: '25px',
+		marginBottom: 0,
 	},
 	boxCenter: {
 		display: 'flex',
@@ -243,6 +245,22 @@ const styles = {
 	skeletonTitle: {
 		bgcolor: '#ededed',
 		mb: 4,
+	},
+
+	relatedProductWrapper: {
+		display: "flex",
+		marginBottom: '25px',
+		alignItems: "center",
+	},
+
+	link: {
+		textDecoration: 'none',
+		margin: 'auto 27px auto auto',
+	},
+
+	viewMoreBtn: {
+		textTransform: 'none',
+		color: 'black',
 	},
 };
 
