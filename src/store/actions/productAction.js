@@ -6,7 +6,6 @@ const getTopRatingAction = () => {
         dispatch({ type: ActionType.START_GET_TOP_RATING });
         getTopRatingAPI()
             .then(response => {
-                console.log('response rating: ', response);
                 if (response.data.success) {
                     dispatch({
                         type: ActionType.GET_TOP_RATING_SUCCESS,
