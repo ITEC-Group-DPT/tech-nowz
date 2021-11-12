@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { styles, useStyles } from './CategoryPage.styles'
-import { Box, Pagination, Container, Grid, Typography } from '@mui/material'
-import { useParams, useLocation } from "react-router-dom"
+import { Box, Pagination, Container, Grid, Typography, Select, FormControl, MenuItem} from '@mui/material'
+import { useParams } from "react-router-dom"
 import { getProductCategoryAPI } from '../../api/productApi'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
 import ProductItem from '../../components/ProductItem/ProductItem'
@@ -12,12 +12,16 @@ const CategoryPage = () => {
 
     const [productList, setProductList] = useState({ "isLoading": true })
     const [page, setPage] = useState(1)
+    const [sortBy, setSortBy] = useState('price ASC')
+
+    const orderBy = sortBy.split(' ')[0]
+    const option = sortBy.split(' ')[1]
     const itemsPerPage = 8
     const offset = (page - 1) * itemsPerPage
 
     useEffect(() => {
-        setProductList({ "isLoading": true }) // when clicking on another page, the isLoading is set to true
-        getProductCategoryAPI(name, offset, itemsPerPage).then(response => {
+        setProductList({ "isLoading": true }) // when clicking on another pagination, the isLoading is set to true
+        getProductCategoryAPI(name, orderBy, option, offset, itemsPerPage).then(response => {
             if (response.data.success) {
                 const data = response.data.data
                 console.log("productList: ", data)
@@ -25,17 +29,29 @@ const CategoryPage = () => {
             }
         })
         window.scrollTo(0, 0)
-    }, [page])
-
-    const handleChangePage = (event, value) => {
-        setPage(value)
-    }
+    }, [page, sortBy])
 
     return (
         <Box sx={styles.box}>
             <Container maxWidth="lg">
                 <Box sx={styles.titleWrapper}>
                     <Typography sx={styles.categoryTitle}>{name}</Typography>
+                    <Box sx={styles.sortByWrapper}>
+                        <Typography sx={styles.sortBy}>Sort by</Typography>
+                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                            <Select
+                                displayEmpty
+                                value={sortBy}
+                                onChange={(event) => { setSortBy(event.target.value) }}
+                                inputProps={{ 'aria-label': 'Without label' }}
+                            >
+                                <MenuItem value={'price ASC'}>Price: lowest</MenuItem>
+                                <MenuItem value={'price DESC'}>Price: highest</MenuItem>
+                                <MenuItem value={'rating ASC'}>Rating: lowest</MenuItem>
+                                <MenuItem value={'rating DESC'}>Rating: highest</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
                 </Box>
                 {productList.isLoading ? (
                     <Grid container spacing={{ xs: 1, md: 3, lg: 3.5 }}>
@@ -59,7 +75,12 @@ const CategoryPage = () => {
                 )}
 
                 <Box sx={styles.paginationWrapper}>
-                    <Pagination classes={{ ul: classes.ul }} count={3} page={page} onChange={handleChangePage} />
+                    <Pagination
+                        classes={{ ul: classes.ul }}
+                        count={3}
+                        page={page}
+                        onChange={(event, value) => { setPage(value) }}
+                    />
                 </Box>
             </Container>
         </Box>

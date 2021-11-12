@@ -13,6 +13,8 @@ const styles = {
 
 	titleWrapper: {
 		marginBottom: '25px',
+		display: 'flex',
+		justifyContent: 'space-between',
 	},
 	categoryTitle: {
 		fontSize: {
@@ -21,6 +23,10 @@ const styles = {
 		},
 		fontWeight: 'bold',
 		textAlign: 'start',
+	},
+	sortByWrapper: {
+		display: 'flex',
+		alignItems: 'center',
 	},
 	link: {
 		textDecoration: 'none',
