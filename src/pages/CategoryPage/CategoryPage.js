@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { styles, useStyles } from './CategoryPage.styles'
-import { Box, Pagination, Container, Grid, Typography, Select, FormControl, MenuItem} from '@mui/material'
+import { Box, Pagination, Container, Grid, Typography, Select, FormControl, MenuItem } from '@mui/material'
 import { useParams } from "react-router-dom"
 import { getProductCategoryAPI } from '../../api/productApi'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
@@ -28,7 +28,7 @@ const CategoryPage = () => {
                 setProductList({ "isLoading": false, "data": data })
             }
         })
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0) // when clicking on another pagination, scroll to top
     }, [page, sortBy])
 
     return (
@@ -38,12 +38,12 @@ const CategoryPage = () => {
                     <Typography sx={styles.categoryTitle}>{name}</Typography>
                     <Box sx={styles.sortByWrapper}>
                         <Typography sx={styles.sortBy}>Sort by</Typography>
-                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl sx={styles.formControl} className={classes.root}>
                             <Select
                                 displayEmpty
                                 value={sortBy}
                                 onChange={(event) => { setSortBy(event.target.value) }}
-                                inputProps={{ 'aria-label': 'Without label' }}
+                                sx={styles.select}
                             >
                                 <MenuItem value={'price ASC'}>Price: lowest</MenuItem>
                                 <MenuItem value={'price DESC'}>Price: highest</MenuItem>

@@ -16,6 +16,7 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'space-between',
 	},
+
 	categoryTitle: {
 		fontSize: {
 			xs: "26px",
@@ -24,10 +25,36 @@ const styles = {
 		fontWeight: 'bold',
 		textAlign: 'start',
 	},
+
 	sortByWrapper: {
 		display: 'flex',
 		alignItems: 'center',
 	},
+
+	sortBy: {
+		fontSize: {
+			xs: "14px",
+			md: "17px",
+		},
+		mr: 1,
+	},
+
+	formControl: {
+		minWidth: {
+			xs: "135px",
+			md: "160px",
+		},
+	},
+
+	select: {
+		height: "40px",
+		backgroundColor: "white",
+		fontSize: {
+			xs: "13px",
+			md: "16px",
+		},
+	},
+
 	link: {
 		textDecoration: 'none',
 		margin: 'auto 0 auto auto',
@@ -42,11 +69,20 @@ const styles = {
 
 const useStyles = makeStyles(() => ({
 	ul: {
+		"& .MuiPaginationItem-root": {
+			marginRight: "10px",
+		},
 		"& .MuiPaginationItem-root.Mui-selected": {
-			backgroundColor: "#333333",
-			color: "white",
+			backgroundColor: "#333333 !important",
+			color: "white !important",
 		}
-	}
+	},
+
+	root: {
+		'& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+			border: '1px solid black',
+		}
+	},
 }))
 
 export { styles, useStyles }
