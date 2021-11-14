@@ -4,18 +4,18 @@ const styles = {
 	footer: {
 		backgroundColor: colors.primary,
 		color: 'white',
-		padding: '2rem',
+		padding: '25px',
 	},
 	addressWrapper: {
 		display: 'flex',
 		justifyContent: 'center',
-		mt: 4,
+		mt: 3,
 	},
 	socialMedia: {
 		display: 'flex',
 	},
 	newsletterWrapper: {
-		mt: 4,
+		mt: 3,
 		alignItems: 'center',
 	},
 	newsletter: {
@@ -28,12 +28,26 @@ const styles = {
 		backgroundColor: 'white',
 		borderRadius: '6px',
 		padding: '5px 12px',
+		fontSize: {
+			xs: "15px",
+			md: '17px'
+		},
+	},
+	iconWrapper: {
+		display: "flex",
+		justifyContent: "center",
 	},
 	icon: {
-		fontSize: '2rem',
+		fontSize: {
+			xs: "30px",
+			md: '35px'
+		},
 	},
 	signUp: {
-		fontSize: '1rem',
+		fontSize: {
+			xs: "16px",
+			md: '18px'
+		},
 		textAlign: 'center',
 		mb: {
 			xs: 3,
@@ -48,6 +62,10 @@ const styles = {
 		justifyContent: 'center',
 	},
 	subscribeBtn: {
+		fontSize: {
+			xs: "15px",
+			md: '17px'
+		},
 		color: 'white',
 		border: 'solid 1px #FFFFFF',
 		textTransform: 'none',
@@ -64,13 +82,24 @@ const styles = {
 			border: 'solid 1px #FFFFFF',
 		},
 	},
+	address: {
+		fontSize: {
+			xs: "16px",
+			md: '18px'
+		},
+		textAlign: "center",
+	},
 	bottomFooter: {
 		backgroundColor: 'rgb(41 41 41)',
 		display: 'flex',
 		justifyContent: 'center',
-		padding: '1rem',
+		padding: '15px',
 	},
 	copyright: {
+		fontSize: {
+			xs: "16px",
+			md: '18px'
+		},
 		color: 'white',
 	},
 };

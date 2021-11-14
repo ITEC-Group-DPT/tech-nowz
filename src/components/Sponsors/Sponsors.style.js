@@ -9,7 +9,10 @@ const styles = {
             md: '2rem 4rem',
             lg: '3rem 7rem',
         },
-        borderRadius: '25px'
+        borderRadius: {
+            xs: "0",
+            md: '25px',
+        },
     },
 
     card: {
@@ -19,12 +22,18 @@ const styles = {
     },
 
     sponsor: {
-        height: "200px",
+        height: {
+            xs: "170px",
+            md: "200px",
+        },
         width: '100%',
     },
 
     sponsorTitle: {
-        fontSize: '1.8rem',
+        fontSize: {
+            xs: "28px",
+            md: "32px",
+        },
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: '45px',

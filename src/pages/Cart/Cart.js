@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import styles from './cart.style'
+import styles from './Cart.styles'
 
 //component
+import { TransitionGroup } from 'react-transition-group';
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 import EmptyCart from '../../components/EmptyCart/EmptyCart';
-import { Container, Box, Typography, Button } from '@mui/material'
+import { Container, Box, Typography, Button, Collapse } from '@mui/material'
 import CustomModal from "../../components/Modal/Modal"
 
 //redux && api
@@ -35,16 +36,20 @@ const Cart = () => {
     const deleteProduct = (product) => {
         dispatch(removeProductFromCart(product));
     }
-    return (
-        <Box 
-        sx={styles.main}>
-            <CustomModal
-                openModal = {openModalDelete}
-                setOpenModal = {setOpenModalDelete}
+    const onCheckOut = () => {
+        history.push('/checkout/payment')
+    }
 
-                title = {"Remove all"}
-                description = "Do want to remove all product from cart?"
-                onPressConfirm = {removeAllProduct}
+    return (
+        <Box
+            sx={styles.main}>
+            <CustomModal
+                openModal={openModalDelete}
+                setOpenModal={setOpenModalDelete}
+
+                title={"Remove all"}
+                description="Do want to remove all product from cart?"
+                onPressConfirm={removeAllProduct}
             />
             {
                 (cartList && cartList.length == 0)
@@ -52,7 +57,7 @@ const Cart = () => {
                     : null
             }
             {cartList && cartList.length != 0 ?
-                <Box sx={{ flex: 7, position: "relative" }}>
+                <Box sx={styles.cartListWrapper}>
                     <Box>
                         <Box sx={styles.removeRow}>
                             <Typography
@@ -62,25 +67,30 @@ const Cart = () => {
                             </Typography>
 
                             <Button
-                                onClick={() => setOpenModalDelete(true)}
+                                onClick={removeAllProduct}
                                 color="error"
                                 sx={styles.removeAll}
                             >
                                 Remove all
                             </Button>
                         </Box>
-                        {cartList.map(product =>
-                            <HorizontalProduct
-                                key={product.productID}
-                                cartProduct
-                                product={product}
-                                canDelete
-                                onPressDelete={() =>
-                                    deleteProduct(product)
-                                }
-                                changeQuantity={changeQuantity}
-                            />)
-                        }
+                        <TransitionGroup>
+                            {cartList.map(product =>
+                                <Collapse key={product.productID}>
+                                    <HorizontalProduct
+                                        key={product.productID}
+                                        cartProduct
+                                        product={product}
+                                        canDelete
+                                        onPressDelete={(e) => {
+                                            e.preventDefault()
+                                            deleteProduct(product)
+                                        }}
+                                        changeQuantity={changeQuantity}
+                                    />
+                                </Collapse>
+                            )}
+                        </TransitionGroup>
                     </Box>
 
 
@@ -108,10 +118,10 @@ const Cart = () => {
                         </Box>
 
                         <Button
-                            onClick={() => history.push("/checkout/payment")}
                             sx={styles.checkoutButton}
                             variant="contained"
                             color="error"
+                            onClick={onCheckOut}
                         >
                             Checkout
                         </Button>

@@ -13,7 +13,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { colors, icons } from '../../constant';
 import useStyles from './Navbar.styles';
-import { Divider } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
@@ -94,31 +93,6 @@ const Navbar = () => {
 					/>
 				</ListItem>
 			</List>
-			<Divider />
-			<List sx={{ marginTop: 'auto' }}>
-				<ListItem button key="cart">
-					<NavItem
-						href="/checkout/cart"
-						title="Cart"
-						icon={<icons.Cart />}
-					/>
-				</ListItem>
-				<ListItem button key="user">
-					{userInfo.isEmpty ? (
-						<NavItem
-							href="/authentication"
-							title="Login"
-							icon={<icons.User />}
-						/>
-					) : (
-						<NavItem
-							href="/"
-							title={userInfo.username}
-							icon={<icons.User />}
-						/>
-					)}
-				</ListItem>
-			</List>
 		</Box>
 	);
 	// main
@@ -129,7 +103,7 @@ const Navbar = () => {
 			className="appBar"
 		>
 			<Toolbar>
-				<Container maxWidth="xl">
+				<Container maxWidth="xl" sx={{padding: 0}}>
 					<Grid container spacing={2}>
 						{isMatch ? (
 							<Grid item xs={3}>

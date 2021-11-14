@@ -19,7 +19,7 @@ const OrderComponent = ({ orderID, productList }) => {
 			<Box sx={styles.titleDiv}>
 				<Typography sx={styles.title}>Order: #{orderID}</Typography>
 				<Link style={styles.link} to={orderHistoryURL}>
-					<Button sx={styles.titleBtn}>See Detail</Button>
+					<Button sx={styles.titleBtn}>See detail</Button>
 				</Link>
 			</Box>
 			<Box sx={styles.contentDiv}>

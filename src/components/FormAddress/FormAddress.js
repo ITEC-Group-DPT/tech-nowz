@@ -9,6 +9,7 @@ import {
 	TextField,
 	Container,
 } from "@mui/material";
+import styles from './FormAddress.styles'
 import { createAddressBook, editAddressBook } from "../../api/addressApi";
 
 let defaultAddress = {
@@ -26,7 +27,7 @@ const FormAddress = ({
 	paymentChooseNewAddress = false,
 }) => {
 	// console.log(address);
-	let arrAddress = ["","","",""];
+	let arrAddress = ["", "", "", ""];
 	const [form, setFormAddress] = useState({
 		name: "",
 		addressInForm: "",
@@ -38,7 +39,7 @@ const FormAddress = ({
 
 	useEffect(() => {
 		arrAddress = address.address.split(", ");
-		while (arrAddress.length < 4) { //for error process 
+		while (arrAddress.length < 4) { //for error process
 			arrAddress.push("");
 		}
 		//if (arrAddress.length == 1) arrAddress = ["","","",""] //for change textfield
@@ -56,7 +57,7 @@ const FormAddress = ({
 	// const [district,setDistrict] = useState(arrAddress[2])
 	// const [city,setCity] = useState(arrAddress[3])
 	// const [phone,setPhone] = useState(address.phone)
-	function test(){
+	function test() {
 		console.log(1);
 	}
 	function handleSubmit(e) {
@@ -95,21 +96,22 @@ const FormAddress = ({
 		}
 	}
 	return (
-		<Box sx={{ p: 2, my: 1 }}>
+		<Box sx={styles.box}>
 			<FormControl fullWidth="true">
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="name"
 					label="Name"
 					onChange={(e) =>
 						setFormAddress({ ...form, name: e.target.value })
 					}
-					placeholder="Type your name here"
+					placeholder="Your full name"
 					value={form.name}
-					variant="standard"
+					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="address"
 					label="Address"
 					onChange={(e) =>
@@ -118,73 +120,76 @@ const FormAddress = ({
 							addressInForm: e.target.value,
 						})
 					}
-					placeholder="Type your address here"
+					placeholder="Your address (House number, street name)"
 					value={form.addressInForm}
-					variant="standard"
+					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="ward"
 					label="Ward"
-					placeholder="Type your ward here"
+					placeholder="Your ward"
 					onChange={(e) =>
 						setFormAddress({ ...form, ward: e.target.value })
 					}
 					value={form.ward}
-					variant="standard"
+					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="district"
 					label="District"
-					placeholder="Type your district here"
+					placeholder="Your district"
 					onChange={(e) =>
 						setFormAddress({ ...form, district: e.target.value })
 					}
 					value={form.district}
-					variant="standard"
+					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="city"
 					label="City"
-					placeholder="Type your city here"
+					placeholder="Your city name"
 					onChange={(e) =>
 						setFormAddress({ ...form, city: e.target.value })
 					}
 					value={form.city}
-					variant="standard"
+					variant="outlined"
 					required
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="phone"
 					label="Phone"
-					placeholder="Type your phone here"
+					placeholder="Your phone number"
 					onChange={(e) =>
 						setFormAddress({ ...form, phone: e.target.value })
 					}
 					value={form.phone}
-					variant="standard"
+					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
-				<Container sx={{ textAlign: "center" }}>
+				<Container sx={{ textAlign: "center", mt: 2 }}>
 					{paymentChooseNewAddress == false && (
 						<Button
-							sx={{ mx: 1 }}
+							sx={styles.cancelBtn}
 							onClick={() => setAppear(false)}
-							variant="outlined"
 							size="small"
-							color="error">
+						>
 							Cancel
 						</Button>
 					)}
 					<Button
-						sx={{ mx: 1 }}
+						sx={styles.submitBtn}
 						onClick={(e) => handleSubmit(e)}
-						variant="outlined"
 						size="small"
 						type="submit"
-						color="success">
+					>
 						Submit
 					</Button>
 				</Container>

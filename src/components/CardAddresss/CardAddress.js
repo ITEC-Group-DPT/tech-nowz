@@ -1,67 +1,72 @@
 import { React, useState } from "react";
+import styles from './CardAddress.styles'
 import {
 	Card,
 	CardContent,
 	Typography,
 	Button,
-	Divider,
+	IconButton,
+	Box,
 	CardActions,
 	Container,
 	FormControl,
 	Input,
 	InputLabel,
+	Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import icons from "../../constant/icons";
 import { ExitToAppSharp } from "@mui/icons-material";
 import FormAddress from "../FormAddress/FormAddress";
+import { style } from "@mui/system";
 
 const CardAddress = ({ address, onDelete, onEdit, btnAppear = true }) => {
-	const [formAppear, setFormAppear] = useState(false);
+	const [modelAppear, setModelAppear] = useState(false);
 	return (
-		<Card
-			variant="outlined"
-			sx={{ minWidth: 275, maxWidth: "80%", my: 2, mx: "auto" }}>
+		<Card sx={styles.addressCard}>
 			<CardContent>
-				<Typography variant="p" sx={{ fontSize: 20 }} component="div">
-					Name: {address.name} <br />
-					Address: {address.address} <br />
-					Phone: {address.phone}
-				</Typography>
+				<Box sx={styles.infoWrapper}>
+					<Typography sx={styles.title}>Customer</Typography>
+					<Typography sx={styles.data}>{address.name}</Typography>
+				</Box>
+				<Box sx={styles.infoWrapper}>
+					<Typography sx={styles.title}>Address</Typography>
+					<Typography sx={styles.data}>{address.address}</Typography>
+				</Box>
+				<Box sx={styles.infoWrapper}>
+					<Typography sx={styles.title}>Phone</Typography>
+					<Typography sx={styles.data}>{address.phone}</Typography>
+				</Box>
 			</CardContent>
 			{btnAppear && (
-				<div>
-					<Divider sx={{ mx: 2 }}></Divider>
-					<CardActions
-						sx={{ justifyContent: "flex-end", bgcolor: "#f5f5f5" }}>
-						<Button
-							disabled={formAppear}
-							onClick={() => setFormAppear(true)}
-							variant="outlined"
-							size="small"
-							color="success"
-							startIcon={<DeleteIcon fontSize="small" />}>
-							Edit
-						</Button>
-						<Button
+				<Box>
+					<CardActions sx={styles.actionsWrapper}>
+						<IconButton
+							onClick={() => setModelAppear(true)}
+							sx={styles.editBtn}
+						>
+							<icons.Edit sx={styles.icon} />
+						</IconButton>
+						<IconButton
 							onClick={() => onDelete(address.deliveryID)}
-							variant="outlined"
-							size="small"
-							color="error"
-							startIcon={<DeleteIcon fontSize="small" />}>
-							Delete
-						</Button>
+							sx={styles.deleteBtn}
+						>
+							<icons.Trashcan sx={styles.icon} />
+						</IconButton>
 					</CardActions>
-					{formAppear ? (
+					<Dialog
+						open={modelAppear}
+						onClose={() => setModelAppear(false)}
+						sx={styles.dialog}
+					>
+						<DialogTitle sx={{textAlign: "center"}}>Edit Address</DialogTitle>
 						<FormAddress
 							address={address}
 							formCommand="edit"
 							formSubmit={onEdit}
-							setAppear={setFormAppear}
+							setAppear={setModelAppear}
 						/>
-					) : (
-						<></>
-					)}
-				</div>
+					</Dialog>
+				</Box>
 			)}
 		</Card>
 	);

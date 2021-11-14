@@ -1,11 +1,19 @@
 const styles = {
-    main: {
-        margin: "50px 0",
-        marginLeft: "120px",
-    },
+    box: {
+		minHeight: '80vh',
+		backgroundColor: 'rgb(245, 245, 245)',
+		paddingBottom: '100px',
+        paddingTop: {
+			xs: '30px',
+			md: '50px',
+		},
+	},
 
     sliderTitle: {
-        fontSize: '2rem',
+        fontSize: {
+            xs: "26px",
+            md: "30px",
+        },
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: '25px',

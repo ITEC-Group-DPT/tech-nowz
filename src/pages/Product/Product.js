@@ -17,7 +17,8 @@ import { changeFavoriteApi } from '../../api/favoriteApi'
 
 //redux
 import { cartSelector } from "../../store/selectors"
-import { addProductToCart, changeProductQuantity } from '../../store/actions/cartAction'
+import { addProductToCart, changeProductQuantity, showCartNoti, hideCartNoti } from '../../store/actions/cartAction'
+import { showAddFavNoti, showRemoveFavNoti, hideFavNoti } from '../../store/actions/favoriteAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 const useQuery = () => {
@@ -115,6 +116,8 @@ const Product = () => {
     const cart = useSelector(cartSelector);
     const [quantityDifference, setQuantityDifference] = useState(0);
 
+    const dispatch = useDispatch()
+
     const changeFavorite = () => {
         changeFavoriteApi(productID).then(response => {
             console.log(response.data)
@@ -122,11 +125,22 @@ const Product = () => {
                 setIsFavorite(response.data.data.isLike)
             }
         })
+
+        if (isFavorite === true) {
+            console.log("isFavorite: ", true);
+            dispatch(showRemoveFavNoti())
+        }
+        else {
+            console.log("isFavorite: ", false);
+            dispatch(showAddFavNoti())
+        }
+
+        setTimeout(() => {
+            dispatch(hideFavNoti())
+        }, 3000)
     }
 
-    const dispatch = useDispatch();
     const addItemToCart = () => {
-
         let productIndex = cart["cartList"].findIndex(item => item.productID == productID);
 
         //new product
@@ -138,6 +152,11 @@ const Product = () => {
             setQuantityDifference(quantityDifference + 1);
             dispatch(changeProductQuantity(product.product, 1));
         }
+
+        dispatch(showCartNoti())
+        setTimeout(() => {
+            dispatch(hideCartNoti())
+        }, 3000);
     }
 
     useEffect(() => {

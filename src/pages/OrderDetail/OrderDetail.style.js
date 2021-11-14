@@ -1,38 +1,91 @@
 const styles = {
-	main: {
-		marginBottom: '24px',
-		paddingLeft: { xs: '2%', md: '4%' },
+	box: {
+		minHeight: '80vh',
+		backgroundColor: 'rgb(245, 245, 245)',
+		paddingBottom: '100px',
+        paddingTop: '50px',
+	},
+	divider: {
+		 mt: 2,
+		 mb: 2,
+	},
+	wrapper: {
+		backgroundColor: "white",
+		borderRadius: "5px",
+		display: "flex",
+		alignItems: "center",
+		padding: "30px 40px !important",
 	},
 	title: {
 		fontWeight: '600',
-		fontSize: { xs: '1.5rem', md: '1.75rem' },
-		lineHeight: '1.5',
-		fontFamily: 'Roboto Slab, serif',
-		marginTop: '3%',
+		fontSize: { xs: '20px', md: '24px' },
+		mb: 1,
 	},
 	content: {
-		fontSize: '1rem',
-		fontFamily: 'Roboto Slab, serif',
-		fontWeight: '100',
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		//mb: 1,
+	},
+	priceWrapper: {
+		display: 'flex',
+		//mt: 1,
+	},
+	upperTitles: {
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		fontWeight: "500",
+	},
+	upperValues: {
+		ml: 'auto',
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		fontWeight: "500",
+	},
+	lowerPriceWrapper: {
+		mt: 2,
+		display: 'flex',
+	},
+	lowerTitles: {
+		fontWeight: "600",
+		fontSize: {
+			xs: '15px',
+			md: '24px',
+		},
+	},
+	lowerValues: {
+		fontWeight: "600",
+		fontSize: {
+			xs: '15px',
+			md: '20px',
+		},
+		ml: 'auto',
+		color: 'red',
+	},
+	packageWrapper: {
+
 	},
 	productList: {
-		width: { xs: '100%', md: '80%' },
+		borderLeft: {
+			xs: 'none',
+			lg: '1px solid #e0e0e0'
+		},
+		paddingLeft: {
+			xs: 'none',
+			lg: '48px',
+		},
 	},
-	priceBox: {
-		alignItems: 'center',
-		display: 'flex',
-		marginTop: '24px',
-		justifyContent: 'space-between',
-		width: { xs: '100%', md: '80%' },
-	},
-	price: {
-		flexDirection: 'right',
-		color: 'red',
-		marginTop: '3%',
-		fontFamily: 'Roboto Slab, serif',
-		fontSize: { xs: '1.5rem', md: '1.75rem' },
-		fontWeight: 'bold',
-	},
+	productTitle: {
+		textAlign: "center",
+		fontWeight: '600',
+		fontSize: { xs: '20px', md: '26px' },
+		mb: 2,
+	}
 };
 
 export default styles;
