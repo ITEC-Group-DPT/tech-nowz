@@ -1,18 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './cart.style'
 
+//component
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import EmptyCart from '../../components/EmptyCart/EmptyCart';
+import { Container, Box, Typography, Button } from '@mui/material'
+import CustomModal from "../../components/Modal/Modal"
+
+//redux && api
 import { cartSelector } from "../../store/selectors"
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Box, Typography, Button } from '@mui/material'
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
-import EmptyCart from '../../components/EmptyCart/EmptyCart';
+
 
 const Cart = () => {
 
     const history = useHistory();
     const { cartList, totalPrice, isLoading } = useSelector(cartSelector);
+
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
 
@@ -29,7 +36,16 @@ const Cart = () => {
         dispatch(removeProductFromCart(product));
     }
     return (
-        <Box sx={styles.main}>
+        <Box 
+        sx={styles.main}>
+            <CustomModal
+                openModal = {openModalDelete}
+                setOpenModal = {setOpenModalDelete}
+
+                title = {"Remove all"}
+                description = "Do want to remove all product from cart?"
+                onPressConfirm = {removeAllProduct}
+            />
             {
                 (cartList && cartList.length == 0)
                     ? <EmptyCart />
@@ -46,7 +62,7 @@ const Cart = () => {
                             </Typography>
 
                             <Button
-                                onClick={removeAllProduct}
+                                onClick={() => setOpenModalDelete(true)}
                                 color="error"
                                 sx={styles.removeAll}
                             >
