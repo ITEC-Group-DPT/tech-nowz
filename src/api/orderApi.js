@@ -9,18 +9,28 @@ const getOrderListAPI = () => {
 const getOrderDetailAPI = (orderID) => {
 	let command = 'getOrderDetail';
 	return axios.get(
-		TEST_API_URL + `orderAPI.php?command=${command}&orderID=${orderID}`
+		TEST_API_URL + `orderAPI.php?command=${command}&orderID=${orderID}`,
 	);
 };
-const createOrder= (deliID,name, address, phone,totalPrice,cartList) => {
+
+const rateProduct = (orderID, productID, rating) => {
 	let data = new FormData();
-	data.append("command", "createOrder");
-	data.append("deliID", deliID);
-	data.append("name", name);
-	data.append("address", address);
-	data.append("phone", phone);
-	data.append("totalPrice", totalPrice);
-	data.append("list", JSON.stringify(cartList));
+	data.append('command', 'rateProduct');
+	data.append('orderID', orderID);
+	data.append('productID', productID);
+	data.append('rating', rating);
 	return axios.post(TEST_API_URL + `orderAPI.php`, data);
 };
-export { getOrderListAPI, getOrderDetailAPI,createOrder};
+
+const createOrder = (deliID, name, address, phone, totalPrice, cartList) => {
+	let data = new FormData();
+	data.append('command', 'createOrder');
+	data.append('deliID', deliID);
+	data.append('name', name);
+	data.append('address', address);
+	data.append('phone', phone);
+	data.append('totalPrice', totalPrice);
+	data.append('list', JSON.stringify(cartList));
+	return axios.post(TEST_API_URL + `orderAPI.php`, data);
+};
+export { getOrderListAPI, getOrderDetailAPI, rateProduct, createOrder };
