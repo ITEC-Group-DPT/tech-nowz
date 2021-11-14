@@ -27,7 +27,7 @@ const styles = {
 		fontWeight: 'bold',
 		fontSize: {
             xs: "19px",
-            lg: "25px",
+            lg: "24px",
         },
 		//fontFamily: 'Roboto Slab, serif',
 	},
@@ -35,7 +35,7 @@ const styles = {
 		textTransform: "none",
 		fontSize: {
             xs: "14px",
-            lg: "18px",
+            lg: "17px",
         },
 		color: 'black',
 	},

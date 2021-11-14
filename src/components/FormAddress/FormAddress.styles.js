@@ -1,10 +1,17 @@
 const styles = {
     box: {
-        p: 5,
+        p: {
+            xs: 3,
+            md: 5,
+        },
         width: {
-            xs: "100%",
             md: "500px",
         },
+    },
+
+    textField: {
+        mb: 2,
+        width: "100%",
     },
 
     cancelBtn: {
@@ -13,7 +20,13 @@ const styles = {
         textTransform: "none",
         px: 2,
         py: 1,
-        mx: 5,
+        mx: {
+            xs: 1,
+            md: 5,
+        },
+        "&: hover": {
+            backgroundColor: "#ff5959",
+        },
     },
     submitBtn: {
         backgroundColor: "#333333",
@@ -21,7 +34,13 @@ const styles = {
         textTransform: "none",
         px: 2,
         py: 1,
-        mx: 5,
+        mx: {
+            xs: 1,
+            md: 5,
+        },
+        "&: hover": {
+            backgroundColor: "#5b5b5b",
+        },
     }
 }
 

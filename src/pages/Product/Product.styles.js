@@ -26,7 +26,7 @@ const styles = {
 		bgcolor: 'rgb(245, 245, 245)',
 	},
 	productContainer: {
-		minHeight: '85vh',
+		minHeight: '80vh',
 		bgcolor: 'white',
 		borderRadius: '15px',
 		padding: {
@@ -37,7 +37,7 @@ const styles = {
 	image: {
 		height: {
 			xs: '400px',
-			lg: '520px',
+			lg: '480px',
 		},
 		width: '100%',
 		objectFit: 'contain',
@@ -75,11 +75,11 @@ const styles = {
 	pName: {
 		textAlign: 'center',
 		fontSize: {
-			xs: '26px',
-			lg: '33px',
+			xs: '24px',
+			lg: '29px',
 		},
 		fontWeight: 'bold',
-		paddingRight: '0rem',
+		paddingRight: 0,
 	},
 	pRatingWrapper: {
 		display: 'flex',
@@ -88,14 +88,14 @@ const styles = {
 	},
 	pRating: {
 		fontSize: {
-			xs: '1rem',
-			lg: '1.1rem',
+			xs: '15px',
+			lg: '19px',
 		},
 	},
 	pSold: {
 		fontSize: {
-			xs: '.65rem',
-			lg: '.7rem',
+			xs: '13px',
+			lg: '14px',
 		},
 		marginLeft: '5px',
 		alignSelf: 'center',
@@ -118,8 +118,8 @@ const styles = {
 	pPrice: {
 		textAlign: 'center',
 		fontSize: {
-			xs: '20px',
-			lg: '22px',
+			xs: '18px',
+			lg: '20px',
 		},
 		fontWeight: 'bold',
 		mt: 2,
@@ -194,14 +194,14 @@ const styles = {
 	tabTitle: {
 		margin: {
 			xs: '0 15px',
-			lg: '0 80px',
+			lg: '0 70px',
 		},
 		textTransform: 'none',
 		color: 'black',
 		fontWeight: 'bold',
 		fontSize: {
-			xs: '.9rem',
-			lg: '1.1rem',
+			xs: '16px',
+			lg: '19px',
 		},
 	},
 	details: {

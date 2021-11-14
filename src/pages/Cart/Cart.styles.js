@@ -25,7 +25,7 @@ const styles = {
     },
     summaryData: {
         backgroundColor: "white",
-        borderRadius: "10px",
+        borderRadius: "4px",
         padding: { xs: "25px 20px", md: "35px 30px" },
         //boxShadow: "0 .125rem .25rem rgba(0,0,0,.075)",
         //border: "1px solid rgba(0,0,0,.125)",
@@ -66,15 +66,14 @@ const styles = {
         //fontFamily: "Roboto Slab",
         color: "red",
         fontWeight: "500",
-        fontSize: { xs: "18px", md: "19px" },
+        fontSize: { xs: "18px", md: "18px" },
     },
     checkoutButton: {
         marginTop: 3,
         padding: "10px 0px",
-        borderRadius: "10px",
         textTransform: "none",
         backgroundColor: "#333333",
-        fontSize: { sm: "15px", md: "18px" },
+        fontSize: { xs: "15px", md: "17px" },
         width: "100%",
         transition: "400ms",
         '&:hover': {

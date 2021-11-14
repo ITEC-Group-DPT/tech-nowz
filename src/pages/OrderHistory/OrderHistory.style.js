@@ -9,9 +9,9 @@ const styles = {
 		},
 	},
 	title: {
-		fontSize: {
+        fontSize: {
             xs: "26px",
-            lg: "32px",
+            md: "30px",
         },
         fontWeight: 'bold',
         textAlign: 'center',

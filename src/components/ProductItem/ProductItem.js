@@ -39,7 +39,7 @@ const ProductItem = ({ product, isSlider }) => {
 							{product.name}
 						</Typography>
 					</CardContent>
-					<div style={styles.pRatingWrapper}>
+					<Box style={styles.pRatingWrapper}>
 						<Rating
 							size="small"
 							readOnly
@@ -52,7 +52,7 @@ const ProductItem = ({ product, isSlider }) => {
 						<Typography sx={isSlider ? styles.pSoldSlider : styles.pSold}>
 							({product.sold})
 						</Typography>
-					</div>
+					</Box>
 					<CardActions sx={styles.cardBottom}>
 						<Typography sx={isSlider ? styles.pPriceSlider : styles.pPrice}>
 							{formatedPrice}

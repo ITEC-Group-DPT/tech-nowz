@@ -18,7 +18,7 @@ const styles = {
 	title: {
         fontSize: {
             xs: "26px",
-            lg: "32px",
+            md: "30px",
         },
         fontWeight: 'bold',
         textAlign: 'center',

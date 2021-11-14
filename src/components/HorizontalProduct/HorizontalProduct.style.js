@@ -40,7 +40,7 @@ const styles = {
         //fontFamily: "'Roboto Slab', serif",
         fontSize: {
             xs: "13px",
-            md: "17px"
+            md: "16px"
         },
 
         //max 2 line
@@ -62,7 +62,7 @@ const styles = {
         fontWeight: "700",
         fontSize: {
             xs: "11px",
-            md: "16px",
+            md: "15px",
         },
        minWidth: {xs: "70px", md: "100px" },
 
@@ -75,7 +75,7 @@ const styles = {
         marginTop: '1%',
     },
     productSold: {
-        fontSize: { xs: "10px", md: "15px" },
+        fontSize: { xs: "10px", md: "12px" },
         paddingLeft: '1%',
         //fontFamily: "'IBM Plex Serif', serif",
     },

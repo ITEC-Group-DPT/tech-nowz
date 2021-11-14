@@ -1,6 +1,9 @@
 const styles = {
 	sliderTitle: {
-		fontSize: '1.8rem',
+		fontSize: {
+			xs: "28px",
+			md: "32px",
+		},
 		fontWeight: 'bold',
 		textAlign: 'center',
 		marginBottom: '25px',

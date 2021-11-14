@@ -11,23 +11,23 @@ const Footer = () => {
 		<>
 			<Box sx={styles.footer}>
 				<Container maxWidth="xs">
-					<Grid container spacing={2}>
-						<Grid item xs={2}>
+					<Grid container spacing={1}>
+						<Grid item xs={2} sx={styles.iconWrapper}>
 							<icons.Facebook sx={styles.icon} />
 						</Grid>
-						<Grid item xs={2}>
+						<Grid item xs={2} sx={styles.iconWrapper}>
 							<icons.Twitter sx={styles.icon} />
 						</Grid>
-						<Grid item xs={2}>
+						<Grid item xs={2} sx={styles.iconWrapper}>
 							<icons.Google sx={styles.icon} />
 						</Grid>
-						<Grid item xs={2}>
+						<Grid item xs={2} sx={styles.iconWrapper}>
 							<icons.Instagram sx={styles.icon} />
 						</Grid>
-						<Grid item xs={2}>
+						<Grid item xs={2} sx={styles.iconWrapper}>
 							<icons.LinkedIn sx={styles.icon} />
 						</Grid>
-						<Grid item xs={2}>
+						<Grid item xs={2} sx={styles.iconWrapper}>
 							<icons.GitHub sx={styles.icon} />
 						</Grid>
 					</Grid>
@@ -59,16 +59,16 @@ const Footer = () => {
 					</Grid>
 				</Container>
 				<Box sx={styles.addressWrapper}>
-					<Box sx={styles.address}>
-						<Typography>
+					<Box>
+						<Typography sx={styles.address}>
 							227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam
 						</Typography>
 					</Box>
 				</Box>
 			</Box>
 			<Box sx={styles.bottomFooter}>
-				<Box sx={styles.copyright}>
-					<Typography>© 2021 Copyright: TechNow</Typography>
+				<Box>
+					<Typography sx={styles.copyright}>© 2021 Copyright: TechNow</Typography>
 				</Box>
 			</Box>
 		</>

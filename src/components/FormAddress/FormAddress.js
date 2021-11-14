@@ -99,7 +99,7 @@ const FormAddress = ({
 		<Box sx={styles.box}>
 			<FormControl fullWidth="true">
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="name"
 					label="Name"
 					onChange={(e) =>
@@ -108,9 +108,10 @@ const FormAddress = ({
 					placeholder="Your full name"
 					value={form.name}
 					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="address"
 					label="Address"
 					onChange={(e) =>
@@ -122,9 +123,10 @@ const FormAddress = ({
 					placeholder="Your address (House number, street name)"
 					value={form.addressInForm}
 					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="ward"
 					label="Ward"
 					placeholder="Your ward"
@@ -133,9 +135,10 @@ const FormAddress = ({
 					}
 					value={form.ward}
 					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="district"
 					label="District"
 					placeholder="Your district"
@@ -144,9 +147,10 @@ const FormAddress = ({
 					}
 					value={form.district}
 					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="city"
 					label="City"
 					placeholder="Your city name"
@@ -156,9 +160,10 @@ const FormAddress = ({
 					value={form.city}
 					variant="outlined"
 					required
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
 				<TextField
-					sx={{ mb: 2 }}
+					sx={styles.textField}
 					name="phone"
 					label="Phone"
 					placeholder="Your phone number"
@@ -167,8 +172,9 @@ const FormAddress = ({
 					}
 					value={form.phone}
 					variant="outlined"
+					inputProps={{style: {fontSize: "17px"}}}
 				/>
-				<Container sx={{ textAlign: "center" }}>
+				<Container sx={{ textAlign: "center", mt: 2 }}>
 					{paymentChooseNewAddress == false && (
 						<Button
 							sx={styles.cancelBtn}
