@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { styles, useStyles } from './CategoryPage.styles'
-import { Box, Pagination, Container, Grid, Typography, Select, FormControl, MenuItem } from '@mui/material'
+import { Box, Pagination, Container, Grid, Typography, Select, FormControl, MenuItem, Skeleton } from '@mui/material'
 import { useParams } from "react-router-dom"
-import { getProductCategoryAPI } from '../../api/productApi'
+import { getTotalCategoryAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
 import ProductItem from '../../components/ProductItem/ProductItem'
 
@@ -10,6 +10,7 @@ const CategoryPage = () => {
     const { name } = useParams()
     const classes = useStyles()
 
+    const [totalPage, setTotalPage] = useState({ "isLoading": true })
     const [productList, setProductList] = useState({ "isLoading": true })
     const [page, setPage] = useState(1)
     const [sortBy, setSortBy] = useState('price ASC')
@@ -18,6 +19,17 @@ const CategoryPage = () => {
     const option = sortBy.split(' ')[1]
     const itemsPerPage = 8
     const offset = (page - 1) * itemsPerPage
+
+    useEffect(() => {
+        getTotalCategoryAPI(name).then(response => {
+            if (response.data.success) {
+                const data = response.data.data
+                console.log("totalProduct: ", data.total)
+                console.log("totalPage: ", Math.ceil(data.total / 8));
+                setTotalPage({ "isLoading": false, "value": Math.ceil(data.total / 8) }) // 8 is total products per page
+            }
+        })
+    }, [])
 
     useEffect(() => {
         setProductList({ "isLoading": true }) // when clicking on another pagination, the isLoading is set to true
@@ -30,6 +42,8 @@ const CategoryPage = () => {
         })
         window.scrollTo(0, 0) // when clicking on another pagination, scroll to top
     }, [page, sortBy])
+
+
 
     return (
         <Box sx={styles.box}>
@@ -75,12 +89,18 @@ const CategoryPage = () => {
                 )}
 
                 <Box sx={styles.paginationWrapper}>
-                    <Pagination
-                        classes={{ ul: classes.ul }}
-                        count={3}
-                        page={page}
-                        onChange={(event, value) => { setPage(value) }}
-                    />
+                    {totalPage.isLoading ? (
+                        <Skeleton variant="text" animation="wave" sx={styles.skeleton}>
+                            <Typography gutterBottom variant="h5" component="div">lorem lorem lore</Typography>
+                        </Skeleton>
+                    ) : (
+                        <Pagination
+                            classes={{ ul: classes.ul }}
+                            count={totalPage.value}
+                            page={page}
+                            onChange={(event, value) => { setPage(value) }}
+                        />
+                    )}
                 </Box>
             </Container>
         </Box>
