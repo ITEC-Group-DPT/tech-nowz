@@ -25,8 +25,8 @@ const CategoryPage = () => {
             if (response.data.success) {
                 const data = response.data.data
                 console.log("totalProduct: ", data.total)
-                console.log("totalPage: ", Math.ceil(data.total / 8));
-                setTotalPage({ "isLoading": false, "value": Math.ceil(data.total / 8) }) // 8 is total products per page
+                console.log("totalPage: ", Math.ceil(data.total / itemsPerPage));
+                setTotalPage({ "isLoading": false, "value": Math.ceil(data.total / itemsPerPage) })
             }
         })
     }, [])
@@ -69,7 +69,7 @@ const CategoryPage = () => {
                 </Box>
                 {productList.isLoading ? (
                     <Grid container spacing={{ xs: 1, md: 3, lg: 3.5 }}>
-                        {Array(8).fill().map(() => (
+                        {Array(itemsPerPage).fill().map(() => (
                             <Grid item xs={6} md={4} lg={3}>
                                 <ProductSkeleton />
                             </Grid>
