@@ -25,8 +25,10 @@ const CategoryPage = () => {
             if (response.data.success) {
                 const data = response.data.data
                 console.log("totalProduct: ", data.total)
-                console.log("totalPage: ", Math.ceil(data.total / itemsPerPage));
-                setTotalPage({ "isLoading": false, "value": Math.ceil(data.total / itemsPerPage) })
+                
+                const total = Math.ceil(data.total / itemsPerPage)
+                console.log("totalPage: ", total)
+                setTotalPage({ "isLoading": false, "value": total })
             }
         })
     }, [])
