@@ -1,7 +1,7 @@
 import ActionType from './actionType'
 import { signInApi, signUpApi } from '../../api/authApi'
 import { getCart } from "../actions/cartAction"
-
+import { encryptData } from '../../constant/utils'
 const signIn = (email, password, history) => {
     return dispatch => {
         dispatch({ type: ActionType.START_LOGIN })
@@ -11,7 +11,10 @@ const signIn = (email, password, history) => {
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
                     dispatch(getCart());
-                    sessionStorage.setItem("userInfo", JSON.stringify(data));
+
+                    let token = encryptData(data);
+
+                    sessionStorage.setItem("userInfo", token);
                     history.push("/");
                 }
                 else
@@ -28,7 +31,10 @@ const signUp = (email, username, password, history) => {
                 const data = response.data.data;
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
-                    sessionStorage.setItem("userInfo", JSON.stringify(data));
+
+                    let token = encryptData(data);
+
+                    sessionStorage.setItem("userInfo", token);
                     dispatch(getCart());
                     history.push("/");
                 }

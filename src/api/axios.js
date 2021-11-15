@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { BASE_API_URL, TEST_API_URL } from '../constant/string';
-
+import { decryptData } from '../constant/utils';
 const instance = axios.create({
 	baseURL: TEST_API_URL,
 });
 
-const object = sessionStorage.getItem('userInfo');
-if (object) {
-	const { userID } = JSON.parse(object);
+const token = sessionStorage.getItem('userInfo');
+if (token) {
+
+	let data = decryptData(token);
+	console.log('data: ',data);
+	const { userID } = JSON.parse(data);
 	// Alter defaults after instance has been created
 	instance.defaults.headers.common['Userid'] = userID;
 }
@@ -15,10 +18,12 @@ if (object) {
 instance.interceptors.request.use(
 	(config) => {
 		if (!config.headers.Userid) {
-			console.log('run interceptor');
-			const token = JSON.parse(sessionStorage.getItem('userInfo'));
+
+			let token = sessionStorage.getItem('userInfo');
+
 			if (token) {
-				config.headers.Userid = token.userID;
+				let data = JSON.parse(decryptData(token));
+				config.headers.Userid = data.userID;
 			}
 		}
 		return config;

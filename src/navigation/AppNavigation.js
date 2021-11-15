@@ -8,7 +8,7 @@ import { sessionLogin } from '../store/actions/authAction';
 import { userInfoSelector } from '../store/selectors'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from '../store/actions/cartAction';
-
+import {decryptData} from "../constant/utils"
 const AppNavigation = () => {
 
     const dispatch = useDispatch();
@@ -17,7 +17,9 @@ const AppNavigation = () => {
         const userInfo = sessionStorage.getItem("userInfo");
         if (userInfo != null) {
             console.log('sessionLogin');
-            dispatch(sessionLogin(JSON.parse(userInfo)));
+
+            let data = decryptData(userInfo);
+            dispatch(sessionLogin(JSON.parse(data)));
             dispatch(getCart());
         }
     }, [])
