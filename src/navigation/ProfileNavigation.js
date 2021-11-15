@@ -5,7 +5,7 @@ import OrderHistory from '../pages/OrderHistory/OrderHistory';
 import AddressBook from '../pages/AddressBook/AddressBook';
 import NotFound from '../components/NotFound/NotFound';
 import OrderDetail from '../pages/OrderDetail/OrderDetail';
-
+import AdminCreateNewProduct from '../pages/AdminCreateNewProduct/AdminCreateNewProduct';
 const ProfileNavigation = () => {
 	const match = useRouteMatch();
 	return (
@@ -28,6 +28,11 @@ const ProfileNavigation = () => {
 				exact
 				path={`${match.path}/addressbook`}
 				component={AddressBook}
+			/>
+			<Route
+				exact
+				path={`${match.path}/createproduct`}
+				component={AdminCreateNewProduct}
 			/>
 			<Route path={`${match.path}`} component={NotFound} />
 		</Switch>

@@ -3,6 +3,9 @@ import { React, useState } from "react";
 import { Container, Typography, Button, Divider, Modal } from "@mui/material";
 import FormProduct from "../../components/FormProduct/FormProduct";
 import { createProduct } from "../../api/productApi";
+import { userInfoSelector } from "../../store/selectors";
+import { useSelector } from "react-redux";
+import NotFound from "../../components/NotFound/NotFound";
 const defaultemptyProduct = {
 	productID: 0,
 	type: "",
@@ -21,28 +24,41 @@ const defaultemptyProduct = {
 
 const AdminCreateNewProduct = () => {
 	const [productForm, setProductForm] = useState(defaultemptyProduct);
-	function handleSubmit(){
+	const { userRole } = useSelector(userInfoSelector);
+
+	function handleSubmit() {
 		createProduct(productForm).then((response) => {
-			console.log(response.data);
+			if (response.data.success = true){
+				console.log(response.data);
+
+			}
 		});
 	}
 	return (
 		<div>
-			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
-				<Typography
-					variant="h1"
-					sx={{
-						fontWeight: "500",
-						fontSize: { xs: "50px", md: "80px", lg: "100px" },
-					}}
-					component="div">
-					Create New Product
-				</Typography>
-			</Box>
+			{userRole == 0 ? (	<div>
+				<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
+					<Typography
+						variant="h1"
+						sx={{
+							fontWeight: "500",
+							fontSize: { xs: "50px", md: "80px", lg: "100px" },
+						}}
+						component="div">
+						Create New Product
+					</Typography>
+				</Box>
 
-			<Container >
-				<FormProduct form={productForm} setProduct={setProductForm} handleSubmit={handleSubmit} cancelBtnAppear={false} />
-			</Container>
+				<Container>
+					<FormProduct
+						form={productForm}
+						setProduct={setProductForm}
+						handleSubmit={handleSubmit}
+						cancelBtnAppear={false}
+					/>
+				</Container>
+			</div>): <NotFound/>}
+		
 		</div>
 	);
 };

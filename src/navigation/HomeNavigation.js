@@ -10,7 +10,6 @@ import ProfileNavigation from './ProfileNavigation';
 import Home from '../pages/Home/Home';
 import NotFound from '../components/NotFound/NotFound';
 import UpperNav from '../components/UpperNav/UpperNav';
-import AdminCreateNewProduct from '../pages/AdminCreateNewProduct/AdminCreateNewProduct'
 import Footer from '../components/Footer/Footer';
 
 //redux & api
@@ -41,7 +40,7 @@ const HomeNavigation = () => {
 				<Route path="/product/:name" component={Product} />
 				<Route path="/checkout" component={CartNavigation} />
 				<Route path="/profile" component={ProfileNavigation} />
-				<Route path="/create" component={AdminCreateNewProduct} />
+				
 				<Route path="/" component={NotFound} />
 			</Switch>
 			<Footer />

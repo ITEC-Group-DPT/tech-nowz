@@ -26,7 +26,7 @@ const FormAddress = ({
 	paymentChooseNewAddress = false,
 }) => {
 	// console.log(address);
-	let arrAddress = ["","","",""];
+	let arrAddress = ["", "", "", ""];
 	const [form, setFormAddress] = useState({
 		name: "",
 		addressInForm: "",
@@ -38,7 +38,8 @@ const FormAddress = ({
 
 	useEffect(() => {
 		arrAddress = address.address.split(", ");
-		while (arrAddress.length < 4) { //for error process 
+		while (arrAddress.length < 4) {
+			//for error process
 			arrAddress.push("");
 		}
 		//if (arrAddress.length == 1) arrAddress = ["","","",""] //for change textfield
@@ -50,17 +51,27 @@ const FormAddress = ({
 			city: arrAddress[3],
 			phone: address.phone,
 		});
-	}, [address])
+	}, [address]);
 	// const [addressForm,setAddress] = useState(arrAddress[0])
 	// const [ward,setWard] = useState(arrAddress[1])
 	// const [district,setDistrict] = useState(arrAddress[2])
 	// const [city,setCity] = useState(arrAddress[3])
 	// const [phone,setPhone] = useState(address.phone)
-	function test(){
-		console.log(1);
+
+	function checkEmptyForm(form) {
+		
+		for (const element in form) {
+			if (form[element].toString() === "") {
+				return false;
+			}
+		}
+		return true;
 	}
 	function handleSubmit(e) {
 		e.preventDefault();
+		if (checkEmptyForm(form) == false) {
+			return;
+		}
 		let id = address.deliveryID;
 		let joinAddress =
 			form.addressInForm +
@@ -154,7 +165,6 @@ const FormAddress = ({
 					}
 					value={form.city}
 					variant="standard"
-					
 				/>
 				<TextField
 					sx={{ mb: 2 }}

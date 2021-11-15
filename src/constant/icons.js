@@ -23,7 +23,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-
+import AddIcon from '@mui/icons-material/Add';
 const icons = {
     Home: HomeOutlinedIcon,
     Phone: PhoneCallbackOutlinedIcon,
@@ -50,6 +50,7 @@ const icons = {
     SignOut: LogoutOutlinedIcon,
     ShowIcon: VisibilityOutlinedIcon,
     HideIcon: VisibilityOffOutlinedIcon,
+    Add: AddIcon,
 }
 
 export default icons;

@@ -16,6 +16,7 @@ import {
 	Tab,
 	Skeleton,
 	Modal,
+	responsiveFontSizes,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Slider from "react-slick";
@@ -37,6 +38,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userInfoSelector } from "../../store/selectors";
 import FormProduct from "../../components/FormProduct/FormProduct";
 import { deleteProduct, editProduct } from "../../api/productApi";
+import { useHistory } from "react-router";
 const useQuery = () => {
 	return new URLSearchParams(useLocation().search);
 };
@@ -142,8 +144,17 @@ const defaultemptyProduct = {
 	img3: "",
 	img4: "",
 };
+function checkEmptyForm(form) {
+	for (const element in form) {
+		if (form[element].toString() === "") {
+			return false;
+		}
+	}
+	return true;
+}
 const Product = () => {
 	//const { name } = useParams()
+	const history = useHistory();
 	const { userID, userRole } = useSelector(userInfoSelector);
 	const query = useQuery();
 	const productID = query.get("i");
@@ -165,34 +176,32 @@ const Product = () => {
 	const [formOpen, setFormOpen] = useState(false);
 
 	function submitEditForm() {
-		setFormOpen(false);
-		editProduct(productForm, productID).then((response) => {
-			console.log(response.data);
-			console.log(product);
-			console.log(productForm);
-		
-			setProduct({
-				...product,
-				product: productForm
-			})
-
-			console.log(product);
-		
-		});
+		if (checkEmptyForm(productForm)) {
+			setFormOpen(false);
+			editProduct(productForm, productID).then((response) => {
+				if (response.data.success == true) {
+					setProduct({
+						...product,
+						product: productForm,
+					});
+				}
+			});
+		} else {
+			console.log("empty field");
+			// process alert here
+		}
 	}
 
 	function onDeleteProduct() {
 		setModalOpen(false);
 		deleteProduct(productID).then((response) => {
-			console.log(response.data);
+			if (response.data.success == true) {
+				console.log('da xoa product');
+				setTimeout(() => {
+					window.location.href="/"
+				}, 2000);
+			}
 		});
-
-		// console.log(product);
-		// console.log(productForm);
-		// let newproduct = JSON.parse(JSON.stringify(product))
-		// newproduct.product.product = productForm
-		// console.log(newproduct.product.product);
-		// setProduct(newproduct)
 	}
 	const changeFavorite = () => {
 		changeFavoriteApi(productID).then((response) => {
@@ -504,22 +513,25 @@ const Product = () => {
 									</Skeleton>
 								</Box>
 							) : (
-								<Box sx={styles.btnWrapper}>
-									<Button
-										variant="outlined"
-										sx={styles.favoriteBtn}
-										onClick={() => setModalOpen(true)}>
-										Delete
-									</Button>
+								userRole == 0 && (
+									<Box sx={styles.btnWrapper}>
+										<Button
+											variant="outlined"
+											sx={{ p: 1, mx: 2 }}
+											color="error"
+											onClick={() => setModalOpen(true)}>
+											Delete
+										</Button>
 
-									<Button
-										onClick={addItemToCart}
-										onClick={() => setFormOpen(true)}
-										variant="contained"
-										sx={styles.addBtn}>
-										Edit
-									</Button>
-								</Box>
+										<Button
+											onClick={addItemToCart}
+											onClick={() => setFormOpen(true)}
+											variant="contained"
+											sx={styles.addBtn}>
+											Edit
+										</Button>
+									</Box>
+								)
 							)}
 						</Box>
 					</Grid>
