@@ -65,6 +65,11 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'center',
 	},
+
+	skeleton: {
+		bgcolor: '#ededed',
+		boxShadow: 'none',
+	},
 }
 
 const useStyles = makeStyles(() => ({

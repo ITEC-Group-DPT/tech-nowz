@@ -10,6 +10,15 @@ const getProductCategoryAPI = (category, orderBy = 'rating', option = 'DESC', of
 
 };
 
+const getTotalCategoryAPI = (category) => {
+	let command = 'getTotalCategory';
+	return axios.get(
+		TEST_API_URL +
+			`productAPI.php?command=${command}&typeOfProduct=${category}`
+	);
+
+};
+
 const getTopRatingAPI = (limit = 10) => {
 	let command = 'getTopRating';
 	return axios.get(
@@ -35,6 +44,7 @@ const searchProductsAPI = (searchValue) => {
 
 export {
 	getProductCategoryAPI,
+	getTotalCategoryAPI,
 	getTopRatingAPI,
 	getProductAPI,
 	searchProductsAPI,
