@@ -14,9 +14,10 @@ const OrderDetail = () => {
 
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
-			if (response.data.success === true)
+			if (response.data.success === true) {
 				setOrderDetail({ "isLoading": false, data: response.data.data })
-			console.log(response.data.data)
+				console.log(response.data.data)
+			}
 		})
 	}, [])
 

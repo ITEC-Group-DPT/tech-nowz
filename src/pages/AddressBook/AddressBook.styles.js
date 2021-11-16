@@ -1,4 +1,4 @@
-// import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles"
 const styles = {
 	box: {
 		minHeight: '80vh',
@@ -35,6 +35,9 @@ const styles = {
 
 	dialog: {
 		minWidth: "100%",
-	}
-};
-export default styles;
+	},
+	skeletonBtn: {
+		bgcolor: '#ededed',
+	},
+}
+export default styles

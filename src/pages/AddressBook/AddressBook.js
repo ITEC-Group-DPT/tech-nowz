@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect } from "react"
 import {
 	Box,
 	Container,
@@ -6,27 +6,31 @@ import {
 	Button,
 	Dialog, DialogTitle,
 	Collapse,
-} from "@mui/material";
-import CardAddress from "../../components/CardAddresss/CardAddress";
-import FormAddress from "../../components/FormAddress/FormAddress";
-import icons from "../../constant/icons";
-import { TransitionGroup } from 'react-transition-group';
+	Skeleton,
+} from "@mui/material"
+import CardAddress from "../../components/CardAddresss/CardAddress"
+import FormAddress from "../../components/FormAddress/FormAddress"
+import icons from "../../constant/icons"
+import { TransitionGroup } from 'react-transition-group'
 import styles from "./AddressBook.styles"
-import { getAddressBook, deleteAddressBook } from "../../api/addressApi";
+import { getAddressBook, deleteAddressBook } from "../../api/addressApi"
+import HorizontalProductSkeleton from "../../components/HorizontalProductSkeleton/HorizontalProductSkeleton"
 
 const AddressBook = () => {
-	const [modelAppear, setModelAppear] = useState(false);
-	const [addressBook, setAddressBook] = useState([]);
+	const [modelAppear, setModelAppear] = useState(false)
+	const [addressList, setAddressList] = useState({ "isLoading": true })
 
 	useEffect(() => {
-		getAddress();
-	}, []);
+		getAddress()
+	}, [])
 
 	const getAddress = () => {
-		getAddressBook().then((res) => {
-			if (res.data.success == true)
-				setAddressBook(res.data.data);
-		});
+		getAddressBook().then((response) => {
+			if (response.data.success == true) {
+				setAddressList({ "isLoading": false, "data": response.data.data })
+				console.log("addressList: ", response.data.data)
+			}
+		})
 	}
 
 	const onCreate = (id, name, address, phone) => {
@@ -35,10 +39,10 @@ const AddressBook = () => {
 			address: address,
 			name: name,
 			phone: phone,
-		};
-		let newLs = addressBook;
-		newLs.push(obj);
-		setAddressBook(newLs);
+		}
+		let newLs = addressList.data
+		newLs.push(obj)
+		setAddressList({...addressList, data: newLs})
 	}
 
 	const onEdit = (id, name, address, phone) => {
@@ -47,27 +51,25 @@ const AddressBook = () => {
 			address: address,
 			name: name,
 			phone: phone,
-		};
+		}
 
-		let indexbyid = addressBook.findIndex(
+		let indexbyid = addressList.data.findIndex(
 			(address) => address.deliveryID == id
-		);
-		let newLs = JSON.parse(JSON.stringify(addressBook));
+		)
+		let newLs = JSON.parse(JSON.stringify(addressList.data))
 
-		newLs[indexbyid] = obj;
+		newLs[indexbyid] = obj
 
-		setAddressBook(newLs);
+		setAddressList({...addressList, data: newLs})
 	}
 
 	const onDelete = (id) => {
 		deleteAddressBook(id).then((res) => {
 			if (res.data.success == true) {
-				const newLs = addressBook.filter(
-					(address) => address.deliveryID !== id
-				);
-				setAddressBook(newLs);
+				const newLs = addressList.data.filter((address) => address.deliveryID !== id)
+				setAddressList({...addressList, data: newLs})
 			}
-		});
+		})
 	}
 
 	return (
@@ -75,26 +77,47 @@ const AddressBook = () => {
 			<Container maxWidth="md">
 				<Box sx={styles.titleWrapper}>
 					<Typography sx={styles.title}>Address Book</Typography>
-					<Button
-						startIcon={<icons.Add />}
-						onClick={() => setModelAppear(true)}
-						sx={styles.addBtn}
-					>
-						New address
-					</Button>
-				</Box>
-				<TransitionGroup>
-					{addressBook.map(address =>
-						<Collapse key={address.deliveryID}>
-							<CardAddress
-								address={address}
-								key={address.deliveryID}
-								onEdit={onEdit}
-								onDelete={onDelete}
-							/>
-						</Collapse>
+					{addressList.isLoading ? (
+						<Skeleton variant="text" animation="wave" sx={styles.skeletonBtn}>
+							<Button
+								startIcon={<icons.Add />}
+								sx={styles.addBtn}
+							>
+								New address
+							</Button>
+						</Skeleton>
+					) : (
+						<Button
+							startIcon={<icons.Add />}
+							onClick={() => setModelAppear(true)}
+							sx={styles.addBtn}
+						>
+							New address
+						</Button>
 					)}
-				</TransitionGroup>
+
+				</Box>
+				{addressList.isLoading ? (
+					<TransitionGroup>
+						<Collapse>
+							<HorizontalProductSkeleton />
+						</Collapse>
+					</TransitionGroup>
+				) : (
+					<TransitionGroup>
+						{addressList.data.map(address =>
+							<Collapse key={address.deliveryID}>
+								<CardAddress
+									address={address}
+									key={address.deliveryID}
+									onEdit={onEdit}
+									onDelete={onDelete}
+								/>
+							</Collapse>
+						)}
+					</TransitionGroup>
+				)}
+
 			</Container>
 			<Dialog
 				open={modelAppear}
@@ -109,7 +132,7 @@ const AddressBook = () => {
 				/>
 			</Dialog>
 		</Box>
-	);
-};
+	)
+}
 
-export default AddressBook;
+export default AddressBook
