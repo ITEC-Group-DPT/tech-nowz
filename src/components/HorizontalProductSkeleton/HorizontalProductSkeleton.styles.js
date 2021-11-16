@@ -1,6 +1,6 @@
 const styles = {
 	rectangular: {
-		minHeight: 150,
+		minHeight: 160,
 		bgcolor: '#ededed',
 		borderRadius: '25px',
 		boxShadow: 'none',

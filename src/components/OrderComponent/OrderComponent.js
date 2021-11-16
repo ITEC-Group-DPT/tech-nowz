@@ -1,18 +1,12 @@
-import React from 'react';
-import styles from './OrderComponent.style';
-import { Link } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import React from 'react'
+import styles from './OrderComponent.style'
+import { Link } from 'react-router-dom'
+import { Box, Button, Typography, Collapse } from '@mui/material'
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct'
+import { TransitionGroup } from 'react-transition-group'
 
 const OrderComponent = ({ orderID, productList }) => {
-	const orderHistoryURL = `/profile/orderhistory/${orderID}`;
-	function ProductList(props) {
-		const productList = props.productList;
-		const products = productList.map((product) => (
-			<HorizontalProduct product={product} />
-		));
-		return products;
-	}
+	const orderHistoryURL = `/profile/orderhistory/${orderID}`
 
 	return (
 		<Box sx={styles.main}>
@@ -24,11 +18,17 @@ const OrderComponent = ({ orderID, productList }) => {
 			</Box>
 			<Box sx={styles.contentDiv}>
 				<Box sx={styles.productList}>
-					<ProductList productList={productList} />
+					{/* <TransitionGroup> */}
+						{productList.map(product =>
+							// <Collapse key={product.productID}>
+								<HorizontalProduct product={product} />
+							// </Collapse>
+						)}
+					{/* </TransitionGroup> */}
 				</Box>
 			</Box>
 		</Box>
-	);
-};
+	)
+}
 
-export default OrderComponent;
+export default OrderComponent

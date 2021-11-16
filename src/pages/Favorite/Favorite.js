@@ -9,12 +9,11 @@ import { TransitionGroup } from 'react-transition-group'
 
 const Favorite = () => {
     const [favoriteList, setFavoriteList] = useState({ "isLoading": true })
-
     useEffect(() => {
         getFavoriteListApi().then(response => {
             if (response.data.success == true) {
                 setFavoriteList({ "isLoading": false, "data": response.data.data })
-                console.log("Fav list: ", response.data.data)
+                console.log("favoriteList: ", response.data.data)
             }
         })
     }, [])
@@ -25,7 +24,7 @@ const Favorite = () => {
             if (response.data.success == true) {
                 if (response.data.data.isLike == false) {
                     let newList = favoriteList.data.filter((product) => product.productID !== productID)
-                    console.log(newList)
+                    console.log("newFavoriteList: ", newList)
                     setFavoriteList({ ...favoriteList, "data": newList })
                 }
             }
