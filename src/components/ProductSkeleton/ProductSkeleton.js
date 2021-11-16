@@ -1,7 +1,6 @@
-import React from 'react';
-import styles from './ProductSkeleton.style';
-import Stack from '@mui/material/Stack';
-import Skeleton from '@mui/material/Skeleton';
+import React from 'react'
+import styles from './ProductSkeleton.style'
+import { Stack, Skeleton } from '@mui/material'
 
 const ProductSkeleton = ({ isSlider }) => {
 	return (
@@ -12,7 +11,7 @@ const ProductSkeleton = ({ isSlider }) => {
 				sx={isSlider ? styles.rectangularSlider : styles.rectangular}
 			/>
 		</Stack>
-	);
-};
+	)
+}
 
-export default ProductSkeleton;
+export default ProductSkeleton

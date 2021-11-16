@@ -18,6 +18,6 @@ const styles = {
 			md: '27px',
 		},
 	},
-};
+}
 
-export default styles;
+export default styles
