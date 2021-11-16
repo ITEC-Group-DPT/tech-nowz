@@ -38,11 +38,9 @@ const Favorite = () => {
             <Container maxWidth="md">
                 {favoriteList.isLoading ? (
                     <TransitionGroup>
-                        {Array(1).fill().map(() => (
-                            <Collapse >
-                                <HorizontalProductSkeleton />
-                            </Collapse>
-                        ))}
+                        <Collapse>
+                            <HorizontalProductSkeleton />
+                        </Collapse>
                     </TransitionGroup>
                 ) : (
                     <TransitionGroup>
@@ -62,8 +60,6 @@ const Favorite = () => {
                         )}
                     </TransitionGroup>
                 )}
-
-
             </Container>
         </Box>
     )

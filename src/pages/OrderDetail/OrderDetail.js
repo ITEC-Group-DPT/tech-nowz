@@ -1,11 +1,12 @@
 import { React, useState, useEffect } from 'react'
 import styles from './OrderDetail.style'
 import { useParams } from 'react-router-dom'
-import { Container, Box, Typography, Grid, Divider, Skeleton } from '@mui/material'
+import { Container, Box, Typography, Grid, Divider, Skeleton, Collapse } from '@mui/material'
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct'
 import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton'
 import ProductRatingBar from '../../components/ProductRatingBar/ProductRatingBar'
 import { getOrderDetailAPI } from '../../api/orderApi'
+import { TransitionGroup } from 'react-transition-group'
 
 const OrderDetail = () => {
 	const { id } = useParams()
@@ -15,7 +16,7 @@ const OrderDetail = () => {
 		getOrderDetailAPI(id).then((response) => {
 			if (response.data.success === true)
 				setOrderDetail({ "isLoading": false, data: response.data.data })
-				console.log(response.data.data)
+			console.log(response.data.data)
 		})
 	}, [])
 
@@ -50,8 +51,8 @@ const OrderDetail = () => {
 						</Grid>
 						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
 							<Box sx={styles.productList}>
-								{Array(2).fill().map(() => (
-									<Box>
+								<TransitionGroup>
+									<Collapse>
 										<HorizontalProductSkeleton />
 										<Box
 											sx={{
@@ -61,8 +62,8 @@ const OrderDetail = () => {
 										>
 											<Skeleton animation="wave" sx={styles.ratingSkeleton} />
 										</Box>
-									</Box>
-								))}
+									</Collapse>
+								</TransitionGroup>
 							</Box>
 						</Grid>
 					</Grid>
@@ -110,31 +111,33 @@ const OrderDetail = () => {
 						</Grid>
 						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
 							<Box sx={styles.productList}>
-								{order.data.itemList.map((product) => (
-									<Box>
-										<HorizontalProduct
-											product={product}
-											ratingSize={'20px'}
-										/>
-										<Box
-											sx={{
-												display: 'flex',
-												mb: '20px',
-											}}
-										>
-											<Typography sx={styles.ratingTitle}>
-												Your rating:
-											</Typography>
-											<ProductRatingBar
-												orderID={id}
-												productID={product.productID}
-												customerRating={
-													product.customerRating
-												}
-											></ProductRatingBar>
-										</Box>
-									</Box>
-								))}
+								<TransitionGroup>
+									{order.data.itemList.map((product) => (
+										<Collapse>
+											<HorizontalProduct
+												product={product}
+												ratingSize={'20px'}
+											/>
+											<Box
+												sx={{
+													display: 'flex',
+													mb: '20px',
+												}}
+											>
+												<Typography sx={styles.ratingTitle}>
+													Your rating:
+												</Typography>
+												<ProductRatingBar
+													orderID={id}
+													productID={product.productID}
+													customerRating={
+														product.customerRating
+													}
+												></ProductRatingBar>
+											</Box>
+										</Collapse>
+									))}
+								</TransitionGroup>
 							</Box>
 						</Grid>
 					</Grid>
