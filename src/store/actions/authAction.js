@@ -1,6 +1,6 @@
 import ActionType from './actionType'
 import { signInApi, signUpApi } from '../../api/authApi'
-import { getCart } from "../actions/cartAction"
+import { getCart, clearCartUI } from "../actions/cartAction"
 import { encryptData } from '../../constant/utils'
 const signIn = (email, password, history) => {
     return dispatch => {
@@ -70,6 +70,7 @@ const removeEmailSignUpError = () => {
 
 const logOut = (history) => {
     return dispatch => {
+        dispatch(clearCartUI());
         dispatch({ type: ActionType.LOGOUT })
         sessionStorage.removeItem("userInfo")
 
@@ -79,6 +80,13 @@ const logOut = (history) => {
     }
 }
 
+const showAuthError = () => {
+    return dispatch => {
+        dispatch({ type: ActionType.SHOW_AUTH_ERROR_NOTI });
+    }
+}
+
+
 export {
     signIn,
     signUp,
@@ -86,5 +94,6 @@ export {
     removeEmailError,
     removePasswordError,
     removeEmailSignUpError,
+    showAuthError,
     logOut
 };

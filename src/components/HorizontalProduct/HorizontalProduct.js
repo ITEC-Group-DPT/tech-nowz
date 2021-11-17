@@ -14,7 +14,7 @@ import icons from "../../constant/icons";
 import { changeQuantityApi } from "../../api/cartApi"
 
 import { useDispatch } from "react-redux";
-import { showCartErrorNoti } from "../../store/actions/cartAction"
+import { showAuthError } from "../../store/actions/authAction"
 
 const HorizontalProduct = ({
 	cartProduct,
@@ -67,7 +67,7 @@ const HorizontalProduct = ({
 					}
 					else {
 						console.log("Something wrong is happend");
-						dispatch(showCartErrorNoti())
+						dispatch(showAuthError())
 					}
 				});
 

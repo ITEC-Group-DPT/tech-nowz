@@ -8,6 +8,8 @@ import {
     removeAllApi,
 } from "../../api/cartApi"
 
+import {showAuthError} from "../actions/authAction"
+
 const getCart = () => {
 
     return dispatch => {
@@ -62,7 +64,7 @@ const addProductToCart = (product) => {
 
         if (!response.data.success) {
             console.log('error ?');
-            dispatch(showCartErrorNoti());
+            dispatch(showAuthError());
         }
     }
 }
@@ -80,7 +82,7 @@ const removeProductFromCart = (product) => {
         const response = await removeProductFromCartApi(productID);
 
         if (!response.data.success) {
-            dispatch(showCartErrorNoti());
+            dispatch(showAuthError());
         }
     }
 }
@@ -107,7 +109,7 @@ const removeAllCart = () => {
         const response = await removeAllApi();
 
         if (!response.data.success) {
-            dispatch(showCartErrorNoti());
+            dispatch(showAuthError());
         }
     }
 }
@@ -128,18 +130,12 @@ const hideCartNoti = () => {
     }
 }
 
-const showCartErrorNoti = (message) => {
+const clearCartUI = () => {
     return dispatch => {
         dispatch({
-            type: ActionType.SHOW_CART_ERROR_NOTI,
-        })
-    };
-}
-
-const closeCartErrorNoti = () => {
-    return dispatch => {
-        dispatch({ type: ActionType.CLOSE_CART_ERROR_NOTI })
-    };
+            type: ActionType.CLEAR_CART_UI,
+        });
+    }
 }
 
 export {
@@ -151,6 +147,5 @@ export {
     removeAllCart,
     showCartNoti,
     hideCartNoti,
-    showCartErrorNoti,
-    closeCartErrorNoti,
+    clearCartUI,
 };

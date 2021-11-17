@@ -4,7 +4,6 @@ const initState = {
     isLoading: false,
     notification: {
         addToCart: false,
-        authError: false,
     },
     cart: {
         cartList: [],
@@ -105,11 +104,12 @@ const CartReducer = (state = initState, action) => {
                     cartList: [],
                 },
             }
+        case (ActionType.CLEAR_CART_UI):
+            return initState;
         case (ActionType.SHOW_CART_NOTI):
             return {
                 ...state,
                 notification: {
-                    ...state.notification,
                     addToCart: true,
                 }
             }
@@ -117,20 +117,9 @@ const CartReducer = (state = initState, action) => {
             return {
                 ...state,
                 notification: {
-                    ...state.notification,
                     addToCart: false,
                 }
             }
-        case (ActionType.SHOW_CART_ERROR_NOTI):
-            return {
-                ...state,
-                notification: {
-                    addToCart: false,
-                    authError: true
-                }
-            }
-        case (ActionType.CLOSE_CART_ERROR_NOTI):
-            return initState;
         default: return state;
     }
 }

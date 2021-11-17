@@ -9,19 +9,16 @@ import { Container, Box, Typography, Button, Collapse } from '@mui/material'
 import CustomModal from "../../components/Modal/Modal"
 
 //redux && api
-import { cartSelector, cartNotiSelector,userInfoSelector } from "../../store/selectors"
+import { cartSelector } from "../../store/selectors"
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeProductFromCart, changeProductQuantity, removeAllCart,closeCartErrorNoti } from "../../store/actions/cartAction"
-import { logOut } from "../../store/actions/authAction"
+import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
 
 const Cart = () => {
 
     const history = useHistory();
     const { cartList, totalPrice } = useSelector(cartSelector);
-    const userInfo = useSelector(userInfoSelector)
-    const { authError } = useSelector(cartNotiSelector);
 
     const isLoading = useSelector(state => state.CartList.isLoading)
 
@@ -45,33 +42,11 @@ const Cart = () => {
         history.push('/checkout/payment')
     }
 
-    const errorAuthConfirm = () => {
-        dispatch(closeCartErrorNoti());
-        dispatch(logOut());
-    }
-
     if (isLoading) return <Box sx={{ minHeight: "65vh" }} />
     else
         return (
             <Box sx={styles.box}>
                 <Box sx={styles.main}>
-                    {
-                        authError &&
-                        <CustomModal
-                            openModal={authError}
-                            noCancel
-
-                            title={"Alert"}
-                            description={
-                                userInfo.isEmpty 
-                                ? "Please login to continue"
-                                : "Something wrong happend !, please login again to continue"
-                            }
-
-                            onPressCancel={() => { }}
-                            onPressConfirm={errorAuthConfirm}
-                        />
-                    }
                     <CustomModal
                         openModal={openModalDelete}
                         setOpenModal={setOpenModalDelete}
