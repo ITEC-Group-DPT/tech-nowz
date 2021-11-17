@@ -3,7 +3,7 @@ import styles from './Product.styles'
 import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
-import { useParams, useLocation, Link } from "react-router-dom"
+import { useParams, useLocation, Link,useHistory } from "react-router-dom"
 import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
@@ -11,13 +11,15 @@ import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
+import CustomModal from '../../components/Modal/Modal'
 
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
 
 //redux
-import { cartSelector } from "../../store/selectors"
-import { addProductToCart, changeProductQuantity, showCartNoti, hideCartNoti } from '../../store/actions/cartAction'
+import { cartSelector, cartNotiSelector, userInfoSelector } from "../../store/selectors"
+import { addProductToCart, changeProductQuantity, showCartNoti, hideCartNoti, closeCartErrorNoti, showCartErrorNoti } from '../../store/actions/cartAction'
+import { logOut } from '../../store/actions/authAction'
 import { showAddFavNoti, showRemoveFavNoti, hideFavNoti } from '../../store/actions/favoriteAction'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -114,10 +116,35 @@ const Product = () => {
     const [tab, setTab] = React.useState('1');
 
     const cart = useSelector(cartSelector);
+    const userInfo = useSelector(userInfoSelector)
+    const { authError } = useSelector(cartNotiSelector);
+
     const [quantityDifference, setQuantityDifference] = useState(0);
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
+    const authErrorModal = () => {
+        return (
+            <CustomModal
+                openModal={authError}
+                noCancel
+
+                title={"Alert"}
+                description={
+                    userInfo.isEmpty
+                        ? "Please login to continue"
+                        : "Something wrong happend !, please login again to continue"
+                }
+
+                onPressCancel={() => { }}
+                onPressConfirm={() => {
+                    dispatch(closeCartErrorNoti());
+                    dispatch(logOut(history));
+                }}
+            />
+        )
+    }
     const changeFavorite = () => {
         changeFavoriteApi(productID).then(response => {
             console.log(response.data)
@@ -170,6 +197,8 @@ const Product = () => {
                     }
                     else {
                         console.log("Something wrong is happend");
+                        dispatch(showCartErrorNoti())
+
                     }
                 });
 
@@ -215,6 +244,9 @@ const Product = () => {
 
     return (
         <Box sx={styles.box}>
+            {
+                authError && authErrorModal()
+            }
             <Container maxWidth="xl" sx={styles.productContainer}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} lg={6}>

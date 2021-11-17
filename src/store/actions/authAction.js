@@ -72,7 +72,10 @@ const logOut = (history) => {
     return dispatch => {
         dispatch({ type: ActionType.LOGOUT })
         sessionStorage.removeItem("userInfo")
-        history.push("/")
+
+        if (history) {
+            history.push("/")
+        }
     }
 }
 

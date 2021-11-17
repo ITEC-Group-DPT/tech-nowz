@@ -5,25 +5,33 @@ const instance = axios.create({
 	baseURL: TEST_API_URL,
 });
 
-const token = sessionStorage.getItem('userInfo');
-if (token) {
+const getUserIDFromSessionStorage = () => {
+	const token = sessionStorage.getItem("userInfo");
 
 	let data = decryptData(token);
-	console.log('data: ',data);
+
 	const { userID } = JSON.parse(data);
-	// Alter defaults after instance has been created
-	instance.defaults.headers.common['Userid'] = userID;
+
+	return userID;
 }
+
+try {
+	// Alter defaults after instance has been created
+	instance.defaults.headers.common['Userid'] = getUserIDFromSessionStorage();
+} catch (error) {
+	sessionStorage.clear();
+}
+
 
 instance.interceptors.request.use(
 	(config) => {
 		if (!config.headers.Userid) {
 
-			let token = sessionStorage.getItem('userInfo');
-
-			if (token) {
-				let data = JSON.parse(decryptData(token));
-				config.headers.Userid = data.userID;
+			try {
+				// Alter defaults after instance has been created
+				config.headers.Userid = getUserIDFromSessionStorage();
+			} catch (error) {
+				sessionStorage.clear();
 			}
 		}
 		return config;

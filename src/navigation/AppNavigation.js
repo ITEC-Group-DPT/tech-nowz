@@ -5,10 +5,9 @@ import Authentication from '../pages/Authentication/Authentication';
 import HomeNavigation from './HomeNavigation';
 import { sessionLogin } from '../store/actions/authAction';
 
-import { userInfoSelector } from '../store/selectors'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from '../store/actions/cartAction';
-import {decryptData} from "../constant/utils"
+import { decryptData } from "../constant/utils"
 const AppNavigation = () => {
 
     const dispatch = useDispatch();
@@ -19,8 +18,18 @@ const AppNavigation = () => {
             console.log('sessionLogin');
 
             let data = decryptData(userInfo);
-            dispatch(sessionLogin(JSON.parse(data)));
-            dispatch(getCart());
+
+            try {
+                let userObject = JSON.parse(data);
+
+                if (userObject["userID"]) {
+                    dispatch(sessionLogin(userObject));
+                    dispatch(getCart());
+                }
+            } catch (error) {
+                sessionStorage.clear();
+
+            }
         }
     }, [])
 

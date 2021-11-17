@@ -15,9 +15,6 @@ const decryptData = (data) => {
     var bytes = CryptoJS.AES.decrypt(data, AUTH_KEY);
     var decrypt = bytes.toString(CryptoJS.enc.Utf8);
 
-    console.log('bytes: ', decrypt);
-
-
     return decrypt;
 }
 

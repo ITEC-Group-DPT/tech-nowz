@@ -29,7 +29,6 @@ const getCartQuantity = () => {
     return dispatch => {
         getCartQuantityApi().then(response => {
             if (response.data.success) {
-                console.log('get cart qty: ', response);
                 const data = response.data.data;
                 dispatch({
                     type: ActionType.GET_CART_QUANTITY,
@@ -60,11 +59,10 @@ const addProductToCart = (product) => {
             data: productData,
         })
         const response = await addProductToCartApi(productID);
-        console.log('add product response: ', response);
 
         if (!response.data.success) {
-            alert('add product fail')
-            //remove product if don't success
+            console.log('error ?');
+            dispatch(showCartErrorNoti());
         }
     }
 }
@@ -72,7 +70,7 @@ const addProductToCart = (product) => {
 const removeProductFromCart = (product) => {
 
     const productID = product.productID;
-    return async(dispatch) => {
+    return async (dispatch) => {
         dispatch({
             type: ActionType.REMOVE_PRODUCT_FROM_CART,
             productID: productID,
@@ -82,12 +80,12 @@ const removeProductFromCart = (product) => {
         const response = await removeProductFromCartApi(productID);
 
         if (!response.data.success) {
-            alert('remove product fail');
+            dispatch(showCartErrorNoti());
         }
     }
 }
 
-const changeProductQuantity = (product,quantity) => {
+const changeProductQuantity = (product, quantity) => {
 
     const productID = product.productID;
     return (dispatch) => {
@@ -101,7 +99,7 @@ const changeProductQuantity = (product,quantity) => {
 }
 
 const removeAllCart = () => {
-    return async(dispatch) => {
+    return async (dispatch) => {
         dispatch({
             type: ActionType.REMOVE_ALL_CART,
         })
@@ -109,7 +107,7 @@ const removeAllCart = () => {
         const response = await removeAllApi();
 
         if (!response.data.success) {
-            alert('remove cart fail');
+            dispatch(showCartErrorNoti());
         }
     }
 }
@@ -130,6 +128,20 @@ const hideCartNoti = () => {
     }
 }
 
+const showCartErrorNoti = (message) => {
+    return dispatch => {
+        dispatch({
+            type: ActionType.SHOW_CART_ERROR_NOTI,
+        })
+    };
+}
+
+const closeCartErrorNoti = () => {
+    return dispatch => {
+        dispatch({ type: ActionType.CLOSE_CART_ERROR_NOTI })
+    };
+}
+
 export {
     getCart,
     getCartQuantity,
@@ -139,4 +151,6 @@ export {
     removeAllCart,
     showCartNoti,
     hideCartNoti,
+    showCartErrorNoti,
+    closeCartErrorNoti,
 };
