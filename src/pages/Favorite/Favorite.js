@@ -36,9 +36,9 @@ const Favorite = () => {
     return (
         <Box sx={styles.box}>
             <Container maxWidth="md">
+                <Typography sx={styles.sliderTitle}>Favorites</Typography>
                 {favoriteList.isLoading ? (
                     <>
-                        <Typography sx={styles.sliderTitle}>Favorites</Typography>
                         <TransitionGroup>
                             <Collapse>
                                 <HorizontalProductSkeleton />
@@ -51,7 +51,6 @@ const Favorite = () => {
                             <EmptyList img={emptyFav} title={"Your favorite list is empty"} imgHeight={'45vh'} btnMarginTop={"5vh"} />
                         ) : (
                             <>
-                                <Typography sx={styles.sliderTitle}>Favorites</Typography>
                                 <TransitionGroup>
                                     {favoriteList.data.map(product =>
                                         <Collapse key={product.productID}>
