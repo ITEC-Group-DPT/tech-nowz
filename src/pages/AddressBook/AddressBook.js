@@ -15,6 +15,8 @@ import { TransitionGroup } from 'react-transition-group'
 import styles from "./AddressBook.styles"
 import { getAddressBook, deleteAddressBook } from "../../api/addressApi"
 import HorizontalProductSkeleton from "../../components/HorizontalProductSkeleton/HorizontalProductSkeleton"
+import EmptyList from "../../components/EmptyList/EmptyList"
+import emptyAddress from "../../img/empty-address.png"
 
 const AddressBook = () => {
 	const [modelAppear, setModelAppear] = useState(false)
@@ -42,7 +44,7 @@ const AddressBook = () => {
 		}
 		let newLs = addressList.data
 		newLs.push(obj)
-		setAddressList({...addressList, data: newLs})
+		setAddressList({ ...addressList, data: newLs })
 	}
 
 	const onEdit = (id, name, address, phone) => {
@@ -60,14 +62,14 @@ const AddressBook = () => {
 
 		newLs[indexbyid] = obj
 
-		setAddressList({...addressList, data: newLs})
+		setAddressList({ ...addressList, data: newLs })
 	}
 
 	const onDelete = (id) => {
 		deleteAddressBook(id).then((res) => {
 			if (res.data.success == true) {
 				const newLs = addressList.data.filter((address) => address.deliveryID !== id)
-				setAddressList({...addressList, data: newLs})
+				setAddressList({ ...addressList, data: newLs })
 			}
 		})
 	}
@@ -76,27 +78,32 @@ const AddressBook = () => {
 		<Box sx={styles.box}>
 			<Container maxWidth="md">
 				<Box sx={styles.titleWrapper}>
-					<Typography sx={styles.title}>Address Book</Typography>
 					{addressList.isLoading ? (
-						<Skeleton variant="text" animation="wave" sx={styles.skeletonBtn}>
+						<>
+							<Typography sx={styles.title}>Address Book</Typography>
+							<Skeleton variant="text" animation="wave" sx={styles.skeletonBtn}>
+								<Button
+									startIcon={<icons.Add />}
+									sx={styles.addBtn}
+								>
+									New address
+								</Button>
+							</Skeleton>
+						</>
+					) : (
+						<>
+							<Typography sx={styles.title}>Address Book</Typography>
 							<Button
 								startIcon={<icons.Add />}
+								onClick={() => setModelAppear(true)}
 								sx={styles.addBtn}
 							>
 								New address
 							</Button>
-						</Skeleton>
-					) : (
-						<Button
-							startIcon={<icons.Add />}
-							onClick={() => setModelAppear(true)}
-							sx={styles.addBtn}
-						>
-							New address
-						</Button>
+						</>
 					)}
-
 				</Box>
+
 				{addressList.isLoading ? (
 					<TransitionGroup>
 						<Collapse>
@@ -104,18 +111,28 @@ const AddressBook = () => {
 						</Collapse>
 					</TransitionGroup>
 				) : (
-					<TransitionGroup>
-						{addressList.data.map(address =>
-							<Collapse key={address.deliveryID}>
-								<CardAddress
-									address={address}
-									key={address.deliveryID}
-									onEdit={onEdit}
-									onDelete={onDelete}
-								/>
-							</Collapse>
+					<>
+						{addressList.data && addressList.data.length === 0 ? (
+							<EmptyList img={emptyAddress} title={"Your address list is empty"} imgHeight={'45vh'} btnMarginTop={"5vh"} />
+						) : (
+							<>
+
+
+								<TransitionGroup>
+									{addressList.data.map(address =>
+										<Collapse key={address.deliveryID}>
+											<CardAddress
+												address={address}
+												key={address.deliveryID}
+												onEdit={onEdit}
+												onDelete={onDelete}
+											/>
+										</Collapse>
+									)}
+								</TransitionGroup>
+							</>
 						)}
-					</TransitionGroup>
+					</>
 				)}
 
 			</Container>

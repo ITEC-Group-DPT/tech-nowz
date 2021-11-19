@@ -4,7 +4,8 @@ import styles from './Cart.styles'
 //component
 import { TransitionGroup } from 'react-transition-group';
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
-import EmptyCart from '../../components/EmptyCart/EmptyCart';
+import EmptyList from '../../components/EmptyList/EmptyList';
+import huhu from "../../img/empty-cart.png"
 import { Container, Box, Typography, Button, Collapse, Skeleton } from '@mui/material'
 import CustomModal from "../../components/Modal/Modal"
 
@@ -89,7 +90,7 @@ const Cart = () => {
                 )}
                 {
                     (cartList && cartList.length == 0)
-                        ? <EmptyCart />
+                        ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"}  />
                         : null
                 }
                 {cartList && cartList.length != 0 ?

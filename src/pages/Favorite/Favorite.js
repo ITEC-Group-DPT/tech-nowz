@@ -6,6 +6,8 @@ import { Container, Typography, Collapse } from '@mui/material'
 import { getFavoriteListApi, changeFavoriteApi } from '../../api/favoriteApi'
 import { Box } from '@mui/system'
 import { TransitionGroup } from 'react-transition-group'
+import EmptyList from "../../components/EmptyList/EmptyList"
+import emptyFav from "../../img/empty-favorite.png"
 
 const Favorite = () => {
     const [favoriteList, setFavoriteList] = useState({ "isLoading": true })
@@ -33,31 +35,42 @@ const Favorite = () => {
 
     return (
         <Box sx={styles.box}>
-            <Typography sx={styles.sliderTitle}>Favorites</Typography>
             <Container maxWidth="md">
                 {favoriteList.isLoading ? (
-                    <TransitionGroup>
-                        <Collapse>
-                            <HorizontalProductSkeleton />
-                        </Collapse>
-                    </TransitionGroup>
-                ) : (
-                    <TransitionGroup>
-                        {favoriteList.data.map(product =>
-                            <Collapse key={product.productID}>
-                                <HorizontalProduct
-                                    product={product}
-                                    key={product.productID}
-                                    canDelete={true}
-                                    ratingSize={"20px"}
-                                    onPressDelete={(e) => {
-                                        e.preventDefault()
-                                        onDelete(product.productID)
-                                    }}
-                                />
+                    <>
+                        <Typography sx={styles.sliderTitle}>Favorites</Typography>
+                        <TransitionGroup>
+                            <Collapse>
+                                <HorizontalProductSkeleton />
                             </Collapse>
+                        </TransitionGroup>
+                    </>
+                ) : (
+                    <>
+                        {favoriteList.data && favoriteList.data.length === 0 ? (
+                            <EmptyList img={emptyFav} title={"Your favorite list is empty"} imgHeight={'45vh'} btnMarginTop={"5vh"} />
+                        ) : (
+                            <>
+                                <Typography sx={styles.sliderTitle}>Favorites</Typography>
+                                <TransitionGroup>
+                                    {favoriteList.data.map(product =>
+                                        <Collapse key={product.productID}>
+                                            <HorizontalProduct
+                                                product={product}
+                                                key={product.productID}
+                                                canDelete={true}
+                                                ratingSize={"20px"}
+                                                onPressDelete={(e) => {
+                                                    e.preventDefault()
+                                                    onDelete(product.productID)
+                                                }}
+                                            />
+                                        </Collapse>
+                                    )}
+                                </TransitionGroup>
+                            </>
                         )}
-                    </TransitionGroup>
+                    </>
                 )}
             </Container>
         </Box>
