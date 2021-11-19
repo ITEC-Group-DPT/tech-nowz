@@ -5,6 +5,8 @@ import OrderComponent from '../../components/OrderComponent/OrderComponent'
 import { getOrderListAPI } from '../../api/orderApi'
 import { TransitionGroup } from 'react-transition-group'
 import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton'
+import EmptyList from "../../components/EmptyList/EmptyList"
+import emptyOrder from "../../img/empty-order.png"
 
 const OrderHistory = () => {
 	const [orderList, setOrderList] = useState({ "isLoading": true })
@@ -38,14 +40,20 @@ const OrderHistory = () => {
 						</Box>
 					</Box>
 				) : (
-					<Box>
-						{Object.keys(orderList.data).map((order, index) =>
-							<OrderComponent
-								orderID={Object.keys(orderList.data)[index]}
-								productList={orderList.data[order]}
-							/>
+					<>
+						{orderList.data && orderList.data.length === 0 ? (
+							<EmptyList img={emptyOrder} title={"Your order history is empty"} imgHeight={'45vh'} btnMarginTop={"5vh"} />
+						) : (
+							<Box>
+								{Object.keys(orderList.data).map((order, index) =>
+									<OrderComponent
+										orderID={Object.keys(orderList.data)[index]}
+										productList={orderList.data[order]}
+									/>
+								)}
+							</Box>
 						)}
-					</Box>
+					</>
 				)}
 
 			</Container>
