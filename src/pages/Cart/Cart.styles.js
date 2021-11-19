@@ -72,12 +72,12 @@ const styles = {
         marginTop: 3,
         padding: "10px 0px",
         textTransform: "none",
-        backgroundColor: "#333333",
+        backgroundColor: "#e32436",
         fontSize: { xs: "15px", md: "17px" },
         width: "100%",
         transition: "400ms",
         '&:hover': {
-            backgroundColor: "#565656",
+            backgroundColor: "#bb1d2c",
         }
     },
 

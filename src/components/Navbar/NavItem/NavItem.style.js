@@ -12,8 +12,19 @@ const styles = {
 			backgroundColor: '#737373',
 		},
 	},
+	navItemDrawer: {
+		marginRight: '.5rem',
+		marginLeft: '.5rem',
+		display: 'flex',
+		color: 'white',
+		justifyContent: 'start',
+		padding: '.8rem 1rem',
+		transition: '400ms',
+		borderRadius: '25px',
+	},
 	navLink: {
 		textDecoration: 'none',
+		width: '100%',
 	},
 	icon: {
 		'& *': {

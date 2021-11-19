@@ -25,7 +25,7 @@ const styles = {
             md: 5,
         },
         "&: hover": {
-            backgroundColor: "#ff5959",
+            backgroundColor: "#b90000",
         },
     },
     submitBtn: {
@@ -39,7 +39,7 @@ const styles = {
             md: 5,
         },
         "&: hover": {
-            backgroundColor: "#5b5b5b",
+            backgroundColor: "#000000",
         },
     }
 }

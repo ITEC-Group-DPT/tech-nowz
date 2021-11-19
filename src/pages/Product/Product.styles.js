@@ -207,8 +207,8 @@ const styles = {
 	details: {
 		whiteSpace: 'pre-line',
 		fontSize: {
-			xs: '16px',
-			md: '18px',
+			xs: '15px',
+			md: '17px',
 		},
 		lineHeight: 2,
 		fontWeight: 300,

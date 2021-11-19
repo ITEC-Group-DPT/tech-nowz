@@ -4,7 +4,10 @@ const styles = {
 	},
 	card: {
 		maxWidth: 345,
-		minHeight: 320,
+		minHeight: {
+			xs: "280px",
+			md: "320px",
+		},
 		borderRadius: '25px',
 		boxShadow: 'none',
 		padding: {
@@ -14,7 +17,10 @@ const styles = {
 	},
 	cardSlider: {
 		maxWidth: 345,
-		minHeight: 320,
+		minHeight: {
+			xs: "280px",
+			md: "320px",
+		},
 		borderRadius: '25px',
 		boxShadow: 'none',
 		marginRight: {
@@ -34,6 +40,10 @@ const styles = {
 		},
 	},
 	pImage: {
+		height: {
+			xs: "170px",
+			md: "200px",
+		},
 		objectFit: 'contain',
 	},
 	pNameWrapper: {

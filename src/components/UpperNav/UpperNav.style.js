@@ -69,7 +69,7 @@ const styles = {
 		position: 'absolute',
 		top: {
 			xs: '175px',
-			lg: '70px',
+			lg: '80px',
 		},
 		left: {
 			xs: '0%',

@@ -1,22 +1,17 @@
 import { React, useState, useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+import { AppBar, Toolbar, Grid, Container, IconButton, Box, Drawer, List, ListItem, Typography, Divider, useMediaQuery } from '@mui/material';
 import NavItem from './NavItem/NavItem';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import NavItemUser from './NavItemUser/NavItemUser';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import { colors, icons } from '../../constant';
-import useStyles from './Navbar.styles';
-import { useSelector } from 'react-redux';
+import { useStyles, style } from './Navbar.styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+import { logOut } from "../../store/actions/authAction";
 
 const Navbar = () => {
 	const styles = useStyles();
+	const dispatch = useDispatch()
+	const history = useHistory()
 	const userInfo = useSelector((state) => state.Authentication.user);
 	//console.log('userInfo: ', userInfo);
 
@@ -68,30 +63,64 @@ const Navbar = () => {
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<List>
-				<ListItem button key="home">
-					<NavItem href="/" title="Home" icon={<icons.Home />} />
+				{/* <ListItem button key="user" sx={{ padding: 0 }}>
+					<NavItem
+						href="/"
+						title="Home"
+						icon={<icons.Home />}
+						isDrawer
+					/>
+				</ListItem> */}
+				<ListItem button key="home" sx={{ padding: 0 }}>
+					<NavItem
+						href="/"
+						title="Home"
+						icon={<icons.Home />}
+						isDrawer
+					/>
 				</ListItem>
-				<ListItem button key="Hot Discount">
+				<ListItem button key="Hot Discount" sx={{ padding: 0 }}>
 					<NavItem
 						href="/"
 						title="Hot Discount"
 						icon={<icons.Offer />}
+						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Shipping Policy">
+				<ListItem button key="Shipping Policy" sx={{ padding: 0 }}>
 					<NavItem
 						href="/"
 						title="Shipping Policy"
 						icon={<icons.Truck />}
+						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Contact Us">
+				<ListItem button key="Contact Us" sx={{ padding: 0 }}>
 					<NavItem
 						href="/contactus"
 						title="Contact Us"
 						icon={<icons.Phone />}
+						isDrawer
 					/>
 				</ListItem>
+				<Divider sx={{ my: 2 }} />
+				{userInfo.isEmpty ? (
+					<ListItem button key="login" sx={{ padding: 0 }}>
+						<Link to='/authentication' style={style.navLink}>
+							<Box sx={style.authenWrapper}>
+								<icons.User sx={style.icon} />
+								<Typography sx={style.navTitle}>Login</Typography>
+							</Box>
+						</Link>
+					</ListItem>
+				) : (
+					<ListItem button key="Contact Us" onClick={() => { dispatch(logOut(history)) }} sx={style.signOutListItem}>
+						<Box sx={style.authenWrapper}>
+							<icons.SignOut sx={style.icon} />
+							<Typography sx={style.navTitle}>Sign out</Typography>
+						</Box>
+					</ListItem>
+				)}
 			</List>
 		</Box>
 	);
@@ -103,7 +132,7 @@ const Navbar = () => {
 			className="appBar"
 		>
 			<Toolbar>
-				<Container maxWidth="xl" sx={{padding: 0}}>
+				<Container maxWidth="xl" sx={{ padding: 0 }}>
 					<Grid container spacing={2}>
 						{isMatch ? (
 							<Grid item xs={3}>
