@@ -1,7 +1,7 @@
 import ActionType from "../actions/actionType";
 
 const initState = {
-    isLoading: false,
+    isLoading: true,
     notification: {
         addToCart: false,
     },

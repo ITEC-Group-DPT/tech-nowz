@@ -214,6 +214,7 @@ const styles = {
 		fontWeight: 300,
 		textAlign: 'center',
 		padding: 0,
+		wordBreak: 'break-word',
 	},
 	relatedProductContainer: {
 		marginTop: '60px',

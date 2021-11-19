@@ -5,20 +5,23 @@ import styles from './Cart.styles'
 import { TransitionGroup } from 'react-transition-group';
 import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 import EmptyCart from '../../components/EmptyCart/EmptyCart';
-import { Container, Box, Typography, Button, Collapse } from '@mui/material'
+import { Container, Box, Typography, Button, Collapse, Skeleton } from '@mui/material'
 import CustomModal from "../../components/Modal/Modal"
 
 //redux && api
-import { cartSelector } from "../../store/selectors"
+import { cartSelector, cartIsLoadingSelector } from "../../store/selectors"
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
+import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton';
 
 
 const Cart = () => {
 
     const history = useHistory();
-    const { cartList, totalPrice, isLoading } = useSelector(cartSelector);
+    const { cartList, totalPrice } = useSelector(cartSelector);
+    const isLoading = useSelector(cartIsLoadingSelector);
+    console.log("isLoading: ", isLoading);
 
     const [openModalDelete, setOpenModalDelete] = useState(false);
 
@@ -47,10 +50,43 @@ const Cart = () => {
                     openModal={openModalDelete}
                     setOpenModal={setOpenModalDelete}
 
-                    title={"Remove all"}
-                    description="Do want to remove all product from cart?"
+                    title={"Confirmation"}
+                    description="Do want to remove all product from your cart?"
                     onPressConfirm={removeAllProduct}
                 />
+                {isLoading ? (
+                    <>
+                        <Box sx={styles.cartListWrapper}>
+                            <Box>
+                                <Box sx={styles.removeRow}>
+                                    <Typography sx={styles.myCart}>
+                                        My Cart
+                                    </Typography>
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonRemoveAll}>
+                                        <Button sx={styles.removeAll}>
+                                            Remove all
+                                        </Button>
+                                    </Skeleton>
+                                </Box>
+                                <TransitionGroup>
+                                    <Collapse>
+                                        <HorizontalProductSkeleton />
+                                    </Collapse>
+                                </TransitionGroup>
+                            </Box>
+                        </Box>
+                        <Box sx={styles.summary}>
+                            <Skeleton variant="rectangular" animation="wave" sx={styles.skeletonSummary} />
+                            <Skeleton variant="text" animation="wave" sx={styles.skeletonCheckoutBtn}>
+                                <Button sx={styles.checkoutButton}>
+                                    Checkout
+                                </Button>
+                            </Skeleton>
+                        </Box>
+                    </>
+                ) : (
+                    ""
+                )}
                 {
                     (cartList && cartList.length == 0)
                         ? <EmptyCart />

@@ -10,13 +10,13 @@ import { TransitionGroup } from 'react-transition-group'
 
 const OrderDetail = () => {
 	const { id } = useParams()
-	const [order, setOrderDetail] = useState({ "isLoading": true })
+	const [orderDetail, setOrderDetail] = useState({ "isLoading": true })
 
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
 			if (response.data.success === true) {
 				setOrderDetail({ "isLoading": false, data: response.data.data })
-				console.log(response.data.data)
+				console.log("orderDetail ", response.data.data)
 			}
 		})
 	}, [])
@@ -43,7 +43,7 @@ const OrderDetail = () => {
 	return (
 		<Box sx={styles.box}>
 			<Container maxWidth="lg">
-				{order.isLoading ? (
+				{orderDetail.isLoading ? (
 					<Grid container spacing={6}>
 						<Grid item xs={12} lg={5}>
 							<Box sx={styles.wrapperSkeleton}>
@@ -78,7 +78,7 @@ const OrderDetail = () => {
 									</Typography>
 									<Typography sx={styles.content}>
 										{formatDateDiff(
-											order.data.orderInfo.dateDiff,
+											orderDetail.data.orderInfo.dateDiff,
 										)}
 									</Typography>
 									<Divider sx={styles.divider} />
@@ -86,13 +86,13 @@ const OrderDetail = () => {
 										Customer detail
 									</Typography>
 									<Typography sx={styles.content}>
-										Name: {order.data.orderInfo.name}
+										Name: {orderDetail.data.orderInfo.name}
 									</Typography>
 									<Typography sx={styles.content}>
-										Phone: {order.data.orderInfo.phone}
+										Phone: {orderDetail.data.orderInfo.phone}
 									</Typography>
 									<Typography sx={styles.content}>
-										Address: {order.data.orderInfo.address}
+										Address: {orderDetail.data.orderInfo.address}
 									</Typography>
 									<Divider sx={styles.divider} />
 									<Box sx={{ mt: 4 }}>
@@ -102,7 +102,7 @@ const OrderDetail = () => {
 											</Typography>
 											<Typography sx={styles.lowerValues}>
 												{formatPrice(
-													order.data.orderInfo.totalPrice,
+													orderDetail.data.orderInfo.totalPrice,
 												)}
 											</Typography>
 										</Box>
@@ -113,7 +113,7 @@ const OrderDetail = () => {
 						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
 							<Box sx={styles.productList}>
 								<TransitionGroup>
-									{order.data.itemList.map((product) => (
+									{orderDetail.data.itemList.map(product =>
 										<Collapse>
 											<HorizontalProduct
 												product={product}
@@ -137,7 +137,7 @@ const OrderDetail = () => {
 												></ProductRatingBar>
 											</Box>
 										</Collapse>
-									))}
+									)}
 								</TransitionGroup>
 							</Box>
 						</Grid>

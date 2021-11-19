@@ -117,6 +117,21 @@ const styles = {
             lg: "15px",
         },
     },
+    isLoadingWrapper: {
+        display: { xs: "block", sm: "flex" },
+    },
+    skeletonRemoveAll: {
+		bgcolor: '#ededed',
+	},
+    skeletonSummary: {
+        bgcolor: '#ededed',
+        height: '260px',
+    },
+    skeletonCheckoutBtn: {
+        bgcolor: '#ededed',
+        maxWidth: 'none',
+        width: '100%'
+    },
 };
 
 export default styles;
