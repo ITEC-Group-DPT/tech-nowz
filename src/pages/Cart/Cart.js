@@ -69,11 +69,8 @@ const Cart = () => {
                                         </Button>
                                     </Skeleton>
                                 </Box>
-                                <TransitionGroup>
-                                    <Collapse>
-                                        <HorizontalProductSkeleton />
-                                    </Collapse>
-                                </TransitionGroup>
+                                <HorizontalProductSkeleton />
+                                <HorizontalProductSkeleton />
                             </Box>
                         </Box>
                         <Box sx={styles.summary}>
@@ -90,7 +87,7 @@ const Cart = () => {
                 )}
                 {
                     (cartList && cartList.length == 0)
-                        ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"}  />
+                        ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"} />
                         : null
                 }
                 {cartList && cartList.length != 0 ?

@@ -39,11 +39,8 @@ const Favorite = () => {
                 <Typography sx={styles.sliderTitle}>Favorites</Typography>
                 {favoriteList.isLoading ? (
                     <>
-                        <TransitionGroup>
-                            <Collapse>
-                                <HorizontalProductSkeleton />
-                            </Collapse>
-                        </TransitionGroup>
+                        <HorizontalProductSkeleton />
+                        <HorizontalProductSkeleton />
                     </>
                 ) : (
                     <>

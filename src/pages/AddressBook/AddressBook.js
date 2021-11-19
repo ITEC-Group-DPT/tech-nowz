@@ -105,11 +105,10 @@ const AddressBook = () => {
 				</Box>
 
 				{addressList.isLoading ? (
-					<TransitionGroup>
-						<Collapse>
-							<HorizontalProductSkeleton />
-						</Collapse>
-					</TransitionGroup>
+					<>
+						<HorizontalProductSkeleton />
+						<HorizontalProductSkeleton />
+					</>
 				) : (
 					<>
 						{addressList.data && addressList.data.length === 0 ? (
