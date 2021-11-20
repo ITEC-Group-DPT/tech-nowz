@@ -29,16 +29,12 @@ export function FeedbackForm(props) {
 		setFormInput({ [name]: newValue });
 	};
 
-	const handleReset = (event) => {
-		event.preventDefault();
-		Object.keys(formInput).forEach((inputKey) => {
-			setFormInput({ [inputKey]: '' });
-		});
-	};
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setDialogOpen(true);
+		Object.keys(formInput).forEach((inputKey) => {
+			setFormInput({ [inputKey]: '' });
+		});
 		const delay = setTimeout(() => {
 			window.location = props.websiteURL;
 		}, 2000);
@@ -111,7 +107,6 @@ export function FeedbackForm(props) {
 					</Button>
 				</Box>
 			</form>
-			<Button onClick={handleReset}>Reset</Button>
 			<Dialog open={dialogOpen}>
 				<DialogActions sx={{ display: 'block' }}>
 					<DialogContent sx={{ m: 0, p: 2 }}>
