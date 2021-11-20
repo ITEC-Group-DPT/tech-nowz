@@ -32,7 +32,6 @@ export function FeedbackForm(props) {
 	const handleReset = (event) => {
 		event.preventDefault();
 		Object.keys(formInput).forEach((inputKey) => {
-			console.log(inputKey);
 			setFormInput({ [inputKey]: '' });
 		});
 	};
@@ -42,7 +41,7 @@ export function FeedbackForm(props) {
 		setDialogOpen(true);
 		const delay = setTimeout(() => {
 			window.location = props.websiteURL;
-		}, 1500);
+		}, 2000);
 		return () => clearTimeout(delay);
 	};
 
@@ -59,7 +58,7 @@ export function FeedbackForm(props) {
 									required={true}
 									sx={styles.textField}
 									fullWidth={true}
-									defaultValue={formInput.name}
+									value={formInput.name}
 									onChange={handleInput}
 								/>
 							</Typography>
@@ -72,7 +71,7 @@ export function FeedbackForm(props) {
 									required={true}
 									sx={styles.textField}
 									fullWidth={true}
-									defaultValue={formInput.phone}
+									value={formInput.phone}
 									onChange={handleInput}
 								/>
 							</Typography>
@@ -85,7 +84,7 @@ export function FeedbackForm(props) {
 							required={true}
 							sx={styles.textField}
 							fullWidth={true}
-							defaultValue={formInput.email}
+							value={formInput.email}
 							onChange={handleInput}
 						/>
 					</Typography>
@@ -99,7 +98,7 @@ export function FeedbackForm(props) {
 							multiline={true}
 							minRows={7}
 							maxRows={7}
-							defaultValue={formInput.feedback}
+							value={formInput.feedback}
 							onChange={handleInput}
 						/>
 					</Typography>
