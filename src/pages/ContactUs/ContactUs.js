@@ -8,17 +8,17 @@ import {
 	Link,
 	Button,
 } from '@mui/material';
-import styles from './ContacUs.styles';
+import styles from './ContactUs.styles';
 
-const mailURL = 'technowvn@gmail.com';
-const websiteURL = 'www.technow.vn';
+const mailURL = 'technowz@gmail.com';
+const websiteURL = 'www.technowz.vn';
 
 const ContactUs = () => {
 	return (
 		<Container sx={{ mt: '20px', mb: '20px' }}>
+			<Typography sx={styles.title}>Contact us</Typography>
 			<Grid container spacing={4}>
 				<Grid item xs={12} md={6} sx={styles.gridItem}>
-					<Typography sx={styles.title}>Contact us</Typography>
 					<Box>
 						<hr />
 						<Typography sx={styles.textContent}>
@@ -28,15 +28,14 @@ const ContactUs = () => {
 						<Typography sx={styles.textContent}>
 							(24/7 Support) Hotline: <b>0123-456-789</b>
 						</Typography>
-						<Grid container>
-							<Grid item xs={12} md={6} sx={{ pr: '10px' }}>
+						<Grid container spacing={2}>
+							<Grid item xs={12} md={6}>
 								<Typography sx={styles.textContent}>
 									<b>Name</b>
 									<TextField
 										placeholder='Name'
 										sx={styles.textField}
 										fullWidth={true}
-										required={true}
 									/>
 								</Typography>
 							</Grid>
@@ -47,7 +46,6 @@ const ContactUs = () => {
 										placeholder='Phone number'
 										sx={styles.textField}
 										fullWidth={true}
-										required={true}
 									/>
 								</Typography>
 							</Grid>
@@ -58,7 +56,6 @@ const ContactUs = () => {
 								placeholder='Email'
 								sx={styles.textField}
 								fullWidth={true}
-								required={true}
 							/>
 						</Typography>
 						<Typography sx={styles.textContent}>
@@ -72,12 +69,19 @@ const ContactUs = () => {
 								maxRows={7}
 							/>
 						</Typography>
-						<Button
-							variant='outlined'
-							size='large'
-							sx={styles.sendButton}>
-							Send
-						</Button>
+						<Link
+							onClick={(e) => {
+								window.location.reload();
+								e.preventDefault();
+							}}
+							underline='none'>
+							<Button
+								variant='outlined'
+								size='large'
+								sx={styles.sendButton}>
+								Send
+							</Button>
+						</Link>
 					</Box>
 				</Grid>
 				<Grid item xs={12} md={6} sx={{ m: '20px 0' }}>
@@ -87,44 +91,37 @@ const ContactUs = () => {
 							width='600'
 							height='288'
 							style={{ border: '0', maxWidth: '100%' }}
-							allowfullscreen=''
 							loading='lazy'
 						/>
 						<Typography sx={styles.title}>Address</Typography>
 						<hr />
 						<Typography sx={styles.textContent}>
-							Công ty TNHH Bốn Thành Viên Đồ Chơi Công Nghệ Việt
+							Công ty TNHH Năm Thành Viên Đồ Chơi Công Nghệ Việt
 							Nam
 							<br />
 							227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ
 							Chí Minh
-						</Typography>
-						<Box sx={{ display: 'flex' }}>
-							<Typography sx={styles.textContent}>
-								Email:
-							</Typography>
+							<br />
+							Email:{' '}
 							<Link
-								sx={styles.textContent}
+								sx={styles.linkContent}
 								onClick={(e) => {
-									window.location = `mailto:${mailURL}}@gmail.com`;
+									window.location = `mailto:${mailURL}}`;
 									e.preventDefault();
 								}}>
 								{mailURL}
 							</Link>
-						</Box>
-						<Box sx={{ display: 'flex' }}>
-							<Typography sx={styles.textContent}>
-								Website:
-							</Typography>
+							<br />
+							Website:{' '}
 							<Link
-								sx={styles.textContent}
+								sx={styles.linkContent}
 								onClick={(e) => {
 									window.location = `http://${websiteURL}`;
 									e.preventDefault();
 								}}>
 								{websiteURL}
 							</Link>
-						</Box>
+						</Typography>
 					</Box>
 				</Grid>
 			</Grid>
