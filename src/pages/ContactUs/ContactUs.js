@@ -1,24 +1,17 @@
 import { React } from 'react';
-import {
-	Typography,
-	Box,
-	Container,
-	Grid,
-	TextField,
-	Link,
-	Button,
-} from '@mui/material';
+import { Typography, Box, Container, Grid, Link } from '@mui/material';
+import { FeedbackForm } from '../../components/FeedbackForm/FeedbackForm';
 import styles from './ContactUs.styles';
 
 const mailURL = 'technowz@gmail.com';
-const websiteURL = 'www.technowz.vn';
+const websiteURL = 'http://www.technowz.vn';
 
 const ContactUs = () => {
 	return (
 		<Container sx={{ mt: '20px', mb: '20px' }}>
 			<Typography sx={styles.title}>Contact us</Typography>
 			<Grid container spacing={4}>
-				<Grid item xs={12} md={6} sx={styles.gridItem}>
+				<Grid item xs={12} md={6}>
 					<Box>
 						<hr />
 						<Typography sx={styles.textContent}>
@@ -28,60 +21,7 @@ const ContactUs = () => {
 						<Typography sx={styles.textContent}>
 							(24/7 Support) Hotline: <b>0123-456-789</b>
 						</Typography>
-						<Grid container spacing={2}>
-							<Grid item xs={12} md={6}>
-								<Typography sx={styles.textContent}>
-									<b>Name</b>
-									<TextField
-										placeholder='Name'
-										sx={styles.textField}
-										fullWidth={true}
-									/>
-								</Typography>
-							</Grid>
-							<Grid item xs={12} md={6}>
-								<Typography sx={styles.textContent}>
-									<b>Phone</b>
-									<TextField
-										placeholder='Phone number'
-										sx={styles.textField}
-										fullWidth={true}
-									/>
-								</Typography>
-							</Grid>
-						</Grid>
-						<Typography sx={styles.textContent}>
-							<b>Email</b>
-							<TextField
-								placeholder='Email'
-								sx={styles.textField}
-								fullWidth={true}
-							/>
-						</Typography>
-						<Typography sx={styles.textContent}>
-							<b>Feedback</b>
-							<TextField
-								placeholder='Leave a message here'
-								sx={styles.textField}
-								fullWidth={true}
-								multiline={true}
-								minRows={7}
-								maxRows={7}
-							/>
-						</Typography>
-						<Link
-							onClick={(e) => {
-								window.location.reload();
-								e.preventDefault();
-							}}
-							underline='none'>
-							<Button
-								variant='outlined'
-								size='large'
-								sx={styles.sendButton}>
-								Send
-							</Button>
-						</Link>
+						<FeedbackForm websiteURL={websiteURL} />
 					</Box>
 				</Grid>
 				<Grid item xs={12} md={6} sx={{ m: '20px 0' }}>

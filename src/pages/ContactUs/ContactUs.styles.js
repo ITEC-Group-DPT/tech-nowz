@@ -18,18 +18,6 @@ const styles = {
 		lineHeight: 1.5,
 		cursor: 'pointer',
 	},
-	textField: {
-		display: 'block',
-		mr: '10%',
-	},
-	sendButton: {
-		color: 'white',
-		backgroundColor: '#333333',
-		'&:hover': {
-			background: '#333333',
-			color: 'white',
-		},
-	},
 };
 
 export default styles;
