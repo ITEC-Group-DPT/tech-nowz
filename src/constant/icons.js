@@ -27,6 +27,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import AddIcon from '@mui/icons-material/Add';
 
+import AddIcon from '@mui/icons-material/Add';
 const icons = {
     Home: HomeOutlinedIcon,
     Phone: PhoneCallbackOutlinedIcon,

@@ -42,6 +42,7 @@ const HomeNavigation = () => {
 				<Route path="/category/:name" component={CategoryPage}  />
 				<Route path="/checkout" component={CartNavigation} />
 				<Route path="/profile" component={ProfileNavigation} />
+				
 				<Route path="/" component={NotFound} />
 			</Switch>
 			<Footer />

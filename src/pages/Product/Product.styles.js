@@ -221,7 +221,7 @@ const styles = {
 	},
 	sliderTitle: {
 		fontSize: {
-			xs:	'20px',
+			xs: '20px',
 			md: '27px',
 		},
 		fontWeight: 'bold',
@@ -261,6 +261,17 @@ const styles = {
 	viewMoreBtn: {
 		textTransform: 'none',
 		color: 'black',
+	},
+	modal: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		width: 'fit-content',
+		bgcolor: "white",
+		border: "2px solid #000",
+		boxShadow: 24,
+		p: 4,
 	},
 };
 
