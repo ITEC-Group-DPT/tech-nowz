@@ -4,7 +4,7 @@ import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useParams, useLocation, Link, useHistory } from "react-router-dom"
-import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton,Modal } from '@mui/material'
+import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton, Modal } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
 import TabContext from '@mui/lab/TabContext'
@@ -153,7 +153,7 @@ const Product = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [formOpen, setFormOpen] = useState(false);
 
-	const { userID, userRole } = useSelector(userInfoSelector);
+	const { userID, userRole, isEmpty: userEmpty } = useSelector(userInfoSelector);
 	const cart = useSelector(cartSelector);
 	const [quantityDifference, setQuantityDifference] = useState(0);
 
@@ -211,6 +211,12 @@ const Product = () => {
 	}
 
 	const addItemToCart = () => {
+
+		//if userinfo is empty
+		if (userEmpty) {
+			dispatch(showAuthError())
+			return;
+		}
 		let productIndex = cart["cartList"].findIndex(item => item.productID == productID);
 
 		//new product
@@ -404,7 +410,7 @@ const Product = () => {
 								</Box>
 							)}
 
-{product.isLoading ? (
+							{product.isLoading ? (
 								<Box sx={styles.btnWrapper}>
 									<Skeleton
 										variant="text"
