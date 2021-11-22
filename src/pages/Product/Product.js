@@ -3,7 +3,7 @@ import styles from './Product.styles'
 import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
-import { useLocation, Link } from "react-router-dom"
+import { useParams, useLocation, Link, useHistory } from "react-router-dom"
 import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton,Modal } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
@@ -12,6 +12,7 @@ import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
 import FormProduct from "../../components/FormProduct/FormProduct";
+import CustomModal from '../../components/Modal/Modal'
 
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
@@ -20,6 +21,7 @@ import { changeFavoriteApi } from '../../api/favoriteApi'
 import { userInfoSelector } from "../../store/selectors";
 import { cartSelector } from "../../store/selectors"
 import { addProductToCart, changeProductQuantity, showCartNoti, hideCartNoti } from '../../store/actions/cartAction'
+import { showAuthError } from '../../store/actions/authAction'
 import { showAddFavNoti, showRemoveFavNoti, hideFavNoti } from '../../store/actions/favoriteAction'
 import { deleteProduct, editProduct } from "../../api/productApi";
 import { useDispatch, useSelector } from 'react-redux'
@@ -238,6 +240,7 @@ const Product = () => {
 					}
 					else {
 						console.log("Something wrong is happend");
+						dispatch(showAuthError())
 					}
 				});
 

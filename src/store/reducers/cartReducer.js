@@ -6,6 +6,7 @@ const initState = {
         addToCart: false,
     },
     cart: {
+        cartList: [],
         totalQuantity: 0,
         totalPrice: 0,
     },
@@ -103,6 +104,8 @@ const CartReducer = (state = initState, action) => {
                     cartList: [],
                 },
             }
+        case (ActionType.CLEAR_CART_UI):
+            return initState;
         case (ActionType.SHOW_CART_NOTI):
             return {
                 ...state,

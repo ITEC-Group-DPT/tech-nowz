@@ -18,4 +18,8 @@ const signUpApi = (email, username, password) => {
     return axios.post(TEST_API_URL + "userAPI.php", data);
 }
 
-export { signInApi, signUpApi }
+const validateApi = () => {
+    return axios.post(TEST_API_URL + "userAPI.php?command=checkToken");
+}
+
+export { signInApi, signUpApi, validateApi }
