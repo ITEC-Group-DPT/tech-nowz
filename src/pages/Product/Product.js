@@ -4,7 +4,7 @@ import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useLocation, Link } from "react-router-dom"
-import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton } from '@mui/material'
+import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton,Modal } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
 import TabContext from '@mui/lab/TabContext'

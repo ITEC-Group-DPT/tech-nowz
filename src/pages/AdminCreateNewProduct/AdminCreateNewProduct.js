@@ -30,7 +30,7 @@ const AdminCreateNewProduct = () => {
 		createProduct(productForm).then((response) => {
 			if (response.data.success = true){
 				console.log(response.data);
-
+				setProductForm(defaultemptyProduct);
 			}
 		});
 	}
