@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Redirect, useRouteMatch,useLocation } from 'react-router-dom';
+import { Switch, Route, Redirect, useRouteMatch, useLocation } from 'react-router-dom';
 
 import { validateApi } from '../api/authApi';
 import { showAuthError } from '../store/actions/authAction';
@@ -11,6 +11,7 @@ import AddressBook from '../pages/AddressBook/AddressBook';
 import NotFound from '../components/NotFound/NotFound';
 import OrderDetail from '../pages/OrderDetail/OrderDetail';
 import AdminCreateNewProduct from '../pages/AdminCreateNewProduct/AdminCreateNewProduct';
+import AdminEditProduct from '../pages/AdminEditProduct/AdminEditProduct';
 const ProfileNavigation = () => {
 	const match = useRouteMatch();
 	const location = useLocation();
@@ -49,6 +50,11 @@ const ProfileNavigation = () => {
 				exact
 				path={`${match.path}/createproduct`}
 				component={AdminCreateNewProduct}
+			/>
+			<Route
+				exact
+				path={`${match.path}/editproduct`}
+				component={AdminEditProduct}
 			/>
 			<Route path={`${match.path}`} component={NotFound} />
 		</Switch>

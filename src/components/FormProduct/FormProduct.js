@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useHistory } from 'react-router-dom'
 import {
 	Input,
 	InputLabel,
@@ -11,9 +12,11 @@ import {
 	TextareaAutosize,
 	Typography,
 } from "@mui/material";
+
 function setDefault(e){
 	console.log(e);
 }
+
 const FormProduct = ({
 	form,
 	setProduct,
@@ -21,6 +24,7 @@ const FormProduct = ({
 	cancelBtnAppear = true,
 	setAppear = setDefault,
 }) => {
+	const history = useHistory()
 	return (
 		<Box sx={{ p: 2, my: 1 }}>
 			<FormControl fullWidth="true">
@@ -192,7 +196,7 @@ const FormProduct = ({
 				{cancelBtnAppear && (
 					<Button
 						sx={{ mx: 1 }}
-						onClick={() => setAppear(false)}
+						onClick={() => {history.goBack()}}
 						variant="outlined"
 						size="small"
 						color="error">
