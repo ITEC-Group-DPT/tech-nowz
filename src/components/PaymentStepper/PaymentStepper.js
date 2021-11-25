@@ -10,10 +10,18 @@ import { createOrder } from "../../api/orderApi";
 import { Container, Box, Divider } from "@mui/material";
 
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux"
-import { removeAllCart } from "../../store/actions/cartAction"
-const steps = ["Delivery Information", "Checkout List", "Finish"];
+import { useDispatch } from "react-redux";
+import { removeAllCart } from "../../store/actions/cartAction";
 
+function checkEmptyForm(form) {
+	for (const element in form) {
+		if (form[element].toString() === "") {
+			return false;
+		}
+	}
+	return true;
+}
+const steps = ["Delivery Information", "Checkout List", "Finish"];
 export default function PaymentStepper({
 	idaddress,
 	address,
@@ -24,7 +32,7 @@ export default function PaymentStepper({
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [activeStep, setActiveStep] = React.useState(0);
-	const [disableFinish, setDisableFinish] = React.useState(false)
+	const [disableFinish, setDisableFinish] = React.useState(false);
 	if (activeStep != 0) {
 		setDisableAddress(true);
 	} else {
@@ -32,8 +40,12 @@ export default function PaymentStepper({
 	}
 
 	const handleNext = () => {
-		if (activeStep == 1) {
-			setDisableFinish(true)
+		if (activeStep == 0) {
+			console.log(address);
+			if (checkEmptyForm(address)) setActiveStep(activeStep + 1);
+			else return;
+		} else if (activeStep == 1) {
+			setDisableFinish(true);
 			let joinAddress =
 				address.addressInForm +
 				", " +
@@ -43,10 +55,10 @@ export default function PaymentStepper({
 				", " +
 				address.city;
 			// console.log("da gui");
-			let productIDs = []
+			let productIDs = [];
 			for (const product of cart.cartList) {
-				let arr = [product.productID, product.quantity]
-				productIDs.push(arr)
+				let arr = [product.productID, product.quantity];
+				productIDs.push(arr);
 			}
 
 			createOrder(
@@ -59,7 +71,7 @@ export default function PaymentStepper({
 			).then((res) => {
 				//console.log(res.data);
 				if (res.data.success == true) {
-					dispatch(removeAllCart())
+					dispatch(removeAllCart());
 					setActiveStep(activeStep + 1);
 				}
 			});
@@ -102,10 +114,9 @@ export default function PaymentStepper({
 							justifyContent: "center",
 							pt: 2,
 						}}>
-						<Button 
-						onClick = {() => history.push("/") }
-						variant="outlined"
-						>
+						<Button
+							onClick={() => history.push("/")}
+							variant="outlined">
 							Back to home page
 						</Button>
 					</Box>
@@ -139,7 +150,7 @@ export default function PaymentStepper({
 									<Typography
 										variant="h6"
 										sx={{ fontSize: { xs: "1rem" } }}>
-										Total price: {cart.totalQuantity}
+										Total units: {cart.totalQuantity}
 										{" unit(s)"}
 									</Typography>
 									<Typography
@@ -171,7 +182,10 @@ export default function PaymentStepper({
 							</Button>
 							<Box sx={{ flex: "1 1 auto" }} />
 
-							<Button onClick={handleNext} disabled={disableFinish} variant="outlined">
+							<Button
+								onClick={handleNext}
+								disabled={disableFinish}
+								variant="outlined">
 								{activeStep === steps.length - 2
 									? "Finish?"
 									: "Next"}
