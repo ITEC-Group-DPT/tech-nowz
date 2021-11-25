@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
 import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton';
 
-
 const Cart = () => {
 
     const history = useHistory();
@@ -89,83 +88,42 @@ const Cart = () => {
                     (cartList && cartList.length == 0)
                         ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"} />
                         : null
-                }
-                {cartList && cartList.length != 0 ?
-                    <Box sx={styles.cartListWrapper}>
-                        <Box>
-                            <Box sx={styles.removeRow}>
-                                <Typography
-                                    sx={styles.myCart}
-                                >
-                                    My Cart
-                                </Typography>
+                    }
+                    {
+                        cartList.length != 0 ?
+                            <Box sx={styles.summary}>
+                                <Box sx={styles.summaryData}>
+                                    <Typography sx={styles.orderSummary}>
+                                        Order Summary
+                                    </Typography>
+
+                                    <Box sx={styles.taxContainer}>
+                                        <Typography sx={styles.summaryTitle}>Tax</Typography>
+                                        <Typography sx={styles.tax}>0đ</Typography>
+                                    </Box>
+
+                                    <Box sx={styles.totalContainer}>
+                                        <Typography sx={styles.summaryTitle}>Total</Typography>
+                                        <Typography sx={styles.total}>
+                                            {formatedPrice}</Typography>
+                                    </Box>
+                                </Box>
 
                                 <Button
-                                    onClick={removeAllProduct}
+                                    sx={styles.checkoutButton}
+                                    variant="contained"
                                     color="error"
-                                    sx={styles.removeAll}
+                                    onClick={onCheckOut}
                                 >
-                                    Remove all
+                                    Checkout
                                 </Button>
                             </Box>
-                            <TransitionGroup>
-                                {cartList.map(product =>
-                                    <Collapse key={product.productID}>
-                                        <HorizontalProduct
-                                            key={product.productID}
-                                            cartProduct
-                                            product={product}
-                                            canDelete
-                                            onPressDelete={(e) => {
-                                                e.preventDefault()
-                                                deleteProduct(product)
-                                            }}
-                                            changeQuantity={changeQuantity}
-                                        />
-                                    </Collapse>
-                                )}
-                            </TransitionGroup>
-                        </Box>
+                            : null
+                    }
 
-
-                    </Box>
-                    : null
-                }
-                {
-                    cartList && cartList.length != 0 ?
-                        <Box sx={styles.summary}>
-                            <Box sx={styles.summaryData}>
-                                <Typography sx={styles.orderSummary}>
-                                    Order Summary
-                                </Typography>
-
-                                <Box sx={styles.taxContainer}>
-                                    <Typography sx={styles.summaryTitle}>Tax</Typography>
-                                    <Typography sx={styles.tax}>0đ</Typography>
-                                </Box>
-
-                                <Box sx={styles.totalContainer}>
-                                    <Typography sx={styles.summaryTitle}>Total</Typography>
-                                    <Typography sx={styles.total}>
-                                        {formatedPrice}</Typography>
-                                </Box>
-                            </Box>
-
-                            <Button
-                                sx={styles.checkoutButton}
-                                variant="contained"
-                                color="error"
-                                onClick={onCheckOut}
-                            >
-                                Checkout
-                            </Button>
-                        </Box>
-                        : null
-                }
-
+                </Box>
             </Box>
-        </Box>
-    )
+        )
 }
 
 export default Cart
