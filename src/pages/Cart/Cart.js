@@ -88,42 +88,83 @@ const Cart = () => {
                     (cartList && cartList.length == 0)
                         ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"} />
                         : null
-                    }
-                    {
-                        cartList.length != 0 ?
-                            <Box sx={styles.summary}>
-                                <Box sx={styles.summaryData}>
-                                    <Typography sx={styles.orderSummary}>
-                                        Order Summary
-                                    </Typography>
-
-                                    <Box sx={styles.taxContainer}>
-                                        <Typography sx={styles.summaryTitle}>Tax</Typography>
-                                        <Typography sx={styles.tax}>0đ</Typography>
-                                    </Box>
-
-                                    <Box sx={styles.totalContainer}>
-                                        <Typography sx={styles.summaryTitle}>Total</Typography>
-                                        <Typography sx={styles.total}>
-                                            {formatedPrice}</Typography>
-                                    </Box>
-                                </Box>
+                }
+                {cartList && cartList.length != 0 ?
+                    <Box sx={styles.cartListWrapper}>
+                        <Box>
+                            <Box sx={styles.removeRow}>
+                                <Typography
+                                    sx={styles.myCart}
+                                >
+                                    My Cart
+                                </Typography>
 
                                 <Button
-                                    sx={styles.checkoutButton}
-                                    variant="contained"
+                                    onClick={removeAllProduct}
                                     color="error"
-                                    onClick={onCheckOut}
+                                    sx={styles.removeAll}
                                 >
-                                    Checkout
+                                    Remove all
                                 </Button>
                             </Box>
-                            : null
-                    }
+                            <TransitionGroup>
+                                {cartList.map(product =>
+                                    <Collapse key={product.productID}>
+                                        <HorizontalProduct
+                                            key={product.productID}
+                                            cartProduct
+                                            product={product}
+                                            canDelete
+                                            onPressDelete={(e) => {
+                                                e.preventDefault()
+                                                deleteProduct(product)
+                                            }}
+                                            changeQuantity={changeQuantity}
+                                        />
+                                    </Collapse>
+                                )}
+                            </TransitionGroup>
+                        </Box>
 
-                </Box>
+
+                    </Box>
+                    : null
+                }
+                {
+                    cartList && cartList.length != 0 ?
+                        <Box sx={styles.summary}>
+                            <Box sx={styles.summaryData}>
+                                <Typography sx={styles.orderSummary}>
+                                    Order Summary
+                                </Typography>
+
+                                <Box sx={styles.taxContainer}>
+                                    <Typography sx={styles.summaryTitle}>Tax</Typography>
+                                    <Typography sx={styles.tax}>0đ</Typography>
+                                </Box>
+
+                                <Box sx={styles.totalContainer}>
+                                    <Typography sx={styles.summaryTitle}>Total</Typography>
+                                    <Typography sx={styles.total}>
+                                        {formatedPrice}</Typography>
+                                </Box>
+                            </Box>
+
+                            <Button
+                                sx={styles.checkoutButton}
+                                variant="contained"
+                                color="error"
+                                onClick={onCheckOut}
+                            >
+                                Checkout
+                            </Button>
+                        </Box>
+                        : null
+                }
+
             </Box>
-        )
+        </Box>
+    )
 }
 
 export default Cart
