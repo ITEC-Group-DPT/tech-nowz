@@ -8,8 +8,6 @@ import {
     removeAllApi,
 } from "../../api/cartApi"
 
-import {showAuthError} from "../actions/authAction"
-
 const getCart = () => {
 
     return dispatch => {
@@ -31,6 +29,7 @@ const getCartQuantity = () => {
     return dispatch => {
         getCartQuantityApi().then(response => {
             if (response.data.success) {
+                console.log('get cart qty: ', response);
                 const data = response.data.data;
                 dispatch({
                     type: ActionType.GET_CART_QUANTITY,
@@ -61,10 +60,11 @@ const addProductToCart = (product) => {
             data: productData,
         })
         const response = await addProductToCartApi(productID);
+        console.log('add product response: ', response);
 
         if (!response.data.success) {
-            console.log('error ?');
-            dispatch(showAuthError());
+            alert('add product fail')
+            //remove product if don't success
         }
     }
 }
@@ -72,7 +72,7 @@ const addProductToCart = (product) => {
 const removeProductFromCart = (product) => {
 
     const productID = product.productID;
-    return async (dispatch) => {
+    return async(dispatch) => {
         dispatch({
             type: ActionType.REMOVE_PRODUCT_FROM_CART,
             productID: productID,
@@ -82,12 +82,12 @@ const removeProductFromCart = (product) => {
         const response = await removeProductFromCartApi(productID);
 
         if (!response.data.success) {
-            dispatch(showAuthError());
+            alert('remove product fail');
         }
     }
 }
 
-const changeProductQuantity = (product, quantity) => {
+const changeProductQuantity = (product,quantity) => {
 
     const productID = product.productID;
     return (dispatch) => {
@@ -101,7 +101,7 @@ const changeProductQuantity = (product, quantity) => {
 }
 
 const removeAllCart = () => {
-    return async (dispatch) => {
+    return async(dispatch) => {
         dispatch({
             type: ActionType.REMOVE_ALL_CART,
         })
@@ -109,7 +109,7 @@ const removeAllCart = () => {
         const response = await removeAllApi();
 
         if (!response.data.success) {
-            dispatch(showAuthError());
+            alert('remove cart fail');
         }
     }
 }
@@ -130,14 +130,6 @@ const hideCartNoti = () => {
     }
 }
 
-const clearCartUI = () => {
-    return dispatch => {
-        dispatch({
-            type: ActionType.CLEAR_CART_UI,
-        });
-    }
-}
-
 export {
     getCart,
     getCartQuantity,
@@ -147,5 +139,4 @@ export {
     removeAllCart,
     showCartNoti,
     hideCartNoti,
-    clearCartUI,
 };

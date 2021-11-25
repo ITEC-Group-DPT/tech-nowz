@@ -71,15 +71,10 @@ const AuthReducer = (state = initState, action) => {
 
         //sign out
         case ActionType.LOGOUT:
-            return initState;
-        case ActionType.SHOW_AUTH_ERROR_NOTI:
-            console.log('state user: ', state.user);
             return {
                 ...state,
-                error: {
-                    tokenError: state.user.isEmpty
-                        ? "Please login to continue"
-                        : "Something wrong happend !, please login again to continue"
+                user: {
+                    isEmpty: true,
                 },
             }
         default: return state;

@@ -5,10 +5,8 @@ import { useDispatch } from 'react-redux';
 import { logOut } from "../../store/actions/authAction";
 import { Typography, MenuList, MenuItem, Divider, Popper, Paper, Grow, ClickAwayListener } from '@mui/material';
 import { icons } from '../../constant';
-import { userInfoSelector } from "../../store/selectors";
-import {useSelector } from "react-redux";
+
 const ProfileMenu = ({ anchorRef, clickRef }) => {
-    const { userID, userRole } = useSelector(userInfoSelector);
     const [open, setOpen] = useState(false);
 
     const handleToggle = () => {
@@ -73,12 +71,6 @@ const ProfileMenu = ({ anchorRef, clickRef }) => {
                                         <Typography sx={styles.menuText}>Address</Typography>
                                     </MenuItem>
                                 </Link>
-                                {userRole==0 && (<Link to='/profile/createproduct' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <icons.Add sx={styles.menuIcon} />
-                                        <Typography sx={styles.menuText}>Create Product</Typography>
-                                    </MenuItem>
-                                </Link>)}
                                 <Divider />
                                 <MenuItem onClick={handleSignOut} sx={styles.menuItemSignOut}>
                                     <icons.SignOut sx={styles.menuIcon} />

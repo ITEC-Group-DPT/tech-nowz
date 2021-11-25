@@ -10,17 +10,12 @@ const CustomModal = ({
     description,
     onPressConfirm,
     onPressCancel,
-
-    noCancel,
     cancelText = "Cancel",
     confirmText = "Confirm",
 }) => {
 
-
     const closeModal = () => {
-        if (onPressCancel)
-            onPressCancel();
-        else setOpenModal(false);
+        setOpenModal(false);
     }
 
     return (
@@ -30,8 +25,8 @@ const CustomModal = ({
             onClose={closeModal}
         >
             <Fade
-                in={openModal}
-                timeout={350}
+            in = {openModal}
+            timeout = {350}
             >
                 <Box sx={styles.main}>
                     {
@@ -47,16 +42,17 @@ const CustomModal = ({
                     </Typography>
 
                     <Box sx={styles.buttonView}>
-                        {
-                            !noCancel && 
-                            <Button
-                                variant="outlined"
-                                sx={styles.cancelButton}
-                                onClick={closeModal}
-                            >
-                                Cancel
-                            </Button>
-                        }
+                        <Button
+                            variant="outlined"
+                            sx={styles.cancelButton}
+                            onClick={() => {
+                                onPressCancel
+                                    ? onPressCancel()
+                                    : closeModal();
+                            }}
+                        >
+                            Cancel
+                        </Button>
 
                         <Button
                             variant="contained"

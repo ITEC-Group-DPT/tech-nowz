@@ -1,7 +1,7 @@
 import ActionType from './actionType'
 import { signInApi, signUpApi } from '../../api/authApi'
-import { getCart, clearCartUI } from "../actions/cartAction"
-import { encryptData } from '../../constant/utils'
+import { getCart } from "../actions/cartAction"
+
 const signIn = (email, password, history) => {
     return dispatch => {
         dispatch({ type: ActionType.START_LOGIN })
@@ -11,10 +11,7 @@ const signIn = (email, password, history) => {
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
                     dispatch(getCart());
-
-                    let token = encryptData(data);
-
-                    sessionStorage.setItem("userInfo", token);
+                    sessionStorage.setItem("userInfo", JSON.stringify(data));
                     history.push("/");
                 }
                 else
@@ -31,10 +28,7 @@ const signUp = (email, username, password, history) => {
                 const data = response.data.data;
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
-
-                    let token = encryptData(data);
-
-                    sessionStorage.setItem("userInfo", token);
+                    sessionStorage.setItem("userInfo", JSON.stringify(data));
                     dispatch(getCart());
                     history.push("/");
                 }
@@ -70,22 +64,11 @@ const removeEmailSignUpError = () => {
 
 const logOut = (history) => {
     return dispatch => {
-        dispatch(clearCartUI());
         dispatch({ type: ActionType.LOGOUT })
         sessionStorage.removeItem("userInfo")
-
-        if (history) {
-            history.push("/")
-        }
+        history.push("/")
     }
 }
-
-const showAuthError = () => {
-    return dispatch => {
-        dispatch({ type: ActionType.SHOW_AUTH_ERROR_NOTI });
-    }
-}
-
 
 export {
     signIn,
@@ -94,6 +77,5 @@ export {
     removeEmailError,
     removePasswordError,
     removeEmailSignUpError,
-    showAuthError,
     logOut
 };

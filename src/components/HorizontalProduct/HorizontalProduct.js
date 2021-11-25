@@ -13,9 +13,6 @@ import {
 import icons from "../../constant/icons";
 import { changeQuantityApi } from "../../api/cartApi"
 
-import { useDispatch } from "react-redux";
-import { showAuthError } from "../../store/actions/authAction"
-
 const HorizontalProduct = ({
 	cartProduct,
 	product,
@@ -29,8 +26,6 @@ const HorizontalProduct = ({
 	width,
 	pricePadding,
 }) => {
-
-	const dispatch = useDispatch();
 
 	const formatedPrice = new Intl.NumberFormat("vi-VN", {
 		style: "currency",
@@ -67,7 +62,6 @@ const HorizontalProduct = ({
 					}
 					else {
 						console.log("Something wrong is happend");
-						dispatch(showAuthError())
 					}
 				});
 
@@ -137,7 +131,7 @@ const HorizontalProduct = ({
 				{
 					cartProduct &&
 					<CardContent
-						onClick={(e) => e.preventDefault()}
+						onClick = {(e) => e.preventDefault()}
 						sx={styles.quantityContainer}>
 
 						<Typography
