@@ -103,6 +103,46 @@ const Navbar = () => {
 						isDrawer
 					/>
 				</ListItem>
+
+				{userInfo.isEmpty ? (
+					""
+				) : (
+					<>
+						<Divider sx={{ my: 2 }} />
+						<ListItem button key="Cart" sx={{ padding: 0 }}>
+							<NavItem
+								href="/checkout/cart"
+								title="Cart"
+								icon={<icons.Cart />}
+								isDrawer
+							/>
+						</ListItem>
+						<ListItem button key="Order History" sx={{ padding: 0 }}>
+							<NavItem
+								href="/profile/orderhistory"
+								title="Order"
+								icon={<icons.Order />}
+								isDrawer
+							/>
+						</ListItem>
+						<ListItem button key="Favorite" sx={{ padding: 0 }}>
+							<NavItem
+								href="/profile/favorite"
+								title="Favorite"
+								icon={<icons.NotFavorite />}
+								isDrawer
+							/>
+						</ListItem>
+						<ListItem button key="Address Book" sx={{ padding: 0 }}>
+							<NavItem
+								href="/profile/addressbook"
+								title="Address"
+								icon={<icons.Address />}
+								isDrawer
+							/>
+						</ListItem>
+					</>
+				)}
 				<Divider sx={{ my: 2 }} />
 				{userInfo.isEmpty ? (
 					<ListItem button key="login" sx={{ padding: 0 }}>

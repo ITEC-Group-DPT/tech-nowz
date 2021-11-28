@@ -18,7 +18,7 @@ const styles = {
 		display: 'flex',
 		color: 'white',
 		justifyContent: 'start',
-		padding: '.8rem 1rem',
+		padding: '.65rem 1rem',
 		transition: '400ms',
 		borderRadius: '25px',
 	},
