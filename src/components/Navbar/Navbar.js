@@ -16,6 +16,8 @@ const Navbar = () => {
 	const userInfo = useSelector((state) => state.Authentication.user);
 	const anchorRef = useRef(null)
 	const clickRef = useRef(null)
+	const anchorRefDrawer = useRef(null)
+	const clickRefDrawer = useRef(null)
 	//console.log('userInfo: ', userInfo);
 
 	// popUpNav
@@ -62,47 +64,60 @@ const Navbar = () => {
 				width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
 			}}
 			role="presentation"
-			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<List>
-				{/* <ListItem button key="user" sx={{ padding: 0 }}>
+				<ListItem
+					button
+					key="Home"
+					sx={{ padding: 0 }}
+					onClick={toggleDrawer(anchor, false)}
+				>
 					<NavItem
 						href="/"
 						title="Home"
-						icon={<icons.Home />}
-						isDrawer
-					/>
-				</ListItem> */}
-				<ListItem button key="home" sx={{ padding: 0 }}>
-					<NavItem
-						href="/"
-						title="Home"
-						icon={<icons.Home />}
+						icon={<icons.Home sx={style.iconNav} />}
 						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Hot Discount" sx={{ padding: 0 }}>
+				<ListItem
+					button
+					key="Category"
+					sx={{ padding: 0 }}
+					ref={anchorRefDrawer}
+					id="composition-button"
+					aria-controls={'composition-menu'}
+					aria-expanded={'true'}
+					aria-haspopup="true"
+					onClick={() => clickRefDrawer.current()}
+				>
+					<Box sx={style.authenWrapper}>
+						<icons.Category sx={style.iconNav} />
+						<Typography sx={style.titleNav}>Category</Typography>
+					</Box>
+					<CategoryMenu isDrawer anchorRef={anchorRefDrawer} clickRef={clickRefDrawer} onClick={toggleDrawer(anchor, false)} />
+				</ListItem>
+				<ListItem button key="Hot Discount" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/"
 						title="Hot Discount"
-						icon={<icons.Offer />}
+						icon={<icons.Offer sx={style.iconNav} />}
 						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Shipping Policy" sx={{ padding: 0 }}>
+				<ListItem button key="Shipping Policy" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/"
 						title="Shipping Policy"
-						icon={<icons.Truck />}
+						icon={<icons.Truck sx={style.iconNav} />}
 						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Contact Us" sx={{ padding: 0 }}>
+				<ListItem button key="Contact Us" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/contactus"
 						title="Contact Us"
-						icon={<icons.Phone />}
+						icon={<icons.Phone sx={style.iconNav} />}
 						isDrawer
 					/>
 				</ListItem>
@@ -112,35 +127,35 @@ const Navbar = () => {
 				) : (
 					<>
 						<Divider sx={{ my: 2 }} />
-						<ListItem button key="Cart" sx={{ padding: 0 }}>
+						<ListItem button key="Cart" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 							<NavItem
 								href="/checkout/cart"
 								title="Cart"
-								icon={<icons.Cart />}
+								icon={<icons.Cart sx={style.iconNav} />}
 								isDrawer
 							/>
 						</ListItem>
-						<ListItem button key="Order History" sx={{ padding: 0 }}>
+						<ListItem button key="Order History" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 							<NavItem
 								href="/profile/orderhistory"
 								title="Order"
-								icon={<icons.Order />}
+								icon={<icons.Order sx={style.iconNav} />}
 								isDrawer
 							/>
 						</ListItem>
-						<ListItem button key="Favorite" sx={{ padding: 0 }}>
+						<ListItem button key="Favorite" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 							<NavItem
 								href="/profile/favorite"
 								title="Favorite"
-								icon={<icons.NotFavorite />}
+								icon={<icons.NotFavorite sx={style.iconNav} />}
 								isDrawer
 							/>
 						</ListItem>
-						<ListItem button key="Address Book" sx={{ padding: 0 }}>
+						<ListItem button key="Address Book" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 							<NavItem
 								href="/profile/addressbook"
 								title="Address"
-								icon={<icons.Address />}
+								icon={<icons.Address sx={style.iconNav} />}
 								isDrawer
 							/>
 						</ListItem>
@@ -148,7 +163,7 @@ const Navbar = () => {
 				)}
 				<Divider sx={{ my: 2 }} />
 				{userInfo.isEmpty ? (
-					<ListItem button key="login" sx={{ padding: 0 }}>
+					<ListItem button key="login" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 						<Link to='/authentication' style={style.navLink}>
 							<Box sx={style.authenWrapper}>
 								<icons.User sx={style.icon} />
@@ -157,7 +172,7 @@ const Navbar = () => {
 						</Link>
 					</ListItem>
 				) : (
-					<ListItem button key="Contact Us" onClick={() => { dispatch(logOut(history)) }} sx={style.signOutListItem}>
+					<ListItem button key="log out" onClick={() => { dispatch(logOut(history)) }} sx={style.signOutListItem}>
 						<Box sx={style.authenWrapper}>
 							<icons.SignOut sx={style.icon} />
 							<Typography sx={style.navTitle}>Sign out</Typography>

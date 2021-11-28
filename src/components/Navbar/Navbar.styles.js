@@ -22,8 +22,8 @@ const style = {
 		borderRadius: '25px',
 	},
 	icon: {
-		fontSize: 'large !important',
-		marginRight: '.5rem !important',
+		fontSize: '20px !important',
+		marginRight: '7px !important',
 	},
 	navTitle: {
 		fontSize: '.8rem !important',

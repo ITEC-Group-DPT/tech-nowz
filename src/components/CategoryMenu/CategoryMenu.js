@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styles from './CategoryMenu.styles'
 import { Link } from 'react-router-dom';
-import { Typography, MenuList, MenuItem, Popper, Paper, Grow, ClickAwayListener } from '@mui/material';
+import { Typography, MenuList, MenuItem, Popper, Paper, Grow, ClickAwayListener, Box } from '@mui/material';
 import { icons } from '../../constant';
 
-const CategoryMenu = ({ anchorRef, clickRef }) => {
+const CategoryMenu = ({ anchorRef, clickRef, isDrawer, onClick}) => {
     const [open, setOpen] = useState(false);
 
     const handleToggle = () => {
@@ -45,84 +45,85 @@ const CategoryMenu = ({ anchorRef, clickRef }) => {
                                 id="composition-menu"
                                 aria-labelledby="composition-button"
                             >
-                                <Link to='/category/CPU' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>CPU</Typography>
-                                    </MenuItem>
-                                </Link>
+                                <Box sx={{display: isDrawer ? 'block' : 'flex'}}>
+                                    <Box sx={{mr: isDrawer ? 0 : 5}}>
+                                        <Link to='/category/CPU' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>CPU</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Case' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Case</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/GamingChair' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Gaming Chair</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Headphone' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Headphone</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Keyboard' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Keyboard</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Laptop' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Laptop</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Mainboard' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Mainboard</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                    </Box>
 
-                                <Link to='/category/Case' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Case</Typography>
-                                    </MenuItem>
-                                </Link>
-
-                                <Link to='/category/GamingChair' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Gaming Chair</Typography>
-                                    </MenuItem>
-                                </Link>
-
-                                <Link to='/category/Headphone' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Headphone</Typography>
-                                    </MenuItem>
-                                </Link>
-
-                                <Link to='/category/Keyboard' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Keyboard</Typography>
-                                    </MenuItem>
-                                </Link>
-
-                                <Link to='/category/Laptop' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Laptop</Typography>
-                                    </MenuItem>
-                                </Link>
-
-                                <Link to='/category/Mainboard' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Mainboard</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/Monitor' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Monitor</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/Mouse' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Mouse</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/PSU' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>PSU</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/RAM' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>RAM</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/SSD' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>SSD</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/Speaker' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>Speaker</Typography>
-                                    </MenuItem>
-                                </Link>
-                                <Link to='/category/VGA' style={styles.menuLink}>
-                                    <MenuItem onClick={handleClose} sx={styles.menuItem}>
-                                        <Typography sx={styles.menuText}>VGA</Typography>
-                                    </MenuItem>
-                                </Link>
-
+                                    <Box>
+                                        <Link to='/category/Monitor' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Monitor</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Mouse' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Mouse</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/PSU' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>PSU</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/RAM' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>RAM</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/SSD' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>SSD</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/Speaker' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>Speaker</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <Link to='/category/VGA' style={styles.menuLink} onClick={onClick}>
+                                            <MenuItem onClick={handleClose} sx={isDrawer ? styles.menuItemDrawer : styles.menuItem}>
+                                                <Typography sx={styles.menuText}>VGA</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                    </Box>
+                                </Box>
                             </MenuList>
+
                         </ClickAwayListener>
                     </Paper>
                 </Grow>

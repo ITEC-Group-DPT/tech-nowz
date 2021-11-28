@@ -4,7 +4,7 @@ const styles = {
     },
 
     menu: {
-        padding: "5px 15px",
+        padding: "8px 25px",
         borderRadius: "15px",
     },
 
@@ -15,17 +15,27 @@ const styles = {
 
     menuItem: {
         margin: "3px 0px",
-        padding: "5px 20px",
+        padding: "5px 30px",
         transition: '400ms',
+        display: 'flex',
+        justifyContent: 'center',
         '&:hover': {
             backgroundColor: '#ededed',
             borderRadius: "50px",
         }
     },
 
-    menuIcon: {
-        fontSize: "1.1rem",
-        mr: 1,
+    menuItemDrawer: {
+        margin: "3px 0px",
+        padding: "5px 30px",
+        transition: '400ms',
+        display: 'flex',
+        minHeight: '20px',
+        justifyContent: 'center',
+        '&:hover': {
+            backgroundColor: '#ededed',
+            borderRadius: "50px",
+        }
     },
 
     menuText: {
