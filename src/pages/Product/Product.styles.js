@@ -274,6 +274,36 @@ const styles = {
 		boxShadow: 24,
 		p: 4,
 	},
+
+	deleteBtn: {
+        backgroundColor: "red",
+        color: "white",
+        textTransform: "none",
+        px: 2,
+        py: 1,
+        mx: {
+            xs: 1,
+            md: 5,
+        },
+        "&: hover": {
+            backgroundColor: "#b90000",
+        },
+	},
+	editBtn: {
+		backgroundColor: "#333333",
+        color: "white",
+        textTransform: "none",
+        px: 2,
+        py: 1,
+        mx: {
+            xs: 1,
+            md: 5,
+        },
+        "&: hover": {
+            bgcolor: '#525252',
+        },
+	}
+
 };
 
 export default styles;

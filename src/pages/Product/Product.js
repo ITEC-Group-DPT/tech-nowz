@@ -403,18 +403,18 @@ const Product = () => {
 								userRole == 0 && (
 									<Box sx={styles.btnWrapper}>
 										<Button
-											variant="outlined"
-											sx={{ p: 1, mx: 2 }}
-											color="error"
+											sx={styles.deleteBtn}
+											startIcon={<icons.Trashcan />}
 											onClick={() => setModalOpen(true)}>
+
 											Delete
 										</Button>
 
 										<Button
-											onClick={addItemToCart}
 											onClick={() => history.push('/profile/editproduct', product.product)}
-											variant="contained"
-											sx={styles.addBtn}>
+											startIcon={<icons.Edit />}
+											sx={styles.editBtn}>
+
 											Edit
 										</Button>
 									</Box>

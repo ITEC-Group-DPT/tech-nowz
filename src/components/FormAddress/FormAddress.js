@@ -60,7 +60,7 @@ const FormAddress = ({
 	// const [phone,setPhone] = useState(address.phone)
 
 	function checkEmptyForm(form) {
-		
+
 		for (const element in form) {
 			if (form[element].toString() === "") {
 				return false;
@@ -169,7 +169,7 @@ const FormAddress = ({
 						setFormAddress({ ...form, city: e.target.value })
 					}
 					value={form.city}
-					variant="standard"
+					variant="outlined"
 				/>
 				<TextField
 					sx={styles.textField}

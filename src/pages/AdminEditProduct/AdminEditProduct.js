@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import FormProduct from "../../components/FormProduct/FormProduct"
 import { editProduct } from "../../api/productApi";
+import { Container, Typography, Box } from "@mui/material";
+import styles from './AdminEditProduct.styles'
+import NotFound from "../../components/NotFound/NotFound";
 
 const AdminEditProduct = () => {
     const location = useLocation()
@@ -28,20 +31,25 @@ const AdminEditProduct = () => {
             });
         } else {
             console.log("empty field");
-            // process alert here
+            alert("A field is empty!")
         }
     }
 
     return (
         <>
             {productForm ? (
-                <FormProduct
-                    form={productForm}
-                    setProduct={setProductForm}
-                    handleSubmit={submitEditForm}
-                />
+                <Box sx={styles.box}>
+                    <Typography sx={styles.title}>Edit Product</Typography>
+                    <Container maxWidth="md">
+                        <FormProduct
+                            form={productForm}
+                            setProduct={setProductForm}
+                            handleSubmit={submitEditForm}
+                        />
+                    </Container>
+                </Box>
             ) : (
-                null
+                <NotFound />
             )}
 
         </>
