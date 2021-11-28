@@ -368,39 +368,39 @@ const Product = () => {
 								</Box>
 							)}
 
-							{product.isLoading ? (
-								<Box sx={styles.btnWrapper}>
-									<Skeleton
-										variant="text"
-										animation="wave"
-										sx={styles.skeletonButton}>
-										<Button
-											variant="outlined"
-											startIcon={
-												product.isFavorite ? (
-													<icons.IsFavorite />
-												) : (
-													<icons.NotFavorite />
-												)
-											}
-											sx={styles.addBtn}>
-											Add to Cart
-										</Button>
-									</Skeleton>
-									<Skeleton
-										variant="text"
-										animation="wave"
-										sx={styles.skeletonButton}>
-										<Button
-											variant="contained"
-											startIcon={<icons.AddCart />}
-											sx={styles.addBtn}>
-											Add to Cart
-										</Button>
-									</Skeleton>
-								</Box>
-							) : (
-								userRole == 0 && (
+							{userRole == 0 && (
+								product.isLoading ? (
+									<Box sx={styles.btnWrapper}>
+										<Skeleton
+											variant="text"
+											animation="wave"
+											sx={styles.skeletonButton}>
+											<Button
+												variant="outlined"
+												startIcon={
+													product.isFavorite ? (
+														<icons.IsFavorite />
+													) : (
+														<icons.NotFavorite />
+													)
+												}
+												sx={styles.addBtn}>
+												Add to Cart
+											</Button>
+										</Skeleton>
+										<Skeleton
+											variant="text"
+											animation="wave"
+											sx={styles.skeletonButton}>
+											<Button
+												variant="contained"
+												startIcon={<icons.AddCart />}
+												sx={styles.addBtn}>
+												Add to Cart
+											</Button>
+										</Skeleton>
+									</Box>
+								) : (
 									<Box sx={styles.btnWrapper}>
 										<Button
 											sx={styles.deleteBtn}
