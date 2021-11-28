@@ -43,6 +43,8 @@ const Cart = () => {
         history.push('/checkout/payment')
     }
 
+    console.log("cartList: ", cartList);
+
     return (
         <Box sx={styles.box}>
             <Box sx={styles.main}>
@@ -51,7 +53,7 @@ const Cart = () => {
                     setOpenModal={setOpenModalDelete}
 
                     title={"Confirmation"}
-                    description="Do want to remove all product from your cart?"
+                    description="Do you want to remove all products from your cart?"
                     onPressConfirm={removeAllProduct}
                 />
                 {isLoading ? (
@@ -85,7 +87,7 @@ const Cart = () => {
                     ""
                 )}
                 {
-                    (cartList && cartList.length == 0)
+                    (!isLoading && cartList.length == 0)
                         ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"} />
                         : null
                 }
@@ -100,7 +102,9 @@ const Cart = () => {
                                 </Typography>
 
                                 <Button
-                                    onClick={removeAllProduct}
+                                    onClick={() => {
+                                        setOpenModalDelete(true)
+                                    }}
                                     color="error"
                                     sx={styles.removeAll}
                                 >
