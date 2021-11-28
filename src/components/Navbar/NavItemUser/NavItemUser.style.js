@@ -25,11 +25,11 @@ const styles = {
 		},
 	},
 	icon: {
-		fontSize: 'large',
+		fontSize: '20px !important',
+		marginRight: '7px !important',
 	},
 	navTitle: {
-		fontSize: '.8rem',
-		marginLeft: '15px',
+		fontSize: '16px',
 	},
     btnNav: {
         textTransform: "none",

@@ -8,7 +8,7 @@ const NavItem = ({ href, title, icon, isDrawer }) => {
 	return (
 		<Link to={href} style={styles.navLink}>
 			<Box sx={isDrawer ? styles.navItemDrawer : styles.navItem}>
-				<Box sx={styles.icon}>{icon}</Box>
+				{icon}
 				<Typography sx={styles.navTitle}>{title}</Typography>
 			</Box>
 		</Link>

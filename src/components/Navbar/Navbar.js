@@ -1,5 +1,5 @@
-import { React, useState, useEffect } from 'react';
-import { AppBar, Toolbar, Grid, Container, IconButton, Box, Drawer, List, ListItem, Typography, Divider, useMediaQuery } from '@mui/material';
+import { React, useState, useEffect, useRef } from 'react';
+import { AppBar, Toolbar, Grid, Container, IconButton, Box, Drawer, List, ListItem, Typography, Divider, useMediaQuery, Button } from '@mui/material';
 import NavItem from './NavItem/NavItem';
 import NavItemUser from './NavItemUser/NavItemUser';
 import { colors, icons } from '../../constant';
@@ -7,12 +7,15 @@ import { useStyles, style } from './Navbar.styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { logOut } from "../../store/actions/authAction";
+import CategoryMenu from "../../components/CategoryMenu/CategoryMenu"
 
 const Navbar = () => {
 	const styles = useStyles();
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const userInfo = useSelector((state) => state.Authentication.user);
+	const anchorRef = useRef(null)
+	const clickRef = useRef(null)
 	//console.log('userInfo: ', userInfo);
 
 	// popUpNav
@@ -194,37 +197,52 @@ const Navbar = () => {
 							</Grid>
 						) : (
 							<>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/"
 										title="Home"
-										icon={<icons.Home />}
+										icon={<icons.Home sx={style.iconNav} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
+									<Button
+										ref={anchorRef}
+										id="composition-button"
+										aria-controls={'composition-menu'}
+										aria-expanded={'true'}
+										aria-haspopup="true"
+										onClick={() => clickRef.current()}
+										sx={style.btnWrapper}
+									>
+										<icons.Category sx={style.iconNav} />
+										<Typography sx={style.titleNav}>Category</Typography>
+									</Button>
+
+								</Grid>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/"
-										title="Hot Discount"
-										icon={<icons.Offer />}
+										title="Discount"
+										icon={<icons.Offer sx={style.iconNav} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/"
-										title="Shipping Policy"
-										icon={<icons.Truck />}
+										title="Shipping"
+										icon={<icons.Truck sx={style.iconNav} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/contactus"
-										title="Contact Us"
-										icon={<icons.Phone />}
+										title="Contact"
+										icon={<icons.Phone sx={style.iconNav} />}
 									/>
 								</Grid>
 							</>
 						)}
-						<Grid item xs={9} md={4}>
+						<Grid item xs={9} md={4.5}>
 							<NavItemUser
 								userInfo={userInfo}
 								isHome={isHome}
@@ -232,6 +250,7 @@ const Navbar = () => {
 							/>
 						</Grid>
 					</Grid>
+					<CategoryMenu anchorRef={anchorRef} clickRef={clickRef} />
 				</Container>
 			</Toolbar>
 		</AppBar>

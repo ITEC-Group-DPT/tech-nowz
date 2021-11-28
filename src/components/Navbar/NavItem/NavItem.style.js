@@ -1,11 +1,10 @@
 const styles = {
 	navItem: {
-		marginRight: '.5rem',
-		marginLeft: '.5rem',
 		display: 'flex',
 		color: 'white',
 		justifyContent: 'center',
-		padding: '.5rem 1rem',
+		alignItems: 'center',
+		padding: "8px 5px",
 		transition: '400ms',
 		borderRadius: '25px',
 		'&:hover': {
@@ -28,12 +27,11 @@ const styles = {
 	},
 	icon: {
 		'& *': {
-			fontSize: 'large !important',
-			marginRight: '.5rem !important',
+			
 		},
 	},
 	navTitle: {
-		fontSize: '.8rem !important',
+		fontSize: '16px !important',
 	},
 };
 

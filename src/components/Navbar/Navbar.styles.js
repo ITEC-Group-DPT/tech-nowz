@@ -44,6 +44,35 @@ const style = {
 			backgroundColor: '#737373',
 		},
 	},
+	gridWrapper: {
+		display: "flex",
+		alignItems: "center",
+	},
+	btnNav: {
+		textDecoration: 'none',
+		width: '100%',
+	},
+	btnWrapper: {
+		width: '100%',
+		display: 'flex',
+		color: 'white',
+		justifyContent: 'center',
+		padding: "8px 5px",
+		transition: '400ms',
+		borderRadius: '25px',
+		'&:hover': {
+			backgroundColor: '#737373',
+		},
+	},
+	iconNav: {
+		fontSize: '20px !important',
+		marginRight: '7px !important',
+	},
+	titleNav: {
+		fontSize: '16px !important',
+		textTransform: "none",
+	},
+
 };
 
 export { useStyles, style };
