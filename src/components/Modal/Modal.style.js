@@ -7,19 +7,22 @@ const styles = {
 		bgcolor: "white",
 		borderRadius: "4px",
 		boxShadow: "rgb(0 0 0 / 24%) 0px 24px 24px 0px, rgb(0 0 0 / 18%) 0px 0px 24px 0px",
-		width: "45%",
+		width: {
+			xs: "90%",
+			md: "45%",
+		},
 		outline: "none"
 	},
 	title: {
-		fontFamily: "'Roboto Slab', serif",		
+		//fontFamily: "'Roboto Slab', serif",
 		fontWeight: "700",
-		fontSize: "14px",
+		fontSize: "20px",
 		borderBottom: "1px solid #919191",
 		padding: "12px 24px"
 	},
 	description: {
 		padding: "16px 24px",
-		fontFamily: "'IBM Plex Serif', serif",
+		//fontFamily: "'IBM Plex Serif', serif",
 	},
 	buttonView: {
 		display: "flex",
@@ -27,7 +30,7 @@ const styles = {
 		margin: "18px 16px",
 		marginTop: 0,
 	},
-	cancelButton: {		
+	cancelButton: {
 		// flex:1,
 		fontSize: "13px",
 		textTransform: "Capitalize",

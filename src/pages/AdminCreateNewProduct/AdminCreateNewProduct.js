@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
 import { React, useState } from "react";
+import styles from './AdminCreateNewProduct.styles'
 import { Container, Typography, Button, Divider, Modal } from "@mui/material";
 import FormProduct from "../../components/FormProduct/FormProduct";
 import { createProduct } from "../../api/productApi";
@@ -28,38 +29,31 @@ const AdminCreateNewProduct = () => {
 
 	function handleSubmit() {
 		createProduct(productForm).then((response) => {
-			if (response.data.success = true){
+			if (response.data.success = true) {
 				console.log(response.data);
 				setProductForm(defaultemptyProduct);
 			}
 		});
 	}
 	return (
-		<div>
-			{userRole == 0 ? (	<div>
-				<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
-					<Typography
-						variant="h1"
-						sx={{
-							fontWeight: "500",
-							fontSize: { xs: "50px", md: "80px", lg: "100px" },
-						}}
-						component="div">
-						Create New Product
-					</Typography>
-				</Box>
+		<>
+			{userRole == 0 ? (
+				<Box sx={styles.box}>
+					<Typography sx={styles.title}>Create New Product</Typography>
 
-				<Container>
-					<FormProduct
-						form={productForm}
-						setProduct={setProductForm}
-						handleSubmit={handleSubmit}
-						cancelBtnAppear={false}
-					/>
-				</Container>
-			</div>): <NotFound/>}
-		
-		</div>
+					<Container maxWidth="md">
+						<FormProduct
+							form={productForm}
+							setProduct={setProductForm}
+							handleSubmit={handleSubmit}
+							cancelBtnAppear={false}
+						/>
+					</Container>
+				</Box>
+			) :
+				<NotFound />
+			}
+		</>
 	);
 };
 

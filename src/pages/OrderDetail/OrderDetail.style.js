@@ -16,6 +16,19 @@ const styles = {
 		alignItems: 'center',
 		padding: '30px 40px !important',
 	},
+	wrapperSkeleton: {
+
+	},
+	orderInfoSkeleton: {
+		bgcolor: '#ededed',
+		borderRadius: '5px',
+		height: '370px',
+	},
+	ratingSkeleton: {
+		bgcolor: '#ededed',
+		width: '50%',
+		height: '50px',
+	},
 	title: {
 		fontWeight: '600',
 		fontSize: { xs: '20px', md: '24px' },

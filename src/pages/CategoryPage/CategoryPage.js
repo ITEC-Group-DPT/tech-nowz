@@ -10,6 +10,7 @@ const CategoryPage = () => {
     const { name } = useParams()
     const classes = useStyles()
 
+
     const [totalPage, setTotalPage] = useState({ "isLoading": true })
     const [productList, setProductList] = useState({ "isLoading": true })
     const [page, setPage] = useState(1)
@@ -25,13 +26,14 @@ const CategoryPage = () => {
             if (response.data.success) {
                 const data = response.data.data
                 console.log("totalProduct: ", data.total)
-                
+
                 const total = Math.ceil(data.total / itemsPerPage)
                 console.log("totalPage: ", total)
                 setTotalPage({ "isLoading": false, "value": total })
+                setPage(1)
             }
         })
-    }, [])
+    }, [name])
 
     useEffect(() => {
         setProductList({ "isLoading": true }) // when clicking on another pagination, the isLoading is set to true
@@ -43,9 +45,7 @@ const CategoryPage = () => {
             }
         })
         window.scrollTo(0, 0) // when clicking on another pagination, scroll to top
-    }, [page, sortBy])
-
-
+    }, [page, sortBy, name])
 
     return (
         <Box sx={styles.box}>

@@ -1,47 +1,74 @@
-import { React, useState, useEffect } from 'react';
-import styles from './OrderDetail.style';
-import { useParams } from 'react-router-dom';
-import { Container, Box, Typography, Grid, Divider } from '@mui/material';
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
-import ProductRatingBar from '../../components/ProductRatingBar/ProductRatingBar';
-import NotFound from '../../components/NotFound/NotFound';
-import { getOrderDetailAPI } from '../../api/orderApi';
+import { React, useState, useEffect } from 'react'
+import styles from './OrderDetail.style'
+import { useParams } from 'react-router-dom'
+import { Container, Box, Typography, Grid, Divider, Skeleton, Collapse } from '@mui/material'
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct'
+import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton'
+import ProductRatingBar from '../../components/ProductRatingBar/ProductRatingBar'
+import { getOrderDetailAPI } from '../../api/orderApi'
+import { TransitionGroup } from 'react-transition-group'
 
 const OrderDetail = () => {
-	const { id } = useParams();
-	const [order, setOrderDetail] = useState([]);
+	const { id } = useParams()
+	const [orderDetail, setOrderDetail] = useState({ "isLoading": true })
 
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
-			if (response.data.success === true)
-				setOrderDetail(response.data.data);
-			console.log(response.data.data);
-		});
-	}, []);
+			if (response.data.success === true) {
+				setOrderDetail({ "isLoading": false, data: response.data.data })
+				console.log("orderDetail ", response.data.data)
+			}
+		})
+	}, [])
 
 	const formatDateDiff = (value) => {
-		let type = 'minutes';
+		let type = 'minutes'
 		if (value >= 1440) {
-			value /= 1440;
-			type = 'days';
+			value /= 1440
+			type = 'days'
 		} else if (value >= 60) {
-			value /= 60;
-			type = 'hours';
+			value /= 60
+			type = 'hours'
 		}
-		return `${Math.round(value)} ${type} ago`;
-	};
+		return `${Math.round(value)} ${type} ago`
+	}
 
 	const formatPrice = (value) => {
 		return new Intl.NumberFormat('vi-VN', {
 			style: 'currency',
 			currency: 'VND',
-		}).format(value);
-	};
+		}).format(value)
+	}
 
 	return (
 		<Box sx={styles.box}>
 			<Container maxWidth="lg">
-				{order.length !== 0 ? (
+				{orderDetail.isLoading ? (
+					<Grid container spacing={6}>
+						<Grid item xs={12} lg={5}>
+							<Box sx={styles.wrapperSkeleton}>
+								<Skeleton variant="rectangular" animation="wave" sx={styles.orderInfoSkeleton} />
+							</Box>
+						</Grid>
+						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
+							<Box sx={styles.productList}>
+								<TransitionGroup>
+									<Collapse>
+										<HorizontalProductSkeleton />
+										<Box
+											sx={{
+												display: 'flex',
+												mb: '20px',
+											}}
+										>
+											<Skeleton animation="wave" sx={styles.ratingSkeleton} />
+										</Box>
+									</Collapse>
+								</TransitionGroup>
+							</Box>
+						</Grid>
+					</Grid>
+				) : (
 					<Grid container spacing={6}>
 						<Grid item xs={12} lg={5}>
 							<Box sx={styles.wrapper}>
@@ -51,7 +78,7 @@ const OrderDetail = () => {
 									</Typography>
 									<Typography sx={styles.content}>
 										{formatDateDiff(
-											order.orderInfo.dateDiff,
+											orderDetail.data.orderInfo.dateDiff,
 										)}
 									</Typography>
 									<Divider sx={styles.divider} />
@@ -59,13 +86,13 @@ const OrderDetail = () => {
 										Customer detail
 									</Typography>
 									<Typography sx={styles.content}>
-										Name: {order.orderInfo.name}
+										Name: {orderDetail.data.orderInfo.name}
 									</Typography>
 									<Typography sx={styles.content}>
-										Phone: {order.orderInfo.phone}
+										Phone: {orderDetail.data.orderInfo.phone}
 									</Typography>
 									<Typography sx={styles.content}>
-										Address: {order.orderInfo.address}
+										Address: {orderDetail.data.orderInfo.address}
 									</Typography>
 									<Divider sx={styles.divider} />
 									<Box sx={{ mt: 4 }}>
@@ -75,7 +102,7 @@ const OrderDetail = () => {
 											</Typography>
 											<Typography sx={styles.lowerValues}>
 												{formatPrice(
-													order.orderInfo.totalPrice,
+													orderDetail.data.orderInfo.totalPrice,
 												)}
 											</Typography>
 										</Box>
@@ -85,40 +112,40 @@ const OrderDetail = () => {
 						</Grid>
 						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
 							<Box sx={styles.productList}>
-								{order['itemList'].map((product) => (
-									<Box>
-										<HorizontalProduct
-											product={product}
-											ratingSize={'20px'}
-										/>
-										<Box
-											sx={{
-												display: 'flex',
-												mb: '20px',
-											}}
-										>
-											<Typography sx={styles.ratingTitle}>
-												Your rating:
-											</Typography>
-											<ProductRatingBar
-												orderID={id}
-												productID={product.productID}
-												customerRating={
-													product.customerRating
-												}
-											></ProductRatingBar>
-										</Box>
-									</Box>
-								))}
+								<TransitionGroup>
+									{orderDetail.data.itemList.map(product =>
+										<Collapse>
+											<HorizontalProduct
+												product={product}
+												ratingSize={'20px'}
+											/>
+											<Box
+												sx={{
+													display: 'flex',
+													mb: '20px',
+												}}
+											>
+												<Typography sx={styles.ratingTitle}>
+													Your rating:
+												</Typography>
+												<ProductRatingBar
+													orderID={id}
+													productID={product.productID}
+													customerRating={
+														product.customerRating
+													}
+												></ProductRatingBar>
+											</Box>
+										</Collapse>
+									)}
+								</TransitionGroup>
 							</Box>
 						</Grid>
 					</Grid>
-				) : (
-					<NotFound></NotFound>
 				)}
 			</Container>
 		</Box>
-	);
-};
+	)
+}
 
-export default OrderDetail;
+export default OrderDetail

@@ -23,7 +23,7 @@ import { cartSelector } from "../../store/selectors"
 import { addProductToCart, changeProductQuantity, showCartNoti, hideCartNoti } from '../../store/actions/cartAction'
 import { showAuthError } from '../../store/actions/authAction'
 import { showAddFavNoti, showRemoveFavNoti, hideFavNoti } from '../../store/actions/favoriteAction'
-import { deleteProduct, editProduct } from "../../api/productApi";
+import { deleteProduct } from "../../api/productApi";
 import { useDispatch, useSelector } from 'react-redux'
 
 const useQuery = () => {
@@ -116,32 +116,11 @@ const settingsRelatedProduct = {
 		},
 	],
 };
-const defaultemptyProduct = {
-	productID: 0,
-	type: "",
-	description: "",
-	spec: "",
-	name: "",
-	price: 0,
-	rating: 0,
-	sold: 0,
-	dateCreated: "",
-	img1: "",
-	img2: "",
-	img3: "",
-	img4: "",
-};
-function checkEmptyForm(form) {
-	for (const element in form) {
-		if (form[element].toString() === "") {
-			return false;
-		}
-	}
-	return true;
-}
+
 const Product = () => {
 	//const { name } = useParams()
 	const query = useQuery()
+	const history = useHistory()
 	const productID = query.get("i")
 	const [product, setProduct] = useState({ "isLoading": true })
 	const [relatedProductList, setRelatedProductList] = useState({ "isLoading": true, "productList": [] })
@@ -149,9 +128,7 @@ const Product = () => {
 	const [isFavorite, setIsFavorite] = useState()
 	const [tab, setTab] = React.useState('1');
 
-	const [productForm, setProductForm] = useState(defaultemptyProduct);
 	const [modalOpen, setModalOpen] = useState(false);
-	const [formOpen, setFormOpen] = useState(false);
 
 	const { userID, userRole, isEmpty: userEmpty } = useSelector(userInfoSelector);
 	const cart = useSelector(cartSelector);
@@ -159,24 +136,7 @@ const Product = () => {
 
 	const dispatch = useDispatch()
 
-	function submitEditForm() {
-		if (checkEmptyForm(productForm)) {
-			setFormOpen(false);
-			editProduct(productForm, productID).then((response) => {
-				if (response.data.success == true) {
-					setProduct({
-						...product,
-						product: productForm,
-					});
-				}
-			});
-		} else {
-			console.log("empty field");
-			// process alert here
-		}
-	}
-
-	function onDeleteProduct() {
+	const onDeleteProduct = () => {
 		setModalOpen(false);
 		deleteProduct(productID).then((response) => {
 			if (response.data.success == true) {
@@ -277,8 +237,6 @@ const Product = () => {
 				setIsFavorite(data.favorite)
 
 				setProduct({ "isLoading": false, ...data })
-
-				setProductForm(data.product);
 
 				getProductCategoryAPI(data.product.type).then(response => {
 					if (response.data.success)
@@ -410,53 +368,53 @@ const Product = () => {
 								</Box>
 							)}
 
-							{product.isLoading ? (
-								<Box sx={styles.btnWrapper}>
-									<Skeleton
-										variant="text"
-										animation="wave"
-										sx={styles.skeletonButton}>
-										<Button
-											variant="outlined"
-											startIcon={
-												product.isFavorite ? (
-													<icons.IsFavorite />
-												) : (
-													<icons.NotFavorite />
-												)
-											}
-											sx={styles.addBtn}>
-											Add to Cart
-										</Button>
-									</Skeleton>
-									<Skeleton
-										variant="text"
-										animation="wave"
-										sx={styles.skeletonButton}>
-										<Button
-											variant="contained"
-											startIcon={<icons.AddCart />}
-											sx={styles.addBtn}>
-											Add to Cart
-										</Button>
-									</Skeleton>
-								</Box>
-							) : (
-								userRole == 0 && (
+							{userRole == 0 && (
+								product.isLoading ? (
+									<Box sx={styles.btnWrapper}>
+										<Skeleton
+											variant="text"
+											animation="wave"
+											sx={styles.skeletonButton}>
+											<Button
+												variant="outlined"
+												startIcon={
+													product.isFavorite ? (
+														<icons.IsFavorite />
+													) : (
+														<icons.NotFavorite />
+													)
+												}
+												sx={styles.addBtn}>
+												Add to Cart
+											</Button>
+										</Skeleton>
+										<Skeleton
+											variant="text"
+											animation="wave"
+											sx={styles.skeletonButton}>
+											<Button
+												variant="contained"
+												startIcon={<icons.AddCart />}
+												sx={styles.addBtn}>
+												Add to Cart
+											</Button>
+										</Skeleton>
+									</Box>
+								) : (
 									<Box sx={styles.btnWrapper}>
 										<Button
-											variant="outlined"
-											sx={{ p: 1, mx: 2 }}
-											color="error"
+											sx={styles.deleteBtn}
+											startIcon={<icons.Trashcan />}
 											onClick={() => setModalOpen(true)}>
+
 											Delete
 										</Button>
 
 										<Button
-											onClick={addItemToCart}
-											onClick={() => setFormOpen(true)}
-											variant="contained"
-											sx={styles.addBtn}>
+											onClick={() => history.push('/profile/editproduct', product.product)}
+											startIcon={<icons.Edit />}
+											sx={styles.editBtn}>
+
 											Edit
 										</Button>
 									</Box>
@@ -467,7 +425,7 @@ const Product = () => {
 				</Grid>
 			</Container>
 
-			{formOpen && (
+			{/* {formOpen && (
 				<Container maxWidth="lg" sx={styles.detailContainer}>
 					<FormProduct
 						form={productForm}
@@ -476,7 +434,7 @@ const Product = () => {
 						handleSubmit={submitEditForm}
 					/>
 				</Container>
-			)}
+			)} */}
 			<Container maxWidth="lg" sx={styles.detailContainer}>
 				<Box>
 					<TabContext value={tab}>

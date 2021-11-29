@@ -207,13 +207,14 @@ const styles = {
 	details: {
 		whiteSpace: 'pre-line',
 		fontSize: {
-			xs: '.8rem',
-			lg: '.95rem',
+			xs: '15px',
+			md: '17px',
 		},
 		lineHeight: 2,
 		fontWeight: 300,
 		textAlign: 'center',
 		padding: 0,
+		wordBreak: 'break-word',
 	},
 	relatedProductContainer: {
 		marginTop: '60px',
@@ -273,6 +274,36 @@ const styles = {
 		boxShadow: 24,
 		p: 4,
 	},
+
+	deleteBtn: {
+        backgroundColor: "red",
+        color: "white",
+        textTransform: "none",
+        px: 2,
+        py: 1,
+        mx: {
+            xs: 1,
+            md: 5,
+        },
+        "&: hover": {
+            backgroundColor: "#b90000",
+        },
+	},
+	editBtn: {
+		backgroundColor: "#333333",
+        color: "white",
+        textTransform: "none",
+        px: 2,
+        py: 1,
+        mx: {
+            xs: 1,
+            md: 5,
+        },
+        "&: hover": {
+            bgcolor: '#525252',
+        },
+	}
+
 };
 
 export default styles;

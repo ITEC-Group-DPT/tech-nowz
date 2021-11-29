@@ -1,17 +1,16 @@
 const styles = {
     box: {
-        p: {
-            xs: 3,
-            md: 5,
+        padding: {
+            md: "0px 90px",
+            xs: 0,
         },
-        width: {
-            md: "500px",
-        },
-    },
+        borderRadius: '25px',
 
+    },
     textField: {
-        mb: 2,
+        mb: 3,
         width: "100%",
+        backgroundColor: "white",
     },
 
     cancelBtn: {
@@ -28,6 +27,7 @@ const styles = {
             backgroundColor: "#b90000",
         },
     },
+
     submitBtn: {
         backgroundColor: "#333333",
         color: "white",
@@ -42,6 +42,7 @@ const styles = {
             backgroundColor: "#000000",
         },
     }
-}
 
-export default styles
+};
+
+export default styles;
