@@ -23,6 +23,10 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -50,6 +54,10 @@ const icons = {
     SignOut: LogoutOutlinedIcon,
     ShowIcon: VisibilityOutlinedIcon,
     HideIcon: VisibilityOffOutlinedIcon,
+    Trashcan: DeleteOutlinedIcon,
+    Edit: EditOutlinedIcon,
+    Add: AddIcon,
+    Category: CategoryOutlinedIcon,
 }
 
 export default icons;

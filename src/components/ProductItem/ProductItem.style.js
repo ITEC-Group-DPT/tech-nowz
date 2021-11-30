@@ -4,7 +4,10 @@ const styles = {
 	},
 	card: {
 		maxWidth: 345,
-		minHeight: 350,
+		minHeight: {
+			xs: "280px",
+			md: "320px",
+		},
 		borderRadius: '25px',
 		boxShadow: 'none',
 		padding: {
@@ -14,12 +17,15 @@ const styles = {
 	},
 	cardSlider: {
 		maxWidth: 345,
-		minHeight: 350,
+		minHeight: {
+			xs: "280px",
+			md: "320px",
+		},
 		borderRadius: '25px',
 		boxShadow: 'none',
 		marginRight: {
 			xs: 0,
-			md: '27px',
+			md: '25px',
 		},
 		padding: {
 			lg: '.9rem',
@@ -34,6 +40,10 @@ const styles = {
 		},
 	},
 	pImage: {
+		height: {
+			xs: "170px",
+			md: "200px",
+		},
 		objectFit: 'contain',
 	},
 	pNameWrapper: {
@@ -46,8 +56,8 @@ const styles = {
 	pName: {
 		margin: 0,
 		fontSize: {
-			xs: '.7rem',
-			lg: '.85rem',
+			xs: '14px',
+			lg: '15px',
 		},
 		fontWeight: '500',
 		lineHeight: "20px",
@@ -59,7 +69,7 @@ const styles = {
 	},
 	pNameSlider: {
 		margin: 0,
-		fontSize: '.85rem',
+		fontSize: '15px',
 		fontWeight: '500',
 		lineHeight: "20px",
 		textOverflow: "ellipsis",
@@ -76,42 +86,39 @@ const styles = {
 	},
 	pRating: {
 		fontSize: {
-			xs: '.9rem',
-			lg: '1rem',
+			xs: '15px',
+			lg: '16px',
 		},
 	},
 	pRatingSlider: {
-		fontSize: '1rem',
+		fontSize: '17px',
 	},
 	pSold: {
 		fontSize: {
-			xs: '.55rem',
-			lg: '.6rem',
+			xs: '11px',
+			lg: '12px',
 		},
-		marginLeft: '5px',
+		marginLeft: '4px',
 		alignSelf: 'center',
 	},
 	pSoldSlider: {
-		fontSize: '.6rem',
-		marginLeft: '5px',
+		fontSize: '12px',
+		marginLeft: '4px',
 	},
 	cardBottom: {
+		marginTop: '5px',
 		padding: '0px 0px 0px 10px',
 	},
 	pPrice: {
 		fontSize: {
-			xs: '.75rem',
-			lg: '.9rem',
+			xs: '15px',
+			lg: '16px',
 		},
 		fontWeight: '600',
 	},
 	pPriceSlider: {
-		fontSize: '.9rem',
+		fontSize: '16px',
 		fontWeight: '600',
-	},
-	pAddCart: {
-		color: 'black',
-		marginLeft: 'auto',
 	},
 };
 

@@ -1,7 +1,6 @@
 const styles = {
 	container: {
-		margin: '0px 0px 100px 0px',
-		height: '60vh',
+		margin: '0px 0px 120px 0px',
 		padding: 0,
 	},
 

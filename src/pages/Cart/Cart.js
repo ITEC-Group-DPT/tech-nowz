@@ -1,18 +1,29 @@
-import React, { useEffect } from 'react'
-import styles from './cart.style'
+import React, { useState } from 'react'
+import styles from './Cart.styles'
 
-import { cartSelector } from "../../store/selectors"
+//component
+import { TransitionGroup } from 'react-transition-group';
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
+import EmptyList from '../../components/EmptyList/EmptyList';
+import huhu from "../../img/empty-cart.png"
+import { Container, Box, Typography, Button, Collapse, Skeleton } from '@mui/material'
+import CustomModal from "../../components/Modal/Modal"
+
+//redux && api
+import { cartSelector, cartIsLoadingSelector } from "../../store/selectors"
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Box, Typography, Button } from '@mui/material'
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
 import { removeProductFromCart, changeProductQuantity, removeAllCart } from "../../store/actions/cartAction"
-import EmptyCart from '../../components/EmptyCart/EmptyCart';
+import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton';
 
 const Cart = () => {
 
     const history = useHistory();
-    const { cartList, totalPrice, isLoading } = useSelector(cartSelector);
+    const { cartList, totalPrice } = useSelector(cartSelector);
+    const isLoading = useSelector(cartIsLoadingSelector);
+    console.log("isLoading: ", isLoading);
+
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const formatedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice);
 
@@ -28,81 +39,134 @@ const Cart = () => {
     const deleteProduct = (product) => {
         dispatch(removeProductFromCart(product));
     }
+    const onCheckOut = () => {
+        history.push('/checkout/payment')
+    }
+
+    console.log("cartList: ", cartList);
+
     return (
-        <Box sx={styles.main}>
-            {
-                (cartList && cartList.length == 0)
-                    ? <EmptyCart />
+        <Box sx={styles.box}>
+            <Box sx={styles.main}>
+                <CustomModal
+                    openModal={openModalDelete}
+                    setOpenModal={setOpenModalDelete}
+
+                    title={"Confirmation"}
+                    description="Do you want to remove all products from your cart?"
+                    onPressConfirm={removeAllProduct}
+                />
+                {isLoading ? (
+                    <>
+                        <Box sx={styles.cartListWrapper}>
+                            <Box>
+                                <Box sx={styles.removeRow}>
+                                    <Typography sx={styles.myCart}>
+                                        My Cart
+                                    </Typography>
+                                    <Skeleton variant="text" animation="wave" sx={styles.skeletonRemoveAll}>
+                                        <Button sx={styles.removeAll}>
+                                            Remove all
+                                        </Button>
+                                    </Skeleton>
+                                </Box>
+                                <HorizontalProductSkeleton />
+                                <HorizontalProductSkeleton />
+                            </Box>
+                        </Box>
+                        <Box sx={styles.summary}>
+                            <Skeleton variant="rectangular" animation="wave" sx={styles.skeletonSummary} />
+                            <Skeleton variant="text" animation="wave" sx={styles.skeletonCheckoutBtn}>
+                                <Button sx={styles.checkoutButton}>
+                                    Checkout
+                                </Button>
+                            </Skeleton>
+                        </Box>
+                    </>
+                ) : (
+                    ""
+                )}
+                {
+                    (!isLoading && cartList.length == 0)
+                        ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"} />
+                        : null
+                }
+                {cartList && cartList.length != 0 ?
+                    <Box sx={styles.cartListWrapper}>
+                        <Box>
+                            <Box sx={styles.removeRow}>
+                                <Typography
+                                    sx={styles.myCart}
+                                >
+                                    My Cart
+                                </Typography>
+
+                                <Button
+                                    onClick={() => {
+                                        setOpenModalDelete(true)
+                                    }}
+                                    color="error"
+                                    sx={styles.removeAll}
+                                >
+                                    Remove all
+                                </Button>
+                            </Box>
+                            <TransitionGroup>
+                                {cartList.map(product =>
+                                    <Collapse key={product.productID}>
+                                        <HorizontalProduct
+                                            key={product.productID}
+                                            cartProduct
+                                            product={product}
+                                            canDelete
+                                            onPressDelete={(e) => {
+                                                e.preventDefault()
+                                                deleteProduct(product)
+                                            }}
+                                            changeQuantity={changeQuantity}
+                                        />
+                                    </Collapse>
+                                )}
+                            </TransitionGroup>
+                        </Box>
+
+
+                    </Box>
                     : null
-            }
-            {cartList && cartList.length != 0 ?
-                <Box sx={{ flex: 7, position: "relative" }}>
-                    <Box>
-                        <Box sx={styles.removeRow}>
-                            <Typography
-                                sx={styles.myCart}
-                            >
-                                My Cart
-                            </Typography>
+                }
+                {
+                    cartList && cartList.length != 0 ?
+                        <Box sx={styles.summary}>
+                            <Box sx={styles.summaryData}>
+                                <Typography sx={styles.orderSummary}>
+                                    Order Summary
+                                </Typography>
+
+                                <Box sx={styles.taxContainer}>
+                                    <Typography sx={styles.summaryTitle}>Tax</Typography>
+                                    <Typography sx={styles.tax}>0đ</Typography>
+                                </Box>
+
+                                <Box sx={styles.totalContainer}>
+                                    <Typography sx={styles.summaryTitle}>Total</Typography>
+                                    <Typography sx={styles.total}>
+                                        {formatedPrice}</Typography>
+                                </Box>
+                            </Box>
 
                             <Button
-                                onClick={removeAllProduct}
+                                sx={styles.checkoutButton}
+                                variant="contained"
                                 color="error"
-                                sx={styles.removeAll}
+                                onClick={onCheckOut}
                             >
-                                Remove all
+                                Checkout
                             </Button>
                         </Box>
-                        {cartList.map(product =>
-                            <HorizontalProduct
-                                key={product.productID}
-                                cartProduct
-                                product={product}
-                                canDelete
-                                onPressDelete={() =>
-                                    deleteProduct(product)
-                                }
-                                changeQuantity={changeQuantity}
-                            />)
-                        }
-                    </Box>
+                        : null
+                }
 
-
-                </Box>
-                : null
-            }
-            {
-                cartList && cartList.length != 0 ?
-                    <Box sx={styles.summary}>
-                        <Box sx={styles.summaryData}>
-                            <Typography sx={styles.orderSummary}>
-                                Order Summary
-                            </Typography>
-
-                            <Box sx={styles.taxContainer}>
-                                <Typography sx={styles.summaryTitle}>Tax</Typography>
-                                <Typography sx={styles.tax}>0đ</Typography>
-                            </Box>
-
-                            <Box sx={styles.totalContainer}>
-                                <Typography sx={styles.summaryTitle}>Total</Typography>
-                                <Typography sx={styles.total}>
-                                    {formatedPrice}</Typography>
-                            </Box>
-                        </Box>
-
-                        <Button
-                            onClick={() => history.push("/checkout/payment")}
-                            sx={styles.checkoutButton}
-                            variant="contained"
-                            color="error"
-                        >
-                            Checkout
-                        </Button>
-                    </Box>
-                    : null
-            }
-
+            </Box>
         </Box>
     )
 }

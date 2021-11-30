@@ -29,6 +29,16 @@ const authIsLoadingSelector = state => {
 const cartSelector = state => {
     return state.CartList.cart;
 }
+const cartIsLoadingSelector = state => {
+    return state.CartList.isLoading;
+}
+const cartNotiSelector = state => {
+    return state.CartList.notification;
+}
+
+const favoriteNotiSelector = state => {
+    return state.Favorite.notification;
+}
 export {
     topRatingSelector,
     laptopSelector,
@@ -37,5 +47,8 @@ export {
     userInfoSelector,
     authErrorSelector,
     authIsLoadingSelector,
-    cartSelector
+    cartIsLoadingSelector,
+    cartSelector,
+    cartNotiSelector,
+    favoriteNotiSelector,
 }

@@ -1,89 +1,151 @@
-import { React, useState, useEffect } from 'react';
-import styles from './OrderDetail.style';
-import { useParams } from 'react-router-dom';
-import { Container, Box, Typography } from '@mui/material';
-import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct';
-import NotFound from '../../components/NotFound/NotFound';
-import { getOrderDetailAPI } from '../../api/orderApi';
+import { React, useState, useEffect } from 'react'
+import styles from './OrderDetail.style'
+import { useParams } from 'react-router-dom'
+import { Container, Box, Typography, Grid, Divider, Skeleton, Collapse } from '@mui/material'
+import HorizontalProduct from '../../components/HorizontalProduct/HorizontalProduct'
+import HorizontalProductSkeleton from '../../components/HorizontalProductSkeleton/HorizontalProductSkeleton'
+import ProductRatingBar from '../../components/ProductRatingBar/ProductRatingBar'
+import { getOrderDetailAPI } from '../../api/orderApi'
+import { TransitionGroup } from 'react-transition-group'
 
 const OrderDetail = () => {
-	const { id } = useParams();
-	const [order, setOrderDetail] = useState([]);
+	const { id } = useParams()
+	const [orderDetail, setOrderDetail] = useState({ "isLoading": true })
+
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
-			if (response.data['success'] === true) {
-				setOrderDetail(response.data['data']);
+			if (response.data.success === true) {
+				setOrderDetail({ "isLoading": false, data: response.data.data })
+				console.log("orderDetail ", response.data.data)
 			}
-		});
-	}, []);
+		})
+	}, [])
 
-	function formatDateDiff(value) {
-		let type = "minutes";
+	const formatDateDiff = (value) => {
+		let type = 'minutes'
 		if (value >= 1440) {
-			value /= 1440;
-			type = 'days';
+			value /= 1440
+			type = 'days'
 		} else if (value >= 60) {
-			value /= 60;
-			type = 'hours';
+			value /= 60
+			type = 'hours'
 		}
-		return `${Math.round(value)} ${type} ago`;
+		return `${Math.round(value)} ${type} ago`
 	}
 
-	function ProductList(props) {
-		const productList = props.productList;
-		const products = productList.map((product) => (
-			<Box sx={{ width: '100%' }}>
-				<HorizontalProduct product={product} ratingSize={'20px'} />
-			</Box>
-		));
-		return products;
+	const formatPrice = (value) => {
+		return new Intl.NumberFormat('vi-VN', {
+			style: 'currency',
+			currency: 'VND',
+		}).format(value)
 	}
 
 	return (
-		<Container sx={styles.main}>
-			{order.length !== 0 ? (
-				<div>
-					<Typography variant="h3" sx={styles.title}>
-						Order : #{id}{' '}
-					</Typography>
-					<Typography variant="h6" sx={styles.content}>
-						<b>Created: </b>
-						{formatDateDiff(order['orderInfo']['dateDiff'])}
-					</Typography>
-					<Typography variant="h3" sx={styles.title}>
-						Customer Detail
-					</Typography>
-					<Typography variant="h6" sx={styles.content}>
-						<b>Customer: </b>
-						{order['orderInfo']['name']} -{' '}
-						{order['orderInfo']['phone']}
-					</Typography>
-					<Typography variant="h6" sx={styles.content}>
-						<b>Address: </b>
-						{order['orderInfo']['address']}
-					</Typography>
-					<Typography variant="h3" sx={styles.title}>
-						Package Detail
-					</Typography>
-					<Box sx={styles.productList}>
-						<ProductList productList={order['itemList']} />
-					</Box>
-					<Box sx={styles.priceBox}>
-						<Typography variant="h3" sx={styles.title}>
-							Total Price
-						</Typography>
-						<Typography variant="h3" sx={styles.price}>
-							{Number(
-								order['orderInfo']['totalPrice']
-							).toLocaleString() + 'đ'}
-						</Typography>
-					</Box>
-				</div>
-			) : (
-				<NotFound></NotFound>
-			)}
-		</Container>
-	);
-};
+		<Box sx={styles.box}>
+			<Container maxWidth="lg">
+				{orderDetail.isLoading ? (
+					<Grid container spacing={6}>
+						<Grid item xs={12} lg={5}>
+							<Box sx={styles.wrapperSkeleton}>
+								<Skeleton variant="rectangular" animation="wave" sx={styles.orderInfoSkeleton} />
+							</Box>
+						</Grid>
+						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
+							<Box sx={styles.productList}>
+								<TransitionGroup>
+									<Collapse>
+										<HorizontalProductSkeleton />
+										<Box
+											sx={{
+												display: 'flex',
+												mb: '20px',
+											}}
+										>
+											<Skeleton animation="wave" sx={styles.ratingSkeleton} />
+										</Box>
+									</Collapse>
+								</TransitionGroup>
+							</Box>
+						</Grid>
+					</Grid>
+				) : (
+					<Grid container spacing={6}>
+						<Grid item xs={12} lg={5}>
+							<Box sx={styles.wrapper}>
+								<Box sx={{ width: '100%' }}>
+									<Typography sx={styles.title}>
+										Order : #{id}{' '}
+									</Typography>
+									<Typography sx={styles.content}>
+										{formatDateDiff(
+											orderDetail.data.orderInfo.dateDiff,
+										)}
+									</Typography>
+									<Divider sx={styles.divider} />
+									<Typography sx={styles.title}>
+										Customer detail
+									</Typography>
+									<Typography sx={styles.content}>
+										Name: {orderDetail.data.orderInfo.name}
+									</Typography>
+									<Typography sx={styles.content}>
+										Phone: {orderDetail.data.orderInfo.phone}
+									</Typography>
+									<Typography sx={styles.content}>
+										Address: {orderDetail.data.orderInfo.address}
+									</Typography>
+									<Divider sx={styles.divider} />
+									<Box sx={{ mt: 4 }}>
+										<Box sx={styles.lowerPriceWrapper}>
+											<Typography sx={styles.lowerTitles}>
+												Total price:
+											</Typography>
+											<Typography sx={styles.lowerValues}>
+												{formatPrice(
+													orderDetail.data.orderInfo.totalPrice,
+												)}
+											</Typography>
+										</Box>
+									</Box>
+								</Box>
+							</Box>
+						</Grid>
+						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
+							<Box sx={styles.productList}>
+								<TransitionGroup>
+									{orderDetail.data.itemList.map(product =>
+										<Collapse>
+											<HorizontalProduct
+												product={product}
+												ratingSize={'20px'}
+											/>
+											<Box
+												sx={{
+													display: 'flex',
+													mb: '20px',
+												}}
+											>
+												<Typography sx={styles.ratingTitle}>
+													Your rating:
+												</Typography>
+												<ProductRatingBar
+													orderID={id}
+													productID={product.productID}
+													customerRating={
+														product.customerRating
+													}
+												></ProductRatingBar>
+											</Box>
+										</Collapse>
+									)}
+								</TransitionGroup>
+							</Box>
+						</Grid>
+					</Grid>
+				)}
+			</Container>
+		</Box>
+	)
+}
 
-export default OrderDetail;
+export default OrderDetail

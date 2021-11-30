@@ -1,127 +1,154 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect } from "react"
 import {
-	FormControl,
-	InputLabel,
-	Input,
 	Box,
 	Container,
-	FormHelperText,
-	Card,
 	Typography,
-	CardContent,
 	Button,
-	CardActions,
-	Divider,
-	Modal,
-} from "@mui/material";
-import CardAddress from "../../components/CardAddresss/CardAddress";
-import FormAddress from "../../components/FormAddress/FormAddress";
-import styles from "./addressbook.style";
-import { getAddressBook, deleteAddressBook } from "../../api/addressApi";
-// import axios from "axios";
+	Dialog, DialogTitle,
+	Collapse,
+	Skeleton,
+} from "@mui/material"
+import CardAddress from "../../components/CardAddresss/CardAddress"
+import FormAddress from "../../components/FormAddress/FormAddress"
+import icons from "../../constant/icons"
+import { TransitionGroup } from 'react-transition-group'
+import styles from "./AddressBook.styles"
+import { getAddressBook, deleteAddressBook } from "../../api/addressApi"
+import HorizontalProductSkeleton from "../../components/HorizontalProductSkeleton/HorizontalProductSkeleton"
+import EmptyList from "../../components/EmptyList/EmptyList"
+import emptyAddress from "../../img/empty-address.png"
+
 const AddressBook = () => {
-	const [modelAppear, setModelAppear] = useState(false);
-	const [addressBook, setAddressBook] = useState([]);
+	const [modelAppear, setModelAppear] = useState(false)
+	const [addressList, setAddressList] = useState({ "isLoading": true })
 
 	useEffect(() => {
-		getaddress();
-	}, []);
+		getAddress()
+	}, [])
 
-	function getaddress() {
-		getAddressBook().then((res) => {
-			if (res.data.success == true) 
-			setAddressBook(res.data.data);
-		});
+	const getAddress = () => {
+		getAddressBook().then((response) => {
+			if (response.data.success == true) {
+				setAddressList({ "isLoading": false, "data": response.data.data })
+				console.log("addressList: ", response.data.data)
+			}
+		})
 	}
 
-	// function onSubmit(command,)
-	function onCreate(id, name, address, phone) {
+	const onCreate = (id, name, address, phone) => {
 		let obj = {
 			deliveryID: id,
 			address: address,
 			name: name,
 			phone: phone,
-		};
-		let newLs = addressBook;
-		newLs.push(obj);
-		setAddressBook(newLs);
+		}
+		let newLs = addressList.data
+		newLs.push(obj)
+		setAddressList({ ...addressList, data: newLs })
 	}
-	function onEdit(id, name, address, phone) {
+
+	const onEdit = (id, name, address, phone) => {
 		let obj = {
 			deliveryID: id,
 			address: address,
 			name: name,
 			phone: phone,
-		};
+		}
 
-		let indexbyid = addressBook.findIndex(
+		let indexbyid = addressList.data.findIndex(
 			(address) => address.deliveryID == id
-		);
-		let newLs = JSON.parse(JSON.stringify(addressBook));
+		)
+		let newLs = JSON.parse(JSON.stringify(addressList.data))
 
-		newLs[indexbyid] = obj;
+		newLs[indexbyid] = obj
 
-		setAddressBook(newLs);
+		setAddressList({ ...addressList, data: newLs })
 	}
-	function onDelete(id) {
+
+	const onDelete = (id) => {
 		deleteAddressBook(id).then((res) => {
 			if (res.data.success == true) {
-				const newLs = addressBook.filter(
-					(address) => address.deliveryID !== id
-				);
-				setAddressBook(newLs);
+				const newLs = addressList.data.filter((address) => address.deliveryID !== id)
+				setAddressList({ ...addressList, data: newLs })
 			}
-		});
+		})
 	}
 
 	return (
-		<div>
-			<Box sx={{ textAlign: "center", py: 10, bgcolor: "#e9ecef" }}>
-				<Typography
-					variant="h1"
-					sx={{
-						fontWeight: "500",
-						fontSize: { xs: "50px", md: "80px", lg: "100px" },
-					}}
-					component="div">
-					Address Book
-				</Typography>
-			</Box>
-			<Container>
-				<Divider />
-				{addressBook.map((address) => (
-					<CardAddress
-						address={address}
-						key={address.deliveryID}
-						onEdit={onEdit}
-						onDelete={onDelete}
-					/>
-				))}
-			</Container>
-			<Box sx={{ textAlign: "center", m: 2 }}>
-				<Button variant="outlined" onClick={() => setModelAppear(true)}>
-					Create new Address
-				</Button>
-			</Box>
-			<Modal open={modelAppear} onClose={() => setModelAppear(false)}>
-				<Box sx={styles.modal}>
-					<Box sx={{ textAlign: "center" }}>
-						<Typography
-							variant="h4"
-							sx={{ fontWeight: "500" }}
-							component="div">
-							New address
-						</Typography>
-					</Box>
-					<FormAddress
-						formCommand="create"
-						formSubmit={onCreate}
-						setAppear={setModelAppear}
-					/>
+		<Box sx={styles.box}>
+			<Container maxWidth="md">
+				<Box sx={styles.titleWrapper}>
+					{addressList.isLoading ? (
+						<>
+							<Typography sx={styles.title}>Address Book</Typography>
+							<Skeleton variant="text" animation="wave" sx={styles.skeletonBtn}>
+								<Button
+									startIcon={<icons.Add />}
+									sx={styles.addBtn}
+								>
+									New address
+								</Button>
+							</Skeleton>
+						</>
+					) : (
+						<>
+							<Typography sx={styles.title}>Address Book</Typography>
+							<Button
+								startIcon={<icons.Add />}
+								onClick={() => setModelAppear(true)}
+								sx={styles.addBtn}
+							>
+								New address
+							</Button>
+						</>
+					)}
 				</Box>
-			</Modal>
-		</div>
-	);
-};
 
-export default AddressBook;
+				{addressList.isLoading ? (
+					<>
+						<HorizontalProductSkeleton />
+						<HorizontalProductSkeleton />
+					</>
+				) : (
+					<>
+						{addressList.data && addressList.data.length === 0 ? (
+							<EmptyList img={emptyAddress} title={"Your address list is empty"} imgHeight={'45vh'} btnMarginTop={"5vh"} />
+						) : (
+							<>
+
+
+								<TransitionGroup>
+									{addressList.data.map(address =>
+										<Collapse key={address.deliveryID}>
+											<CardAddress
+												address={address}
+												key={address.deliveryID}
+												onEdit={onEdit}
+												onDelete={onDelete}
+											/>
+										</Collapse>
+									)}
+								</TransitionGroup>
+							</>
+						)}
+					</>
+				)}
+
+			</Container>
+			<Dialog
+				open={modelAppear}
+				onClose={() => setModelAppear(false)}
+				sx={styles.dialog}
+			>
+				<DialogTitle sx={{ textAlign: "center" }}>New Address</DialogTitle>
+				<FormAddress
+					formCommand="create"
+					formSubmit={onCreate}
+					setAppear={setModelAppear}
+				/>
+			</Dialog>
+		</Box>
+	)
+}
+
+export default AddressBook

@@ -1,24 +1,23 @@
-import { React, useState, useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+import { React, useState, useEffect, useRef } from 'react';
+import { AppBar, Toolbar, Grid, Container, IconButton, Box, Drawer, List, ListItem, Typography, Divider, useMediaQuery, Button } from '@mui/material';
 import NavItem from './NavItem/NavItem';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import NavItemUser from './NavItemUser/NavItemUser';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import { colors, icons } from '../../constant';
-import useStyles from './Navbar.styles';
-import { Divider } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useStyles, style } from './Navbar.styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+import { logOut } from "../../store/actions/authAction";
+import CategoryMenu from "../../components/CategoryMenu/CategoryMenu"
 
 const Navbar = () => {
 	const styles = useStyles();
+	const dispatch = useDispatch()
+	const history = useHistory()
 	const userInfo = useSelector((state) => state.Authentication.user);
+	const anchorRef = useRef(null)
+	const clickRef = useRef(null)
+	const anchorRefDrawer = useRef(null)
+	const clickRefDrawer = useRef(null)
 	//console.log('userInfo: ', userInfo);
 
 	// popUpNav
@@ -65,59 +64,121 @@ const Navbar = () => {
 				width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
 			}}
 			role="presentation"
-			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<List>
-				<ListItem button key="home">
-					<NavItem href="/" title="Home" icon={<icons.Home />} />
+				<ListItem
+					button
+					key="Home"
+					sx={{ padding: 0 }}
+					onClick={toggleDrawer(anchor, false)}
+				>
+					<NavItem
+						href="/"
+						title="Home"
+						icon={<icons.Home sx={style.iconNav} />}
+						isDrawer
+					/>
 				</ListItem>
-				<ListItem button key="Hot Discount">
+				<ListItem
+					button
+					key="Category"
+					sx={{ padding: 0 }}
+					ref={anchorRefDrawer}
+					id="composition-button"
+					aria-controls={'composition-menu'}
+					aria-expanded={'true'}
+					aria-haspopup="true"
+					onClick={() => clickRefDrawer.current()}
+				>
+					<Box sx={style.authenWrapper}>
+						<icons.Category sx={style.iconNav} />
+						<Typography sx={style.titleNav}>Category</Typography>
+					</Box>
+					<CategoryMenu isDrawer anchorRef={anchorRefDrawer} clickRef={clickRefDrawer} onClick={toggleDrawer(anchor, false)} />
+				</ListItem>
+				<ListItem button key="Hot Discount" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/"
 						title="Hot Discount"
-						icon={<icons.Offer />}
+						icon={<icons.Offer sx={style.iconNav} />}
+						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Shipping Policy">
+				<ListItem button key="Shipping Policy" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/"
 						title="Shipping Policy"
-						icon={<icons.Truck />}
+						icon={<icons.Truck sx={style.iconNav} />}
+						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Contact Us">
+				<ListItem button key="Contact Us" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/contactus"
 						title="Contact Us"
-						icon={<icons.Phone />}
+						icon={<icons.Phone sx={style.iconNav} />}
+						isDrawer
 					/>
 				</ListItem>
-			</List>
-			<Divider />
-			<List sx={{ marginTop: 'auto' }}>
-				<ListItem button key="cart">
-					<NavItem
-						href="/checkout/cart"
-						title="Cart"
-						icon={<icons.Cart />}
-					/>
-				</ListItem>
-				<ListItem button key="user">
-					{userInfo.isEmpty ? (
-						<NavItem
-							href="/authentication"
-							title="Login"
-							icon={<icons.User />}
-						/>
-					) : (
-						<NavItem
-							href="/"
-							title={userInfo.username}
-							icon={<icons.User />}
-						/>
-					)}
-				</ListItem>
+
+				{userInfo.isEmpty ? (
+					""
+				) : (
+					<>
+						<Divider sx={{ my: 2 }} />
+						<ListItem button key="Cart" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
+							<NavItem
+								href="/checkout/cart"
+								title="Cart"
+								icon={<icons.Cart sx={style.iconNav} />}
+								isDrawer
+							/>
+						</ListItem>
+						<ListItem button key="Order History" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
+							<NavItem
+								href="/profile/orderhistory"
+								title="Order"
+								icon={<icons.Order sx={style.iconNav} />}
+								isDrawer
+							/>
+						</ListItem>
+						<ListItem button key="Favorite" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
+							<NavItem
+								href="/profile/favorite"
+								title="Favorite"
+								icon={<icons.NotFavorite sx={style.iconNav} />}
+								isDrawer
+							/>
+						</ListItem>
+						<ListItem button key="Address Book" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
+							<NavItem
+								href="/profile/addressbook"
+								title="Address"
+								icon={<icons.Address sx={style.iconNav} />}
+								isDrawer
+							/>
+						</ListItem>
+					</>
+				)}
+				<Divider sx={{ my: 2 }} />
+				{userInfo.isEmpty ? (
+					<ListItem button key="login" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
+						<Link to='/authentication' style={style.navLink}>
+							<Box sx={style.authenWrapper}>
+								<icons.User sx={style.icon} />
+								<Typography sx={style.navTitle}>Login</Typography>
+							</Box>
+						</Link>
+					</ListItem>
+				) : (
+					<ListItem button key="log out" onClick={() => { dispatch(logOut(history)) }} sx={style.signOutListItem}>
+						<Box sx={style.authenWrapper}>
+							<icons.SignOut sx={style.icon} />
+							<Typography sx={style.navTitle}>Sign out</Typography>
+						</Box>
+					</ListItem>
+				)}
 			</List>
 		</Box>
 	);
@@ -129,7 +190,7 @@ const Navbar = () => {
 			className="appBar"
 		>
 			<Toolbar>
-				<Container maxWidth="xl">
+				<Container maxWidth="xl" sx={{ padding: 0 }}>
 					<Grid container spacing={2}>
 						{isMatch ? (
 							<Grid item xs={3}>
@@ -151,37 +212,52 @@ const Navbar = () => {
 							</Grid>
 						) : (
 							<>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/"
 										title="Home"
-										icon={<icons.Home />}
+										icon={<icons.Home sx={style.iconNav} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
+									<Button
+										ref={anchorRef}
+										id="composition-button"
+										aria-controls={'composition-menu'}
+										aria-expanded={'true'}
+										aria-haspopup="true"
+										onClick={() => clickRef.current()}
+										sx={style.btnWrapper}
+									>
+										<icons.Category sx={style.iconNav} />
+										<Typography sx={style.titleNav}>Category</Typography>
+									</Button>
+
+								</Grid>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/"
-										title="Hot Discount"
-										icon={<icons.Offer />}
+										title="Discount"
+										icon={<icons.Offer sx={style.iconNav} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/"
-										title="Shipping Policy"
-										icon={<icons.Truck />}
+										title="Shipping"
+										icon={<icons.Truck sx={style.iconNav} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/contactus"
-										title="Contact Us"
-										icon={<icons.Phone />}
+										title="Contact"
+										icon={<icons.Phone sx={style.iconNav} />}
 									/>
 								</Grid>
 							</>
 						)}
-						<Grid item xs={9} md={4}>
+						<Grid item xs={9} md={4.5}>
 							<NavItemUser
 								userInfo={userInfo}
 								isHome={isHome}
@@ -189,6 +265,7 @@ const Navbar = () => {
 							/>
 						</Grid>
 					</Grid>
+					<CategoryMenu anchorRef={anchorRef} clickRef={clickRef} />
 				</Container>
 			</Toolbar>
 		</AppBar>

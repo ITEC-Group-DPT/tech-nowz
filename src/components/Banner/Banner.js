@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Banner.style';
 import Slider from 'react-slick';
-import { Container } from '@mui/material';
+import { Container, useMediaQuery } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import slideShow1 from '../../img/slide-show1.jpg';
 import slideShow2 from '../../img/slide-show2.jpg';
@@ -59,6 +59,9 @@ const settings = {
 };
 
 const Banners = () => {
+	// const matches = useMediaQuery('(min-width:500px)');
+	// console.log("matches: ", matches);
+
 	return (
 		<Container maxWidth="xxl" style={styles.container}>
 			<Slider {...settings}>

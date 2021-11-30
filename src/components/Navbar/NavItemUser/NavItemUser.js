@@ -2,16 +2,36 @@ import { React, useRef } from 'react'
 import styles from './NavItemUser.style'
 import ProfileMenu from '../../ProfileMenu/ProfileMenu';
 import { Link } from 'react-router-dom';
-import { Typography, Fade, Button, Badge } from '@mui/material';
+import { Typography, Fade, Button, Badge, Tooltip, Zoom, styled } from '@mui/material';
+import { tooltipClasses } from '@mui/material/Tooltip';
 import { Box } from '@mui/system';
 import { icons } from '../../../constant';
 
-import { cartSelector } from "../../../store/selectors"
+import { cartSelector, cartNotiSelector, favoriteNotiSelector } from "../../../store/selectors"
 import { useSelector } from 'react-redux';
 
-const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
+//custom tooltip
+const BootstrapTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+    [`& .${tooltipClasses.arrow}`]: {
+        color: theme.palette.common.white,
+    },
+    [`& .${tooltipClasses.tooltip}`]: {
+        backgroundColor: theme.palette.common.white,
+        color: 'black',
+        fontSize: '18px',
+        fontWeight: '400',
+        padding: '15px',
+        border: '1px solid gray',
+    },
+}));
 
-    const cart = useSelector(cartSelector);
+const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
+    const cart = useSelector(cartSelector)
+    const cartNoti = useSelector(cartNotiSelector)
+    const favoriteNoti = useSelector(favoriteNotiSelector)
+
     const anchorRef = useRef(null)
     const clickRef = useRef(null)
 
@@ -19,14 +39,20 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
         <Fade in={isHome ? isPopUp : true} timeout={500}>
             <Box sx={styles.userItemWrapper}>
                 <Box sx={styles.navItem}>
-                    <Link to='/checkout/cart' style={styles.navLink}>
-                        <Box sx={styles.wrapper}>
-                            <Badge badgeContent={cart.totalQuantity || 0} color="error">
-                                <icons.Cart sx={styles.icon} />
-                            </Badge>
-                            <Typography sx={styles.navTitle}>Cart</Typography>
-                        </Box>
-                    </Link>
+                    <BootstrapTooltip
+                        title="Product is added to your cart"
+                        TransitionComponent={Zoom}
+                        open={cartNoti.addToCart}
+                    >
+                        <Link to='/checkout/cart' style={styles.navLink}>
+                            <Box sx={styles.wrapper}>
+                                <Badge badgeContent={cart.totalQuantity || 0} color="error">
+                                    <icons.Cart sx={styles.icon} />
+                                </Badge>
+                                <Typography sx={styles.navTitle}>Cart</Typography>
+                            </Box>
+                        </Link>
+                    </BootstrapTooltip>
                     {
                         userInfo.isEmpty ?
                             <Link to='/authentication' style={styles.navLink}>
@@ -37,18 +63,24 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
                             </Link>
                             :
                             <Box>
-                                <Button
-                                    ref={anchorRef}
-                                    id="composition-button"
-                                    aria-controls={'composition-menu'}
-                                    aria-expanded={'true'}
-                                    aria-haspopup="true"
-                                    onClick={() => clickRef.current()}
-                                    sx={styles.btnNav}
+                                <BootstrapTooltip
+                                    title={favoriteNoti.title}
+                                    TransitionComponent={Zoom}
+                                    open={favoriteNoti.isShown}
                                 >
-                                    <icons.User sx={styles.icon} />
-                                    <Typography sx={styles.navTitle}>{userInfo.username}</Typography>
-                                </Button>
+                                    <Button
+                                        ref={anchorRef}
+                                        id="composition-button"
+                                        aria-controls={'composition-menu'}
+                                        aria-expanded={'true'}
+                                        aria-haspopup="true"
+                                        onClick={() => clickRef.current()}
+                                        sx={styles.btnNav}
+                                    >
+                                        <icons.User sx={styles.icon} />
+                                        <Typography sx={styles.navTitle}>{userInfo.username}</Typography>
+                                    </Button>
+                                </BootstrapTooltip>
                                 <ProfileMenu anchorRef={anchorRef} clickRef={clickRef} />
                             </Box>
                     }

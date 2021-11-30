@@ -19,17 +19,17 @@ const styles = {
 		padding: '.5rem 1rem',
 		transition: '400ms',
 		borderRadius: '25px',
-		//marginRight
+		mr: 1,
 		'&:hover': {
 			backgroundColor: '#737373',
 		},
 	},
 	icon: {
-		fontSize: 'large',
+		fontSize: '20px !important',
+		marginRight: '7px !important',
 	},
 	navTitle: {
-		fontSize: '.8rem',
-		marginLeft: '15px',
+		fontSize: '16px',
 	},
     btnNav: {
         textTransform: "none",
@@ -38,7 +38,7 @@ const styles = {
         padding: '.5rem 1rem',
         transition: '400ms',
         borderRadius: '25px',
-        //marginRight
+        mr: 1,
         '&:hover': {
             backgroundColor: '#737373',
         }

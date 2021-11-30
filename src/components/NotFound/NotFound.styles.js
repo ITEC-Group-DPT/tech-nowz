@@ -1,10 +1,6 @@
 const styles = {
 	wrapper: {
-		minHeight: '60vh',
-	},
-	typo: {
-		textAlign: 'center',
-		fontSize: '2rem',
+		minHeight: '70vh',
 	},
 };
 

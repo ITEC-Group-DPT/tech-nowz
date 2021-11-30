@@ -1,36 +1,108 @@
 const styles = {
-	main: {
-		marginBottom: '24px',
-		paddingLeft: { xs: '2%', md: '4%' },
+	box: {
+		minHeight: '80vh',
+		backgroundColor: 'rgb(245, 245, 245)',
+		paddingBottom: '100px',
+		paddingTop: '50px',
+	},
+	divider: {
+		mt: 2,
+		mb: 2,
+	},
+	wrapper: {
+		backgroundColor: 'white',
+		borderRadius: '5px',
+		display: 'flex',
+		alignItems: 'center',
+		padding: '30px 40px !important',
+	},
+	wrapperSkeleton: {
+
+	},
+	orderInfoSkeleton: {
+		bgcolor: '#ededed',
+		borderRadius: '5px',
+		height: '370px',
+	},
+	ratingSkeleton: {
+		bgcolor: '#ededed',
+		width: '50%',
+		height: '50px',
 	},
 	title: {
 		fontWeight: '600',
-		fontSize: { xs: '1.5rem', md: '1.75rem' },
-		lineHeight: '1.5',
-		fontFamily: 'Roboto Slab, serif',
-		marginTop: '3%',
+		fontSize: { xs: '20px', md: '24px' },
+		mb: 1,
 	},
 	content: {
-		fontSize: '1rem',
-		fontFamily: 'Roboto Slab, serif',
-		fontWeight: '100',
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		// mt: '0.5',
 	},
-	productList: {
-		width: { xs: '100%', md: '80%' },
-	},
-	priceBox: {
-		alignItems: 'center',
+	priceWrapper: {
 		display: 'flex',
-		marginTop: '24px',
-		justifyContent: 'space-between',
-		width: { xs: '100%', md: '80%' },
+		//mt: 1,
 	},
-	price: {
-		flexDirection: 'right',
+	upperTitles: {
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		fontWeight: '500',
+	},
+	upperValues: {
+		ml: 'auto',
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		fontWeight: '500',
+	},
+	lowerPriceWrapper: {
+		mt: 2,
+		display: 'flex',
+	},
+	lowerTitles: {
+		fontWeight: '600',
+		fontSize: {
+			xs: '15px',
+			md: '24px',
+		},
+	},
+	lowerValues: {
+		fontWeight: '600',
+		fontSize: {
+			xs: '15px',
+			md: '20px',
+		},
+		ml: 'auto',
 		color: 'red',
-		marginTop: '3%',
-		fontFamily: 'Roboto Slab, serif',
-		fontSize: { xs: '1.5rem', md: '1.75rem' },
+	},
+	packageWrapper: {},
+	productList: {
+		borderLeft: {
+			xs: 'none',
+			lg: '1px solid #e0e0e0',
+		},
+		paddingLeft: {
+			xs: 'none',
+			lg: '48px',
+		},
+	},
+	productTitle: {
+		textAlign: 'center',
+		fontWeight: '600',
+		fontSize: { xs: '20px', md: '26px' },
+		mb: 2,
+	},
+	ratingTitle: {
+		fontSize: {
+			xs: '14px',
+			md: '17px',
+		},
+		pt: 0.4,
 		fontWeight: 'bold',
 	},
 };

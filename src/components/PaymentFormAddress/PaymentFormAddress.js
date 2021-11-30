@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import {
 	Input,
 	InputLabel,
@@ -71,12 +71,13 @@ const FormAddress = ({form,setChosenAddress}) => {
 					}
 					value={form.city}
 					variant="standard"
-					required
+				
 				/>
 				<TextField
 					sx={{ mb: 2 }}
 					name="phone"
 					label="Phone"
+					type="number"
 					placeholder="Type your phone here"
 					onChange={(e) =>
 						setChosenAddress({ ...form, phone: e.target.value })
