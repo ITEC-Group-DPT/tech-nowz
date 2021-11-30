@@ -16,7 +16,7 @@ import CustomModal from '../../components/Modal/Modal'
 
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
-
+import checkEmptyForm from '../../constant/function'
 //redux
 import { userInfoSelector } from "../../store/selectors";
 import { cartSelector } from "../../store/selectors"
@@ -131,14 +131,7 @@ const defaultemptyProduct = {
 	img3: "",
 	img4: "",
 };
-function checkEmptyForm(form) {
-	for (const element in form) {
-		if (form[element].toString() === "") {
-			return false;
-		}
-	}
-	return true;
-}
+
 const Product = () => {
 	//const { name } = useParams()
 	const query = useQuery()
@@ -160,7 +153,7 @@ const Product = () => {
 	const dispatch = useDispatch()
 
 	function submitEditForm() {
-		if (checkEmptyForm(productForm)) {
+		if (checkEmptyForm(productForm,['img2','img3','img4'])) {
 			setFormOpen(false);
 			editProduct(productForm, productID).then((response) => {
 				if (response.data.success == true) {

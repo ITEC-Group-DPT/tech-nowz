@@ -12,15 +12,8 @@ import { Container, Box, Divider } from "@mui/material";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { removeAllCart } from "../../store/actions/cartAction";
+import checkEmptyForm from "../../constant/function";
 
-function checkEmptyForm(form) {
-	for (const element in form) {
-		if (form[element].toString() === "") {
-			return false;
-		}
-	}
-	return true;
-}
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 export default function PaymentStepper({
 	idaddress,
@@ -43,7 +36,10 @@ export default function PaymentStepper({
 		if (activeStep == 0) {
 			console.log(address);
 			if (checkEmptyForm(address)) setActiveStep(activeStep + 1);
-			else return;
+			else {
+				console.log('empty input');
+				return;
+			}
 		} else if (activeStep == 1) {
 			setDisableFinish(true);
 			let joinAddress =
