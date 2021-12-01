@@ -12,7 +12,7 @@ import { Container, Box, Divider } from "@mui/material";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { removeAllCart } from "../../store/actions/cartAction";
-import checkEmptyForm from "../../constant/function";
+import {checkEmptyForm} from "../../constant/function";
 
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 export default function PaymentStepper({

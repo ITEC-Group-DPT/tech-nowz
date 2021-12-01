@@ -10,7 +10,7 @@ import {
 	Container,
 } from "@mui/material";
 import styles from './FormAddress.styles'
-import checkEmptyForm from "../../constant/function";
+import {checkEmptyForm} from "../../constant/function";
 import { createAddressBook, editAddressBook } from "../../api/addressApi";
 
 let defaultAddress = {

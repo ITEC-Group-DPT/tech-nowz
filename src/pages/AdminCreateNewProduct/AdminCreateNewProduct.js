@@ -7,7 +7,7 @@ import { createProduct } from "../../api/productApi";
 import { userInfoSelector } from "../../store/selectors";
 import { useSelector } from "react-redux";
 import NotFound from "../../components/NotFound/NotFound";
-import checkEmptyForm from "../../constant/function";
+import { checkEmptyForm, checkNotNegative } from "../../constant/function";
 const defaultemptyProduct = {
 	productID: 0,
 	type: "",
@@ -30,14 +30,17 @@ const AdminCreateNewProduct = () => {
 
 	function handleSubmit() {
 		if (checkEmptyForm(productForm, ["img2", "img3", "img4"])) {
-			createProduct(productForm).then((response) => {
-				if ((response.data.success = true)) {
-					console.log(response.data);
-					setProductForm(defaultemptyProduct);
-				}
-			});
-		}
-		else {
+			if (checkNotNegative(productForm, ["sold", "price", "rating"])) {
+				createProduct(productForm).then((response) => {
+					if ((response.data.success = true)) {
+						console.log(response.data);
+						setProductForm(defaultemptyProduct);
+					}
+				});
+			}else {
+				console.log("negative field");
+			}
+		} else {
 			console.log("empty field");
 			// process alert here
 		}
