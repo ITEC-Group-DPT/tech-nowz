@@ -45,7 +45,12 @@ const styles = {
 		boxShadow: "0 !important",
 		background: "#ff2e2e!important",
 		marginLeft: "4px",
-
+	},
+	outlineButton: {
+		fontSize: "13px",
+		textTransform: "Capitalize",
+		boxShadow: "0 !important",
+		marginLeft: "4px",
 	},
 }
 

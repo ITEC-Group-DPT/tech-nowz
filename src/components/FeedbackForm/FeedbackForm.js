@@ -107,6 +107,8 @@ export function FeedbackForm(props) {
 			<CustomModal
 			openModal= {dialogOpen}
 			setOpenModal={setDialogOpen}
+			outlinedConfirm
+			noCancel
 			title="Thank you for your feedback"
 			description="We have received your message"
 			/>
