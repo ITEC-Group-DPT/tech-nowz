@@ -7,6 +7,7 @@ import { createProduct } from "../../api/productApi";
 import { userInfoSelector } from "../../store/selectors";
 import { useSelector } from "react-redux";
 import NotFound from "../../components/NotFound/NotFound";
+import checkEmptyForm from "../../constant/function";
 const defaultemptyProduct = {
 	productID: 0,
 	type: "",
@@ -28,20 +29,45 @@ const AdminCreateNewProduct = () => {
 	const { userRole } = useSelector(userInfoSelector);
 
 	function handleSubmit() {
-		createProduct(productForm).then((response) => {
-			if (response.data.success = true) {
-				console.log(response.data);
-				setProductForm(defaultemptyProduct);
-			}
-		});
+		if (checkEmptyForm(productForm, ["img2", "img3", "img4"])) {
+			createProduct(productForm).then((response) => {
+				if ((response.data.success = true)) {
+					console.log(response.data);
+					setProductForm(defaultemptyProduct);
+				}
+			});
+		}
+		else {
+			console.log("empty field");
+			// process alert here
+		}
 	}
 	return (
-		<>
+		<div>
 			{userRole == 0 ? (
-				<Box sx={styles.box}>
-					<Typography sx={styles.title}>Create New Product</Typography>
+				<div>
+					<Box
+						sx={{
+							textAlign: "center",
+							py: 10,
+							bgcolor: "#e9ecef",
+						}}>
+						<Typography
+							variant="h1"
+							sx={{
+								fontWeight: "500",
+								fontSize: {
+									xs: "50px",
+									md: "80px",
+									lg: "100px",
+								},
+							}}
+							component="div">
+							Create New Product
+						</Typography>
+					</Box>
 
-					<Container maxWidth="md">
+					<Container>
 						<FormProduct
 							form={productForm}
 							setProduct={setProductForm}
@@ -49,11 +75,11 @@ const AdminCreateNewProduct = () => {
 							cancelBtnAppear={false}
 						/>
 					</Container>
-				</Box>
-			) :
+				</div>
+			) : (
 				<NotFound />
-			}
-		</>
+			)}
+		</div>
 	);
 };
 

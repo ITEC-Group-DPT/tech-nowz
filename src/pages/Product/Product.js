@@ -16,7 +16,7 @@ import CustomModal from '../../components/Modal/Modal'
 
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
-
+import checkEmptyForm from '../../constant/function'
 //redux
 import { userInfoSelector } from "../../store/selectors";
 import { cartSelector } from "../../store/selectors"
@@ -116,6 +116,21 @@ const settingsRelatedProduct = {
 		},
 	],
 };
+const defaultemptyProduct = {
+	productID: 0,
+	type: "",
+	description: "",
+	spec: "",
+	name: "",
+	price: 0,
+	rating: 0,
+	sold: 0,
+	dateCreated: "",
+	img1: "",
+	img2: "",
+	img3: "",
+	img4: "",
+};
 
 const Product = () => {
 	//const { name } = useParams()
@@ -136,7 +151,24 @@ const Product = () => {
 
 	const dispatch = useDispatch()
 
-	const onDeleteProduct = () => {
+	function submitEditForm() {
+		if (checkEmptyForm(productForm,['img2','img3','img4'])) {
+			setFormOpen(false);
+			editProduct(productForm, productID).then((response) => {
+				if (response.data.success == true) {
+					setProduct({
+						...product,
+						product: productForm,
+					});
+				}
+			});
+		} else {
+			console.log("empty field");
+			// process alert here
+		}
+	}
+
+	function onDeleteProduct() {
 		setModalOpen(false);
 		deleteProduct(productID).then((response) => {
 			if (response.data.success == true) {

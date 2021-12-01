@@ -93,9 +93,6 @@ const Payment = () => {
 				))}
 			</Container>
 			<Divider />
-			{/* <FormAddress address={chosenAddress} /> */}
-
-			{/* <FormAddress address={indexOfAddress}/> */}
 			{
 				cart.cartList && 
 				<PaymentStepper
