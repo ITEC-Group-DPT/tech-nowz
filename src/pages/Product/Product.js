@@ -16,7 +16,8 @@ import CustomModal from '../../components/Modal/Modal'
 
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
-import checkEmptyForm from '../../constant/function'
+
+import { checkNotNegative,checkEmptyForm } from '../../constant/function'
 //redux
 import { userInfoSelector } from "../../store/selectors";
 import { cartSelector } from "../../store/selectors"
@@ -123,7 +124,7 @@ const defaultemptyProduct = {
 	spec: "",
 	name: "",
 	price: 0,
-	rating: 0,
+	rating: 0.0,
 	sold: 0,
 	dateCreated: "",
 	img1: "",
@@ -154,15 +155,21 @@ const Product = () => {
 
 	function submitEditForm() {
 		if (checkEmptyForm(productForm,['img2','img3','img4'])) {
-			setFormOpen(false);
-			editProduct(productForm, productID).then((response) => {
-				if (response.data.success == true) {
-					setProduct({
-						...product,
-						product: productForm,
-					});
-				}
-			});
+			if (checkNotNegative(productForm,['sold','price','rating'])){
+				setFormOpen(false);
+				editProduct(productForm, productID).then((response) => {
+					if (response.data.success == true) {
+						setProduct({
+							...product,
+							product: productForm,
+						});
+					}
+				});
+			}
+			else {
+				console.log("negative field");
+			}
+		
 		} else {
 			console.log("empty field");
 			// process alert here

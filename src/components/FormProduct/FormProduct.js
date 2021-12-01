@@ -61,33 +61,6 @@ const FormProduct = ({
 					value={form.price}
 					variant="standard"
 				/>
-
-				{/* <TextField
-					sx={{ mb: 2 }}
-					name="spec"
-					label="Specification"
-					placeholder="Type Specification here"
-					onChange={(e) =>
-						setProduct({ ...form, spec: e.target.value })
-					}
-					value={form.spec}
-					variant="standard"
-				/>
-				<TextField
-					sx={{ mb: 2 }}
-					name="des"
-					label="Description"
-					placeholder="Type description here"
-					onChange={(e) =>
-						setProduct({
-							...form,
-							description: e.target.value,
-						})
-					}
-					value={form.description}
-					variant="standard"
-					required
-				/> */}
 				<TextField
 					sx={{ mb: 2 }}
 					name="rating"
@@ -95,7 +68,7 @@ const FormProduct = ({
 					label="Rating"
 					placeholder="Type rating here"
 					onChange={(e) =>
-						setProduct({ ...form, rating: e.target.value })
+						setProduct({ ...form, rating: e.target.value == '' ? "" : parseFloat(e.target.value) })
 					}
 					value={form.rating}
 					variant="standard"
@@ -107,7 +80,7 @@ const FormProduct = ({
 					label="Sold"
 					placeholder="Type sold here"
 					onChange={(e) =>
-						setProduct({ ...form, sold: e.target.value })
+						setProduct({ ...form, sold: e.target.value  })
 					}
 					value={form.sold}
 					variant="standard"
