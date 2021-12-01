@@ -9,6 +9,7 @@ import {
 	DialogActions,
 	DialogContent,
 } from '@mui/material';
+import CustomModal from "../Modal/Modal"
 import styles from './FeedbackForm.styles';
 
 export function FeedbackForm(props) {
@@ -35,10 +36,6 @@ export function FeedbackForm(props) {
 		Object.keys(formInput).forEach((inputKey) => {
 			setFormInput({ [inputKey]: '' });
 		});
-		const delay = setTimeout(() => {
-			window.location = props.websiteURL;
-		}, 2000);
-		return () => clearTimeout(delay);
 	};
 
 	return (
@@ -107,17 +104,12 @@ export function FeedbackForm(props) {
 					</Button>
 				</Box>
 			</form>
-			<Dialog open={dialogOpen}>
-				<DialogActions sx={{ display: 'block' }}>
-					<DialogContent sx={{ m: 0, p: 2 }}>
-						<Typography gutterBottom>
-							Your feedback has been sent
-							<br />
-							You will be redirect to homepage
-						</Typography>
-					</DialogContent>
-				</DialogActions>
-			</Dialog>
+			<CustomModal
+			openModal= {dialogOpen}
+			setOpenModal={setDialogOpen}
+			title="Thank you for your feedback"
+			description="We have received your message"
+			/>
 		</Box>
 	);
 }
