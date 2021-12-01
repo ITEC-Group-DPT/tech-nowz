@@ -126,7 +126,6 @@ const defaultemptyProduct = {
 	price: 0,
 	rating: 0.0,
 	sold: 0,
-	dateCreated: "",
 	img1: "",
 	img2: "",
 	img3: "",
@@ -151,29 +150,6 @@ const Product = () => {
 	const [quantityDifference, setQuantityDifference] = useState(0);
 
 	const dispatch = useDispatch()
-
-	function submitEditForm() {
-		if (checkEmptyForm(productForm,['img2','img3','img4'])) {
-			if (checkNotNegative(productForm,['sold','price','rating'])){
-				setFormOpen(false);
-				editProduct(productForm, productID).then((response) => {
-					if (response.data.success == true) {
-						setProduct({
-							...product,
-							product: productForm,
-						});
-					}
-				});
-			}
-			else {
-				console.log("negative field");
-			}
-		
-		} else {
-			console.log("empty field");
-			// process alert here
-		}
-	}
 
 	function onDeleteProduct() {
 		setModalOpen(false);

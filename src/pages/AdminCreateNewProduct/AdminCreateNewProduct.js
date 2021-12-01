@@ -17,7 +17,6 @@ const defaultemptyProduct = {
 	price: 0,
 	rating: 0,
 	sold: 0,
-	dateCreated: "",
 	img1: "",
 	img2: "",
 	img3: "",
@@ -29,8 +28,8 @@ const AdminCreateNewProduct = () => {
 	const { userRole } = useSelector(userInfoSelector);
 
 	function handleSubmit() {
-		if (checkEmptyForm(productForm, ["img2", "img3", "img4"])) {
-			if (checkNotNegative(productForm, ["sold", "price", "rating"])) {
+		if (checkEmptyForm(productForm, ["img2", "img3", "img4",'sold','rating'])) {
+			if (checkNotNegative(productForm, ["price"])) {
 				createProduct(productForm).then((response) => {
 					if ((response.data.success = true)) {
 						console.log(response.data);

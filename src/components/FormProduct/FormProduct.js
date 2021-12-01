@@ -66,7 +66,7 @@ const FormProduct = ({
 					value={form.price}
 					variant="outlined"
 				/>
-				<TextField
+				{/* <TextField
 					sx={styles.textField}
 					name="rating"
 					type="number"
@@ -89,7 +89,7 @@ const FormProduct = ({
 					}
 					value={form.sold}
 					variant="outlined"
-				/>
+				/> */}
 
 				<TextField
 					sx={styles.textField}
