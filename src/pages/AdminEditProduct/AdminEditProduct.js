@@ -16,8 +16,7 @@ const AdminEditProduct = () => {
 
     function submitEditForm() {
 		if (checkEmptyForm(productForm,['img2','img3','img4'])) {
-			setFormOpen(false);
-			editProduct(productForm, productID).then((response) => {
+			editProduct(productForm, productForm.productID).then((response) => {
 				if (response.data.success == true) {
                     history.goBack()
 					// setProduct({
