@@ -12,6 +12,7 @@ import {cartSelector } from "../../store/selectors"
 
 import RadioAddressPayment from "../../components/RadioAddressPayment/RadioAddressPayment";
 import PaymentStepper from "../../components/PaymentStepper/PaymentStepper";
+import styles from "./Payment.style"
 
 const emptyAddress = {
 	name: "",
@@ -66,14 +67,18 @@ const Payment = () => {
 
 	return (
 		<Box sx={{ minHeight: "65%" }}>
-			<Container sx={{ my: 2 }}>
+			<Container sx={styles.addressbook}>
 				<Typography
 					variant="h4"
 					sx={{ fontWeight: "600" }}
 					component="div">
 					Address Book
 				</Typography>
-				<Typography variant="p" component="div">
+				<Typography 
+				sx={{ mb: "18px"}}
+				variant="p" 
+				component="div"
+				>
 					(you can edit exists address book by choosing and editing
 					below)
 				</Typography>
@@ -92,7 +97,6 @@ const Payment = () => {
 					/>
 				))}
 			</Container>
-			<Divider />
 			{
 				cart.cartList && 
 				<PaymentStepper

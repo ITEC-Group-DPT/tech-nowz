@@ -60,7 +60,7 @@ const CustomModal = ({
                         }
 
                         <Button
-                            variant="outlined"
+                            variant={outlinedConfirm ? "outlined" : "contained"}
                             sx={!outlinedConfirm
                                 ? styles.confirmButton
                                 : styles.outlineButton

@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { Box } from "@mui/system";
-import { FormControlLabel, Radio, Typography } from "@mui/material";
+import { FormControlLabel, Radio, Typography, Button } from "@mui/material";
 
 const RadioAddressPayment = ({
 	onClickAddress,
@@ -9,36 +9,61 @@ const RadioAddressPayment = ({
 	disabled,
 }) => {
 	return (
-		<Box
-			sx={{
-				display: "flex",
-				alignItems: "center",
-				m: 1,
-				pr: 2,
-				border: 1,
-				width: "fit-content",
-				borderRadius: 1,
-			}}
+		<Button
+			disabled={disabled}
+			variant="outlined"
+			sx={styles.main}
 			onClick={() => disabled == false && onClickAddress(address.deliveryID)}>
 			<Radio
 				checked={chosenAddress == address.deliveryID}
 				value={address.deliveryID}
 				name={address.deliveryID}
 				disabled={disabled}
-				// inputProps={{ "aria-label": "A" }}
+			// inputProps={{ "aria-label": "A" }}
 			/>
 			{address.deliveryID == -1 ? (
-				<Typography variant="p" sx={{ fontSize: 16 }} component="div">
+				<Typography
+					variant="p"
+					sx={styles.addressText}
+					component="div"
+				>
 					New Address
 				</Typography>
 			) : (
-				<Typography variant="p" sx={{ fontSize: 16 }} component="div">
-					Name: {address.name} <br />
-					Address: {address.address} <br />
-					Phone: {address.phone}
+				<Typography
+					variant="p"
+					sx={styles.addressText}
+					component="div"
+				>
+					<b>Name:</b> {address.name} <br />
+					<b>Address:</b> {address.address} <br />
+					<b>Phone:</b> {address.phone}
 				</Typography>
 			)}
-		</Box>
+		</Button>
 	);
 };
+
+const styles = {
+	main: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent:"flex-start",
+		color:"black !important",
+		textTransform:"capitalize",
+		mb: "12px",
+		padding: "8px 6px",
+		paddingRight: "10px",
+		border: 1,
+		borderColor: "black !important",
+		width: "fit-content",
+		cursor: "pointer",
+		userSelect: "none",
+		textAlign:"start",
+	},
+	addressText: {
+		fontSize: "13px",
+		fontFamily: "'Montserrat', sans-serif",
+	},
+}
 export default RadioAddressPayment;

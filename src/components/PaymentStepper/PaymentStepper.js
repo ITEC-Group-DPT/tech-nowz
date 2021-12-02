@@ -12,7 +12,7 @@ import { Container, Box, Divider } from "@mui/material";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { removeAllCart } from "../../store/actions/cartAction";
-import {checkEmptyForm} from "../../constant/function";
+import { checkEmptyForm } from "../../constant/function";
 
 const steps = ["Delivery Information", "Checkout List", "Finish"];
 export default function PaymentStepper({
@@ -79,7 +79,7 @@ export default function PaymentStepper({
 	};
 
 	return (
-		<Box sx={{ maxWidth: "90%", mx: "auto", my: 5 }}>
+		<Container sx={{ pb: "40px" }}>
 			<Stepper activeStep={activeStep}>
 				{steps.map((label, index) => {
 					const stepProps = {};
@@ -93,7 +93,9 @@ export default function PaymentStepper({
 					}
 					return (
 						<Step key={label} {...stepProps}>
-							<StepLabel {...labelProps}>{label}</StepLabel>
+							<StepLabel
+								{...labelProps}
+							>{label}</StepLabel>
 						</Step>
 					);
 				})}
@@ -126,38 +128,91 @@ export default function PaymentStepper({
 								setChosenAddress={setAddress}
 							/>
 						) : (
-							<Box sx={{ my: 2 }}>
-								{cart["cartList"].map((product) => (
-									<HorizontalProduct
-										product={product}
-										noQuantityChange={true}
-									/>
-								))}
+							<Box sx={{ my: 2, display: "flex" }}>
+								<Box>
+									{cart["cartList"].map((product) => (
+										<>
+											<HorizontalProduct
+												imageSize={"15%"}
+												product={product}
+												noQuantityChange={true}
+											/>
+											<Divider />
+										</>
+									))}
+								</Box>
 
 								<Box
 									sx={{
-										width: "fit-content",
-										p: 2,
-										mt: 2,
-										ml: "auto",
-										border: 1,
-										borderRadius: 3,
-									}}>
+										ml: "5%",
+										width: "45%",
+									}}
+								>
 									<Typography
-										variant="h6"
-										sx={{ fontSize: { xs: "1rem" } }}>
-										Total units: {cart.totalQuantity}
-										{" unit(s)"}
-									</Typography>
+										sx={{
+											fontSize: "18px",
+											fontWeight: "bold",
+											fontFamily: "Roboto Slab",
+										}}
+									>Bill Details</Typography>
+									<Box
+										sx={{
+											p: 2,
+											mt: 2,
+											border: 1,
+											borderRadius: 3,
+										}}>
+										<Typography
+											sx={{ fontSize: { xs: "1rem" } }}>
+											<b>Total quantity:</b> {cart.totalQuantity}
+											{" unit(s)"}
+										</Typography>
+										<Typography
+											sx={{ fontSize: { xs: "1rem" } }}>
+											<b>Total price:</b>{" "}
+											{Intl.NumberFormat("vi-VN", {
+												style: "currency",
+												currency: "VND",
+											}).format(cart.totalPrice)}
+										</Typography>
+									</Box>
+
 									<Typography
-										variant="h6"
-										sx={{ fontSize: { xs: "1rem" } }}>
-										Total price:{" "}
-										{Intl.NumberFormat("vi-VN", {
-											style: "currency",
-											currency: "VND",
-										}).format(cart.totalPrice)}
-									</Typography>
+										sx={{
+											fontSize: "18px",
+											fontWeight: "bold",
+											fontFamily: "Roboto Slab",
+											mt: 3,
+										}}
+									>Delivery Info</Typography>
+									<Box
+										sx={{
+											p: 2,
+											mt: 2,
+											border: 1,
+											borderRadius: 3,
+										}}>
+										<Typography
+											sx={{ fontSize: { xs: "1rem" } }}>
+											<b>Receiver's name:</b> {address.name}
+										</Typography>
+										<Typography
+											sx={{ fontSize: { xs: "1rem" } }}>
+											<b>Address:</b> {
+												address.addressInForm +
+												", Ward " +
+												address.ward +
+												", District " +
+												address.district +
+												", " +
+												address.city
+											}
+										</Typography>
+										<Typography
+											sx={{ fontSize: { xs: "1rem" } }}>
+											<b>Phone Number:</b> {address.phone}
+										</Typography>
+									</Box>
 								</Box>
 							</Box>
 						)}
@@ -183,13 +238,13 @@ export default function PaymentStepper({
 								disabled={disableFinish}
 								variant="outlined">
 								{activeStep === steps.length - 2
-									? "Finish?"
+									? "Finish"
 									: "Next"}
 							</Button>
 						</Box>
 					</React.Fragment>
 				</Container>
 			)}
-		</Box>
+		</Container>
 	);
 }
