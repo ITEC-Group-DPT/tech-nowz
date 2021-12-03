@@ -128,8 +128,22 @@ export default function PaymentStepper({
 								setChosenAddress={setAddress}
 							/>
 						) : (
-							<Box sx={{ my: 2, display: "flex" }}>
+							<Box sx={{
+								my: 2,
+								display: {
+									xs: "block",
+									md: "flex"
+								}
+							}}>
 								<Box>
+									<Typography
+										sx={{
+											fontSize: "18px",
+											fontWeight: "bold",
+											fontFamily: "Roboto Slab",
+											mb: "12px",
+										}}
+									>Cart Details</Typography>
 									{cart["cartList"].map((product) => (
 										<>
 											<HorizontalProduct
@@ -144,8 +158,19 @@ export default function PaymentStepper({
 
 								<Box
 									sx={{
-										ml: "5%",
-										width: "45%",
+										ml:
+										{
+											xs: 0,
+											md: "5%"
+										},
+										mt: {
+											xs: "24px",
+											md: "0",
+										},
+										width: {
+											xs: "fit-content",
+											md: "45%",
+										},
 									}}
 								>
 									<Typography
