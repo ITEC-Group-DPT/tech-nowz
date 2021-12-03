@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Banner.style';
 import Slider from 'react-slick';
-import { Container, useMediaQuery } from '@mui/material';
+import { Container, useMediaQuery,CardMedia } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import slideShow1 from '../../img/slide-show1.jpg';
 import slideShow2 from '../../img/slide-show2.jpg';
@@ -67,27 +67,27 @@ const Banners = () => {
 			<Slider {...settings}>
 				<div>
 					<div style={styles.slideShowWrapper}>
-						<img
-							style={styles.slideShow}
-							src={slideShow1}
+						<CardMedia
+							sx={styles.slideShow}
+							image={slideShow1}
 							alt="slide1"
 						/>
 					</div>
 				</div>
 				<div>
 					<div style={styles.slideShowWrapper}>
-						<img
-							style={styles.slideShow}
-							src={slideShow2}
+						<CardMedia
+							sx={styles.slideShow}
+							image={slideShow2}
 							alt="slide2"
 						/>
 					</div>
 				</div>
 				<div>
 					<div style={styles.slideShowWrapper}>
-						<img
-							style={styles.slideShow}
-							src={slideShow3}
+						<CardMedia
+							sx={styles.slideShow}
+							image={slideShow3}
 							alt="slide3"
 						/>
 					</div>
