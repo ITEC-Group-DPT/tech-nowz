@@ -1,3 +1,11 @@
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+	badge: {
+		right: "7px !important",
+	},
+});
+
 const styles = {
 	userItemWrapper: {
 		display: 'flex',
@@ -45,4 +53,4 @@ const styles = {
     },
 };
 
-export default styles;
+export { styles, useStyles };
