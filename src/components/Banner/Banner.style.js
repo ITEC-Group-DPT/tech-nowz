@@ -6,12 +6,16 @@ const styles = {
 
 	slideShowWrapper: {
 		width: '100%',
-		height: '120%',
+		height: '100%',
 	},
 
 	slideShow: {
+		objectFit:"contain",
 		width: '100%',
-		height: '100%',
+		height: {
+			xs: "220px",
+			md: '50vh',
+		},
 	},
 };
 
