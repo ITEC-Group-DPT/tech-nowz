@@ -15,7 +15,7 @@ const AdminEditProduct = () => {
 	const [productForm, setProductForm] = useState(location.state);
 
 	function submitEditForm() {
-		if (checkEmptyForm(productForm, ["img2", "img3", "img4",'sold','rating'])) {
+		if (checkEmptyForm(productForm, ["img2", "img3", "img4",'sold','rating',"spec", "description"])) {
 			if (checkNotNegative(productForm, ["price"])) {
 				editProduct(productForm, productForm.productID).then(
 					(response) => {

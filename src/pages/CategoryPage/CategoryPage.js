@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { styles, useStyles } from './CategoryPage.styles'
 import { Box, Pagination, Container, Grid, Typography, Select, FormControl, MenuItem, Skeleton } from '@mui/material'
-import { useParams } from "react-router-dom"
+import { useParams,useHistory } from "react-router-dom"
 import { getTotalCategoryAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton'
 import ProductItem from '../../components/ProductItem/ProductItem'
@@ -9,6 +9,7 @@ import ProductItem from '../../components/ProductItem/ProductItem'
 const CategoryPage = () => {
     const { name } = useParams()
     const classes = useStyles()
+    const history = useHistory();
 
 
     const [totalPage, setTotalPage] = useState({ "isLoading": true })
@@ -25,7 +26,7 @@ const CategoryPage = () => {
         getTotalCategoryAPI(name).then(response => {
             if (response.data.success) {
                 const data = response.data.data
-                console.log("totalProduct: ", data.total)
+                if (data.total == 0) history.push("/notfound") 
 
                 const total = Math.ceil(data.total / itemsPerPage)
                 console.log("totalPage: ", total)

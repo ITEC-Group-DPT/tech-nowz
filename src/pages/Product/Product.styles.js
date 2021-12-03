@@ -270,7 +270,7 @@ const styles = {
 		transform: "translate(-50%, -50%)",
 		width: 'fit-content',
 		bgcolor: "white",
-		border: "2px solid #000",
+		borderRadius:"8px",
 		boxShadow: 24,
 		p: 4,
 	},

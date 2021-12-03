@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Redirect, useRouteMatch, useLocation } from 'react-router-dom';
+import { Switch, Route, Redirect, useRouteMatch, useLocation,useHistory } from 'react-router-dom';
 
 import { validateApi } from '../api/authApi';
 import { showAuthError } from '../store/actions/authAction';
@@ -16,12 +16,15 @@ const ProfileNavigation = () => {
 	const match = useRouteMatch();
 	const location = useLocation();
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		validateApi().then(response => {
 			console.log('response: ', response);
 			if (!response.data.success) {
 				dispatch(showAuthError());
+				history.push("/error")
+
 			}
 		})
 	}, [location])

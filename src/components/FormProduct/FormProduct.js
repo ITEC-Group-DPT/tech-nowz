@@ -142,25 +142,26 @@ const FormProduct = ({
 				<Typography sx={{ pb: 1 }}>
 					Specification
 				</Typography>
-				<TextareaAutosize
-					maxRows={4}
-					minRows={3}
-					placeholder="Product specification"
+				<TextField
+					style={{textAlign: 'left',background:"white"}}
+					multiline
+					rows={5}
 					value={form.spec}
-					sx={{ width: "100%" }}
+					placeholder="Product specification"
 					onChange={(e) =>
 						setProduct({ ...form, spec: e.target.value })
 					}
 				/>
-				<Typography sx={{ pb: 1, pt: 2 }}>
+				<Typography sx={{ pb: 1,pt:2 }}>
 					Description
 				</Typography>
-				<TextareaAutosize
-					maxRows={4}
-					minRows={3}
+				<TextField
+					style={{textAlign: 'left',background:"white"}}
+					multiline
+					rows={5}
 					placeholder="Product description"
+
 					value={form.description}
-					sx={{ width: "100%" }}
 					onChange={(e) =>
 						setProduct({ ...form, description: e.target.value })
 					}

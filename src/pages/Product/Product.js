@@ -555,13 +555,14 @@ const Product = () => {
 							variant="outlined"
 							sx={{ mx: 1 }}
 							onClick={() => setModalOpen(false)}>
-							No
+							Cancel
 						</Button>
 						<Button
 							variant="outlined"
-							sx={{ mx: 1, color: "red" }}
+							sx={{ mx: 1 }}
+							color="error"
 							onClick={() => onDeleteProduct()}>
-							Yes
+							Confirm
 						</Button>
 					</Box>
 				</Box>

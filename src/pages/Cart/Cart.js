@@ -88,7 +88,12 @@ const Cart = () => {
                 )}
                 {
                     (!isLoading && cartList.length == 0)
-                        ? <EmptyList img={huhu} imgHeight={'60vh'} btnMarginTop={"-10vh"} />
+                        ? <EmptyList
+                            img={huhu}
+                            imgHeight={'60vh'}
+                            btnMarginTop={"-10vh"}
+                            isCart
+                        />
                         : null
                 }
                 {cartList && cartList.length != 0 ?
