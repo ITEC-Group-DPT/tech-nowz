@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/Modal'
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
 
-import { checkNotNegative,checkEmptyForm } from '../../constant/function'
+import { checkNotNegative, checkEmptyForm } from '../../constant/function'
 //redux
 import { userInfoSelector } from "../../store/selectors";
 import { cartSelector } from "../../store/selectors"
@@ -244,8 +244,13 @@ const Product = () => {
 				let formattedDesc = "Sản phẩm chưa có thông tin mô tả"
 				if (data.product.description !== "")
 					formattedDesc = data.product.description
+
+					let formattedSpec = "Sản phẩm chưa có thông tin kỹ thuật"
+					if (data.product.spec !== "")
+						formattedSpec = data.product.spec;
 				setformatted({
 					price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.product.price),
+					spec: formattedSpec,
 					desc: formattedDesc,
 				})
 
@@ -500,7 +505,7 @@ const Product = () => {
 
 							) :
 								(
-									<Typography sx={styles.details}>{product.product.spec}</Typography>
+									<Typography sx={styles.details}>{formatted.spec}</Typography>
 								)}
 						</TabPanel>
 						<TabPanel value="2">

@@ -2,22 +2,33 @@ import { React, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import styles from './FormProduct.styles'
 import {
-	Input,
-	InputLabel,
 	Button,
 	FormControl,
-	FormHelperText,
 	Box,
 	TextField,
 	Container,
-	TextareaAutosize,
+	InputAdornment,
+	MenuItem,
+	Select,
 	Typography,
+	InputLabel,
 } from "@mui/material";
 
 function setDefault(e) {
 	console.log(e);
 }
 
+const ITEM_HEIGHT = 40;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+const category = ["CPU", "Case", "Gaming Chair", "Headphone", "Keyboard", "Laptop", "Mainboard","Monitor", "Mouse", "PSU", "RAM", "SSD", "Speaker", "VGA"];
 const FormProduct = ({
 	form,
 	setProduct,
@@ -25,6 +36,8 @@ const FormProduct = ({
 	cancelBtnAppear = true,
 	setAppear = setDefault,
 }) => {
+
+	
 	const history = useHistory()
 	return (
 		<Box sx={styles.box}>
@@ -40,56 +53,46 @@ const FormProduct = ({
 					value={form.name}
 					variant="outlined"
 				/>
-				<TextField
-					sx={styles.textField}
-					name="type"
-					label="Category"
-					onChange={(e) =>
-						setProduct({
-							...form,
-							type: e.target.value,
-						})
-					}
-					placeholder="Product category"
-					value={form.type}
-					variant="outlined"
-				/>
+				<Box sx = {{position: "relative"}}>
+					<InputLabel id="zzzz">Category</InputLabel>
+
+					<Select
+						placeholder="Category"
+						labelId="zzzz"
+						sx={styles.textField}
+						id="demo-simple-select"
+						value={form.type}
+						label="Category"
+						MenuProps={MenuProps}
+						onChange={(e) => {
+							setProduct({ ...form, type: e.target.value })
+						}}
+					>
+						{category.map(item => {
+							let value = item.replace(" ", "");
+							return (
+								<MenuItem value={value}>{item}</MenuItem>
+							)
+						})}
+					</Select>
+				</Box>
 				<TextField
 					sx={styles.textField}
 					name="price"
 					label="Price"
-					type="number"
+					type="tel"
 					placeholder="Product price"
-					onChange={(e) =>
-						setProduct({ ...form, price: e.target.value })
-					}
+					onChange={(e) => {
+						let value = e.target.value.replace(/[^0-9]/g, '');
+
+						setProduct({ ...form, price: value })
+					}}
+					InputProps={{
+						endAdornment: <Typography>VND</Typography>
+					}}
 					value={form.price}
 					variant="outlined"
 				/>
-				{/* <TextField
-					sx={styles.textField}
-					name="rating"
-					type="number"
-					label="Rating"
-					placeholder="Product rating"
-					onChange={(e) =>
-						setProduct({ ...form, rating: e.target.value == '' ? "" : parseFloat(e.target.value) })
-					}
-					value={form.rating}
-					variant="outlined"
-				/>
-				<TextField
-					sx={styles.textField}
-					name="sold"
-					type="number"
-					label="Amount of product sold"
-					placeholder="Product sold amount"
-					onChange={(e) =>
-						setProduct({ ...form, sold: e.target.value  })
-					}
-					value={form.sold}
-					variant="outlined"
-				/> */}
 
 				<TextField
 					sx={styles.textField}
@@ -143,7 +146,7 @@ const FormProduct = ({
 					Specification
 				</Typography>
 				<TextField
-					style={{textAlign: 'left',background:"white"}}
+					style={{ textAlign: 'left', background: "white" }}
 					multiline
 					rows={5}
 					value={form.spec}
@@ -152,11 +155,11 @@ const FormProduct = ({
 						setProduct({ ...form, spec: e.target.value })
 					}
 				/>
-				<Typography sx={{ pb: 1,pt:2 }}>
+				<Typography sx={{ pb: 1, pt: 2 }}>
 					Description
 				</Typography>
 				<TextField
-					style={{textAlign: 'left',background:"white"}}
+					style={{ textAlign: 'left', background: "white" }}
 					multiline
 					rows={5}
 					placeholder="Product description"
