@@ -6,7 +6,7 @@ const styles = {
 		alignItems: 'center',
 		padding: "8px 5px",
 		transition: '400ms',
-		borderRadius: '25px',
+		borderRadius: '20px',
 		'&:hover': {
 			backgroundColor: '#737373',
 		},
@@ -24,6 +24,7 @@ const styles = {
 	navLink: {
 		textDecoration: 'none',
 		width: '100%',
+		cursor: "pointer"
 	},
 	icon: {
 		'& *': {
@@ -32,6 +33,7 @@ const styles = {
 	},
 	navTitle: {
 		fontSize: '16px !important',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
 };
 

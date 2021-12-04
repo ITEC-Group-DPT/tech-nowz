@@ -1,3 +1,11 @@
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+	badge: {
+		right: "7px !important",
+	},
+});
+
 const styles = {
 	userItemWrapper: {
 		display: 'flex',
@@ -27,9 +35,11 @@ const styles = {
 	icon: {
 		fontSize: '20px !important',
 		marginRight: '7px !important',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
 	navTitle: {
 		fontSize: '16px',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
     btnNav: {
         textTransform: "none",
@@ -45,4 +55,4 @@ const styles = {
     },
 };
 
-export default styles;
+export { styles, useStyles };

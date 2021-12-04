@@ -1,5 +1,5 @@
 import { React, useRef } from 'react'
-import styles from './NavItemUser.style'
+import { styles, useStyles } from './NavItemUser.style'
 import ProfileMenu from '../../ProfileMenu/ProfileMenu';
 import { Link } from 'react-router-dom';
 import { Typography, Fade, Button, Badge, Tooltip, Zoom, styled } from '@mui/material';
@@ -28,6 +28,7 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
 }));
 
 const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
+    const classes = useStyles();
     const cart = useSelector(cartSelector)
     const cartNoti = useSelector(cartNotiSelector)
     const favoriteNoti = useSelector(favoriteNotiSelector)
@@ -46,7 +47,7 @@ const NavUserItems = ({ isHome, isPopUp, userInfo }) => {
                     >
                         <Link to='/checkout/cart' style={styles.navLink}>
                             <Box sx={styles.wrapper}>
-                                <Badge badgeContent={cart.totalQuantity || 0} color="error">
+                                <Badge badgeContent={cart.totalQuantity || 0} classes={{ badge: classes.badge }} color="error">
                                     <icons.Cart sx={styles.icon} />
                                 </Badge>
                                 <Typography sx={styles.navTitle}>Cart</Typography>

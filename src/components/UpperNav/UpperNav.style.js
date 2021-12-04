@@ -42,10 +42,12 @@ const styles = {
 			xs: '22px',
 			lg: '25px',
 		},
+		fontFamily:"'IBM Plex Serif', serif",
 	},
 	menuTitle: {
 		marginLeft: '.7rem',
-		fontSize: '18px'
+		fontSize: '18px',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
 	searchComponent: {
 		position: 'relative',

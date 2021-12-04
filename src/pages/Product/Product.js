@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './Product.styles'
 import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useParams, useLocation, Link, useHistory } from "react-router-dom"
-import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton, Modal } from '@mui/material'
+import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton, Modal, MenuList, MenuItem, Popper, Paper, Grow, ClickAwayListener } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
 import TabContext from '@mui/lab/TabContext'
@@ -17,6 +17,7 @@ import CustomModal from '../../components/Modal/Modal'
 import { changeQuantityApi } from '../../api/cartApi'
 import { changeFavoriteApi } from '../../api/favoriteApi'
 
+import { checkNotNegative, checkEmptyForm } from '../../constant/function'
 //redux
 import { userInfoSelector } from "../../store/selectors";
 import { cartSelector } from "../../store/selectors"
@@ -116,6 +117,20 @@ const settingsRelatedProduct = {
 		},
 	],
 };
+const defaultemptyProduct = {
+	productID: 0,
+	type: "",
+	description: "",
+	spec: "",
+	name: "",
+	price: 0,
+	rating: 0.0,
+	sold: 0,
+	img1: "",
+	img2: "",
+	img3: "",
+	img4: "",
+};
 
 const Product = () => {
 	//const { name } = useParams()
@@ -136,7 +151,7 @@ const Product = () => {
 
 	const dispatch = useDispatch()
 
-	const onDeleteProduct = () => {
+	function onDeleteProduct() {
 		setModalOpen(false);
 		deleteProduct(productID).then((response) => {
 			if (response.data.success == true) {
@@ -229,8 +244,13 @@ const Product = () => {
 				let formattedDesc = "Sản phẩm chưa có thông tin mô tả"
 				if (data.product.description !== "")
 					formattedDesc = data.product.description
+
+					let formattedSpec = "Sản phẩm chưa có thông tin kỹ thuật"
+					if (data.product.spec !== "")
+						formattedSpec = data.product.spec;
 				setformatted({
 					price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.product.price),
+					spec: formattedSpec,
 					desc: formattedDesc,
 				})
 
@@ -249,6 +269,27 @@ const Product = () => {
 	const handleChange = (event, newValue) => {
 		setTab(newValue);
 	}
+
+
+	//admin UI
+
+	const anchorRefDropDown = useRef(null)
+	const clickRefDropDown = useRef(null)
+	const [openDropDown, setOpenDropDown] = useState(false);
+
+	const handleToggleDropDown = () => {
+		setOpenDropDown((prevOpen) => !prevOpen);
+	};
+
+	const handleCloseDropDown = (event) => {
+		if (anchorRefDropDown.current && anchorRefDropDown.current.contains(event.target)) {
+			return;
+		}
+		setOpenDropDown(false);
+	};
+
+	clickRefDropDown.current = handleToggleDropDown // assign button onclick of parent component to handleToggle function
+
 
 	return (
 		<Box sx={styles.box}>
@@ -370,56 +411,78 @@ const Product = () => {
 
 							{userRole == 0 && (
 								product.isLoading ? (
-									<Box sx={styles.btnWrapper}>
+									<Box sx={styles.adminWrapper}>
 										<Skeleton
 											variant="text"
 											animation="wave"
 											sx={styles.skeletonButton}>
-											<Button
-												variant="outlined"
-												startIcon={
-													product.isFavorite ? (
-														<icons.IsFavorite />
-													) : (
-														<icons.NotFavorite />
-													)
-												}
-												sx={styles.addBtn}>
-												Add to Cart
-											</Button>
-										</Skeleton>
-										<Skeleton
-											variant="text"
-											animation="wave"
-											sx={styles.skeletonButton}>
-											<Button
-												variant="contained"
-												startIcon={<icons.AddCart />}
-												sx={styles.addBtn}>
-												Add to Cart
+											<Button>
+												<icons.More />
 											</Button>
 										</Skeleton>
 									</Box>
 								) : (
-									<Box sx={styles.btnWrapper}>
+									<Box sx={styles.adminWrapper}>
 										<Button
-											sx={styles.deleteBtn}
-											startIcon={<icons.Trashcan />}
-											onClick={() => setModalOpen(true)}>
+											ref={anchorRefDropDown}
+											sx={styles.adminBtn}
+											id="composition-button"
+											aria-controls={'composition-menu'}
+											aria-expanded={'true'}
+											aria-haspopup="true"
+											onClick={() => clickRefDropDown.current()}
 
-											Delete
-										</Button>
-
-										<Button
-											onClick={() => history.push('/profile/editproduct', product.product)}
-											startIcon={<icons.Edit />}
-											sx={styles.editBtn}>
-
-											Edit
+										>
+											<icons.More />
 										</Button>
 									</Box>
 								)
 							)}
+
+							<Popper
+								open={openDropDown}
+								anchorEl={anchorRefDropDown.current}
+								role={undefined}
+								placement="bottom-start"
+								transition
+								disablePortal
+								style={styles.wrapper}
+							>
+								{({ TransitionProps, placement }) => (
+									<Grow
+										{...TransitionProps}
+										style={{
+											transformOrigin:
+												placement === 'bottom-start' ? 'left top' : 'left bottom',
+										}}
+									>
+										<Paper sx={styles.menu}>
+											<ClickAwayListener onClickAway={handleCloseDropDown}>
+												<MenuList
+													autoFocusItem={openDropDown}
+													id="composition-menu"
+													aria-labelledby="composition-button"
+												>
+													<MenuItem onClick={() => history.push('/profile/editproduct', product.product)} sx={styles.adminMenu}>
+														<Box sx={styles.adminBtnWrapper}>
+															<icons.Edit sx={styles.adminIcon} />
+															<Typography sx={styles.adminText}>Edit</Typography>
+														</Box>
+													</MenuItem>
+
+													<MenuItem onClick={() => setModalOpen(true)} sx={styles.adminMenu}>
+														<Box sx={styles.adminBtnWrapper}>
+															<icons.Trashcan sx={styles.adminIcon} />
+															<Typography sx={styles.adminText}>Delete</Typography>
+														</Box>
+													</MenuItem>
+												</MenuList>
+
+											</ClickAwayListener>
+										</Paper>
+									</Grow>
+								)}
+							</Popper>
 						</Box>
 					</Grid>
 				</Grid>
@@ -485,7 +548,7 @@ const Product = () => {
 
 							) :
 								(
-									<Typography sx={styles.details}>{product.product.spec}</Typography>
+									<Typography sx={styles.details}>{formatted.spec}</Typography>
 								)}
 						</TabPanel>
 						<TabPanel value="2">
@@ -540,13 +603,14 @@ const Product = () => {
 							variant="outlined"
 							sx={{ mx: 1 }}
 							onClick={() => setModalOpen(false)}>
-							No
+							Cancel
 						</Button>
 						<Button
 							variant="outlined"
-							sx={{ mx: 1, color: "red" }}
+							sx={{ mx: 1 }}
+							color="error"
 							onClick={() => onDeleteProduct()}>
-							Yes
+							Confirm
 						</Button>
 					</Box>
 				</Box>

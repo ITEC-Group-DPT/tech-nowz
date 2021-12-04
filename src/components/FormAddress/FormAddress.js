@@ -10,6 +10,7 @@ import {
 	Container,
 } from "@mui/material";
 import styles from './FormAddress.styles'
+import {checkEmptyForm} from "../../constant/function";
 import { createAddressBook, editAddressBook } from "../../api/addressApi";
 
 let defaultAddress = {
@@ -59,18 +60,10 @@ const FormAddress = ({
 	// const [city,setCity] = useState(arrAddress[3])
 	// const [phone,setPhone] = useState(address.phone)
 
-	function checkEmptyForm(form) {
-
-		for (const element in form) {
-			if (form[element].toString() === "") {
-				return false;
-			}
-		}
-		return true;
-	}
 	function handleSubmit(e) {
 		e.preventDefault();
 		if (checkEmptyForm(form) == false) {
+			console.log('empty input');
 			return;
 		}
 		let id = address.deliveryID;

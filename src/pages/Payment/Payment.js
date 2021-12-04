@@ -7,11 +7,13 @@ import {
 import { Box } from "@mui/system";
 import { getAddressBook, createAddressBook } from "../../api/addressApi";
 
+import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import {cartSelector } from "../../store/selectors"
+import { cartSelector } from "../../store/selectors"
 
 import RadioAddressPayment from "../../components/RadioAddressPayment/RadioAddressPayment";
 import PaymentStepper from "../../components/PaymentStepper/PaymentStepper";
+import styles from "./Payment.style"
 
 const emptyAddress = {
 	name: "",
@@ -24,10 +26,14 @@ const emptyAddress = {
 
 const Payment = () => {
 
+	const history = useHistory();
 	const cart = useSelector(cartSelector);
 	const [addressBook, setAddressBook] = useState([]);
 
 	useEffect(() => {
+		if (cart.totalQuantity === 0) {
+			history.push("/error")
+		}
 		getAddressBook().then((res) => {
 			if (res.data.success == true) setAddressBook(res.data.data);
 		});
@@ -61,19 +67,24 @@ const Payment = () => {
 				(address) => address.deliveryID == id
 			);
 
-			setChosenAddress(processingAddress(addressBook[indexbyid]));		}
+			setChosenAddress(processingAddress(addressBook[indexbyid]));
+		}
 	}
 
 	return (
 		<Box sx={{ minHeight: "65%" }}>
-			<Container sx={{ my: 2 }}>
+			<Container sx={styles.addressbook}>
 				<Typography
 					variant="h4"
 					sx={{ fontWeight: "600" }}
 					component="div">
 					Address Book
 				</Typography>
-				<Typography variant="p" component="div">
+				<Typography
+					sx={{ mb: "18px" }}
+					variant="p"
+					component="div"
+				>
 					(you can edit exists address book by choosing and editing
 					below)
 				</Typography>
@@ -92,12 +103,8 @@ const Payment = () => {
 					/>
 				))}
 			</Container>
-			<Divider />
-			{/* <FormAddress address={chosenAddress} /> */}
-
-			{/* <FormAddress address={indexOfAddress}/> */}
 			{
-				cart.cartList && 
+				cart.cartList &&
 				<PaymentStepper
 					idaddress={chosenIDAddress}
 					address={chosenAddress}

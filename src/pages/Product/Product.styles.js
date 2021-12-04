@@ -26,6 +26,7 @@ const styles = {
 		bgcolor: 'rgb(245, 245, 245)',
 	},
 	productContainer: {
+		position: "relative",
 		minHeight: '80vh',
 		bgcolor: 'white',
 		borderRadius: '15px',
@@ -270,7 +271,7 @@ const styles = {
 		transform: "translate(-50%, -50%)",
 		width: 'fit-content',
 		bgcolor: "white",
-		border: "2px solid #000",
+		borderRadius:"8px",
 		boxShadow: 24,
 		p: 4,
 	},
@@ -302,8 +303,40 @@ const styles = {
         "&: hover": {
             bgcolor: '#525252',
         },
-	}
+	},
+	adminWrapper: {
+		position: "absolute",
+		top: 8,
+		right: 8,
+	},
 
+	adminBtn: {
+		color: "#333333",
+	},
+
+	menu: {
+		padding: "0 6px",
+	},
+
+	adminMenu: {
+		borderRadius: "25px",
+		my: 0.5,
+	},
+
+	adminBtnWrapper: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+
+	adminIcon: {
+		fontSize: "22px",
+		mr: 1,
+	},
+
+	adminText: {
+		fontSize: "18px",
+	}
 };
 
 export default styles;

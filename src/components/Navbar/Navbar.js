@@ -105,10 +105,10 @@ const Navbar = () => {
 						isDrawer
 					/>
 				</ListItem>
-				<ListItem button key="Shipping Policy" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
+				<ListItem button key="Shipping" sx={{ padding: 0 }} onClick={toggleDrawer(anchor, false)}>
 					<NavItem
 						href="/"
-						title="Shipping Policy"
+						title="Shipping"
 						icon={<icons.Truck sx={style.iconNav} />}
 						isDrawer
 					/>
@@ -236,14 +236,14 @@ const Navbar = () => {
 								</Grid>
 								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
-										href="/"
+										href="#"
 										title="Discount"
 										icon={<icons.Offer sx={style.iconNav} />}
 									/>
 								</Grid>
 								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
-										href="/"
+										href="#"
 										title="Shipping"
 										icon={<icons.Truck sx={style.iconNav} />}
 									/>
@@ -251,7 +251,7 @@ const Navbar = () => {
 								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
 										href="/contactus"
-										title="Contact"
+										title="Contact Us"
 										icon={<icons.Phone sx={style.iconNav} />}
 									/>
 								</Grid>
