@@ -12,6 +12,7 @@ const CustomModal = ({
     onPressCancel,
     outlinedConfirm,
 
+    noConfirm,
     noCancel,
     cancelText = "Cancel",
     confirmText = "Confirm",
@@ -58,20 +59,22 @@ const CustomModal = ({
                                 {cancelText}
                             </Button>
                         }
-
-                        <Button
-                            variant={outlinedConfirm ? "outlined" : "contained"}
-                            sx={!outlinedConfirm
-                                ? styles.confirmButton
-                                : styles.outlineButton
-                            }
-                            onClick={() => {
-                                onPressConfirm && onPressConfirm();
-                                closeModal();
-                            }}
-                        >
-                            {confirmText}
-                        </Button>
+                        {
+                            !noConfirm &&
+                            <Button
+                                variant={outlinedConfirm ? "outlined" : "contained"}
+                                sx={!outlinedConfirm
+                                    ? styles.confirmButton
+                                    : styles.outlineButton
+                                }
+                                onClick={() => {
+                                    onPressConfirm && onPressConfirm();
+                                    closeModal();
+                                }}
+                            >
+                                {confirmText}
+                            </Button>
+                        }
                     </Box>
                 </Box>
             </Fade>

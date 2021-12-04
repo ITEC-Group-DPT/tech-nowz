@@ -35,9 +35,11 @@ const styles = {
 	icon: {
 		fontSize: '20px !important',
 		marginRight: '7px !important',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
 	navTitle: {
 		fontSize: '16px',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
     btnNav: {
         textTransform: "none",

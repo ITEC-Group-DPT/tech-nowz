@@ -59,7 +59,7 @@ const style = {
 		justifyContent: 'center',
 		padding: "8px 5px",
 		transition: '400ms',
-		borderRadius: '25px',
+		borderRadius: '20px',
 		'&:hover': {
 			backgroundColor: '#737373',
 		},
@@ -67,10 +67,12 @@ const style = {
 	iconNav: {
 		fontSize: '20px !important',
 		marginRight: '7px !important',
+		fontFamily:"'IBM Plex Serif', serif",
 	},
 	titleNav: {
 		fontSize: '16px !important',
 		textTransform: "none",
+		fontFamily:"'IBM Plex Serif', serif"
 	},
 
 };

@@ -9,20 +9,21 @@ const styles = {
 		boxShadow: "rgb(0 0 0 / 24%) 0px 24px 24px 0px, rgb(0 0 0 / 18%) 0px 0px 24px 0px",
 		width: {
 			xs: "90%",
-			md: "45%",
+			md: "35%",
 		},
-		outline: "none"
+		outline: "none",
 	},
 	title: {
 		//fontFamily: "'Roboto Slab', serif",
 		fontWeight: "700",
 		fontSize: "20px",
 		borderBottom: "1px solid #919191",
-		padding: "12px 24px"
+		padding: "12px 24px",
+		fontFamily:"Roboto Slab",
 	},
 	description: {
 		padding: "16px 24px",
-		//fontFamily: "'IBM Plex Serif', serif",
+		fontFamily: "'IBM Plex Serif', serif",
 	},
 	buttonView: {
 		display: "flex",
