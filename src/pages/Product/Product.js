@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './Product.styles'
 import { icons } from '../../constant'
 import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useParams, useLocation, Link, useHistory } from "react-router-dom"
-import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton, Modal } from '@mui/material'
+import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton, Modal, MenuList, MenuItem, Popper, Paper, Grow, ClickAwayListener } from '@mui/material'
 import { Box } from '@mui/system'
 import Slider from "react-slick"
 import TabContext from '@mui/lab/TabContext'
@@ -270,6 +270,27 @@ const Product = () => {
 		setTab(newValue);
 	}
 
+
+	//admin UI
+
+	const anchorRefDropDown = useRef(null)
+	const clickRefDropDown = useRef(null)
+	const [openDropDown, setOpenDropDown] = useState(false);
+
+	const handleToggleDropDown = () => {
+		setOpenDropDown((prevOpen) => !prevOpen);
+	};
+
+	const handleCloseDropDown = (event) => {
+		if (anchorRefDropDown.current && anchorRefDropDown.current.contains(event.target)) {
+			return;
+		}
+		setOpenDropDown(false);
+	};
+
+	clickRefDropDown.current = handleToggleDropDown // assign button onclick of parent component to handleToggle function
+
+
 	return (
 		<Box sx={styles.box}>
 			<Container maxWidth="xl" sx={styles.productContainer}>
@@ -390,56 +411,78 @@ const Product = () => {
 
 							{userRole == 0 && (
 								product.isLoading ? (
-									<Box sx={styles.btnWrapper}>
+									<Box sx={styles.adminWrapper}>
 										<Skeleton
 											variant="text"
 											animation="wave"
 											sx={styles.skeletonButton}>
-											<Button
-												variant="outlined"
-												startIcon={
-													product.isFavorite ? (
-														<icons.IsFavorite />
-													) : (
-														<icons.NotFavorite />
-													)
-												}
-												sx={styles.addBtn}>
-												Add to Cart
-											</Button>
-										</Skeleton>
-										<Skeleton
-											variant="text"
-											animation="wave"
-											sx={styles.skeletonButton}>
-											<Button
-												variant="contained"
-												startIcon={<icons.AddCart />}
-												sx={styles.addBtn}>
-												Add to Cart
+											<Button>
+												<icons.More />
 											</Button>
 										</Skeleton>
 									</Box>
 								) : (
-									<Box sx={styles.btnWrapper}>
+									<Box sx={styles.adminWrapper}>
 										<Button
-											sx={styles.deleteBtn}
-											startIcon={<icons.Trashcan />}
-											onClick={() => setModalOpen(true)}>
+											ref={anchorRefDropDown}
+											sx={styles.adminBtn}
+											id="composition-button"
+											aria-controls={'composition-menu'}
+											aria-expanded={'true'}
+											aria-haspopup="true"
+											onClick={() => clickRefDropDown.current()}
 
-											Delete
-										</Button>
-
-										<Button
-											onClick={() => history.push('/profile/editproduct', product.product)}
-											startIcon={<icons.Edit />}
-											sx={styles.editBtn}>
-
-											Edit
+										>
+											<icons.More />
 										</Button>
 									</Box>
 								)
 							)}
+
+							<Popper
+								open={openDropDown}
+								anchorEl={anchorRefDropDown.current}
+								role={undefined}
+								placement="bottom-start"
+								transition
+								disablePortal
+								style={styles.wrapper}
+							>
+								{({ TransitionProps, placement }) => (
+									<Grow
+										{...TransitionProps}
+										style={{
+											transformOrigin:
+												placement === 'bottom-start' ? 'left top' : 'left bottom',
+										}}
+									>
+										<Paper sx={styles.menu}>
+											<ClickAwayListener onClickAway={handleCloseDropDown}>
+												<MenuList
+													autoFocusItem={openDropDown}
+													id="composition-menu"
+													aria-labelledby="composition-button"
+												>
+													<MenuItem onClick={() => history.push('/profile/editproduct', product.product)} sx={styles.adminMenu}>
+														<Box sx={styles.adminBtnWrapper}>
+															<icons.Edit sx={styles.adminIcon} />
+															<Typography sx={styles.adminText}>Edit</Typography>
+														</Box>
+													</MenuItem>
+
+													<MenuItem onClick={() => setModalOpen(true)} sx={styles.adminMenu}>
+														<Box sx={styles.adminBtnWrapper}>
+															<icons.Trashcan sx={styles.adminIcon} />
+															<Typography sx={styles.adminText}>Delete</Typography>
+														</Box>
+													</MenuItem>
+												</MenuList>
+
+											</ClickAwayListener>
+										</Paper>
+									</Grow>
+								)}
+							</Popper>
 						</Box>
 					</Grid>
 				</Grid>
