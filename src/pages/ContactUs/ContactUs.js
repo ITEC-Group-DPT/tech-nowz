@@ -4,7 +4,7 @@ import { FeedbackForm } from '../../components/FeedbackForm/FeedbackForm';
 import styles from './ContactUs.styles';
 
 const mailURL = 'technowz@gmail.com';
-const websiteURL = 'http://www.technowz.vn';
+const websiteURL = 'https://technow-b54b6.web.app';
 
 const ContactUs = () => {
 	return (
@@ -56,7 +56,7 @@ const ContactUs = () => {
 							<Link
 								sx={styles.linkContent}
 								onClick={(e) => {
-									window.location = `http://${websiteURL}`;
+									window.location = `${websiteURL}`;
 									e.preventDefault();
 								}}>
 								{websiteURL}
