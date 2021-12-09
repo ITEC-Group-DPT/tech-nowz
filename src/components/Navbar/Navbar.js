@@ -236,14 +236,14 @@ const Navbar = () => {
 								</Grid>
 								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
-										href="#"
+										href="/"
 										title="Discount"
 										icon={<icons.Offer sx={style.iconNav} />}
 									/>
 								</Grid>
 								<Grid item xs={1.5} sx={style.gridWrapper}>
 									<NavItem
-										href="#"
+										href="/"
 										title="Shipping"
 										icon={<icons.Truck sx={style.iconNav} />}
 									/>
