@@ -1,5 +1,6 @@
 {
   "name": "tech-nowz",
+  "homepage": "http://technowz.phuhanh.com.vn/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
