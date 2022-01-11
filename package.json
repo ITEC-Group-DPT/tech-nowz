@@ -1,6 +1,7 @@
 {
   "name": "tech-nowz",
   "version": "0.1.0",
+  "homepage": "http://technowz.phuhanh.com.vn/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
