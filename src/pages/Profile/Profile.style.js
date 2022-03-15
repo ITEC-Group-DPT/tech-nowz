@@ -35,11 +35,28 @@ const styles = {
     editBtn: {
         textTransform: 'none',
         color: 'black',
+        mx: 2,
+        minWidth: "200px",
+        py: 1,
+        borderColor: "black",
+        '&:hover': {
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            borderColor: "black"
+        }
+
     },
 
     changeBtn: {
         textTransform: 'none',
         color: 'black',
+        minWidth: "200px",
+        mx: 2,
+        py: 1,
+        borderColor: "black",
+        '&:hover': {
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            borderColor: "black"
+        }
     }
 }
 

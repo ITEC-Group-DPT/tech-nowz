@@ -1,7 +1,7 @@
 const styles = {
     avatarBox: {
-        width: 120,
-        height: 120,
+        width: 160,
+        height: 160,
         borderRadius: 50,
         border: 0.5,
         padding: 0,

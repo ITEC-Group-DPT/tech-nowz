@@ -51,7 +51,7 @@ const Profile = () => {
                             maxWidth: "100px",
                             fontWeight: "bold",
                             marginTop: 8,
-                            fontSize: 18,
+                            fontSize: 25,
                         }}
                         autoFocus
                         readOnly={!isChangeUsername}
@@ -82,6 +82,7 @@ const Profile = () => {
                 <Box sx={styles.btwWrapper}>
                     <Button
                         sx={styles.editBtn}
+                        variant="outlined"
                         onClick={() => {
                             if (isChangeUsername == false) {
                                 setCurrentUsername(username)
@@ -94,6 +95,7 @@ const Profile = () => {
 
                     <Button
                         sx={styles.changeBtn}
+                        variant="outlined"
                         onClick={() => setModalAppear(true)}
                     >
                         Change Password
