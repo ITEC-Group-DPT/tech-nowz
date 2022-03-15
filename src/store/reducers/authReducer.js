@@ -26,6 +26,14 @@ const AuthReducer = (state = initState, action) => {
                 user: action.data,
                 isLoading: false,
             }
+        case ActionType.CHANGE_USERNAME:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    username: action.data
+                },
+            }
 
         //sign in
         case ActionType.REMOVE_EMAIL_ERROR:
