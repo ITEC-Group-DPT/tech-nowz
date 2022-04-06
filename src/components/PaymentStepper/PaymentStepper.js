@@ -53,7 +53,7 @@ export default function PaymentStepper({
 			// console.log("da gui");
 			let productIDs = [];
 			for (const product of cart.cartList) {
-				let arr = [product.productID, product.quantity];
+				let arr = [product.productID, product.quantity, product.price];
 				productIDs.push(arr);
 			}
 
