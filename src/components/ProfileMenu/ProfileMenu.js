@@ -73,12 +73,12 @@ const ProfileMenu = ({ anchorRef, clickRef }) => {
                                         <Typography sx={styles.menuText}>Address</Typography>
                                     </MenuItem>
                                 </Link>
-                                {userRole==0 && (<Link to='/profile/createproduct' style={styles.menuLink}>
+                                {/* {userRole==0 && (<Link to='/profile/createproduct' style={styles.menuLink}>
                                     <MenuItem onClick={handleClose} sx={styles.menuItem}>
                                         <icons.Add sx={styles.menuIcon} />
                                         <Typography sx={styles.menuText}>Create Product</Typography>
                                     </MenuItem>
-                                </Link>)}
+                                </Link>)} */}
                                 <Divider />
                                 <MenuItem onClick={handleSignOut} sx={styles.menuItemSignOut}>
                                     <icons.SignOut sx={styles.menuIcon} />

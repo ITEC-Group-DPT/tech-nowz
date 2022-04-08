@@ -410,7 +410,7 @@ const Product = () => {
 								</Box>
 							)}
 
-							{userRole == 0 && (
+							{/* {userRole == 0 && (
 								product.isLoading ? (
 									<Box sx={styles.adminWrapper}>
 										<Skeleton
@@ -438,7 +438,7 @@ const Product = () => {
 										</Button>
 									</Box>
 								)
-							)}
+							)} */}
 
 							<Popper
 								open={openDropDown}
