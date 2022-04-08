@@ -8,6 +8,7 @@ import { sessionLogin } from '../store/actions/authAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from '../store/actions/cartAction';
 import { decryptData } from "../constant/utils"
+import { updateUserVisitAPI } from '../api/authApi';
 const AppNavigation = () => {
 
     const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const AppNavigation = () => {
 
             }
         }
+        updateUserVisitAPI();
     }, [])
 
     return (

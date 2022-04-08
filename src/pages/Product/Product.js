@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styles from './Product.styles'
 import { icons } from '../../constant'
-import { getProductAPI, getProductCategoryAPI } from '../../api/productApi'
+import { getProductAPI, getProductCategoryAPI, updateProductView } from '../../api/productApi'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { useParams, useLocation, Link, useHistory } from "react-router-dom"
 import { Container, Grid, Button, IconButton, CardMedia, Rating, Typography, Divider, Tab, Skeleton, Modal, MenuList, MenuItem, Popper, Paper, Grow, ClickAwayListener } from '@mui/material'
@@ -241,6 +241,7 @@ const Product = () => {
 				const data = response.data.data
 				console.log("product: ", data)
 
+				updateProductView(productID);
 				let formattedDesc = "Sản phẩm chưa có thông tin mô tả"
 				if (data.product.description !== "")
 					formattedDesc = data.product.description

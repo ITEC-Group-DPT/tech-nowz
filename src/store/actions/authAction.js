@@ -1,8 +1,10 @@
 import ActionType from './actionType'
-import { signInApi, signUpApi } from '../../api/authApi'
+import { signInApi, signUpApi, updateUserVisitAPI } from '../../api/authApi'
 import { getCart, clearCartUI } from "../actions/cartAction"
 import { encryptData } from '../../constant/utils'
 const signIn = (email, password, history) => {
+
+
     return dispatch => {
         dispatch({ type: ActionType.START_LOGIN })
         signInApi(email, password)
@@ -11,6 +13,8 @@ const signIn = (email, password, history) => {
                 if (response.data.success) {
                     dispatch({ type: ActionType.LOGIN_SUCCESS, data: data })
                     dispatch(getCart());
+
+                    updateUserVisitAPI();
 
                     let token = encryptData(data);
 

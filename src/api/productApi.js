@@ -83,6 +83,13 @@ const deleteProduct = (productID) => {
 	
 	return axios.post(TEST_API_URL + `productAPI.php`, data);
 };
+const updateProductView = (productID) => {
+	const data = new FormData();
+	data.append("command", "updateProductView");
+	data.append("productID", productID);
+	
+	return axios.post(TEST_API_URL + `productAPI.php`, data);
+}
 export {
 	getProductCategoryAPI,
 	getTotalCategoryAPI,
@@ -92,4 +99,5 @@ export {
 	createProduct,
 	editProduct,
 	deleteProduct,
+	updateProductView
 };
