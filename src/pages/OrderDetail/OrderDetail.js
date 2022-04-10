@@ -11,17 +11,47 @@ import icons from "../../constant/icons";
 
 const statusList = ['Received', 'Processing', 'Shipping', 'Completed']
 
+const Stepper = ({ isChecked, title }) => (
+	<Box sx={styles.stepWrapper}>
+		<Fab sx={styles.checked}>
+			{isChecked && <icons.Check sx={styles.checkIcon} />}
+		</Fab>
+		<Typography sx={styles.stepTitle}>{title}</Typography>
+	</Box>
+)
+
+const LineStepper = () => (
+	<Box sx={styles.lineWrapper}>
+		<Divider sx={styles.stepLine} />
+	</Box>
+)
+
 const OrderDetail = () => {
 	const { id } = useParams()
 	const [orderDetail, setOrderDetail] = useState({ "isLoading": true })
-
-	const status = 'completed'
+	const [activeStatusList, setActiveStatusList] = useState([])
 
 	useEffect(() => {
 		getOrderDetailAPI(id).then((response) => {
 			if (response.data.success === true) {
-				setOrderDetail({ "isLoading": false, data: response.data.data })
-				console.log("orderDetail ", response.data.data)
+				const resData = response.data.data
+				setOrderDetail({ "isLoading": false, data: resData })
+				console.log("orderDetail ", resData)
+
+				const orderStatus = resData.orderInfo.status
+				if (orderStatus != 'Cancelled') {
+					const statusIndex = statusList.indexOf(orderStatus)
+					let tempList = []
+
+					for (let i = 0; i < statusList.length; i++) {
+						if (i <= statusIndex)
+							tempList[i] = true;
+						else
+							tempList[i] = false;
+					}
+
+					setActiveStatusList(tempList)
+				}
 			}
 		})
 	}, [])
@@ -86,8 +116,8 @@ const OrderDetail = () => {
 											orderDetail.data.orderInfo.dateDiff,
 										)}
 									</Typography>
-									<Divider sx={styles.divider} />
-									<Typography sx={styles.title}>
+
+									<Typography sx={{...styles.title, mt: 4}}>
 										Customer detail
 									</Typography>
 									<Typography sx={styles.content}>
@@ -100,80 +130,25 @@ const OrderDetail = () => {
 										Address: {orderDetail.data.orderInfo.address}
 									</Typography>
 
-									<Divider sx={styles.divider} />
-									<Typography sx={styles.title}>
+									<Typography sx={{...styles.title, mt: 4, mb: 2}}>
 										Status
 									</Typography>
 
 									<Box sx={styles.stepper}>
-
-										{statusList.map((status) => {
-											if (status == 'Completed')
+										{activeStatusList.map((isChecked, index) => {
+											if (index < 3)
 												return (
-													<Box sx={styles.stepWrapper}>
-														<Fab sx={styles.checked}>
-															<icons.Check sx={styles.checkIcon} />
-														</Fab>
-														<Typography sx={styles.stepTitle}>{status}</Typography>
-													</Box>
+													<>
+														<Stepper isChecked={isChecked} title={statusList[index]} />
+														<LineStepper />
+													</>
 												)
-											return (
-												<>
-													<Box sx={styles.stepWrapper}>
-														<Fab sx={styles.checked}>
-															<icons.Check sx={styles.checkIcon} />
-														</Fab>
-														<Typography sx={styles.stepTitle}>{status}</Typography>
-													</Box>
-
-													<Box sx={styles.lineWrapper}>
-														<Divider sx={styles.stepLine} />
-													</Box>
-												</>
-											)
-
+											else
+												return (
+													<Stepper isChecked={isChecked} title={statusList[index]} />
+												)
 										})}
-										{/* <Box sx={styles.stepWrapper}>
-											<Fab aria-label="add" sx={styles.checked}>
-												<icons.Check sx={styles.checkIcon} />
-											</Fab>
-											<Typography sx={styles.stepTitle}>Received</Typography>
-										</Box>
-
-										<Box sx={styles.lineWrapper}>
-											<Divider sx={styles.stepLine} />
-										</Box>
-
-										<Box sx={styles.stepWrapper}>
-											<Fab aria-label="add" sx={styles.checked}>
-												<icons.Check sx={styles.checkIcon} />
-											</Fab>
-											<Typography sx={styles.stepTitle}>Processing</Typography>
-										</Box>
-
-										<Box sx={styles.lineWrapper}>
-											<Divider sx={styles.stepLine} />
-										</Box>
-
-										<Box sx={styles.stepWrapper}>
-											<Fab aria-label="add" sx={styles.checked}>
-												<icons.Check sx={styles.checkIcon} />
-											</Fab>
-											<Typography sx={styles.stepTitle}>Shipping</Typography>
-										</Box>
-
-										<Box sx={styles.lineWrapper}>
-											<Divider sx={styles.stepLine} />
-										</Box>
-
-										<Box sx={styles.stepWrapper}>
-											<Fab aria-label="add" sx={styles.checked}>
-												<icons.Check sx={styles.checkIcon} />
-											</Fab>
-											<Typography sx={styles.stepTitle}>Completed</Typography>
-										</Box> */}
 									</Box>
-
 
 									<Divider sx={styles.divider} />
 									<Box sx={{ mt: 4 }}>

@@ -6,7 +6,7 @@ const styles = {
 		paddingTop: '50px',
 	},
 	divider: {
-		mt: 2,
+		mt: 5,
 		mb: 2,
 	},
 	wrapper: {
@@ -121,28 +121,34 @@ const styles = {
 	checkIcon: {
 		height: '20px',
 		width: '20px',
+		color: 'black',
 	},
 
 	checked: {
 		boxShadow: 'none',
-		height: '40px',
-		width: '40px',
+		height: '35px',
+		width: '35px',
 		alignSelf: 'center',
 		pointerEvents: 'none',
+		border: '2px solid black',
+		backgroundColor: 'white',
 	},
 
 	stepWrapper: {
 		display: 'flex',
     	flexDirection: 'column',
+		minWidth: '60px',
+		alignItems: 'center',
 	},
 
 	stepLine: {
 		width: '35px',
-		margin: 0,
+		borderColor: 'black',
 	},
 
 	stepTitle: {
-		fontSize: '15px',
+		mt: 1,
+		fontSize: '14px',
 	},
 };
 
