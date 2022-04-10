@@ -39,6 +39,7 @@ const OrderDetail = () => {
 				console.log("orderDetail ", resData)
 
 				const orderStatus = resData.orderInfo.status
+
 				if (orderStatus != 'Cancelled') {
 					const statusIndex = statusList.indexOf(orderStatus)
 					let tempList = []
@@ -148,6 +149,10 @@ const OrderDetail = () => {
 													<Stepper isChecked={isChecked} title={statusList[index]} />
 												)
 										})}
+
+										{ activeStatusList.length == 0 ?
+										(<Typography sx={{color: 'red', fontWeight: 600}}>THIS ORDER IS CANCELLED</Typography>)
+										: ("")}
 									</Box>
 
 									<Divider sx={styles.divider} />
