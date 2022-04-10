@@ -28,6 +28,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import CheckIcon from '@mui/icons-material/Check';
 
 const icons = {
     Home: HomeOutlinedIcon,
@@ -60,6 +61,7 @@ const icons = {
     Add: AddIcon,
     Category: CategoryOutlinedIcon,
     More: MoreHorizIcon,
+    Check: CheckIcon,
 }
 
 export default icons;

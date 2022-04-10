@@ -105,6 +105,45 @@ const styles = {
 		pt: 0.4,
 		fontWeight: 'bold',
 	},
+
+	stepper: {
+		display: 'flex',
+	},
+
+	lineWrapper: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: '40px',
+		width: '50px',
+	},
+
+	checkIcon: {
+		height: '20px',
+		width: '20px',
+	},
+
+	checked: {
+		boxShadow: 'none',
+		height: '40px',
+		width: '40px',
+		alignSelf: 'center',
+		pointerEvents: 'none',
+	},
+
+	stepWrapper: {
+		display: 'flex',
+    	flexDirection: 'column',
+	},
+
+	stepLine: {
+		width: '35px',
+		margin: 0,
+	},
+
+	stepTitle: {
+		fontSize: '15px',
+	},
 };
 
 export default styles;
