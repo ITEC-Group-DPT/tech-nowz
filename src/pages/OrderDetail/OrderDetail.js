@@ -51,7 +51,7 @@ const OrderDetail = () => {
 							tempList[i] = false;
 					}
 
-					setActiveStatusList(tempList)
+					setActiveStatusList(tempList);
 				}
 			}
 		})
@@ -118,7 +118,7 @@ const OrderDetail = () => {
 										)}
 									</Typography>
 
-									<Typography sx={{...styles.title, mt: 4}}>
+									<Typography sx={{ ...styles.title, mt: 4 }}>
 										Customer detail
 									</Typography>
 									<Typography sx={styles.content}>
@@ -131,7 +131,7 @@ const OrderDetail = () => {
 										Address: {orderDetail.data.orderInfo.address}
 									</Typography>
 
-									<Typography sx={{...styles.title, mt: 4, mb: 2}}>
+									<Typography sx={{ ...styles.title, mt: 4, mb: 2 }}>
 										Status
 									</Typography>
 
@@ -150,9 +150,9 @@ const OrderDetail = () => {
 												)
 										})}
 
-										{ activeStatusList.length == 0 ?
-										(<Typography sx={{color: 'red', fontWeight: 600}}>THIS ORDER IS CANCELLED</Typography>)
-										: ("")}
+										{activeStatusList.length == 0 ?
+											(<Typography sx={{ color: 'red', fontWeight: 600 }}>THIS ORDER IS CANCELLED</Typography>)
+											: ("")}
 									</Box>
 
 									<Divider sx={styles.divider} />
@@ -174,31 +174,37 @@ const OrderDetail = () => {
 						<Grid item xs={12} lg={7} sx={styles.packageWrapper}>
 							<Box sx={styles.productList}>
 								<TransitionGroup>
-									{orderDetail.data.itemList.map(product =>
-										<Collapse>
-											<HorizontalProduct
-												product={product}
-												ratingSize={'20px'}
-											/>
-											<Box
-												sx={{
-													display: 'flex',
-													mb: '20px',
-												}}
-											>
-												<Typography sx={styles.ratingTitle}>
-													Your rating:
-												</Typography>
-												<ProductRatingBar
-													orderID={id}
-													productID={product.productID}
-													customerRating={
-														product.customerRating
+									{
+										orderDetail.data.itemList.map(product =>
+											<Collapse>
+												<HorizontalProduct
+													product={product}
+													ratingSize={'20px'}
+												/>
+												<Box
+													sx={{
+														display: 'flex',
+														mb: '20px',
+													}}
+												>
+													{
+														activeStatusList[3] &&
+														<Box>
+															<Typography sx={styles.ratingTitle}>
+																Your rating:
+															</Typography>
+															<ProductRatingBar
+																orderID={id}
+																productID={product.productID}
+																customerRating={
+																	product.customerRating
+																}
+															/>
+														</Box>
 													}
-												></ProductRatingBar>
-											</Box>
-										</Collapse>
-									)}
+												</Box>
+											</Collapse>
+										)}
 								</TransitionGroup>
 							</Box>
 						</Grid>
